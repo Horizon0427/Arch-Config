@@ -25,3 +25,11 @@ Useful keybinds can be found in `./hypr/hyprland.conf`.
 ## waybar
 
 Check out my very first `waybar` setup in `./waybar/config.jsonc` and `./waybar/style.css`.
+
+# Screenshots
+
+![1](./images/rice1.png)
+![2](./images/rice2.png)
+![3](./images/rice3.png)
+![4](./images/rice4.png)
+![5](./images/rice5.png)
