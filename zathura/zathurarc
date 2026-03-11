@@ -1,0 +1,12 @@
+set selection-clipboard clipboard
+
+set recolor "false"
+
+set recolor-keep-images "true"
+
+set recolor-lightcolor "#1e1e2e" 
+set recolor-darkcolor  "#cdd6f4" 
+
+set scrollbars "false"
+
+map r reload

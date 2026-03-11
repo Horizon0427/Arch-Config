@@ -1,0 +1,81 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+
+format = """
+[░▒▓]({{colors.secondary.default.hex}})\
+[  ](bg:{{colors.secondary.default.hex}} fg:{{colors.on_secondary.default.hex}})\
+[](bg:{{colors.primary.default.hex}} fg:{{colors.secondary.default.hex}})\
+$username\
+$hostname\
+[](bg:{{colors.tertiary.default.hex}} fg:{{colors.primary.default.hex}})\
+$directory\
+[](fg:{{colors.tertiary.default.hex}} bg:{{colors.surface_container_highest.default.hex}})\
+$git_branch\
+$git_status\
+[](fg:{{colors.surface_container_highest.default.hex}} bg:{{colors.surface_container.default.hex}})\
+$nodejs\
+$rust\
+$golang\
+$php\
+[](fg:{{colors.surface_container.default.hex}} bg:{{colors.surface.default.hex}})\
+$time\
+[ ](fg:{{colors.surface.default.hex}})\
+\n$character"""
+
+[username]
+show_always = true
+style_user = "bg:{{colors.primary.default.hex}} fg:{{colors.on_primary.default.hex}}"
+style_root = "bg:{{colors.primary.default.hex}} fg:{{colors.on_primary.default.hex}}"
+format = '[ $user ]($style)'
+
+[hostname]
+ssh_only = false
+style = "bg:{{colors.primary.default.hex}} fg:{{colors.on_primary.default.hex}}"
+format = '[@$hostname]($style)'
+
+[directory]
+style = "fg:{{colors.on_tertiary.default.hex}} bg:{{colors.tertiary.default.hex}}"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "🎧 "
+"Pictures" = " "
+
+[git_branch]
+symbol = ""
+style = "bg:{{colors.surface_container_highest.default.hex}}"
+format = '[[ $symbol $branch ](fg:{{colors.on_surface_variant.default.hex}} bg:{{colors.surface_container_highest.default.hex}})]($style)'
+
+[git_status]
+style = "bg:{{colors.surface_container_highest.default.hex}}"
+format = '[[($all_status$ahead_behind )](fg:{{colors.on_surface_variant.default.hex}} bg:{{colors.surface_container_highest.default.hex}})]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:{{colors.surface_container.default.hex}}"
+format = '[[ $symbol ($version) ](fg:{{colors.on_surface.default.hex}} bg:{{colors.surface_container.default.hex}})]($style)'
+
+[rust]
+symbol = ""
+style = "bg:{{colors.surface_container.default.hex}}"
+format = '[[ $symbol ($version) ](fg:{{colors.on_surface.default.hex}} bg:{{colors.surface_container.default.hex}})]($style)'
+
+[golang]
+symbol = ""
+style = "bg:{{colors.surface_container.default.hex}}"
+format = '[[ $symbol ($version) ](fg:{{colors.on_surface.default.hex}} bg:{{colors.surface_container.default.hex}})]($style)'
+
+[php]
+symbol = ""
+style = "bg:{{colors.surface_container.default.hex}}"
+format = '[[ $symbol ($version) ](fg:{{colors.on_surface.default.hex}} bg:{{colors.surface_container.default.hex}})]($style)'
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:{{colors.surface.default.hex}}"
+format = '[[  $time ](fg:{{colors.on_surface.default.hex}} bg:{{colors.surface.default.hex}})]($style)'

@@ -1,0 +1,214 @@
+@import "colors.css";
+
+window#waybar {
+    background-color: transparent; 
+}
+
+* {
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", sans-serif;
+}
+
+#workspaces {
+    background-color: @tertiary;
+    color: @on-tertiary;
+    padding: 0 10px;
+    min-height: 16px;
+    margin-right: 0px;
+}
+#custom-sep.workspaces_edge {
+    color: @tertiary;
+    background-color: transparent;
+    font-size: 25px;
+    margin-right: 15px;
+}
+
+
+#workspaces button {
+    padding: 0 8px;
+    margin: 2px 2px;
+    border-radius: 15px;
+    background-color: transparent;
+    color: @on-tertiary;
+    box-shadow: none;
+    text-shadow: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#workspaces button:hover {
+    background-color: alpha(@on-tertiary, 0.15);
+    box-shadow: none;
+}
+
+#workspaces button:active {
+    background-color: alpha(@on-tertiary, 0.3);
+    transition: all 0.1s ease;
+}
+
+#workspaces button.active:hover {
+  background: radial-gradient(circle at center, @tertiary 0%, @on-tertiary 100%);
+}
+
+
+#workspaces button.active {
+    background: radial-gradient(circle at center, @tertiary 0%, @tertiary-container 100%);
+    color: @on-tertiary;
+    padding: 0 16px;
+}
+
+#custom-sep.cleft_left_edge {
+    color: @primary;
+    background-color: transparent;
+    font-size: 25px;
+}
+#cleft {
+    background-image: radial-gradient(circle at right center, alpha(@primary, 0) 15px, @primary 17px);
+    padding-left: 10px;
+    padding-right: 25px;
+    min-height: 30px;
+    min-width: 250px;
+}
+#custom-sep.cleft_right_edge {
+    color: red;
+    background-color: @primary;
+    font-size: 25px;
+}
+
+#power-profiles-daemon {
+    background-color: @tertiary;
+    color: @on-tertiary;
+    border-radius: 50px;
+    min-width: 30px;
+    margin: 0 0px;
+    padding: 0 7px;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+}
+#power-profiles-daemon:hover {
+    background-color: @tertiary-container;
+    color: @on-tertiary-container;
+    box-shadow: 0 0 2px alpha(@tertiary, 0.6);
+}
+#power-profiles-daemon:active {
+    background-color: @secondary;
+    box-shadow: none;
+    transition:all 0.1s ease;
+}
+#power-profiles-daemon.performance:hover {
+    background-color: @error-container;
+    color: @on-error-container;
+    box-shadow: 0 0 2px alpha(@tertiary, 0.6);
+}
+#power-profiles-daemon.power-saver:hover {
+    background-color: @primary-container;
+    color: @on-primary-container;
+    box-shadow: 0 0 2px alpha(@tertiary, 0.6);
+}
+#power-profiles-daemon.performance {
+    background-color: @error;
+    color: @on-error;
+}
+#power-profiles-daemon.power-saver {
+    background-color: @primary;
+    color: @on-primary;
+}
+
+
+#custom-sep.cright_left_edge {
+    color: @primary;
+    background-color: @primary;
+    font-size: 25px;
+}
+#cright {
+    background-image: radial-gradient(circle at left center, alpha(@primary, 0) 15px, @primary 17px);
+    padding-left: 30px;
+    padding-right: 10px;
+    min-height: 30px;
+    min-width: 100px;
+}
+#custom-sep.cright_right_edge {
+    color: @primary;
+    background-color: transparent;
+    font-size: 25px;
+}
+
+#custom-sep.sysright_edge {
+    color: @tertiary;
+    background-color: transparent;
+    font-size: 25px;
+    margin-left: 15px;
+}
+#sysright {
+    background-color: @tertiary;
+    padding: 0 10px;
+    min-height: 16px;
+}
+
+#battery,
+#pulseaudio,
+#backlight,
+#clock,
+#network {
+    background-color: transparent;
+    color: @on-primary;
+    padding: 0 8px;
+}
+
+#battery.critical:not(.charging) {
+    background-color: transparent;
+    color: @error;
+}
+
+#tray {
+    background-color: transparent;
+}
+
+#tray > .passive,
+#tray > .active,
+#tray > .needs-attention {
+    background-color: transparent;
+    padding: 2px 6px;
+    margin: 0 2px;
+    border-radius: 10px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+#tray > .passive:hover,
+#tray > .active:hover,
+#tray > .needs-attention:hover {
+    background-color: alpha(@on-tertiary, 0.15); 
+}
+
+#tray > .needs-attention {
+    background-color: alpha(@error, 0.2);
+}
+
+
+#custom-power {
+    padding: 0 10px;
+    margin: 2px 2px;
+    border-radius: 15px;
+    background-color: transparent;
+    color: @on-secondary;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#custom-power:hover {
+    background-color: @error;
+    color: @on-error;
+    box-shadow: 0 0 8px alpha(@error, 0.6); 
+}
+
+#custom-power:active {
+    background-color: alpha(@error, 0.7); 
+    box-shadow: none;
+    transition: all 0.1s ease;
+}
+
+#custom-cava {
+    background-color: transparent;
+    color: @on-primary;
+    padding: 0 20px;
+    font-size: 16px;
+}

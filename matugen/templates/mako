@@ -1,0 +1,20 @@
+font=Cozette 11
+
+background-color={{colors.surface.default.hex}}
+
+text-color={{colors.on_surface.default.hex}}
+
+border-color={{colors.primary.default.hex}}
+
+border-size=2
+border-radius=20
+width=300
+margin=10
+padding=10
+format=<b>%a</b>\n%s\n%b
+default-timeout=3000
+
+[urgency=high]
+border-color={{colors.error.default.hex}}
+background-color={{colors.error_container.default.hex}}
+text-color={{colors.on_error_container.default.hex}}

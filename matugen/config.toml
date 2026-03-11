@@ -1,0 +1,22 @@
+[config]
+
+[templates.waybar]
+input_path = "~/.config/matugen/templates/colors.css"
+
+output_path = "~/.config/waybar/colors.css"
+
+[templates.hyprland]
+input_path = "~/.config/matugen/templates/colors-hyprland.conf"
+output_path = "~/.config/hypr/colors.conf"
+
+[templates.starship]
+input_path = "~/.config/matugen/templates/starship.toml"
+output_path = "~/.config/starship.toml"
+
+[templates.mako]
+input_path = "~/.config/matugen/templates/mako"
+output_path = "~/.config/mako/config"
+
+[templates.wlogout]
+input_path = "~/.config/matugen/templates/wlogout.css"
+output_path = "~/.config/wlogout/style.css"
