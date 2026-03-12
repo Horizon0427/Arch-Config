@@ -6,13 +6,13 @@ Here's a brief overview of what you will find in the listing directory:
 
 ## Hyprland
 
-`Hyprland` recently added scrolling layouts, which is nice to laptop users. I designed a shell script `toggle_latout.sh` to quickly switch the layouts between `Dwindle` and `Scrolling` using keybinds(`super + D`). 
+`Hyprland` recently added scrolling layouts, which is nice to laptop users. A shell script `toggle_latout.sh` can switch the layouts between `Dwindle` and `Scrolling` using keybinds(`super + D`). 
 
-`screenshot.sh` is made for easily pasting screenshots in sessions.
+`screenshot.sh` is made for pasting screenshots in sessions.
 
 `ghostty_cursors.sh` automatically closes the cursor trails in `ghostty` for reducing power consumption.
 
-Useful keybinds can be found in `./hypr/hyprland.conf`.
+More keybinds can be found in `./hypr/hyprland.conf`.
 
 ## Matugen
 
