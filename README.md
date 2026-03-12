@@ -1,5 +1,4 @@
-# My Arch Linux Dotfiles AAAA
-
+# My Arch Linux Dotfiles
 Welcome to Horizon's archlinux repository, 
 a place saving personal configuration of my operating system. 
 Here's a brief overview of what you will find in the listing directory:
