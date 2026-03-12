@@ -8,13 +8,13 @@
 }
 
 window {
-    background-color: alpha(#0f1416, 0.5);
+    background-color: alpha(#1a1110, 0.5);
 }
 
 button {
-    color: #dee3e5;
-    background-color: alpha(#303637, 0.85);
-    border: 2px solid alpha(#dee3e5, 0.05);
+    color: #f1dfdb;
+    background-color: alpha(#3d3230, 0.85);
+    border: 2px solid alpha(#f1dfdb, 0.05);
     border-radius: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
     margin: 25px;
@@ -25,10 +25,10 @@ button {
 }
 
 button:active, button:hover {
-    background-color: alpha(#84d2e5, 0.95);
-    color: #00363f;
-    border: 2px solid #84d2e5;
-    box-shadow: 0 0 25px alpha(#84d2e5, 0.6);
+    background-color: alpha(#ffb4a6, 0.95);
+    color: #561e14;
+    border: 2px solid #ffb4a6;
+    box-shadow: 0 0 25px alpha(#ffb4a6, 0.6);
     margin: 10px;
 }
 
