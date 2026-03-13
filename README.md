@@ -33,3 +33,6 @@ Check out my very first `waybar` setup in `./waybar/config.jsonc` and `./waybar/
 ![4](./images/rice4.png)
 ![5](./images/rice5.png)
 ![6](./images/rice6.png)
+![7](./images/rice7.png)
+![8](./images/rice8.png)
+![9](./images/rice9.png)
