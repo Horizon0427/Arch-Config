@@ -13,6 +13,8 @@ Here's a brief overview of what you will find in the listing directory:
 
 More keybinds can be found in `./hypr/hyprland.conf`.
 
+The positioning of certain UI elements in `hyprlock` is hardcoded to my specific screen resolution. If you plan to use this, please manually adjust the coordinates of each component to fit your own display.
+
 ## Matugen
 
 `matugen` takes over multiple styling aspects, triggered dynamically via `waypaper`. Specifically, this covers: `waybar`, active window borders, `starship`, `mako`, `wlogout`, `fastfetch`, `btop` and `hyprlock`. 
