@@ -38,3 +38,4 @@ Check out my very first `waybar` setup in `./waybar/config.jsonc` and `./waybar/
 ![7](./images/rice7.png)
 ![8](./images/rice8.png)
 ![9](./images/rice9.png)
+![10](./images/rice10.png)
