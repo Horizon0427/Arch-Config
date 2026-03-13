@@ -15,7 +15,7 @@ More keybinds can be found in `./hypr/hyprland.conf`.
 
 ## Matugen
 
-`matugen` takes over multiple styling aspects, triggered dynamically via `waypaper`. Specifically, this covers: `waybar`, active window borders, `starship`, `mako`, `wlogout` and `fastfetch`. 
+`matugen` takes over multiple styling aspects, triggered dynamically via `waypaper`. Specifically, this covers: `waybar`, active window borders, `starship`, `mako`, `wlogout`, `fastfetch`, `btop` and `hyprlock`. 
 
 ## cowsay
 
