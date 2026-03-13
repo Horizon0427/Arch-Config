@@ -23,3 +23,7 @@ output_path = "~/.config/wlogout/style.css"
 [templates.fastfetch]
 input_path = "~/.config/matugen/templates/config.jsonc"
 output_path = "~/.config/fastfetch/config.jsonc"
+
+[templates.btop]
+input_path = "~/.config/matugen/templates/btop.theme"
+output_path = "~/.config/btop/themes/matugen.theme"
