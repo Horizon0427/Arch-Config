@@ -32,3 +32,6 @@ output_path = "~/.config/btop/themes/matugen.theme"
 input_path = "~/.config/matugen/templates/hyprlock.conf"
 output_path = "~/.config/hypr/hyprlock.conf"
 
+[templates.prelock]
+input_path = "~/.config/matugen/templates/prelock-color.txt"
+output_path = "~/.config/hypr/lock_animation/prelock_color"

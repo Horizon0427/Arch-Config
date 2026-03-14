@@ -15,6 +15,11 @@ More keybinds can be found in `./hypr/hyprland.conf`.
 
 The positioning of certain UI elements in `hyprlock` is hardcoded to my specific screen resolution. If you plan to use this, please manually adjust the coordinates of each component to fit your own display.
 
+## "Hyper"hyprlock
+Hypr-Prelock-Anim is a high-performance, aesthetically driven pre-lock screen overlay developed in `C` using the `Raylib` framework, specifically engineered for `Hyprland` power users who prioritize a nice desktop experience. This project serves as a visual bridge between an active session and the system lock screen.
+
+It features a sophisticated geometric animation that dynamically adapts its color palette in real-time by parsing `Matugen`-generated Material You themes. To solve the common Wayland "flicker" issue during lock transitions, the project utilizes a unique Unix signal-based handoff mechanism: a shell script coordinates the lifecycle by launching the hardware-accelerated `C` barrier, triggering `hyprlock`, and then signaling the `C` process via a temporary flag (`/tmp/prelock_unlocked`) to perform a graceful 0.3s fade-out only after a successful unlock.
+
 ## Matugen
 
 `matugen` takes over multiple styling aspects, triggered dynamically via `waypaper`. Specifically, this covers: `waybar`, active window borders, `starship`, `mako`, `wlogout`, `fastfetch`, `btop` and `hyprlock`. 
@@ -31,13 +36,14 @@ Check out my very first `waybar` setup in `./waybar/config.jsonc` and `./waybar/
 
 # Screenshots
 
-![1](./images/rice1.png)
-![2](./images/rice2.png)
-![3](./images/rice3.png)
-![4](./images/rice4.png)
-![5](./images/rice5.png)
-![6](./images/rice6.png)
-![7](./images/rice7.png)
-![8](./images/rice8.png)
-![9](./images/rice9.png)
-![10](./images/rice10.png)
+![1](./rice/rice1.png)
+![2](./rice/rice2.png)
+![3](./rice/rice3.png)
+![4](./rice/rice4.png)
+![5](./rice/rice5.png)
+![6](./rice/rice6.png)
+![7](./rice/rice7.png)
+![8](./rice/rice8.png)
+![9](./rice/rice9.png)
+![10](./rice/rice10.png)
+![11](./rice/rice11.gif)
