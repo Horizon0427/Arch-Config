@@ -5,11 +5,11 @@ Here's a brief overview of what you will find in the listing directory:
 
 ## Hyprland
 
-`Hyprland` recently added scrolling layouts, which is nice to laptop users. A shell script `toggle_latout.sh` can switch the layouts between `Dwindle` and `Scrolling` using keybinds(`super + D`). 
+`Hyprland` recently added scrolling layouts, which is nice to laptop users. A shell script `toggle_layout.sh` can switch the layouts between `Dwindle` and `Scrolling` using keybinds(`super + D`). 
 
 `screenshot.sh` is made for pasting screenshots in sessions.
 
-`ghostty_cursors.sh` automatically closes the cursor trails in `ghostty` for reducing power consumption.
+`ghostty_cursors.sh` automatically closes(or start) the cursor trails in `ghostty` for reducing power consumption(or performance).
 
 More keybinds can be found in `./hypr/hyprland.conf`.
 
@@ -18,6 +18,8 @@ The positioning of certain UI elements in `hyprlock` is hardcoded to my specific
 ## Matugen
 
 `matugen` takes over multiple styling aspects, triggered dynamically via `waypaper`. Specifically, this covers: `waybar`, active window borders, `starship`, `mako`, `wlogout`, `fastfetch`, `btop` and `hyprlock`. 
+
+New releases shows that `matugen` supports `base16` and pipes(`|`), some syntax has been superseded. Go to `waypaper/config.ini`, add `--source-color-index 0` behind `matugen image "$wallpaper"` may help to fix color issues.
 
 ## cowsay
 

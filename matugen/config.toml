@@ -31,3 +31,4 @@ output_path = "~/.config/btop/themes/matugen.theme"
 [templates.hyprlock]
 input_path = "~/.config/matugen/templates/hyprlock.conf"
 output_path = "~/.config/hypr/hyprlock.conf"
+
