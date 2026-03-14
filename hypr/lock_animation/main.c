@@ -6,14 +6,13 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-// 读取 Matugen 缓存文件并转换为 Raylib Color 的函数
 Color GetMatugenColor() {
   char path[256];
   snprintf(path, sizeof(path), "%s/.config/hypr/lock_animation/prelock_color",
            getenv("HOME"));
   FILE *file = fopen(path, "r");
   if (!file)
-    return RAYWHITE; // 兜底颜色
+    return RAYWHITE;
 
   char hexStr[7];
   if (fscanf(file, "%6s", hexStr) != 1) {
@@ -24,7 +23,7 @@ Color GetMatugenColor() {
 
   unsigned int hexValue;
   sscanf(hexStr, "%x", &hexValue);
-  // 提取 RGB，Alpha 设为 255
+
   return (Color){(hexValue >> 16) & 0xFF, (hexValue >> 8) & 0xFF,
                  hexValue & 0xFF, 255};
 }
@@ -42,7 +41,6 @@ int main(void) {
   float fadeOutTime = 0.0f;
   const float fadeOutDuration = 0.3f;
 
-  // 在循环开始前获取主题色
   Color primaryColor = GetMatugenColor();
 
   while (!WindowShouldClose()) {
@@ -91,7 +89,6 @@ int main(void) {
     float lineStartOffset = (easeOut * 120.0f) + 30.0f;
     float lineLength = easeOut * (GetScreenWidth() / 2.0f);
 
-    // 替换为动态主题色
     Color rayColor = Fade(primaryColor, (1.0f - progress) * globalAlpha);
 
     DrawLineEx((Vector2){centerX - lineStartOffset, centerY},
@@ -136,7 +133,6 @@ int main(void) {
     float shackleEase = sin(shackleProgress * PI / 2.0f);
     float shackleY = -18.0f * (1.0f - shackleEase);
 
-    // 替换为动态主题色
     Color lockColor =
         Fade(primaryColor, (1.0f - progress * 0.2f) * globalAlpha);
 
@@ -150,7 +146,6 @@ int main(void) {
 
     DrawRectangleRounded((Rectangle){-25, -10, 50, 38}, 0.3f, 16, lockColor);
 
-    // 钥匙孔也可以用 primaryColor 稍作暗化处理，或者保留 DARKGRAY 均可
     DrawCircle(0, 5, 4, Fade(DARKGRAY, globalAlpha));
     DrawTriangle((Vector2){0, 3}, (Vector2){-4, 14}, (Vector2){4, 14},
                  Fade(DARKGRAY, globalAlpha));
