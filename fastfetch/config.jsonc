@@ -2,10 +2,10 @@
     "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
 
     "logo": {
-        "source": "$HOME/.config/fastfetch/ascii.txt",
+        "source": "arch2",
         "color": {
-            "1": "#b5c4ff",
-            "2": "#c1c5dd"
+            "1": "#bec2ff",
+            "2": "#c5c4dd"
         },
         "padding": {
             "top": 4,
@@ -37,43 +37,43 @@
         {
             "type": "host",
             "key": "│  Host       ",
-            "keyColor": "#b5c4ff",
+            "keyColor": "#bec2ff",
             "keyWidth": 16
         },
         {
             "type": "os",
             "key": "│ ├ OS       ",
-            "keyColor": "#b5c4ff",
+            "keyColor": "#bec2ff",
             "keyWidth": 16
         },
         {
             "type": "kernel",
             "key": "│ ├ Kernel   ",
-            "keyColor": "#b5c4ff",
+            "keyColor": "#bec2ff",
             "keyWidth": 16
         },
         {
             "type": "bios",
             "key": "│ ├ BIOS     ",
-            "keyColor": "#b5c4ff",
+            "keyColor": "#bec2ff",
             "keyWidth": 16
         },
         {
             "type": "de",
             "key": "│ ├ DE       ",
-            "keyColor": "#b5c4ff",
+            "keyColor": "#bec2ff",
             "keyWidth": 16
         },
         {
             "type": "wm",
             "key": "│ ├󱂬 WM       ",
-            "keyColor": "#b5c4ff",
+            "keyColor": "#bec2ff",
             "keyWidth": 16
         },
         {
             "type": "wmtheme",
             "key": "│ └󰉼 Theme    ",
-            "keyColor": "#b5c4ff",
+            "keyColor": "#bec2ff",
             "keyWidth": 16
         },
         {
@@ -90,25 +90,25 @@
         {
             "type": "cpu",
             "key": "│  CPU      ",
-            "keyColor": "#c1c5dd",
+            "keyColor": "#c5c4dd",
             "keyWidth": 16
         },
         {
             "type": "gpu",
             "key": "│ ├ GPU       ",
-            "keyColor": "#c1c5dd",
+            "keyColor": "#c5c4dd",
             "keyWidth": 16
         },
         {
             "type": "memory",
             "key": "│ ├ Memory   ",
-            "keyColor": "#c1c5dd",
+            "keyColor": "#c5c4dd",
             "keyWidth": 16
         },
         {
             "type": "disk",
             "key": "│ └ Disk     ",
-            "keyColor": "#c1c5dd",
+            "keyColor": "#c5c4dd",
             "keyWidth": 16
         },
         {
@@ -125,38 +125,38 @@
         {
             "type": "shell",
             "key": "│  Shell    ",
-            "keyColor": "#e3badb",
+            "keyColor": "#e7b9d5",
             "keyWidth": 16
         },
         {
             "type": "terminal",
             "key": "│ ├ Terminal ",
-            "keyColor": "#e3badb",
+            "keyColor": "#e7b9d5",
             "keyWidth": 16
         },
         {
             "type": "packages",
             "key": "│ ├󰏖 Packages ",
-            "keyColor": "#e3badb",
+            "keyColor": "#e7b9d5",
             "keyWidth": 16
         },
         {
             "type": "command",
             "key": "│ ├󰩹 OS Age   ",
-            "keyColor": "#e3badb",
+            "keyColor": "#e7b9d5",
             "keyWidth": 16,
             "text": "birth_install=$(stat -c %W /); current=$(date +%s); time_progression=$((current - birth_install)); days_difference=$((time_progression / 86400)); echo $days_difference days"
         },
         {
             "type": "uptime",
             "key": "│ ├ Uptime   ",
-            "keyColor": "#e3badb",
+            "keyColor": "#e7b9d5",
             "keyWidth": 16
         },
         {
             "type": "datetime",
             "key": "│ └󰃰 DateTime ",
-            "keyColor": "#e3badb",
+            "keyColor": "#e7b9d5",
             "keyWidth": 16
         },
         {

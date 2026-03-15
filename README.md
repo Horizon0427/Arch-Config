@@ -5,7 +5,7 @@ Here's a brief overview of what you will find in the listing directory:
 
 ## Hyprland
 
-`Hyprland` recently added scrolling layouts, which is nice to laptop users. A shell script `toggle_layout.sh` can switch the layouts between `Dwindle` and `Scrolling` using keybinds(`super + D`). 
+`Hyprland` supports scrolling layouts. A shell script `toggle_layout.sh` can switch the layouts between `Dwindle` and `Scrolling` using keybinds(`super + D`). 
 
 `screenshot.sh` is made for pasting screenshots in sessions.
 
@@ -22,7 +22,7 @@ It features a sophisticated geometric animation that dynamically adapts its colo
 
 ## Matugen
 
-`matugen` takes over multiple styling aspects, triggered dynamically via `waypaper`. Specifically, this covers: `waybar`, active window borders, `starship`, `mako`, `wlogout`, `fastfetch`, `btop` and `hyprlock`. 
+`matugen` takes over multiple styling aspects, triggered dynamically via `waypaper`. Specifically, this covers: `waybar`, active window borders, `starship`, `mako`, `wlogout`, `fastfetch`, `btop`, Hypr-Prelock-Anim and `hyprlock`. 
 
 New releases shows that `matugen` supports `base16` and pipes(`|`), some syntax has been superseded. Go to `waypaper/config.ini`, add `--source-color-index 0` behind `matugen image "$wallpaper"` may help to fix color issues.
 
