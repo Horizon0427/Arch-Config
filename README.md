@@ -18,11 +18,11 @@ The positioning of certain UI elements in `hyprlock` is hardcoded to my specific
 ## "Hyper"hyprlock
 Hypr-Prelock-Anim is a high-performance, aesthetically driven pre-lock screen overlay developed in `C` using the `Raylib` framework, specifically engineered for `Hyprland` power users who prioritize a nice desktop experience. This project serves as a visual bridge between an active session and the system lock screen.
 
-It features a sophisticated geometric animation that dynamically adapts its color palette in real-time by parsing `Matugen`-generated Material You themes. To solve the common Wayland "flicker" issue during lock transitions, the project utilizes a unique Unix signal-based handoff mechanism: a shell script coordinates the lifecycle by launching the hardware-accelerated `C` barrier, triggering `hyprlock`, and then signaling the `C` process via a temporary flag (`/tmp/prelock_unlocked`) to perform a graceful 0.3s fade-out only after a successful unlock.
+It features a sophisticated geometric animation that dynamically adapts its color palette in real-time by parsing `Matugen`-generated Material You themes. To solve the common Wayland "flicker" issue during lock transitions, the project utilizes a unique Unix signal-based handoff mechanism: a shell script coordinates the lifecycle by launching the hardware-accelerated `C` barrier, triggering `hyprlock`, and then signaling the `C` process via a temporary flag (`/tmp/prelock_unlocked`) to perform a graceful 0.3s fade-out only after a successful unlock. oops?
 
 ## Matugen
 
-`matugen` takes over multiple styling aspects, triggered dynamically via `waypaper`. Specifically, this covers: `waybar`, active window borders, `starship`, `mako`, `wlogout`, `fastfetch`, `btop`, Hypr-Prelock-Anim and `hyprlock`. 
+`matugen` takes over multiple styling aspects, triggered dynamically via `waypaper`. Specifically, this covers: `waybar`, active window borders, `starship`, `mako`, `wlogout`, `fastfetch`, `btop`, Hypr-Prelock `hyprlock`. 
 
 New releases shows that `matugen` supports `base16` and pipes(`|`), some syntax has been superseded. Go to `waypaper/config.ini`, add `--source-color-index 0` behind `matugen image "$wallpaper"` may help to fix color issues.
 
