@@ -7,6 +7,8 @@ Here's a brief overview of what you will find in the listing directory:
 
 `Hyprland` supports scrolling layouts. A shell script `toggle_layout.sh` can switch the layouts between `Dwindle` and `Scrolling` using keybinds(`super + D`). 
 
+HI!linux
+
 `screenshot.sh` is made for pasting screenshots in sessions.
 
 `ghostty_cursors.sh` automatically closes(or start) the cursor trails in `ghostty` for reducing power consumption(or performance).
@@ -18,7 +20,7 @@ The positioning of certain UI elements in `hyprlock` is hardcoded to my specific
 ## "Hyper"hyprlock
 Hypr-Prelock-Anim is a high-performance, aesthetically driven pre-lock screen overlay developed in `C` using the `Raylib` framework, specifically engineered for `Hyprland` power users who prioritize a nice desktop experience. This project serves as a visual bridge between an active session and the system lock screen.
 
-It features a sophisticated geometric animation that dynamically adapts its color palette in real-time by parsing `Matugen`-generated Material You themes. To solve the common Wayland "flicker" issue during lock transitions, the project utilizes a unique Unix signal-based handoff mechanism: a shell script coordinates the lifecycle by launching the hardware-accelerated `C` barrier, triggering `hyprlock`, and then signaling the `C` process via a temporary flag (`/tmp/prelock_unlocked`) to perform a graceful 0.3s fade-out only after a successful unlock. oops?
+It features a sophisticated geometric animation that dynamically adapts its color palette in real-time by parsing `Matugen`-generated Material You themes. To solve the common Wayland "flicker" issue during lock transitions, the project utilizes a unique Unix signal-based handoff mechanism: a shell script coordinates the lifecycle by launching the hardware-accelerated `C` barrier, triggering `hyprlock`, and then signaling the `C` process via a temporary flag (`/tmp/prelock_unlocked`) to perform a graceful 0.3s fade-out only after a successful unlock. 
 
 ## Matugen
 
