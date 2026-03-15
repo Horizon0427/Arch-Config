@@ -7,7 +7,6 @@ Here's a brief overview of what you will find in the listing directory:
 
 `Hyprland` supports scrolling layouts. A shell script `toggle_layout.sh` can switch the layouts between `Dwindle` and `Scrolling` using keybinds(`super + D`). 
 
-HI!linux
 
 `screenshot.sh` is made for pasting screenshots in sessions.
 
