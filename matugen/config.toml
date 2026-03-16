@@ -12,9 +12,9 @@ output_path = "~/.config/hypr/colors.conf"
 input_path = "~/.config/matugen/templates/starship.toml"
 output_path = "~/.config/starship.toml"
 
-[templates.mako]
-input_path = "~/.config/matugen/templates/mako"
-output_path = "~/.config/mako/config"
+#[templates.mako]
+#input_path = "~/.config/matugen/templates/mako"
+#output_path = "~/.config/mako/config"
 
 [templates.wlogout]
 input_path = "~/.config/matugen/templates/wlogout.css"
@@ -35,3 +35,7 @@ output_path = "~/.config/hypr/hyprlock.conf"
 [templates.prelock]
 input_path = "~/.config/matugen/templates/prelock-color.txt"
 output_path = "~/.config/hypr/lock_animation/prelock_color"
+
+[templates.swaync]
+input_path = "~/.config/matugen/templates/swaync.css"
+output_path = "~/.config/swaync/colors.css"

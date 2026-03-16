@@ -1,0 +1,12 @@
+:root {
+  --bg-base: alpha(#733428, 0.8); 
+  --bg-surface: alpha(#534340, 0.8);
+  --bg-hover: alpha(#3d3230, 1.0); 
+  
+  --text-primary: #f1dfdb;
+  --text-secondary: #d8c2bd;
+  
+  --border-color: alpha(#a08c89, 0.3);
+  
+  --accent: #ffb4a6;
+}

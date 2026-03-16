@@ -1,0 +1,143 @@
+@import 'colors.css';
+
+:root {
+  --border-radius-large: 16px; 
+  --border-radius-small: 8px; 
+  --padding-standard: 12px;
+}
+
+.control-center {
+  background: var(--bg-surface);
+  border-radius: var(--border-radius-large);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.blank-window,
+notificationwindow {
+  background: transparent;
+}
+
+.control-center .control-center-list-placeholder {
+  opacity: 0.4;
+  font-size: 1.2rem;
+}
+
+.widget {
+  margin: var(--padding-standard);
+  padding: var(--padding-standard);
+  background: var(--bg-surface);
+  border-radius: var(--border-radius-large);
+  border: 1px solid var(--border-color);
+}
+
+.widget-title {
+  margin-bottom: 0px;
+  background: transparent;
+  border: none;
+}
+.widget-title > label {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+.widget-title > button {
+  background: var(--bg-surface);
+  border-radius: var(--border-radius-small);
+  padding: 4px 12px;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+.widget-title > button:hover {
+  background: var(--bg-hover);
+}
+
+.widget-dnd {
+  margin-top: 4px;
+}
+.widget-dnd label {
+  font-size: 1.1rem;
+}
+.widget-dnd switch {
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.3);
+}
+.widget-dnd switch:checked {
+  background: var(--accent);
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-album-art {
+  border-radius: 100%;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6);
+  -gtk-icon-size: 96px; 
+}
+
+.widget-mpris-title {
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+.widget-mpris-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.notification-row {
+  outline: none;
+}
+
+.notification-background .notification {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-large);
+  margin-top: 16px;
+}
+
+.notification-background .notification:hover {
+  background: var(--bg-hover);
+}
+
+.notification-content .summary {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.notification-content .body {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.notification-content .time {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+
+.notification-content .image {
+  border-radius: var(--border-radius-small);
+}
+.notification-content .app-icon {
+  margin-right: 8px;
+}
+
+.close-button {
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: 100%;
+  margin: 6px;
+}
+.close-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.notification-group .notification-group-headers {
+  padding: 8px 12px;
+}
+.notification-group .notification-group-header {
+  font-weight: bold;
+  color: var(--text-secondary);
+}
+.notification-group.collapsed .notification-row:not(:last-child) {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}

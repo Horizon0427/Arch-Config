@@ -1,0 +1,50 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "positionX": "right",
+  "positionY": "top",
+  "layer": "overlay",
+  "control-center-layer": "top",
+  "layer-shell": true,
+  "cssPriority": "user",
+  
+  "control-center-margin-top": 12,
+  "control-center-margin-bottom": 12,
+  "control-center-margin-right": 12,
+  "control-center-width": 450,
+  
+  "timeout": 3,
+  "timeout-low": 1.5,
+  "timeout-critical": 0,
+  "fit-to-screen": true,
+  "notification-window-width": 500,
+  "keyboard-shortcuts": false,
+  "notification-inline-replies": true,
+  "notification-grouping": true,
+  "image-visibility": "when-available",
+  "transition-time": 200,
+  "hide-on-clear": false,
+  "hide-on-action": true,
+  "script-fail-notify": true,
+  
+  "widgets": [
+    "title",
+    "dnd",
+    "mpris",
+    "notifications"
+  ],
+  
+  "widget-config": {
+    "title": {
+      "text": "通知中心",
+      "clear-all-button": true,
+      "button-text": "󰎟 清空"
+    },
+    "dnd": {
+      "text": "勿扰模式"
+    },
+    "mpris": {
+      "image-size": 96,
+      "image-radius": 12
+    }
+  }
+}

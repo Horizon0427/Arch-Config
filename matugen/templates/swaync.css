@@ -1,0 +1,12 @@
+:root {
+  --bg-base: alpha({{colors.primary_container.default.hex}}, 0.8); 
+  --bg-surface: alpha({{colors.surface_variant.default.hex}}, 0.8);
+  --bg-hover: alpha({{colors.surface_container_highest.default.hex}}, 1.0); 
+  
+  --text-primary: {{colors.on_surface.default.hex}};
+  --text-secondary: {{colors.on_surface_variant.default.hex}};
+  
+  --border-color: alpha({{colors.outline.default.hex}}, 0.3);
+  
+  --accent: {{colors.primary.default.hex}};
+}
