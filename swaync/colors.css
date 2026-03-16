@@ -6,7 +6,8 @@
   --text-primary: #f1dfdb;
   --text-secondary: #d8c2bd;
   
-  --border-color: alpha(#a08c89, 0.3);
+  --border-color: alpha(#a08c89, 0.5);
   
   --accent: #ffb4a6;
+  --second: #e7bdb5;
 }
