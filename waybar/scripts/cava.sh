@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CHARS="▂▃▄▅▆▇█"
-BARS=18
+BARS=15
 CONF="/tmp/waybar_cava_config"
 
 len=$((${#CHARS} - 1))

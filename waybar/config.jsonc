@@ -36,6 +36,7 @@
     "orientation": "horizontal",
     "modules": [
     "network",
+    "custom/longshot",
     "custom/cava"
   ]
 },
@@ -66,6 +67,18 @@
   "custom/sep#sysright_edge":{
   "format": "",
   "tooltip": false
+},
+
+"custom/longshot": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "if [ -f /tmp/longshot_recording.pid ]; then echo '{\"text\": \"🔴\", \"class\": \"recording\"}'; else echo '{\"text\": \"󰹑\", \"class\": \"idle\"}'; fi",
+        "interval": "once",
+        "signal": 8,
+        "on-click": "~/Python-projects/longshot_tool/longshot.sh",
+        "on-click-right": "~/Python-projects/longshot_tool/longshot.sh cancel",
+        "tooltip": true,
+        "tooltip-format": "左键: 开始/结束长截图\n右键: 直接取消并丢弃"
 },
 
 

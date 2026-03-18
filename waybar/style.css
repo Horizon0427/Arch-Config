@@ -212,3 +212,26 @@ window#waybar {
     padding: 0 20px;
     font-size: 16px;
 }
+
+#custom-longshot {
+    padding: 0 10px;
+    background-color: transparent;
+    color: @on-primary;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+#custom-longshot:hover {
+    color: @secondary;
+}
+
+#custom-longshot.recording {
+    color: @error;
+    animation: pulse-record 1.5s infinite;
+}
+
+@keyframes pulse-record {
+    0% { opacity: 1; text-shadow: 0 0 5px alpha(@error, 0.8); }
+    50% { opacity: 0.3; text-shadow: none; }
+    100% { opacity: 1; text-shadow: 0 0 5px alpha(@error, 0.8); }
+}
