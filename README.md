@@ -60,7 +60,6 @@ Then the program will stitch the recoeded video into a long `PNG` image. Check m
 ![1](./rice/rice1.png)
 ![2](./rice/rice2.png)
 ![3](./rice/rice3.png)
-![4](./rice/rice4.png)
 ![5](./rice/rice5.png)
 ![6](./rice/rice6.png)
 ![7](./rice/rice7.png)

@@ -39,3 +39,7 @@ output_path = "~/.config/hypr/lock_animation/prelock_color"
 [templates.swaync]
 input_path = "~/.config/matugen/templates/swaync.css"
 output_path = "~/.config/swaync/colors.css"
+
+#[templates.fcitx5]
+#input_path = "~/.config/matugen/templates/fcitx5-theme.conf"
+#output_path = "~/.local/share/fcitx5/themes/matugen/theme.conf"
