@@ -50,6 +50,11 @@ If you've been following my previous setups, please note that I have recently mi
 * **Active:** The `swaync/` directory contains the current, actively themed configuration.
 * **Deprecated:** The old `mako/` folder is left in the repository purely for legacy reference and is **no longer maintained**. Please use SwayNC moving forward!
 
+## New scrolling long-screenshot added
+
+To fix the longshot issue in `wanland`, I made a program in `C`, `bash` scripts and `Python`. It allows you to select an area which needs capturing. 
+Then the program will stitch the recoeded video into a long `PNG` image. Check my repo `hypr-longshot` for details.
+
 # Screenshots
 
 ![1](./rice/rice1.png)
