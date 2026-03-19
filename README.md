@@ -33,7 +33,11 @@ New releases shows that `matugen` supports `base16` and pipes(`|`), some syntax 
 
 ## waybar
 
-Check out my very first `waybar` setup in `./waybar/config.jsonc` and `./waybar/style.css`.
+Check out my two `waybar` setup in `./waybar`. You can switch the `waybar` styles between `top` and `bottom` by using keybind `super + F1`. To reload `waybar`, use keybind `super + f2`.
+
+## hyprsunset
+
+Use keybind `super + F3` to turn down gamma, `super + F4` to turn the light down, `super + F5` to reload.
 
 ## Credits & Acknowledgements
 
@@ -66,4 +70,6 @@ Then the program will stitch the recoeded video into a long `PNG` image. Check m
 ![8](./rice/rice8.png)
 ![9](./rice/rice9.png)
 ![10](./rice/rice10.png)
+![waybar1](./rice/waybar1.png)
+![waybar2](./rice/waybar2.png)
 ![11](./rice/rice11.gif)

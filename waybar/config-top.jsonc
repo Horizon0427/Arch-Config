@@ -1,5 +1,6 @@
 // -*- mode: jsonc -*-
 {
+    "position": "top",
     "spacing": 0,
     "modules-left": [
         "hyprland/workspaces",

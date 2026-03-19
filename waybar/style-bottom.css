@@ -1,0 +1,267 @@
+@import "colors.css";
+
+* {
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", sans-serif;
+    font-size: 14px;
+}
+
+window#waybar {
+    background-color: alpha(@surface, 0.85);
+    border-top: 1px solid alpha(@outline, 0.3);
+    color: @on-surface;
+}
+
+#workspaces {
+    margin: 4px 6px;
+    padding: 2px;
+    background-color: alpha(@surface-variant, 0.3);
+    border: 2px solid alpha(@outline, 0.4);
+    border-radius: 8px;
+}
+
+#workspaces button {
+    padding: 0 10px;
+    margin: 0 2px;
+    border-radius: 6px;
+    color: @primary;
+    background: transparent;
+    box-shadow: none;
+    text-shadow: none;
+    transition: all 0.2s ease;
+}
+#workspaces button:hover {
+    color: @primary-container;
+    background: @tertiary; 
+    box-shadow: none;
+}
+#workspaces button.active {
+    color: @primary;
+    background: alpha(@primary, 0.15);
+    border-bottom: 2px solid @primary;
+    border-radius: 6px 6px 5px 5px;
+}
+#workspaces button.active:hover {
+    background: alpha(@primary, 0.35);
+}
+
+#network {
+    padding: 0 16px 0 8px;
+    margin: 4px 2px;
+    border-radius: 6px;
+    color: @primary;
+    background-color: alpha(@surface-variant, 0.3);
+    border: 1px solid alpha(@outline, 0.2);
+    transition: all 0.2s ease;
+}
+#network:hover {
+    background-color: alpha(@on-surface, 0.15);
+    border: 1px solid alpha(@outline, 0.4);
+}
+
+#backlight {
+    padding: 0 8px;
+    margin: 4px 2px;
+    border-radius: 6px;
+    color: @primary;
+    background-color: alpha(@surface-variant, 0.3);
+    border: 1px solid alpha(@outline, 0.2);
+    transition: all 0.2s ease;
+}
+#backlight:hover {
+    background-color: alpha(@on-surface, 0.15);
+    border: 1px solid alpha(@outline, 0.4);
+}
+
+#battery {
+    padding: 0 14px 0 8px;
+    margin: 4px 2px;
+    border-radius: 6px;
+    color: @primary;
+    background-color: alpha(@surface-variant, 0.3);
+    border: 1px solid alpha(@outline, 0.2);
+    transition: all 0.2s ease;
+}
+#battery:hover {
+    background-color: alpha(@on-surface, 0.15);
+    border: 1px solid alpha(@outline, 0.4);
+}
+#battery.warning:not(.charging) {
+    color: @tertiary;
+    border: 1px solid alpha(@tertiary, 0.4);
+}
+#battery.critical:not(.charging) {
+    color: @error;
+    border: 1px solid alpha(@error, 0.5);
+    animation: blink 2s linear infinite;
+}
+
+#clock {
+    padding: 0 8px;
+    margin: 4px 2px;
+    border-radius: 6px;
+    color: @primary;
+    font-weight: bold;
+    background-color: alpha(@surface-variant, 0.3);
+    border: 1px solid alpha(@outline, 0.2);
+    transition: all 0.2s ease;
+}
+#clock:hover {
+    background-color: alpha(@on-surface, 0.15);
+    border: 1px solid alpha(@outline, 0.4);
+}
+
+#power-profiles-daemon {
+    padding: 0 18px 0 15px;
+    margin: 4px 2px;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    color: @on-tertiary;
+    background-color: alpha(@tertiary, 0.85);
+    border: 1px solid alpha(@on-tertiary, 0.3); 
+}
+
+#power-profiles-daemon:hover {
+    background-color: @tertiary; 
+    border: 1px solid alpha(@on-tertiary, 0.6);
+    box-shadow: 0 0 6px alpha(@tertiary, 0.4);
+}
+
+#power-profiles-daemon.performance {
+    color: @on-error;
+    background-color: alpha(@error, 0.85);
+    border: 1px solid alpha(@on-error, 0.3);
+}
+
+#power-profiles-daemon.performance:hover {
+    background-color: @error; 
+    border: 1px solid alpha(@on-error, 0.6);
+    box-shadow: 0 0 6px alpha(@error, 0.4);
+}
+
+#power-profiles-daemon.power-saver {
+    color: @on-primary;
+    background-color: alpha(@primary, 0.85);
+    border: 1px solid alpha(@on-primary, 0.3);
+}
+
+#power-profiles-daemon.power-saver:hover {
+    background-color: @primary;
+    border: 1px solid alpha(@on-primary, 0.6);
+    box-shadow: 0 0 6px alpha(@primary, 0.4);
+}
+
+#custom-cava {
+    padding: 0 10px;
+    margin: 4px 2px;
+    border-radius: 6px;
+    color: @primary;
+    background-color: alpha(@surface-variant, 0.3);
+    border: 1px solid alpha(@outline, 0.2);
+    transition: all 0.2s ease; 
+}
+#custom-cava:hover {
+    background-color: alpha(@on-surface, 0.15);
+    border: 1px solid alpha(@outline, 0.4);
+}
+
+#pulseaudio {
+    padding: 0 8px;
+    margin: 4px 2px;
+    border-radius: 6px;
+    color: @primary;
+    background-color: alpha(@surface-variant, 0.3);
+    border: 1px solid alpha(@outline, 0.2);
+    transition: all 0.2s ease;
+}
+#pulseaudio:hover {
+    background-color: alpha(@on-surface, 0.15);
+    border: 1px solid alpha(@outline, 0.4);
+}
+
+#custom-longshot {
+    padding: 0 14px 0 9px;
+    margin: 4px 2px;
+    border-radius: 6px;
+    color: @primary;
+    background-color: alpha(@surface-variant, 0.3);
+    border: 1px solid alpha(@outline, 0.2);
+    transition: all 0.2s ease;
+}
+
+#custom-longshot.idle:hover {
+    background-color: @tertiary;
+    color: @on-tertiary;
+    border: 1px solid alpha(@tertiary, 0.5);
+}
+
+#custom-longshot.recording {
+    padding: 0 6px 0 6px;
+    color: @error;
+    background-color: alpha(@surface-variant, 0.3);
+    border: 1px solid alpha(@error, 0.4);
+    animation: pulse-record 1.5s infinite;
+}
+
+#custom-longshot.recording:hover {
+    background-color: @tertiary;
+    border: 1px solid alpha(@tertiary, 0.6);
+}
+
+#tray {
+    margin: 4px 4px 4px 2px;
+    padding: 2px 6px;
+    background-color: alpha(@surface-variant, 0.3);
+    border: 1px solid alpha(@outline, 0.2);
+    border-radius: 8px;
+}
+
+#tray > .passive,
+#tray > .active,
+#tray > .needs-attention {
+    padding: 0 4px;
+    margin: 0 2px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+#tray > .passive:hover,
+#tray > .active:hover,
+#tray > .needs-attention:hover {
+    background-color: alpha(@on-surface, 0.15);
+}
+#tray > .needs-attention {
+    background-color: alpha(@error, 0.2);
+}
+
+#custom-power {
+    padding: 0 15px 0 11px;
+    margin: 4px 8px 4px 2px;
+    border-radius: 6px;
+    color: @error;
+    background-color: alpha(@error, 0.15);
+    border: 1px solid alpha(@error, 0.3);
+    transition: all 0.2s ease;
+}
+
+#custom-power:hover {
+    background-color: @error;
+    color: @on-error;
+    border: 1px solid alpha(@error, 0.6);
+    box-shadow: 0 0 6px alpha(@error, 0.4);
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+@keyframes pulse-record {
+    0% { opacity: 1; text-shadow: 0 0 5px alpha(@error, 0.8); }
+    50% { opacity: 0.3; text-shadow: none; }
+    100% { opacity: 1; text-shadow: 0 0 5px alpha(@error, 0.8); }
+}

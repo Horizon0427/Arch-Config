@@ -1,0 +1,118 @@
+// -*- mode: jsonc -*-
+{
+    "position": "bottom",
+    "layer": "top",
+    "spacing": 4,
+
+    "modules-left": [
+        "hyprland/workspaces",
+        "battery",
+        "pulseaudio",
+        "clock",
+        "network"
+    ],
+    "modules-center": [
+        "power-profiles-daemon"
+    ],
+    "modules-right": [
+        "custom/cava",
+        "backlight",
+        "custom/longshot",
+        "tray",
+        "custom/power"
+    ],
+
+    
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "",
+        "performance": "",
+        "balanced": "",
+        "power-saver": ""
+      }
+    },
+
+    "network": {
+        "format-wifi": "",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+
+    "custom/cava": {
+        "tooltip": false,
+        "format": "{}",
+        "exec": "~/.config/waybar/scripts/cava.sh"
+    },
+
+    "pulseaudio": {
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "",
+        "format-source-muted": " ",
+        "format-icons": {
+            "headphone": " ",
+            "hands-free": "",
+            "headset": "",
+            "phone": " ",
+            "portable": " ",
+            "car": " ",
+            "default": ["", " ", " "]
+        },
+       "on-click": "pavucontrol"
+    },
+
+    "backlight": {
+        "format": "{icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
+
+    "custom/longshot": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "if [ -f /tmp/longshot_recording.pid ]; then echo '{\"text\": \"🔴\", \"class\": \"recording\"}'; else echo '{\"text\": \"󰹑\", \"class\": \"idle\"}'; fi",
+        "interval": "once",
+        "signal": 8,
+        "on-click": "~/Python-projects/longshot_tool/longshot.sh",
+        "on-click-right": "~/Python-projects/longshot_tool/longshot.sh cancel",
+        "tooltip": true,
+        "tooltip-format": "左键: 开始/结束长截图\n右键: 直接取消并丢弃"
+    },
+
+    "custom/power": {
+        "format": "⏻",
+        "on-click": "wlogout -b 3 -T 300 -B 300",
+        "tooltip": false
+    }
+}

@@ -9,6 +9,7 @@ window#waybar {
     border-radius: 0;
     margin: 0;
     font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", sans-serif;
+    font-size: 15px;
 }
 
 #workspaces {
@@ -222,7 +223,7 @@ window#waybar {
 }
 
 #custom-longshot:hover {
-    color: @secondary;
+    color: @on-error;
 }
 
 #custom-longshot.recording {
