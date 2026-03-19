@@ -33,7 +33,7 @@ New releases shows that `matugen` supports `base16` and pipes(`|`), some syntax 
 
 ## waybar
 
-Check out my two `waybar` setup in `./waybar`. You can switch the `waybar` styles between `top` and `bottom` by using keybind `super + F1`. To reload `waybar`, use keybind `super + f2`.
+Check out my two `waybar` setup in `./waybar`. You can switch the `waybar` styles between `top` and `bottom` by using keybind `super + F1`. To reload `waybar`, use keybind `super + F2`.
 
 ## hyprsunset
 
