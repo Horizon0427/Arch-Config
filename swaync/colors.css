@@ -1,13 +1,13 @@
 :root {
-  --bg-base: alpha(#4a4900, 0.8); 
-  --bg-surface: alpha(#48473a, 0.8);
-  --bg-hover: alpha(#36352c, 1.0); 
+  --bg-base: alpha(#344479, 0.8); 
+  --bg-surface: alpha(#45464f, 0.8);
+  --bg-hover: alpha(#34343a, 1.0); 
   
-  --text-primary: #e6e3d5;
-  --text-secondary: #cac7b6;
+  --text-primary: #e3e1e9;
+  --text-secondary: #c6c6d0;
   
-  --border-color: alpha(#939182, 0.5);
+  --border-color: alpha(#8f909a, 0.5);
   
-  --accent: #cccb76;
-  --second: #cac8a4;
+  --accent: #b5c4ff;
+  --second: #c1c5dd;
 }

@@ -6,71 +6,105 @@
         "hyprland/workspaces",
         "custom/sep#workspaces_edge"
     ],
-
     "modules-center": [
         "custom/sep#cleft_left_edge",
         "group/cleft",
-
         "power-profiles-daemon",
-
         "group/cright",
         "custom/sep#cright_right_edge"
     ],
-
     "modules-right": [
         "custom/sep#sysright_edge",
         "group/sysright"
     ],
 
+    "custom/sep#workspaces_edge": {
+        "format": "",
+        "tooltip": false
+    },
 
-    "group/cleft":{
-    "orientation": "horizontal",
-    "modules": [
-      "battery",
-      "pulseaudio",
-      "backlight",
-      "clock"
-    ]
-  },
+    "custom/sep#cleft_left_edge": {
+        "format": "",
+        "tooltip": false
+    },
+    "group/cleft": {
+        "orientation": "horizontal",
+        "modules": [
+            "battery",
+            "pulseaudio",
+            "backlight",
+            "clock"
+        ]
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "pulseaudio": {
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "",
+        "format-source-muted": " ",
+        "format-icons": {
+            "headphone": " ",
+            "hands-free": "",
+            "headset": "",
+            "phone": " ",
+            "portable": " ",
+            "car": " ",
+            "default": ["", " ", " "]
+        },
+       "on-click": "pavucontrol"
+    },
+    "backlight": {
+        "format": "{icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
 
-    "group/cright":{
-    "orientation": "horizontal",
-    "modules": [
-    "network",
-    "custom/longshot",
-    "custom/cava"
-  ]
-},
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "  ",
+        "performance": "  ",
+        "balanced": "  ",
+        "power-saver": "  "
+      }
+    },
 
-    "group/sysright": {
-    "orientation": "horizontal",
-    "modules": [
-    "tray",
-    "custom/power"
-  ]
-},
-
-  "custom/sep#workspaces_edge": {
-  "format": "",
-  "tooltip": false
-},
-
-  "custom/sep#cleft_left_edge":{
-  "format": "",
-  "tooltip": false
-},
-
-  "custom/sep#cright_right_edge":{
-  "format": "",
-  "tooltip": false
-},
-
-  "custom/sep#sysright_edge":{
-  "format": "",
-  "tooltip": false
-},
-
-"custom/longshot": {
+    "group/cright": {
+        "orientation": "horizontal",
+        "modules": [
+            "network",
+            "custom/longshot",
+            "custom/cava"
+        ]
+    },
+    "network": {
+        "format-wifi": "",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "custom/longshot": {
         "format": "{}",
         "return-type": "json",
         "exec": "if [ -f /tmp/longshot_recording.pid ]; then echo '{\"text\": \"🔴\", \"class\": \"recording\"}'; else echo '{\"text\": \"󰹑\", \"class\": \"idle\"}'; fi",
@@ -80,8 +114,37 @@
         "on-click-right": "~/Python-projects/longshot_tool/longshot.sh cancel",
         "tooltip": true,
         "tooltip-format": "左键: 开始/结束长截图\n右键: 直接取消并丢弃"
-},
+    },
+    "custom/cava": {
+        "tooltip": false,
+        "format": "{}",
+        "exec": "~/.config/waybar/scripts/cava.sh"
+    },
+    "custom/sep#cright_right_edge": {
+        "format": "",
+        "tooltip": false
+    },
 
+    "custom/sep#sysright_edge": {
+        "format": "",
+        "tooltip": false
+    },
+    "group/sysright": {
+        "orientation": "horizontal",
+        "modules": [
+            "tray",
+            "custom/power"
+        ]
+    },
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
+    "custom/power": {
+        "format": "⏻",
+        "on-click": "wlogout -b 3 -T 300 -B 300",
+        "tooltip": false
+    },
 
     "keyboard-state": {
         "numlock": true,
@@ -108,40 +171,17 @@
         "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
         "unknown-tag": "N/A",
         "interval": 5,
-        "consume-icons": {
-            "on": " "
-        },
-        "random-icons": {
-            "off": "<span color=\"#f53c3c\"></span> ",
-            "on": " "
-        },
-        "repeat-icons": {
-            "on": " "
-        },
-        "single-icons": {
-            "on": "1 "
-        },
-        "state-icons": {
-            "paused": "",
-            "playing": ""
-        },
+        "consume-icons": { "on": " " },
+        "random-icons": { "off": "<span color=\"#f53c3c\"></span> ", "on": " " },
+        "repeat-icons": { "on": " " },
+        "single-icons": { "on": "1 " },
+        "state-icons": { "paused": "", "playing": "" },
         "tooltip-format": "MPD (connected)",
         "tooltip-format-disconnected": "MPD (disconnected)"
     },
     "idle_inhibitor": {
         "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
-    "tray": {
-         "icon-size": 18,
-        "spacing": 10,
-    },
-    "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format-icons": { "activated": "", "deactivated": "" }
     },
     "cpu": {
         "format": "{usage}% ",
@@ -155,68 +195,8 @@
         "format": "{temperatureC}°C {icon}",
         "format-icons": ["", "", ""]
     },
-    "backlight": {
-        "format": "{icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
-    },
-    "battery": {
-        "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        "format-icons": ["", "", "", "", ""]
-    },
     "battery#bat2": {
         "bat": "BAT2"
-    },
-    "power-profiles-daemon": {
-      "format": "{icon}",
-      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-      "tooltip": true,
-      "format-icons": {
-        "default": "  ",
-        "performance": "  ",
-        "balanced": "  ",
-        "power-saver": "  "
-      }
-    },
-    "network": {
-        "format-wifi": "",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
-    },
-  "custom/cava": {
-        "tooltip": false,
-        "format": "{}",
-        "exec": "~/.config/waybar/scripts/cava.sh",
-    },
-
-    "pulseaudio": {
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "",
-        "format-source-muted": " ",
-        "format-icons": {
-            "headphone": " ",
-            "hands-free": "",
-            "headset": "",
-            "phone": " ",
-            "portable": " ",
-            "car": " ",
-            "default": ["", " ", " "]
-        },
-       "on-click": "pavucontrol"
     },
     "custom/media": {
         "format": "{icon} {text}",
@@ -227,13 +207,6 @@
             "default": "🎜 "
         },
         "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-    },
-    "custom/power": {
-        "format": "⏻",
-        "on-click": "wlogout -b 3 -T 300 -B 300",
-        "tooltip": false
-		}
-
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"
     }
 }

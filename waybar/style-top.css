@@ -26,37 +26,35 @@ window#waybar {
     margin-right: 15px;
 }
 
-
 #workspaces button {
     padding: 0 8px;
     margin: 2px 2px;
-    border-radius: 15px;
-    background-color: transparent;
+    border-radius: 40px;
     color: @on-tertiary;
+    background: transparent;
     box-shadow: none;
     text-shadow: none;
+    border: 1px solid transparent; 
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-
 #workspaces button:hover {
-    background-color: alpha(@on-tertiary, 0.15);
+    background: alpha(@on-tertiary, 0.15);
+    border: 1px solid alpha(@on-tertiary, 0.2);
     box-shadow: none;
 }
-
 #workspaces button:active {
-    background-color: alpha(@on-tertiary, 0.3);
+    background: alpha(@on-tertiary, 0.3);
     transition: all 0.1s ease;
 }
-
-#workspaces button.active:hover {
-  background: radial-gradient(circle at center, @tertiary 0%, @on-tertiary 100%);
-}
-
-
 #workspaces button.active {
     background: radial-gradient(circle at center, @tertiary 0%, @tertiary-container 100%);
     color: @on-tertiary;
     padding: 0 16px;
+    border: 1px solid transparent;
+}
+#workspaces button.active:hover {
+    background: radial-gradient(circle at center, @tertiary 0%, @on-tertiary 100%);
+    border: 1px solid alpha(@on-tertiary, 0.3);
 }
 
 #custom-sep.cleft_left_edge {
@@ -71,57 +69,70 @@ window#waybar {
     min-height: 30px;
     min-width: 250px;
 }
-#custom-sep.cleft_right_edge {
-    color: red;
-    background-color: @primary;
-    font-size: 25px;
+
+#battery, #pulseaudio, #backlight, #clock {
+    background: transparent;
+    color: @on-primary;
+    padding: 0 8px;
+    margin: 2px 1px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+#battery:hover, #pulseaudio:hover, #backlight:hover, #clock:hover {
+    background: alpha(@on-primary, 0.15);
+    border: 1px solid alpha(@on-primary, 0.2);
+}
+
+#battery.critical:not(.charging) {
+    color: @error;
 }
 
 #power-profiles-daemon {
     background-color: @tertiary;
     color: @on-tertiary;
     border-radius: 50px;
-    min-width: 30px;
+    min-width: 20px;
+    font-size: 17px;
     margin: 0 0px;
-    padding: 0 7px;
+    padding: 0 10px 0 6px;
+    border: 1px solid alpha(@on-tertiary, 0.2);
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-
 }
 #power-profiles-daemon:hover {
     background-color: @tertiary-container;
     color: @on-tertiary-container;
-    box-shadow: 0 0 2px alpha(@tertiary, 0.6);
+    border: 1px solid alpha(@on-tertiary, 0.5);
+    box-shadow: 0 0 4px alpha(@tertiary, 0.6);
 }
 #power-profiles-daemon:active {
     background-color: @secondary;
     box-shadow: none;
     transition:all 0.1s ease;
 }
-#power-profiles-daemon.performance:hover {
-    background-color: @error-container;
-    color: @on-error-container;
-    box-shadow: 0 0 2px alpha(@tertiary, 0.6);
-}
-#power-profiles-daemon.power-saver:hover {
-    background-color: @primary-container;
-    color: @on-primary-container;
-    box-shadow: 0 0 2px alpha(@tertiary, 0.6);
-}
 #power-profiles-daemon.performance {
     background-color: @error;
     color: @on-error;
+    border: 1px solid alpha(@on-error, 0.2);
+}
+#power-profiles-daemon.performance:hover {
+    background-color: @error-container;
+    color: @on-error-container;
+    border: 1px solid alpha(@on-error, 0.5);
+    box-shadow: 0 0 4px alpha(@error, 0.6);
 }
 #power-profiles-daemon.power-saver {
     background-color: @primary;
     color: @on-primary;
+    border: 1px solid alpha(@on-primary, 0.2);
+}
+#power-profiles-daemon.power-saver:hover {
+    background-color: @primary-container;
+    color: @on-primary-container;
+    border: 1px solid alpha(@on-primary, 0.5);
+    box-shadow: 0 0 4px alpha(@primary, 0.6);
 }
 
-
-#custom-sep.cright_left_edge {
-    color: @primary;
-    background-color: @primary;
-    font-size: 25px;
-}
 #cright {
     background-image: radial-gradient(circle at left center, alpha(@primary, 0) 15px, @primary 17px);
     padding-left: 30px;
@@ -133,6 +144,44 @@ window#waybar {
     color: @primary;
     background-color: transparent;
     font-size: 25px;
+}
+
+#network, #custom-longshot, #custom-cava {
+    background: transparent;
+    color: @on-primary;
+    padding: 0 10px 0 6px;
+    margin: 2px 1px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+#network:hover {
+    background: alpha(@on-primary, 0.15);
+    border: 1px solid alpha(@on-primary, 0.2);
+    padding: 0 10px 0 6px;
+}
+
+#custom-longshot {
+    box-shadow: none; 
+    font-size: 18px;
+}
+#custom-longshot:hover {
+    background: alpha(@on-primary, 0.15);
+    border: 1px solid alpha(@on-primary, 0.2);
+}
+#custom-longshot.recording {
+    color: @error;
+    animation: pulse-record 1.5s infinite;
+}
+#custom-longshot.recording:hover {
+    background: alpha(@on-primary, 0.15);
+    border: 1px solid alpha(@on-primary, 0.2);
+    padding: 0 4px 0 4px;
+}
+
+#custom-cava {
+    padding: 0 15px;
+    font-size: 16px;
 }
 
 #custom-sep.sysright_edge {
@@ -147,88 +196,48 @@ window#waybar {
     min-height: 16px;
 }
 
-#battery,
-#pulseaudio,
-#backlight,
-#clock,
-#network {
-    background-color: transparent;
-    color: @on-primary;
-    padding: 0 8px;
-}
-
-#battery.critical:not(.charging) {
-    background-color: transparent;
-    color: @error;
-}
-
 #tray {
     background-color: transparent;
 }
-
 #tray > .passive,
 #tray > .active,
 #tray > .needs-attention {
-    background-color: transparent;
+    background: transparent;
     padding: 2px 6px;
     margin: 0 2px;
-    border-radius: 10px;
+    border-radius: 8px;
+    border: 1px solid transparent;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 #tray > .passive:hover,
 #tray > .active:hover,
 #tray > .needs-attention:hover {
-    background-color: alpha(@on-tertiary, 0.15); 
+    background: alpha(@on-tertiary, 0.15); 
+    border: 1px solid alpha(@on-tertiary, 0.2);
 }
-
 #tray > .needs-attention {
-    background-color: alpha(@error, 0.2);
+    background: alpha(@error, 0.2);
 }
-
 
 #custom-power {
-    padding: 0 10px;
+    padding: 0 12px;
     margin: 2px 2px;
-    border-radius: 15px;
-    background-color: transparent;
-    color: @on-secondary;
+    border-radius: 12px;
+    background: transparent;
+    color: @on-tertiary;
+    border: 1px solid transparent;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-
 #custom-power:hover {
-    background-color: @error;
+    background: @error;
     color: @on-error;
-    box-shadow: 0 0 8px alpha(@error, 0.6); 
+    border: 1px solid alpha(@error, 0.5);
+    box-shadow: 0 0 6px alpha(@error, 0.6); 
 }
-
 #custom-power:active {
-    background-color: alpha(@error, 0.7); 
+    background: alpha(@error, 0.7); 
     box-shadow: none;
     transition: all 0.1s ease;
-}
-
-#custom-cava {
-    background-color: transparent;
-    color: @on-primary;
-    padding: 0 20px;
-    font-size: 16px;
-}
-
-#custom-longshot {
-    padding: 0 10px;
-    background-color: transparent;
-    color: @on-primary;
-    font-size: 18px;
-    transition: all 0.3s ease;
-}
-
-#custom-longshot:hover {
-    color: @on-error;
-}
-
-#custom-longshot.recording {
-    color: @error;
-    animation: pulse-record 1.5s infinite;
 }
 
 @keyframes pulse-record {
