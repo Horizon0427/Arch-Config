@@ -67,7 +67,7 @@ window#waybar {
     padding-left: 10px;
     padding-right: 25px;
     min-height: 30px;
-    min-width: 250px;
+    min-width: 260px;
 }
 
 #battery, #pulseaudio, #backlight, #clock {
@@ -164,6 +164,7 @@ window#waybar {
 #custom-longshot {
     box-shadow: none; 
     font-size: 18px;
+    padding: 0 12px 0 7px;
 }
 #custom-longshot:hover {
     background: alpha(@on-primary, 0.15);
@@ -181,7 +182,7 @@ window#waybar {
 
 #custom-cava {
     padding: 0 15px;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 #custom-sep.sysright_edge {

@@ -1,143 +1,339 @@
 @import 'colors.css';
 
 :root {
-  --border-radius-large: 16px; 
-  --border-radius-small: 8px; 
-  --padding-standard: 12px;
-}
+  --radius-xl: 22px;
+  --radius-lg: 18px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
 
-.control-center {
-  background: var(--bg-surface);
-  border-radius: var(--border-radius-large);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
+  --space-1: 6px;
+  --space-2: 10px;
+  --space-3: 14px;
+  --space-4: 18px;
+
+  --panel-bg: var(--bg-base);
+  --card-bg: var(--bg-surface);
+  --card-hover: var(--bg-hover);
+
+  --text-main: var(--text-primary);
+  --text-muted: var(--text-secondary);
+
+  --stroke: var(--border-color);
+  --accent-bg: alpha(var(--accent), 0.16);
+  --accent-stroke: alpha(var(--accent), 0.55);
+  --accent-strong: var(--accent);
 }
 
 .blank-window,
-notificationwindow {
+notificationwindow,
+.floating-notifications {
   background: transparent;
+}
+
+.control-center {
+  background: var(--panel-bg);
+  color: var(--text-main);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--stroke);
+  padding: var(--space-2);
 }
 
 .control-center .control-center-list-placeholder {
-  opacity: 0.4;
-  font-size: 1.2rem;
+  opacity: 0.45;
+  font-size: 1.05rem;
+  color: var(--text-muted);
 }
 
 .widget {
-  margin: var(--padding-standard);
-  padding: var(--padding-standard);
-  background: var(--bg-surface);
-  border-radius: var(--border-radius-large);
-  border: 1px solid var(--border-color);
+  margin: var(--space-2);
+  padding: var(--space-3);
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--stroke);
+  transition: all 180ms ease;
+}
+
+.widget:hover {
+  background: var(--card-hover);
 }
 
 .widget-title {
-  margin-bottom: 0px;
+  margin-bottom: 0;
+  padding-bottom: 4px;
   background: transparent;
   border: none;
+}
 
 .widget-title > label {
-  font-size: 1.4rem;
-  font-weight: bold;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  color: var(--text-main);
 }
+
 .widget-title > button {
-  background: var(--bg-surface);
-  border-radius: var(--border-radius-small);
-  padding: 4px 12px;
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
+  min-height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: var(--card-bg);
+  color: var(--text-main);
+  border: 1px solid var(--stroke);
+  transition: all 180ms ease;
 }
+
 .widget-title > button:hover {
-  background: var(--bg-hover);
+  background: var(--card-hover);
+  border-color: var(--accent-stroke);
 }
 
 .widget-dnd {
-  margin-top: 4px;
-}
-.widget-dnd label {
-  font-size: 1.1rem;
-}
-.widget-dnd switch {
-  border-radius: 20px;
-  background: rgba(0, 0, 0, 0.3);
-}
-.widget-dnd switch:checked {
-  background: var(--accent);
+  margin-top: 0;
 }
 
-.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-album-art {
-  border-radius: 100%;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6);
-  -gtk-icon-size: 96px; 
+.widget-dnd > label,
+.widget-dnd label {
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.widget-dnd > switch,
+.widget-dnd switch {
+  border-radius: 999px;
+  background: var(--card-bg);
+  border: 1px solid var(--stroke);
+}
+
+.widget-dnd > switch:checked,
+.widget-dnd switch:checked {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+}
+
+.widget-dnd > switch slider,
+.widget-dnd switch slider {
+  background: var(--text-main);
+  border-radius: 999px;
+}
+
+.widget-buttons-grid {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.widget-buttons-grid flowboxchild > button {
+  min-height: 44px;
+  padding: 0 12px;
+  margin: 4px;
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  color: var(--text-main);
+  border: 1px solid var(--stroke);
+  transition: all 180ms ease;
+}
+
+.widget-buttons-grid flowboxchild > button:hover {
+  background: var(--accent-bg);
+  border-color: var(--accent-stroke);
+}
+
+.widget-mpris {
+  padding-top: 6px;
+}
+
+.widget-mpris .widget-mpris-player {
+  padding: 12px;
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  border: 1px solid var(--stroke);
+}
+
+.widget-mpris .widget-mpris-album-art {
+  border-radius: 16px;
+  margin-right: 14px;
 }
 
 .widget-mpris-title {
+  font-size: 1.06rem;
   font-weight: 800;
-  font-size: 1.1rem;
+  color: var(--text-main);
 }
+
 .widget-mpris-subtitle {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.widget-mpris button {
+  min-width: 34px;
+  min-height: 34px;
+  margin: 2px;
+  border-radius: 999px;
+  background: var(--card-bg);
+  color: var(--text-main);
+  border: 1px solid transparent;
+  transition: all 160ms ease;
+}
+
+.widget-mpris button:hover {
+  background: var(--accent-bg);
+  border-color: var(--accent-stroke);
+}
+
+.widget-volume {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.widget-volume label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.widget-volume scale trough {
+  min-height: 10px;
+  border-radius: 999px;
+  background: var(--card-bg);
+  border: 1px solid var(--stroke);
+}
+
+.widget-volume scale highlight {
+  min-height: 10px;
+  border-radius: 999px;
+  background: var(--accent-strong);
+}
+
+.widget-volume scale slider {
+  min-width: 16px;
+  min-height: 16px;
+  margin: -4px 0;
+  border-radius: 999px;
+  background: var(--text-main);
+  border: none;
+}
+
+.per-app-volume {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  border: 1px solid var(--stroke);
 }
 
 .notification-row {
   outline: none;
+  margin: 0;
+  padding: 0;
+}
+
+.notification-background {
+  background: transparent;
 }
 
 .notification-background .notification {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-large);
-  margin-top: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-lg);
+  margin-top: 12px;
+  transition: all 180ms ease;
 }
 
 .notification-background .notification:hover {
-  background: var(--bg-hover);
+  background: var(--card-hover);
+}
+
+.notification-group {
+  margin: 8px 0;
+}
+
+.notification-group .notification-group-headers {
+  padding: 6px 8px 2px 8px;
+}
+
+.notification-group .notification-group-header {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.notification-content {
+  padding: 12px;
 }
 
 .notification-content .summary {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: var(--text-primary);
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--text-main);
 }
 
 .notification-content .body {
-  font-size: 1rem;
-  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.35;
+  color: var(--text-muted);
   margin-top: 4px;
 }
 
 .notification-content .time {
   font-size: 0.8rem;
-  color: var(--text-secondary);
+  font-weight: 500;
+  color: var(--text-muted);
 }
 
+.notification-content .app-name {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
 
 .notification-content .image {
-  border-radius: var(--border-radius-small);
+  border-radius: 12px;
 }
+
 .notification-content .app-icon {
-  margin-right: 8px;
+  margin-right: 10px;
 }
 
 .close-button {
+  min-width: 28px;
+  min-height: 28px;
+  margin: 8px;
+  border-radius: 999px;
   background: transparent;
-  color: var(--text-secondary);
-  border-radius: 100%;
-  margin: 6px;
-}
-.close-button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-primary);
+  color: var(--text-muted);
+  transition: all 160ms ease;
 }
 
-.notification-group .notification-group-headers {
-  padding: 8px 12px;
+.close-button:hover {
+  background: var(--accent-bg);
+  color: var(--text-main);
 }
-.notification-group .notification-group-header {
-  font-weight: bold;
-  color: var(--text-secondary);
+
+.floating-notifications .notification {
+  background: var(--panel-bg);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-lg);
 }
-.notification-group.collapsed .notification-row:not(:last-child) {
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+
+.critical {
+  border: 1px solid var(--accent-stroke);
+}
+
+.notification-background .critical {
+  background: var(--card-hover);
+}
+
+scrollbar {
+  background: transparent;
+}
+
+scrollbar slider {
+  min-width: 6px;
+  border-radius: 999px;
+  background: alpha(var(--text-muted), 0.35);
+}
+
+scrollbar slider:hover {
+  background: alpha(var(--text-muted), 0.5);
 }

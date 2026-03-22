@@ -1,22 +1,25 @@
 {
   "$schema": "/etc/xdg/swaync/configSchema.json",
+
   "positionX": "right",
   "positionY": "top",
   "layer": "overlay",
   "control-center-layer": "top",
   "layer-shell": true,
   "cssPriority": "user",
-  
-  "control-center-margin-top": 12,
-  "control-center-margin-bottom": 12,
-  "control-center-margin-right": 12,
-  "control-center-width": 450,
-  
-  "timeout": 3,
-  "timeout-low": 1.5,
-  "timeout-critical": 0,
+
+  "control-center-margin-top": 14,
+  "control-center-margin-bottom": 14,
+  "control-center-margin-right": 14,
+  "control-center-width": 460,
+
+  "notification-window-width": 420,
   "fit-to-screen": true,
-  "notification-window-width": 500,
+
+  "timeout": 5,
+  "timeout-low": 2,
+  "timeout-critical": 0,
+
   "keyboard-shortcuts": false,
   "notification-inline-replies": true,
   "notification-grouping": true,
@@ -25,26 +28,59 @@
   "hide-on-clear": false,
   "hide-on-action": true,
   "script-fail-notify": true,
-  
+
   "widgets": [
     "title",
     "dnd",
+    "buttons-grid",
     "mpris",
+    "volume",
     "notifications"
   ],
-  
+
   "widget-config": {
     "title": {
-      "text": "通知中心",
+      "text": "控制中心",
       "clear-all-button": true,
       "button-text": "󰎟 清空"
     },
+
     "dnd": {
       "text": "勿扰模式"
     },
+
+  "buttons-grid": {
+      "buttons-per-row": 3,
+      "actions": [
+        {
+          "label": "󰃭 日程日历",
+          "command": "ghostty -e calcurse"
+        },
+        {
+          "label": "󰔟 桌面时钟",
+          "command": "ghostty -e tty-clock -c -B -C 4"
+        },
+        {
+          "label": "󰃯 运行时间",
+          "command": "ghostty -e sh -c 'fastfetch -s uptime; echo \"\"; read -p \"按回车键退出...\"'"
+        }
+      ]
+    },
+
     "mpris": {
-      "image-size": 96,
-      "image-radius": 12
+      "image-size": 92,
+      "image-radius": 16,
+      "show-album-art": "always",
+      "autohide": true,
+      "loop-carousel": false
+    },
+
+    "volume": {
+      "label": "音量",
+      "show-per-app": true,
+      "show-per-app-icon": true,
+      "show-per-app-label": true,
+      "expand-per-app": false
     }
   }
 }

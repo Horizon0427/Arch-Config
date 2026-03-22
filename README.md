@@ -17,9 +17,20 @@ More keybinds can be found in `./hypr/hyprland.conf`.
 The positioning of certain UI elements in `hyprlock` is hardcoded to my specific screen resolution. If you plan to use this, please manually adjust the coordinates of each component to fit your own display.
 
 ## "Hyper"hyprlock
-Hypr-Prelock-Anim is a high-performance, aesthetically driven pre-lock screen overlay developed in `C` using the `Raylib` framework, specifically engineered for `Hyprland` power users who prioritize a nice desktop experience. This project serves as a visual bridge between an active session and the system lock screen.
 
-It features a sophisticated geometric animation that dynamically adapts its color palette in real-time by parsing `Matugen`-generated Material You themes. To solve the common Wayland "flicker" issue during lock transitions, the project utilizes a unique Unix signal-based handoff mechanism: a shell script coordinates the lifecycle by launching the hardware-accelerated `C` barrier, triggering `hyprlock`, and then signaling the `C` process via a temporary flag (`/tmp/prelock_unlocked`) to perform a graceful 0.3s fade-out only after a successful unlock. 
+hypr-prelock-animation is a `C` program makes a better visual transition before `hyprlock` kicks in. You can put all the animation files in `~/.config/hypr/lock_animation/`,then put the trigger script in `~/.config/hypr/scripts`, and add these in `~/.config/hypr/hyprland.conf`. 
+
+```
+bind = $mainMod ALT, L, exec, ~/.config/hypr/scripts/smart_lock.sh
+
+windowrule {
+    name = prelock-fullscreen
+    match:class = ^(Smooth_Prelock)$
+    fullscreen = true
+}
+```
+```
+```
 
 ## Matugen
 
