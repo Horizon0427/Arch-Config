@@ -18,7 +18,7 @@ The positioning of certain UI elements in `hyprlock` is hardcoded to my specific
 
 ## "Hyper"hyprlock
 
-hypr-prelock-animation is a `C` program makes a better visual transition before `hyprlock` kicks in. You can put all the animation files in `~/.config/hypr/lock_animation/`,then put the trigger script in `~/.config/hypr/scripts`, and add these in `~/.config/hypr/hyprland.conf`. 
+hypr-prelock-animation is a `C` program makes a better visual transition before `hyprlock` kicks in. You can put all the animation files in `~/.config/hypr/lock_animation/`, then put the trigger script in `~/.config/hypr/scripts`, and add these in `~/.config/hypr/hyprland.conf`. 
 
 ```
 bind = $mainMod ALT, L, exec, ~/.config/hypr/scripts/smart_lock.sh
@@ -28,8 +28,6 @@ windowrule {
     match:class = ^(Smooth_Prelock)$
     fullscreen = true
 }
-```
-```
 ```
 
 ## Matugen
