@@ -30,6 +30,8 @@ windowrule {
 }
 ```
 
+Use `super + ALT + L` to lock your screen, and the spinning lock pattern animation will kick out before `hyprlock`.
+
 ## Matugen
 
 `matugen` takes over multiple styling aspects, triggered dynamically via `waypaper`. Specifically, this covers: `waybar`, active window borders, `starship`, `mako`, `wlogout`, `fastfetch`, `btop`, Hypr-Prelock and `hyprlock`. 
