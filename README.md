@@ -32,9 +32,30 @@ windowrule {
 
 Use `super + ALT + L` to lock your screen, and the spinning lock pattern animation will kick out before `hyprlock`.
 
+## "Hyper"paperpicker
+
+Yep I wrote another `C` program with COOL UI and smooth animation which allows you to select wallpapers, I also connected it with `matugen` 
+so the theme color can change as well.
+
+If you want to try, please add these in `~/.config/hypr/hyprland.conf`.
+
+```
+windowrule {
+    name = wall-paper-picker
+    match:class = ^(wallpicker)$
+    fullscreen = true
+    center = true
+    no_blur = true
+    stay_focused = true
+    animation = slide
+}
+```
+The whole process was really smooth so I simply gave up `waypaper`, now `waypaper` part is no longer maintained.
+
+
 ## Matugen
 
-`matugen` takes over multiple styling aspects, triggered dynamically via `waypaper`. Specifically, this covers: `waybar`, active window borders, `starship`, `mako`, `wlogout`, `fastfetch`, `btop`, Hypr-Prelock & `hyprlock` and `yazi`. 
+`matugen` takes over multiple styling aspects, triggered dynamically via my "Hyper"paperpicker. Specifically, this covers: `waybar`, active window borders, `starship`, `mako`, `wlogout`, `fastfetch`, `btop`, Hypr-Prelock & `hyprlock` and `yazi`. 
 
 New releases shows that `matugen` supports `base16` and pipes(`|`), some syntax has been superseded. Go to `waypaper/config.ini`, add `--source-color-index 0` behind `matugen image "$wallpaper"` may help to fix color issues.
 
@@ -81,4 +102,6 @@ Then the program will stitch the recoeded video into a long `PNG` image. Check m
 ![10](./rice/rice10.png)
 ![waybar1](./rice/waybar1.png)
 ![waybar2](./rice/waybar2.png)
+![paper](./rice/paper.png)
 ![11](./rice/rice11.gif)
+![paper](./rice/paperpicker.gif)
