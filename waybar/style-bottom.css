@@ -63,7 +63,7 @@ window#waybar {
 }
 
 #backlight {
-    padding: 0 8px;
+    padding: 0 11px 0 11px;
     margin: 4px 2px;
     border-radius: 6px;
     color: @primary;
@@ -236,6 +236,32 @@ window#waybar {
 #tray > .needs-attention {
     background-color: alpha(@error, 0.2);
 }
+
+
+#mpris {
+    padding: 0 13px 0 11px;
+    margin: 4px 2px;
+    border-radius: 6px;
+    color: @primary;
+    background-color: alpha(@surface-variant, 0.3);
+    border: 1px solid alpha(@outline, 0.2);
+}
+
+#mpris:hover {
+    background-color: alpha(@on-surface, 0.15);
+    border: 1px solid alpha(@outline, 0.4);
+}
+
+
+#mpris.paused {
+    color: @on-surface-variant; 
+    padding: 0 11px 0 13px;
+}
+
+#mpris.playing {
+    color: @primary;
+}
+
 
 #custom-power {
     padding: 0 15px 0 11px;

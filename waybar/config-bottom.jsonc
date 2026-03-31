@@ -9,14 +9,15 @@
         "battery",
         "pulseaudio",
         "clock",
-        "network"
+        "network",
+        "backlight"
     ],
     "modules-center": [
         "power-profiles-daemon"
     ],
     "modules-right": [
         "custom/cava",
-        "backlight",
+        "mpris",
         "custom/longshot",
         "tray",
         "custom/power"
@@ -108,6 +109,19 @@
         "on-click-right": "~/Python-projects/longshot_tool/longshot.sh cancel",
         "tooltip": true,
         "tooltip-format": "左键: 开始/结束长截图\n右键: 直接取消并丢弃"
+    },
+
+    "mpris": {
+    "format": "{player_icon}",
+    "format-paused": "{status_icon}",
+    "player-icons": {
+        "default": "▶",
+        "spotify": ""
+    },
+    "status-icons": {
+        "paused": "▶"
+    },
+    "ignored-players": ["firefox", "chromium"]
     },
 
     "custom/power": {

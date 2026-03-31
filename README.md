@@ -58,12 +58,10 @@ This setup is built on the shoulders of giants. A huge thank you to the open-sou
 * **Wlogout:** Design and color palette heavily inspired by [Catppuccin](https://github.com/catppuccin/catppuccin).
 * **Ghostty:** Terminal shaders and cursor effects are pulled from the awesome [ghostty-shaders](https://github.com/0xhckr/ghostty-shaders) and [cursor-effects](https://github.com/sahaj-b/ghostty-cursor-shaders) repository.
 
-## Notice: Migration from Mako to SwayNC
+## Notice: Migration from SwayNC to Mako
 
-If you've been following my previous setups, please note that I have recently migrated my notification daemon from `Mako` to `SwayNC`. 
-
-* **Active:** The `swaync/` directory contains the current, actively themed configuration.
-* **Deprecated:** The old `mako/` folder is left in the repository purely for legacy reference and is **no longer maintained**. Please use SwayNC moving forward!
+Yep previously I gave up `mako` and tried `swaync`. But I cannot come up with ANY idea about what should be placed there... 
+So I came back, `swaync` is no longer maintained... Sorry :)
 
 ## New scrolling long-screenshot added
 

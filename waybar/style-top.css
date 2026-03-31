@@ -50,11 +50,11 @@ window#waybar {
     background: radial-gradient(circle at center, @tertiary 0%, @tertiary-container 100%);
     color: @on-tertiary;
     padding: 0 16px;
-    border: 1px solid transparent;
+    border: 0px solid transparent;
 }
 #workspaces button.active:hover {
     background: radial-gradient(circle at center, @tertiary 0%, @on-tertiary 100%);
-    border: 1px solid alpha(@on-tertiary, 0.3);
+    border: 0px solid alpha(@on-tertiary, 0.3);
 }
 
 #custom-sep.cleft_left_edge {
