@@ -204,7 +204,7 @@ int main(void) {
 
       DrawTexturePro(wallpapers[hoveredIndex].tex, sourceRec, destRec, origin,
                      0.0f, tint);
-      DrawPolyLinesEx(currentCenter, 6, HEX_RADIUS * scale, 30.0f, 4.0f, WHITE);
+      DrawPolyLinesEx(currentCenter, 6, HEX_RADIUS * scale, 30.0f, 8.0f, WHITE);
 
       if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
         char full_target_path[1024];

@@ -237,31 +237,48 @@ window#waybar {
     background-color: alpha(@error, 0.2);
 }
 
-
-#mpris {
-    padding: 0 13px 0 11px;
-    margin: 4px 2px;
-    border-radius: 6px;
+#custom-prev,
+#mpris,
+#custom-next {
+    padding: 0 11px;
+    margin: 4px 0px;
     color: @primary;
     background-color: alpha(@surface-variant, 0.3);
-    border: 1px solid alpha(@outline, 0.2);
+    border-top: 1px solid alpha(@outline, 0.2);
+    border-bottom: 1px solid alpha(@outline, 0.2);
+    transition: all 0.2s ease;
+    font-size: 20px;
 }
 
-#mpris:hover {
-    background-color: alpha(@on-surface, 0.15);
-    border: 1px solid alpha(@outline, 0.4);
+#custom-prev {
+    border-left: 1px solid alpha(@outline, 0.2);
+    border-radius: 6px 0 0 6px;
+    margin-left: 2px;
 }
 
+#mpris {
+  padding: 0 12px 0 8px;
+  font-size: 17px;
+}
+
+#custom-next {
+    border-right: 1px solid alpha(@outline, 0.2);
+    border-radius: 0 6px 6px 0;
+    margin-right: 2px;
+}
 
 #mpris.paused {
-    color: @on-surface-variant; 
-    padding: 0 11px 0 13px;
+    color: @on-surface-variant;
 }
-
 #mpris.playing {
     color: @primary;
 }
 
+#custom-prev:hover,
+#mpris:hover,
+#custom-next:hover {
+    background-color: alpha(@on-surface, 0.15);
+}
 
 #custom-power {
     padding: 0 15px 0 11px;

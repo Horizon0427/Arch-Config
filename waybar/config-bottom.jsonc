@@ -17,7 +17,7 @@
     ],
     "modules-right": [
         "custom/cava",
-        "mpris",
+        "group/music",
         "custom/longshot",
         "tray",
         "custom/power"
@@ -109,6 +109,33 @@
         "on-click-right": "~/Python-projects/longshot_tool/longshot.sh cancel",
         "tooltip": true,
         "tooltip-format": "左键: 开始/结束长截图\n右键: 直接取消并丢弃"
+    },
+
+    "group/music": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/prev",
+            "mpris",
+            "custom/next"
+        ]
+    },
+
+    "custom/prev": {
+        "exec": "echo '󰒮'",
+        "format": "{}",
+        "exec-if": "playerctl --ignore-player=firefox,chromium status 2>/dev/null",
+        "interval": 2,
+        "on-click": "playerctl previous",
+        "tooltip": false
+    },
+
+    "custom/next": {
+        "exec": "echo '󰒭'",
+        "format": "{}",
+        "exec-if": "playerctl --ignore-player=firefox,chromium status 2>/dev/null",
+        "interval": 2,
+        "on-click": "playerctl next",
+        "tooltip": false
     },
 
     "mpris": {
