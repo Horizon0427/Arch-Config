@@ -94,7 +94,6 @@ The whole process was really smooth so I simply gave up `waypaper`, now `waypape
 
 `matugen` takes over multiple styling aspects, triggered dynamically via my "Hyper"paperpicker. Specifically, this covers: `waybar`, active window borders, `starship`, `mako`, `wlogout`, `fastfetch`, `btop`, Hypr-Prelock & `hyprlock` and `yazi`. 
 
-New releases shows that `matugen` supports `base16` and pipes(`|`), some syntax has been superseded. Go to `waypaper/config.ini`, add `--source-color-index 0` behind `matugen image "$wallpaper"` may help to fix color issues.
 
 ## cowsay
 
