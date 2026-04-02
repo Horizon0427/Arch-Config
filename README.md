@@ -68,7 +68,8 @@ if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
     char cmd[2048];
     snprintf(cmd, sizeof(cmd),
         "("
-        "awww img \"%s\" --transition-type any --transition-angl 30 "
+        "awww img \"%s\" --transition-type grow --transition-pos "
+        "%.3f,%.3f " // grow from the place u click
         "--transition-step 30 --transition-duration 1.2 "
         "--transition-fps 60 & "
         "ln -sf \"%s\" $HOME/.config/hypr/current_wallpaper.png ; "
@@ -78,7 +79,7 @@ if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
         "sleep 0.5 ; "
         "$HOME/.config/waybar/scripts/reload-waybar.sh "
         ") > /dev/null 2>&1 &",
-        full_target_path, full_target_path, full_target_path
+        full_target_path, relX, relY, full_target_path, full_target_path
         );
 
         printf("执行系统联动命令: \n%s\n", cmd);
