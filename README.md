@@ -35,9 +35,11 @@ Use `super + ALT + L` to lock your screen, and the spinning lock pattern animati
 ## "Hyper"paperpicker
 
 Yep I wrote another `C` program with COOL UI and smooth animation which allows you to select wallpapers, I also connected it with `matugen` 
-so the theme color can change as well.
+so the theme color can change as well. I added scrolling logic, so now the wallpaper selector is able to handle an unlimited number of wallpapers. 
 
-If you want to try, please add these in `~/.config/hypr/hyprland.conf`.
+you can use `gcc main.c -lraylib -lm -o wallpicker` to compile it. 
+
+The program actually ask `hyprland` for a window to display the patterns, so please add these in `~/.config/hypr/hyprland.conf`.
 
 ```
 windowrule {
@@ -45,13 +47,48 @@ windowrule {
     match:class = ^(wallpicker)$
     fullscreen = true
     center = true
-    no_blur = true
+    no_blur = false    #if u don't like blur, turn it to "true". 
     stay_focused = true
     animation = slide
 }
 ```
-The whole process was really smooth so I simply gave up `waypaper`, now `waypaper` part is no longer maintained.
 
+The program will read files via this default path: `~/Pictures/wallpapers`, make sure all the pictures are saved here. If you want to change the path, you can edit the source code and compile it again. 
+
+For the first time you run the program, it will create the cache files of your high-res wallpapers, please just wait a second. Next time, it will start super quickly :)
+
+**You also need to pay attention to this part in my `main.c`:**
+
+```
+if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+    char full_target_path[1024];
+    snprintf(full_target_path, sizeof(full_target_path), "%s/%s", wp_dir,
+    wallpapers[hoveredIndex].filename);
+
+    char cmd[2048];
+    snprintf(cmd, sizeof(cmd),
+        "("
+        "awww img \"%s\" --transition-type any --transition-angl 30 "
+        "--transition-step 30 --transition-duration 1.2 "
+        "--transition-fps 60 & "
+        "ln -sf \"%s\" $HOME/.config/hypr/current_wallpaper.png ; "
+        "matugen image \"%s\" --source-color-index 0 ; "
+        "makoctl reload ; "
+        "hyprctl reload ; "
+        "sleep 0.5 ; "
+        "$HOME/.config/waybar/scripts/reload-waybar.sh "
+        ") > /dev/null 2>&1 &",
+        full_target_path, full_target_path, full_target_path
+        );
+
+        printf("执行系统联动命令: \n%s\n", cmd);
+        system(cmd);
+        break;
+      }
+```
+This part runs commands to active `matugen` and change theme color based on current wallpaper, please check all code above to fit your own system. 
+
+The whole process was really smooth so I simply gave up `waypaper`, now `waypaper` part is no longer maintained.
 
 ## Matugen
 
