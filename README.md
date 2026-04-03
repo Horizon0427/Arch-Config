@@ -53,7 +53,10 @@ windowrule {
 }
 ```
 
-The program will read files via this default path: `~/Pictures/wallpapers`, make sure all the pictures are saved here. If you want to change the path, you can edit the source code and compile it again. 
+The program will read files via this default path: `~/Pictures/wallpapers`. But you can also change the path by running this in terminal: `./wallpicker <your real path>` , for example:
+```
+./wallpicker ~/Pictures/another_wallpaper_folder
+```
 
 For the first time you run the program, it will create the cache files of your high-res wallpapers, please just wait a second. Next time, it will start super quickly :)
 
@@ -61,29 +64,43 @@ For the first time you run the program, it will create the cache files of your h
 
 ```
 if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-    char full_target_path[1024];
+    char full_target_path[PATH_MAX];
     snprintf(full_target_path, sizeof(full_target_path), "%s/%s", wp_dir,
     wallpapers[hoveredIndex].filename);
 
-    char cmd[2048];
-    snprintf(cmd, sizeof(cmd),
-        "("
-        "awww img \"%s\" --transition-type grow --transition-pos "
-        "%.3f,%.3f " // grow from the place u click
-        "--transition-step 30 --transition-duration 1.2 "
-        "--transition-fps 60 & "
-        "ln -sf \"%s\" $HOME/.config/hypr/current_wallpaper.png ; "
-        "matugen image \"%s\" --source-color-index 0 ; "
-        "makoctl reload ; "
-        "hyprctl reload ; "
-        "sleep 0.5 ; "
-        "$HOME/.config/waybar/scripts/reload-waybar.sh "
-        ") > /dev/null 2>&1 &",
-        full_target_path, relX, relY, full_target_path, full_target_path
-        );
+    float relX = currentX / (float)GetScreenWidth();
+    float relY = (GetScreenHeight() - currentY) / (float)GetScreenHeight();
 
-        printf("执行系统联动命令: \n%s\n", cmd);
-        system(cmd);
+    char relX_str[32], relY_str[32];
+    snprintf(relX_str, sizeof(relX_str), "%.3f", relX);
+    snprintf(relY_str, sizeof(relY_str), "%.3f", relY);
+
+    pid_t pid = fork();
+
+    if (pid == 0) {
+        char script[] =
+            "awww img \"$1\" --transition-type grow --transition-pos "
+            "\"$2\",\"$3\" "
+            "--transition-step 30 --transition-duration 1.2 "
+            "--transition-fps 60 & "
+            "ln -sf \"$1\" $HOME/.config/hypr/current_wallpaper.png ; "
+            "matugen image \"$1\" --source-color-index 0 ; "
+            "makoctl reload ; "
+            "hyprctl reload ; "
+            "sleep 0.5 ; "
+            "$HOME/.config/waybar/scripts/reload-waybar.sh";
+          execl("/bin/sh", "sh", "-c", script, "--", full_target_path, relX_str, relY_str, NULL);
+
+          perror("execl failed");
+          exit(1);
+
+        } else if (pid < 0) {
+
+          perror("fork failed");
+        }
+
+        printf("已通过 fork/exec 触发壁纸更换，目标文件: %s\n", full_target_path);
+
         break;
       }
 ```
