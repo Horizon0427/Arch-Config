@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CHARS="▂▃▄▅▆▇█"
+CHARS="▁▂▃▄▅▆▇█"
 BARS=18
 CONF="/tmp/waybar_cava_config"
 
@@ -24,9 +24,11 @@ method = raw
 raw_target = /dev/stdout
 data_format = ascii
 ascii_max_range = $len
-channels = mono
+channels = stereo
 
 [smoothing]
+monstercat = 1
+waves = 1
 noise_reduction = 50
 EOF
 
@@ -47,11 +49,19 @@ echo "$idle_output"
 while true; do
   if is_audio_active; then
     if ! pgrep -P $$ -x cava >/dev/null; then
-      sed_dict="s/;//g;"
-      for ((i = 0; i <= ${len}; i++)); do
-        sed_dict="${sed_dict}s/$i/${CHARS:$i:1}/g;"
-      done
-      cava -p "$CONF" 2>/dev/null | sed -u "$sed_dict" &
+      cava -p "$CONF" 2>/dev/null | awk -v chars="$CHARS" '
+      BEGIN {
+          FS=";";
+          split(chars, map, "");
+      }
+      {
+          out = "";
+          for(i=1; i<=NF-1; i++) {
+              out = out map[$i + 1];
+          }
+          print out;
+          fflush();
+      }' &
     fi
     sleep 1
   else

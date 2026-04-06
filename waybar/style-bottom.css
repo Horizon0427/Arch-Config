@@ -246,8 +246,8 @@ window#waybar {
     background-color: alpha(@surface-variant, 0.3);
     border-top: 1px solid alpha(@outline, 0.2);
     border-bottom: 1px solid alpha(@outline, 0.2);
-    transition: all 0.2s ease;
     font-size: 20px;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 #custom-prev {
@@ -268,7 +268,8 @@ window#waybar {
 }
 
 #mpris.paused {
-    color: @on-surface-variant;
+    color: @primary;
+    padding: 0 10px 0 10px;
 }
 #mpris.playing {
     color: @primary;
@@ -297,6 +298,70 @@ window#waybar {
     box-shadow: 0 0 6px alpha(@error, 0.4);
 }
 
+
+window.popup {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    animation: smooth-popin 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+window.popup decoration {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+
+#tray menu {
+    background-color: alpha(@surface, 0.85);
+    border: 2px solid alpha(@primary, 0.85);
+    border-radius: 10px;
+    padding: 2px;
+    margin: 4px;
+    color: @on-surface;
+    box-shadow: none;
+    animation: smooth-popin 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+#tray menuitem {
+    border-radius: 5px;
+    padding: 2px 6px;
+    min-height: 18px;
+    transition: all 0.2s ease;
+}
+
+#tray menuitem:hover {
+    background-color: alpha(@on-surface, 0.15);
+}
+
+#tray menu label {
+    color: @on-surface;
+}
+
+#tray menuitem:hover label {
+    color: @primary; 
+}
+
+#tray menu > separator {
+    color: transparent;
+    background-color: alpha(@outline, 0.2);
+    margin: 2px 0;
+    min-height: 1px;
+}
+
+tooltip {
+    background-color: alpha(@surface, 0.85);
+    border: 2px solid alpha(@primary, 0.85);
+    border-radius: 10px;
+    animation: smooth-popin 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+tooltip label {
+    color: @on-surface;
+    padding: 6px 10px;
+}
+
 @keyframes blink {
     0% { opacity: 1; }
     50% { opacity: 0.3; }
@@ -307,4 +372,14 @@ window#waybar {
     0% { opacity: 1; text-shadow: 0 0 5px alpha(@error, 0.8); }
     50% { opacity: 0.3; text-shadow: none; }
     100% { opacity: 1; text-shadow: 0 0 5px alpha(@error, 0.8); }
+}
+@keyframes smooth-popin {
+    0% { 
+        opacity: 0; 
+        margin-top: -4px; 
+    }
+    100% { 
+        opacity: 1; 
+        margin-top: 0px;
+    }
 }

@@ -54,7 +54,8 @@ int main(int argc, char **argv) {
   } else {
     const char *home = getenv("HOME");
     if (home == NULL) {
-      fprintf(stderr, "Error: 无法获取 HOME 环境变量！\n");
+      fprintf(stderr,
+              "Error: Unable to retrieve HOME environment variable！\n");
       return 1;
     }
     snprintf(wp_dir, sizeof(wp_dir), "%s/Pictures/wallpapers", home);
@@ -71,7 +72,7 @@ int main(int argc, char **argv) {
   DIR *dir = opendir(wp_dir);
   struct dirent *ent;
   if (dir == NULL) {
-    fprintf(stderr, "Error: 无法打开目录 %s\n", wp_dir);
+    fprintf(stderr, "Error: Unable to open directory %s\n", wp_dir);
     return 1;
   }
   while ((ent = readdir(dir)) != NULL) {
@@ -83,14 +84,15 @@ int main(int argc, char **argv) {
   closedir(dir);
 
   if (capacity == 0) {
-    printf("在 %s 中没有找到 .png 或 .jpg 格式的壁纸！\n", wp_dir);
+    printf("No wallpapers in .png or .jpg format were found in %s.\n", wp_dir);
     return 0;
   }
 
   Wallpaper *wallpapers = malloc(capacity * sizeof(Wallpaper));
   if (wallpapers == NULL) {
     fprintf(stderr,
-            "Fatal Error: malloc 内存分配失败 (尝试分配 %d 个壁纸空间)\n",
+            "Fatal Error: malloc memory allocation failed (attempted to "
+            "allocate %d wallpaper space)\n",
             capacity);
     return 1;
   }
@@ -300,29 +302,29 @@ int main(int argc, char **argv) {
         pid_t pid = fork();
 
         if (pid == 0) {
-          char script[] =
-              "awww img \"$1\" --transition-type grow --transition-pos "
-              "\"$2\",\"$3\" "
-              "--transition-step 30 --transition-duration 1.2 "
-              "--transition-fps 60 & "
-              "ln -sf \"$1\" $HOME/.config/hypr/current_wallpaper.png ; "
-              "matugen image \"$1\" --source-color-index 0 ; "
-              "makoctl reload ; "
-              "hyprctl reload ; "
-              "sleep 0.5 ; "
-              "$HOME/.config/waybar/scripts/reload-waybar.sh";
-          execl("/bin/sh", "sh", "-c", script, "--", full_target_path, relX_str,
-                relY_str, NULL);
+          const char *user_home = getenv("HOME");
+          if (user_home == NULL) {
+            fprintf(stderr, "Error: HOME environment variable not set.\n");
+            exit(1);
+          }
 
-          perror("execl failed");
+          char helper_script_path[PATH_MAX];
+          snprintf(helper_script_path, sizeof(helper_script_path),
+                   "%s/.config/hypr-wallpicker/set_wallpaper.sh", user_home);
+
+          execl(helper_script_path, "set_wallpaper.sh", full_target_path,
+                relX_str, relY_str, NULL);
+
+          perror(
+              "execl failed: config-helper script not found or not executable");
           exit(1);
-
         } else if (pid < 0) {
 
           perror("fork failed");
         }
 
-        printf("已通过 fork/exec 触发壁纸更换，目标文件: %s\n",
+        printf("Wallpaper change has been triggered via fork/exec. Target "
+               "file: %s\n",
                full_target_path);
 
         break;

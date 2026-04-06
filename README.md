@@ -34,79 +34,9 @@ Use `super + ALT + L` to lock your screen, and the spinning lock pattern animati
 
 ## "Hyper"paperpicker
 
-Yep I wrote another `C` program with COOL UI and smooth animation which allows you to select wallpapers, I also connected it with `matugen` 
-so the theme color can change as well. I added scrolling logic, so now the wallpaper selector is able to handle an unlimited number of wallpapers. 
+It's a another `C` program using `Raylib` to draw a wallpaper selector with hexagonal border. I made a standalone repo for it and currently I am collaborating with [GrandBIRDLizard](https://github.com/GrandBIRDLizard), trying to make this project launch AUR. 
 
-you can use `gcc main.c -lraylib -lm -o wallpicker` to compile it. 
-
-The program actually ask `hyprland` for a window to display the patterns, so please add these in `~/.config/hypr/hyprland.conf`.
-
-```
-windowrule {
-    name = wall-paper-picker
-    match:class = ^(wallpicker)$
-    fullscreen = true
-    center = true
-    no_blur = false    #if u don't like blur, turn it to "true". 
-    stay_focused = true
-    animation = slide
-}
-```
-
-The program will read files via this default path: `~/Pictures/wallpapers`. But you can also change the path by running this in terminal: `./wallpicker <your real path>` , for example:
-```
-./wallpicker ~/Pictures/another_wallpaper_folder
-```
-
-For the first time you run the program, it will create the cache files of your high-res wallpapers, please just wait a second. Next time, it will start super quickly :)
-
-**You also need to pay attention to this part in my `main.c`:**
-
-```
-if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-    char full_target_path[PATH_MAX];
-    snprintf(full_target_path, sizeof(full_target_path), "%s/%s", wp_dir,
-    wallpapers[hoveredIndex].filename);
-
-    float relX = currentX / (float)GetScreenWidth();
-    float relY = (GetScreenHeight() - currentY) / (float)GetScreenHeight();
-
-    char relX_str[32], relY_str[32];
-    snprintf(relX_str, sizeof(relX_str), "%.3f", relX);
-    snprintf(relY_str, sizeof(relY_str), "%.3f", relY);
-
-    pid_t pid = fork();
-
-    if (pid == 0) {
-        char script[] =
-            "awww img \"$1\" --transition-type grow --transition-pos "
-            "\"$2\",\"$3\" "
-            "--transition-step 30 --transition-duration 1.2 "
-            "--transition-fps 60 & "
-            "ln -sf \"$1\" $HOME/.config/hypr/current_wallpaper.png ; "
-            "matugen image \"$1\" --source-color-index 0 ; "
-            "makoctl reload ; "
-            "hyprctl reload ; "
-            "sleep 0.5 ; "
-            "$HOME/.config/waybar/scripts/reload-waybar.sh";
-          execl("/bin/sh", "sh", "-c", script, "--", full_target_path, relX_str, relY_str, NULL);
-
-          perror("execl failed");
-          exit(1);
-
-        } else if (pid < 0) {
-
-          perror("fork failed");
-        }
-
-        printf("已通过 fork/exec 触发壁纸更换，目标文件: %s\n", full_target_path);
-
-        break;
-      }
-```
-This part runs commands to active `matugen` and change theme color based on current wallpaper, please check all code above to fit your own system. 
-
-The whole process was really smooth so I simply gave up `waypaper`, now `waypaper` part is no longer maintained.
+**New repo here:** [hypr-wallpicker](https://github.com/Horizon0427/hypr-wallpicker)
 
 ## Matugen
 
