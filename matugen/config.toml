@@ -8,9 +8,9 @@ output_path = "~/.config/waybar/colors.css"
 input_path = "~/.config/matugen/templates/colors-hyprland.conf"
 output_path = "~/.config/hypr/colors.conf"
 
-[templates.starship]
-input_path = "~/.config/matugen/templates/starship.toml"
-output_path = "~/.config/starship.toml"
+#[templates.starship]
+#input_path = "~/.config/matugen/templates/starship.toml"
+#output_path = "~/.config/starship.toml"
 
 [templates.mako]
 input_path = "~/.config/matugen/templates/mako"
@@ -20,9 +20,9 @@ output_path = "~/.config/mako/config"
 input_path = "~/.config/matugen/templates/wlogout.css"
 output_path = "~/.config/wlogout/style.css"
 
-[templates.fastfetch]
-input_path = "~/.config/matugen/templates/config.jsonc"
-output_path = "~/.config/fastfetch/config.jsonc"
+#[templates.fastfetch]
+#input_path = "~/.config/matugen/templates/config.jsonc"
+#output_path = "~/.config/fastfetch/config.jsonc"
 
 [templates.btop]
 input_path = "~/.config/matugen/templates/btop.theme"
@@ -40,6 +40,20 @@ output_path = "~/.config/hypr/lock_animation/prelock_color"
 #input_path = "~/.config/matugen/templates/swaync.css"
 #output_path = "~/.config/swaync/colors.css"
 
-[templates.yazi]
-input_path = '~/.config/matugen/templates/yazi-theme.toml'
-output_path = '~/.config/yazi/theme.toml'
+#[templates.yazi]
+#input_path = "~/.config/matugen/templates/yazi-theme.toml"
+#output_path = "~/.config/yazi/theme.toml"
+
+[templates.ghostty]
+input_path = "~/.config/matugen/templates/ghostty-theme.conf"
+output_path = "~/.config/ghostty/matugen-colors"
+post_hook = "killall -SIGUSR2 ghostty"
+
+[templates.gtk-folder]
+input_path = "~/.config/matugen/templates/gtk-folder/recolor.sh"
+output_path = "~/.cache/matugen/recoloricons.sh"
+post_hook = "bash ~/.cache/matugen/recoloricons.sh &"
+
+#[templates.gtk_thunar]
+#input_path = "~/.config/matugen/templates/gtk-thunar.css"
+#output_path = "~/.config/gtk-3.0/gtk.css"

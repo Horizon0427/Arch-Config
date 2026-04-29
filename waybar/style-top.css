@@ -67,7 +67,7 @@ window#waybar {
     padding-left: 10px;
     padding-right: 25px;
     min-height: 30px;
-    min-width: 260px;
+    min-width: 267px;
 }
 
 #battery, #pulseaudio, #backlight, #clock {
@@ -155,10 +155,13 @@ window#waybar {
     border: 1px solid transparent;
     transition: all 0.2s ease;
 }
+#network {
+  padding: 0 14px 0 6px;
+}
 #network:hover {
     background: alpha(@on-primary, 0.15);
     border: 1px solid alpha(@on-primary, 0.2);
-    padding: 0 10px 0 6px;
+    padding: 0 14px 0 6px;
 }
 
 #custom-longshot {

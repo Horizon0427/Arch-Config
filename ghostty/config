@@ -1,6 +1,9 @@
-theme = Liquid Carbon Transparent
+config-file = matugen-colors
+
 background-opacity = 0.75
 window-decoration = false
+app-notifications = false
 custom-shader = cursor-effects/cursor_warp.glsl
 custom-shader = shaders/bloom.glsl
-custom-shader-animation = true
+custom-shader-animation = always
+

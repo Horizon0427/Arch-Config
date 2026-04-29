@@ -1,3 +1,4 @@
+
 #include "raylib.h"
 #include "rlgl.h"
 #include <math.h>
@@ -7,9 +8,14 @@
 #include <unistd.h>
 
 Color GetMatugenColor() {
+  const char *home = getenv("HOME");
+  if (!home)
+    return RAYWHITE;
+
   char path[256];
   snprintf(path, sizeof(path), "%s/.config/hypr/lock_animation/prelock_color",
-           getenv("HOME"));
+           home);
+
   FILE *file = fopen(path, "r");
   if (!file)
     return RAYWHITE;
@@ -21,8 +27,9 @@ Color GetMatugenColor() {
   }
   fclose(file);
 
-  unsigned int hexValue;
-  sscanf(hexStr, "%x", &hexValue);
+  unsigned int hexValue = 0;
+  if (sscanf(hexStr, "%x", &hexValue) != 1)
+    return RAYWHITE;
 
   return (Color){(hexValue >> 16) & 0xFF, (hexValue >> 8) & 0xFF,
                  hexValue & 0xFF, 255};
@@ -75,13 +82,14 @@ int main(void) {
     }
 
     float progress = animTime / animDuration;
-    float easeOut = sin(progress * PI / 2.0f);
+    float easeOut = sinf(progress * PI / 2.0f);
 
     BeginDrawing();
     ClearBackground(BLANK);
 
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(),
-                  Fade(BLACK, easeOut * 0.6f * globalAlpha));
+                  /* 修复 P0: Fade() → ColorAlpha() */
+                  ColorAlpha(BLACK, easeOut * 0.6f * globalAlpha));
 
     int centerX = GetScreenWidth() / 2;
     int centerY = GetScreenHeight() / 2;
@@ -89,7 +97,7 @@ int main(void) {
     float lineStartOffset = (easeOut * 120.0f) + 30.0f;
     float lineLength = easeOut * (GetScreenWidth() / 2.0f);
 
-    Color rayColor = Fade(primaryColor, (1.0f - progress) * globalAlpha);
+    Color rayColor = ColorAlpha(primaryColor, (1.0f - progress) * globalAlpha);
 
     DrawLineEx((Vector2){centerX - lineStartOffset, centerY},
                (Vector2){centerX - lineStartOffset - lineLength, centerY}, 2.0f,
@@ -101,20 +109,35 @@ int main(void) {
 
     float outerRadius = easeOut * 120.0f;
     float outerThickness = 12.0f;
+    float outerInner = outerRadius - outerThickness;
+    if (outerInner < 0.0f)
+      outerInner = 0.0f;
+
     float startAngle = 270.0f;
     float endAngle = 270.0f + (easeOut * 360.0f);
-    DrawRing((Vector2){centerX, centerY}, outerRadius - outerThickness,
-             outerRadius, startAngle, endAngle, 64,
-             Fade(primaryColor, (1.0f - progress * 0.2f) * globalAlpha));
+
+    if (endAngle > startAngle) {
+      DrawRing(
+          (Vector2){centerX, centerY}, outerInner, outerRadius, startAngle,
+          endAngle, 64,
+          ColorAlpha(primaryColor, (1.0f - progress * 0.2f) * globalAlpha));
+    }
 
     float revRadius = easeOut * 145.0f;
     float revThickness = 3.0f;
+    float revInner = revRadius - revThickness;
+    if (revInner < 0.0f)
+      revInner = 0.0f;
+
     float revStartAngle = 270.0f - (easeOut * 360.0f);
     float revEndAngle = 270.0f;
 
-    DrawRing((Vector2){centerX, centerY}, revRadius - revThickness, revRadius,
-             revStartAngle, revEndAngle, 64,
-             Fade(primaryColor, (1.0f - progress * 0.2f) * 0.6f * globalAlpha));
+    if (revEndAngle > revStartAngle) {
+      DrawRing((Vector2){centerX, centerY}, revInner, revRadius, revStartAngle,
+               revEndAngle, 64,
+               ColorAlpha(primaryColor,
+                          (1.0f - progress * 0.2f) * 0.6f * globalAlpha));
+    }
 
     rlPushMatrix();
     rlTranslatef(centerX, centerY, 0);
@@ -130,11 +153,11 @@ int main(void) {
       shackleProgress = 1.0f;
     }
 
-    float shackleEase = sin(shackleProgress * PI / 2.0f);
+    float shackleEase = sinf(shackleProgress * PI / 2.0f);
     float shackleY = -18.0f * (1.0f - shackleEase);
 
     Color lockColor =
-        Fade(primaryColor, (1.0f - progress * 0.2f) * globalAlpha);
+        ColorAlpha(primaryColor, (1.0f - progress * 0.2f) * globalAlpha);
 
     float baseY = -22.0f + shackleY;
 
@@ -146,9 +169,9 @@ int main(void) {
 
     DrawRectangleRounded((Rectangle){-25, -10, 50, 38}, 0.3f, 16, lockColor);
 
-    DrawCircle(0, 5, 4, Fade(DARKGRAY, globalAlpha));
+    DrawCircle(0, 5, 4, ColorAlpha(DARKGRAY, globalAlpha));
     DrawTriangle((Vector2){0, 3}, (Vector2){-4, 14}, (Vector2){4, 14},
-                 Fade(DARKGRAY, globalAlpha));
+                 ColorAlpha(DARKGRAY, globalAlpha));
 
     rlPopMatrix();
 
