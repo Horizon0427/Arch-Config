@@ -1,258 +1,213 @@
 @import "colors.css";
 
-window#waybar {
-    background-color: transparent; 
-}
-
 * {
     border: none;
     border-radius: 0;
     margin: 0;
+    padding: 0;
     font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", sans-serif;
-    font-size: 15px;
+    font-size: 14px;
+    outline: none;
 }
 
-#workspaces {
-    background-color: @tertiary;
-    color: @on-tertiary;
-    padding: 0 10px;
-    min-height: 16px;
-    margin-right: 0px;
-}
-#custom-sep.workspaces_edge {
-    color: @tertiary;
+window#waybar {
     background-color: transparent;
-    font-size: 25px;
-    margin-right: 15px;
+    border: none;
+    color: @on-surface;
 }
 
+#workspaces, #network, #backlight, #battery, #clock, #power-profiles-daemon,
+#custom-cava, #pulseaudio, #custom-longshot, #tray, #custom-power,
+tooltip {
+    background: linear-gradient(110deg,
+        alpha(@surface-variant, 0.45) 0%,
+        alpha(@surface-variant, 0.15) 45%,
+        alpha(@surface-variant, 0.25) 100%);
+    margin: 3px 2px;
+    
+    background-clip: padding-box; 
+    
+    box-shadow:
+        inset 1px 1px 1px rgba(255, 255, 255, 0.60),
+        inset -1px -1px 2px rgba(0, 0, 0, 0.05),
+        inset 0 0 10px alpha(@surface-variant, 0.05);
+        /*0 4px 12px rgba(0, 0, 0, 0.15),
+        0 0 0 alpha(@primary, 0);*/
+    text-shadow: 0 0 0 transparent;
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.35, 1);
+}
+
+#network:hover, #backlight:hover, #battery:hover, #clock:hover,
+#custom-cava:hover, #pulseaudio:hover, #custom-longshot:hover {
+    background: linear-gradient(110deg,
+        alpha(@tertiary,         0.20) 0%,
+        alpha(@surface-variant, 0.22) 45%,
+        alpha(@surface-variant, 0.32) 100%);
+    outline: 1px solid alpha(@tertiary, 0.40); 
+    color: @tertiary;
+    margin: 6px 2px 0px 2px; 
+    box-shadow:
+        inset 1px 1px 2px rgba(255, 255, 255, 0.30),
+        inset -1px -1px 2px rgba(0, 0, 0, 0.35),
+        inset 0 0 15px alpha(@tertiary, 0.0);
+        /*0 7px 18px rgba(0, 0, 0, 0.28),
+        0 0 14px alpha(@primary, 0.1);*/
+    text-shadow: 0 0 5px alpha(@tertiary, 0.5);
+}
+
+#network:active, #backlight:active, #battery:active, #clock:active,
+#custom-cava:active, #pulseaudio:active, #custom-longshot:active,
+#power-profiles-daemon:active, #custom-power:active,
+#custom-prev:active, #mpris:active, #custom-next:active {
+    background: linear-gradient(110deg,
+        alpha(@surface-variant, 0.30) 0%,
+        alpha(@surface-variant, 0.10) 45%,
+        alpha(@surface-variant, 0.18) 100%);
+    outline: none;
+    margin: 4px 2px 2px 2px; 
+    box-shadow:
+        inset 0  3px 4px rgba(0, 0, 0, 0.25),
+        inset 0 -1px 1px rgba(255, 255, 255, 0.05);
+        /*0 1px 2px rgba(0, 0, 0, 0.10),
+        0 0 0 alpha(@primary, 0);*/
+    text-shadow: 0 0 0 transparent;
+    transition: all 0.1s ease-out;
+}
+
+#workspaces { 
+    margin: 3px 6px; 
+    padding: 3px; 
+    border-radius: 24px; 
+    background-clip: padding-box; 
+}
 #workspaces button {
-    padding: 0 8px;
-    margin: 2px 2px;
-    border-radius: 40px;
-    color: @on-tertiary;
-    background: transparent;
-    box-shadow: none;
-    text-shadow: none;
-    border: 1px solid transparent; 
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    padding: 0 8px; margin: 0 2px; border-radius: 18px; color: @primary;
+    background: transparent; box-shadow: 0 0 0 alpha(@primary, 0);
+    background-clip: padding-box;
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.35, 1);
 }
 #workspaces button:hover {
-    background: alpha(@on-tertiary, 0.15);
-    border: 1px solid alpha(@on-tertiary, 0.2);
-    box-shadow: none;
+    color: @primary; background: alpha(@primary, 0.2);
+    box-shadow: 0 0 8px alpha(@primary, 0.18); text-shadow: 0 0 4px alpha(@primary-container, 0.6);
 }
-#workspaces button:active {
-    background: alpha(@on-tertiary, 0.3);
-    transition: all 0.1s ease;
-}
+#workspaces button:active { background: alpha(@tertiary, 0.30); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.20); }
 #workspaces button.active {
-    background: radial-gradient(circle at center, @tertiary 0%, @tertiary-container 100%);
-    color: @on-tertiary;
-    padding: 0 16px;
-    border: 0px solid transparent;
+    padding: 0 16px; color: @primary;
+    background: linear-gradient(110deg, alpha(@primary, 0.2) 0%, alpha(@primary, 0.05) 100%);
+    outline: 1px solid alpha(@primary, 0.40);
+    box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.25), 0 0 10px alpha(@primary, 0.2);
+    text-shadow: 0 0 5px alpha(@primary, 0.60);
 }
 #workspaces button.active:hover {
-    background: radial-gradient(circle at center, @tertiary 0%, @on-tertiary 100%);
-    border: 0px solid alpha(@on-tertiary, 0.3);
+    background: linear-gradient(110deg, alpha(@tertiary, 0.50) 0%, alpha(@tertiary, 0.25) 100%);
+    box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.32), 0 0 16px alpha(@tertiary, 0.3);
 }
 
-#custom-sep.cleft_left_edge {
-    color: @primary;
-    background-color: transparent;
-    font-size: 25px;
-}
-#cleft {
-    background-image: radial-gradient(circle at right center, alpha(@primary, 0) 15px, @primary 17px);
-    padding-left: 10px;
-    padding-right: 25px;
-    min-height: 30px;
-    min-width: 267px;
-}
+#network        { padding: 0 26px 0 20px; border-radius: 24px; color: @primary; }
+#backlight      { padding: 0 16px;        border-radius: 24px; color: @primary; }
+#battery        { padding: 0 14px 0 10px; border-radius: 24px; color: @primary; min-width: 55px; }
+#clock          { padding: 0 14px;        border-radius: 24px; color: @primary; font-weight: bold; }
+#custom-cava    { padding: 0 12px;        border-radius: 24px; color: @primary; min-width: 170px; }
+#pulseaudio     { padding: 0 10px;        border-radius: 24px; color: @primary; min-width: 73px; }
+#custom-longshot { padding: 0 18px 0 14px; border-radius: 24px; color: @primary; }
 
-#battery, #pulseaudio, #backlight, #clock {
-    background: transparent;
-    color: @on-primary;
-    padding: 0 8px;
-    margin: 2px 1px;
-    border-radius: 8px;
-    border: 1px solid transparent;
-    transition: all 0.2s ease;
+#battery.warning:not(.charging) {
+    color: @tertiary; outline: 1px solid alpha(@tertiary, 0.50); text-shadow: 0 0 4px alpha(@tertiary, 0.50);
 }
-#battery:hover, #pulseaudio:hover, #backlight:hover, #clock:hover {
-    background: alpha(@on-primary, 0.15);
-    border: 1px solid alpha(@on-primary, 0.2);
-}
-
 #battery.critical:not(.charging) {
-    color: @error;
+    color: @error; outline: 1px solid alpha(@error, 0.60);
+    box-shadow: inset 1px 1px 1px rgba(255,255,255,0.20), inset -1px -1px 2px rgba(0,0,0,0.10), 0 4px 12px rgba(0,0,0,0.15), 0 0 12px alpha(@error, 0.40);
+    animation: blink 1.5s ease-in-out infinite; text-shadow: 0 0 6px alpha(@error, 0.60);
 }
 
-#power-profiles-daemon {
-    background-color: @tertiary;
-    color: @on-tertiary;
-    border-radius: 50px;
-    min-width: 20px;
-    font-size: 17px;
-    margin: 0 0px;
-    padding: 0 10px 0 6px;
-    border: 1px solid alpha(@on-tertiary, 0.2);
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-#power-profiles-daemon:hover {
-    background-color: @tertiary-container;
-    color: @on-tertiary-container;
-    border: 1px solid alpha(@on-tertiary, 0.5);
-    box-shadow: 0 0 4px alpha(@tertiary, 0.6);
-}
-#power-profiles-daemon:active {
-    background-color: @secondary;
-    box-shadow: none;
-    transition:all 0.1s ease;
-}
-#power-profiles-daemon.performance {
-    background-color: @error;
-    color: @on-error;
-    border: 1px solid alpha(@on-error, 0.2);
-}
-#power-profiles-daemon.performance:hover {
-    background-color: @error-container;
-    color: @on-error-container;
-    border: 1px solid alpha(@on-error, 0.5);
-    box-shadow: 0 0 4px alpha(@error, 0.6);
-}
-#power-profiles-daemon.power-saver {
-    background-color: @primary;
-    color: @on-primary;
-    border: 1px solid alpha(@on-primary, 0.2);
-}
-#power-profiles-daemon.power-saver:hover {
-    background-color: @primary-container;
-    color: @on-primary-container;
-    border: 1px solid alpha(@on-primary, 0.5);
-    box-shadow: 0 0 4px alpha(@primary, 0.6);
-}
-
-#cright {
-    background-image: radial-gradient(circle at left center, alpha(@primary, 0) 15px, @primary 17px);
-    padding-left: 30px;
-    padding-right: 10px;
-    min-height: 30px;
-    min-width: 100px;
-}
-#custom-sep.cright_right_edge {
-    color: @primary;
-    background-color: transparent;
-    font-size: 25px;
-}
-
-#network, #custom-longshot, #custom-cava {
-    background: transparent;
-    color: @on-primary;
-    padding: 0 10px 0 6px;
-    margin: 2px 1px;
-    border-radius: 8px;
-    border: 1px solid transparent;
-    transition: all 0.2s ease;
-}
-#network {
-  padding: 0 14px 0 6px;
-}
-#network:hover {
-    background: alpha(@on-primary, 0.15);
-    border: 1px solid alpha(@on-primary, 0.2);
-    padding: 0 14px 0 6px;
-}
-
-#custom-longshot {
-    box-shadow: none; 
-    font-size: 18px;
-    padding: 0 12px 0 7px;
-}
-#custom-longshot:hover {
-    background: alpha(@on-primary, 0.15);
-    border: 1px solid alpha(@on-primary, 0.2);
-}
+#custom-longshot.idle:hover { color: @tertiary; }
 #custom-longshot.recording {
-    color: @error;
-    animation: pulse-record 1.5s infinite;
-}
-#custom-longshot.recording:hover {
-    background: alpha(@on-primary, 0.15);
-    border: 1px solid alpha(@on-primary, 0.2);
-    padding: 0 4px 0 4px;
+    padding: 0 8px; color: @error; outline: 1px solid alpha(@error, 0.60);
+    animation: pulse-record 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-#custom-cava {
-    padding: 0 15px;
-    font-size: 15px;
+#tray { margin: 3px 4px 3px 2px; padding: 2px 6px; border-radius: 24px; }
+#tray > .passive, #tray > .active, #tray > .needs-attention {
+    padding: 0 6px; margin: 0 2px; border-radius: 18px; transition: all 0.3s cubic-bezier(0.25, 1, 0.35, 1);
+}
+#tray > .passive:hover, #tray > .active:hover { background-color: alpha(@on-surface, 0.18); box-shadow: 0 0 8px alpha(@primary, 0.20); }
+#tray > .needs-attention { background-color: alpha(@error, 0.25); box-shadow: 0 0 10px alpha(@error, 0.30); }
+
+#custom-prev, #mpris, #custom-next {
+    padding: 0 12px; margin: 3px 0; color: @primary;
+    background: linear-gradient(110deg, alpha(@surface-variant, 0.35) 0%, alpha(@surface-variant, 0.25) 50%, alpha(@surface-variant, 0.15) 100%);
+    border-top: 1px solid alpha(@outline, 0.20); border-bottom: 1px solid alpha(@outline, 0.20);
+    font-size: 18px; transition: all 0.35s cubic-bezier(0.25, 1, 0.35, 1);
+}
+#custom-prev { outline: 1px solid alpha(@outline, 0.20); border-radius: 28px 0 0 28px; margin-left: 2px; }
+#mpris { padding: 0 14px 0 10px; font-size: 16px; }
+#custom-next { outline: 1px solid alpha(@outline, 0.20); border-radius: 0 28px 28px 0; margin-right: 2px; }
+#mpris.paused { color: @primary; opacity: 0.8; }
+
+#custom-prev:hover, #mpris:hover, #custom-next:hover {
+    background: linear-gradient(110deg, alpha(@tertiary, 0.18) 0%, alpha(@surface-variant, 0.20) 50%, alpha(@surface-variant, 0.32) 100%);
+    color: @tertiary; text-shadow: 0 0 6px alpha(@tertiary, 0.6);
+    box-shadow:
+        inset 1px 1px 2px rgba(255, 255, 255, 0.30),
+        inset -1px -1px 2px rgba(0, 0, 0, 0.35),
+        inset 0 0 15px alpha(@tertiary, 0.0);
+    margin-top: 6px; margin-bottom: 0px; 
+    border-top: 1px solid alpha(@outline, 0.40); border-bottom: 1px solid alpha(@outline, 0.40); 
 }
 
-#custom-sep.sysright_edge {
-    color: @tertiary;
-    background-color: transparent;
-    font-size: 25px;
-    margin-left: 15px;
-}
-#sysright {
-    background-color: @tertiary;
-    padding: 0 10px;
-    min-height: 16px;
-}
-
-#tray {
-    background-color: transparent;
-}
-#tray > .passive,
-#tray > .active,
-#tray > .needs-attention {
-    background: transparent;
-    padding: 2px 6px;
-    margin: 0 2px;
-    border-radius: 8px;
-    border: 1px solid transparent;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-#tray > .passive:hover,
-#tray > .active:hover,
-#tray > .needs-attention:hover {
-    background: alpha(@on-tertiary, 0.15); 
-    border: 1px solid alpha(@on-tertiary, 0.2);
-}
-#tray > .needs-attention {
-    background: alpha(@error, 0.2);
+#power-profiles-daemon { padding: 0 30px 0 25px; border-radius: 24px; color: @tertiary; font-size: 17px; }
+#power-profiles-daemon:hover {
+    background: linear-gradient(110deg, alpha(@tertiary, 0.20) 0%, alpha(@surface-variant, 0.22) 45%, alpha(@surface-variant, 0.32) 100%);
+    outline: 1px solid alpha(@tertiary, 0.40); 
+    margin: 6px 2px 0px 2px;
+    box-shadow: 
+        inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.45), 
+        inset -1px -1px 3px rgba(0, 0, 0, 0.35), 
+        inset 0 0 18px alpha(@tertiary, 0.0);
+    text-shadow: 0 0 5px alpha(@tertiary, 0.5);
 }
 
+#power-profiles-daemon.performance { color: @error; }
+#power-profiles-daemon.performance:hover {
+    background: linear-gradient(110deg, alpha(@error, 0.20) 0%, alpha(@surface-variant, 0.22) 45%, alpha(@surface-variant, 0.32) 100%);
+    outline: 1px solid alpha(@error, 0.40);
+    margin: 6px 2px 0px 2px;
+    box-shadow: 
+        inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.45), 
+        inset -1px -1px 3px rgba(0, 0, 0, 0.35), 
+        inset 0 0 18px alpha(@error, 0.0);
+    text-shadow: 0 0 5px alpha(@error, 0.5);
+}
+
+#power-profiles-daemon.power-saver { color: @primary; }
+#power-profiles-daemon.power-saver:hover {
+    background: linear-gradient(110deg, alpha(@primary, 0.20) 0%, alpha(@surface-variant, 0.22) 45%, alpha(@surface-variant, 0.32) 100%);
+    outline: 1px solid alpha(@primary, 0.40);
+    margin: 6px 2px 0px 2px;
+    box-shadow: 
+        inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.45), 
+        inset -1px -1px 3px rgba(0, 0, 0, 0.35), 
+        inset 0 0 18px alpha(@primary, 0.0);
+    text-shadow: 0 0 5px alpha(@primary, 0.5);
+}
 #custom-power {
-    padding: 0 12px;
-    margin: 2px 2px;
-    border-radius: 12px;
-    background: transparent;
-    color: @on-tertiary;
-    border: 1px solid transparent;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    padding: 0 14px 0 12px; margin: 3px 8px 3px 2px; border-radius: 24px; color: @error;
+    background: linear-gradient(110deg, alpha(@error, 0.20) 0%, alpha(@error, 0.05) 100%);
+    border: 1px solid alpha(@error, 0.30); 
 }
 #custom-power:hover {
-    background: @error;
-    color: @on-error;
-    border: 1px solid alpha(@error, 0.5);
-    box-shadow: 0 0 6px alpha(@error, 0.6); 
+    color: @on-error; background: linear-gradient(110deg, alpha(@error, 0.65) 0%, alpha(@error, 0.32) 100%);
+    border: 1px solid alpha(@error, 0.65); 
+    margin: 6px 8px 0px 2px; 
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
 }
-#custom-power:active {
-    background: alpha(@error, 0.7); 
-    box-shadow: none;
-    transition: all 0.1s ease;
-}
-
 
 window.popup {
     background-color: transparent;
     border: none;
     box-shadow: none;
     outline: none;
-    animation: smooth-popin 0.25s cubic-bezier(0.25, 1, 0.5, 1);
 }
-
 window.popup decoration {
     border: none;
     box-shadow: none;
@@ -260,14 +215,21 @@ window.popup decoration {
 }
 
 #tray menu {
-    background-color: alpha(@surface, 0.85);
-    border: 2px solid alpha(@primary, 0.85);
+    background: linear-gradient(110deg,
+        alpha(@surface-variant, 0.45) 0%,
+        alpha(@surface-variant, 0.15) 45%,
+        alpha(@surface-variant, 0.25) 100%);
+    border: none;
     border-radius: 10px;
-    padding: 2px;
+    padding: 4px;
     margin: 4px;
+    background-clip: padding-box;
+    box-shadow:
+        inset 1px 1px 1px rgba(255, 255, 255, 0.90),
+        inset -1px -1px 2px rgba(0, 0, 0, 0.05),
+        inset 0 0 10px alpha(@surface-variant, 0.0),
+        0 4px 12px rgba(0, 0, 0, 0.15);
     color: @on-surface;
-    box-shadow: none;
-    animation: smooth-popin 0.25s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 #tray menuitem {
@@ -278,15 +240,22 @@ window.popup decoration {
 }
 
 #tray menuitem:hover {
-    background-color: alpha(@on-surface, 0.15);
+    background: linear-gradient(110deg,
+        alpha(@primary, 0.20) 0%,
+        alpha(@surface-variant, 0.22) 45%,
+        alpha(@surface-variant, 0.32) 100%);
+    box-shadow:
+        inset 1px 1px 2px rgba(255, 255, 255, 0.30),
+        inset -1px -1px 2px rgba(0, 0, 0, 0.35);
 }
 
 #tray menu label {
-    color: @on-surface;
+    color: @primary;
 }
 
 #tray menuitem:hover label {
-    color: @primary;
+    color: @tertiary;
+    text-shadow: 0 0 5px alpha(@tertiary, 0.5);
 }
 
 #tray menu > separator {
@@ -297,29 +266,36 @@ window.popup decoration {
 }
 
 tooltip {
-    background-color: alpha(@surface, 0.85);
-    border: 2px solid alpha(@primary, 0.85);
+    background: linear-gradient(110deg,
+        alpha(@surface-variant, 0.45) 0%,
+        alpha(@surface-variant, 0.15) 45%,
+        alpha(@surface-variant, 0.25) 100%);
+    border: none;
     border-radius: 10px;
-    animation: smooth-popin 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+    background-clip: padding-box;
+    box-shadow:
+        inset 1px 1px 1px rgba(255, 255, 255, 0.60),
+        inset -1px -1px 2px rgba(0, 0, 0, 0.05),
+        inset 0 0 10px alpha(@surface-variant, 0.05),
+        0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 tooltip label {
-    color: @on-surface;
+    color: @tertiary;
     padding: 6px 10px;
 }
 
+@keyframes blink {
+    0%   { opacity: 1;   text-shadow: 0 0 8px alpha(@error, 0.8); }
+    50%  { opacity: 0.5; text-shadow: 0 0 0 transparent; }
+    100% { opacity: 1;   text-shadow: 0 0 8px alpha(@error, 0.8); }
+}
+
 @keyframes pulse-record {
-    0% { opacity: 1; text-shadow: 0 0 5px alpha(@error, 0.8); }
-    50% { opacity: 0.3; text-shadow: none; }
-    100% { opacity: 1; text-shadow: 0 0 5px alpha(@error, 0.8); }
+    0%   { opacity: 1;   box-shadow: 0 0 5px  alpha(@error, 0.4); }
+    50%  { opacity: 0.7; box-shadow: 0 0 15px alpha(@error, 0.8); outline-color: @error; }
+    100% { opacity: 1;   box-shadow: 0 0 5px  alpha(@error, 0.4); }
 }
-@keyframes smooth-popin {
-    0% { 
-        opacity: 0; 
-        margin-top: -4px; 
-    }
-    100% { 
-        opacity: 1; 
-        margin-top: 0px;
-    }
-}
+
+
+
