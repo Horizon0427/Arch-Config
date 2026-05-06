@@ -12,21 +12,20 @@
 
 ## System Overview
 
-| Component | Choice |
-| :--- | :--- |
-| **OS** | Arch GNU/Linux |
-| **WM** | Hyprland (Wayland) |
-| **Status Bar** | Waybar (Liquid Glass) |
-| **Shell** | Fish |
-| **Terminal** | Ghostty |
-| **AUR Helper** | yay |
-| **Snapshots** | btrfs-assistant |
+| Component         | Choice              |
+| ----------------- | ------------------- |
+| Operating System  | Arch GNU/Linux      |
+| Window Manager    | Hyprland (Wayland)  |
+| Status Bar        | Waybar              |
+| Shell             | Fish                |
+| Terminal Emulator | Ghostty             |
+
 
 ---
 
 ## Personal & Collaborative Projects
 
-I've written a handful of small tools along the way to perfect this workflow. All tools below require a window to render; see the `windowrule` entries in `./hypr/hyprland.conf` for details.
+I've written some small tools along the way to perfect this workflow. All tools below require a window to render; see the `windowrule` entries in `./hypr/hyprland.conf` for details.
 
 ### [Hypr-Wallpicker](https://github.com/Horizon0427/hypr-wallpicker)
 A fast, lightweight wallpaper selector written in **C** with [Raylib](https://www.raylib.com/). 
