@@ -35,7 +35,7 @@ A fast, lightweight wallpaper selector written in **C** with [Raylib](https://ww
 A small, smooth pre-lock animation written in **C** with Raylib. 
 Launch it through `./hypr/scripts/smart_lock.sh` — a tiny lock pattern spins briefly before `hyprlock` takes over.
 
-### Hypr-Longshot
+### [Hypr-Longshot](https://github.com/Horizon0427/hypr-longshot)
 A scrolling-screenshot tool for Hyprland, written in **Python** (OpenCV) and **C** (Raylib). 
 Run it through `./hypr/scripts/screenshot.sh`, or wire the script into a Waybar module for one-click capture.
 
@@ -43,16 +43,13 @@ Run it through `./hypr/scripts/screenshot.sh`, or wire the script into a Waybar 
 
 ## Customizations & Theming
 
-<details>
-<summary><b> Waybar — Liquid Glass</b> (Click to expand)</summary>
+### Waybar — Liquid Glass
 
 Thanks to Hyprland's precise transparency-filtering capabilities, Waybar is themed with a translucent, liquid-glass effect. Two configurations live under `./waybar/`:
 - **Toggle:** `./waybar/scripts/toggle-waybar.sh`
 - **Reload:** `./waybar/scripts/reload-waybar.sh`
-</details>
 
-<details>
-<summary><b> Matugen Color Palette</b> (Click to expand)</summary>
+### Matugen Color Palette
 
 [Matugen](https://github.com/InioX/matugen) extracts a Material You color palette from the current wallpaper and propagates it across the system:
 - Waybar, Hyprland, Mako, Wlogout, Btop
@@ -60,7 +57,6 @@ Thanks to Hyprland's precise transparency-filtering capabilities, Waybar is them
 - Ghostty (along with Starship, Fastfetch, and Yazi)
 
 *Special thanks to [Shorin's templates](https://github.com/SHORiN-KiWATA/shorin-niri/tree/main/dotfiles/.config/matugen/templates/gtk-folder) for dynamic Thunar folder icons.*
-</details>
 
 ---
 
