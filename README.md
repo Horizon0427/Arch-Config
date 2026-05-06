@@ -1,91 +1,61 @@
-# My Arch Linux Dotfiles
-Welcome to Horizon's archlinux repository, 
-a place saving personal configuration of my operating system. 
-Here's a brief overview of what you will find in the listing directory:
+# Horizon's Arch Linux Dotfiles
 
-## Hyprland
+Welcome to my personal Arch Linux configuration repository — a focused, hand-tuned setup centered around Hyprland and a handful of small tools I've written along the way.
 
-`Hyprland` supports scrolling layouts. A shell script `toggle_layout.sh` can switch the layouts between `Dwindle` and `Scrolling` using keybinds(`super + D`). 
+## System Overview
 
+| Component         | Choice              |
+| ----------------- | ------------------- |
+| Operating System  | Arch GNU/Linux      |
+| Window Manager    | Hyprland (Wayland)  |
+| Status Bar        | Waybar              |
+| Shell             | Fish                |
+| Terminal Emulator | Ghostty             |
 
-`screenshot.sh` is made for pasting screenshots in sessions.
+## Personal & Collaborative Projects
 
-`ghostty_cursors.sh` automatically closes(or start) the cursor trails in `ghostty` for reducing power consumption(or performance).
+### Hypr-Wallpicker
 
-More keybinds can be found in `./hypr/hyprland.conf`.
+A fast, lightweight wallpaper selector written in **C** with [Raylib](https://www.raylib.com/).
+The project has its own [standalone repository](https://github.com/Horizon0427/hypr-wallpicker), and I'm currently collaborating with [GrandBIRDLizard](https://github.com/GrandBIRDLizard) to refine it along UNIX-philosophy lines and publish it to the AUR.
 
-The positioning of certain UI elements in `hyprlock` is hardcoded to my specific screen resolution. If you plan to use this, please manually adjust the coordinates of each component to fit your own display.
+### Hypr-Prelock
 
-## "Hyper"hyprlock
+A small, smooth pre-lock animation written in **C** with Raylib.
+Launch it through `./hypr/scripts/smart_lock.sh` — a tiny lock pattern spins briefly before `hyprlock` takes over.
 
-hypr-prelock-animation is a `C` program makes a better visual transition before `hyprlock` kicks in. You can put all the animation files in `~/.config/hypr/lock_animation/`, then put the trigger script in `~/.config/hypr/scripts`, and add these in `~/.config/hypr/hyprland.conf`. 
+### Hypr-Longshot
 
-```
-bind = $mainMod ALT, L, exec, ~/.config/hypr/scripts/smart_lock.sh
+A scrolling-screenshot tool for Hyprland, written in **Python** (OpenCV) and **C** (Raylib).
+Run it through `./hypr/scripts/screenshot.sh`, or wire the script into a Waybar module for one-click capture.
 
-windowrule {
-    name = prelock-fullscreen
-    match:class = ^(Smooth_Prelock)$
-    fullscreen = true
-}
-```
+> All three tools above require a window in order to render. See the relevant `windowrule` entries in `./hypr/hyprland.conf` for details.
 
-Use `super + ALT + L` to lock your screen, and the spinning lock pattern animation will kick out before `hyprlock`.
+## Customizations of Upstream Tools
 
-## "Hyper"paperpicker
+### Waybar — Liquid Glass
 
-It's a another `C` program using `Raylib` to draw a wallpaper selector with hexagonal border. I made a standalone repo for it and currently I am collaborating with [GrandBIRDLizard](https://github.com/GrandBIRDLizard), trying to make this project launch AUR. 
+Thanks to Hyprland's precise transparency-filtering capabilities, Waybar is themed with a translucent, liquid-glass effect.
+Two Waybar configurations live under `./waybar/`:
 
-**New repo here:** [hypr-wallpicker](https://github.com/Horizon0427/hypr-wallpicker)
+- Toggle between them — `./waybar/scripts/toggle-waybar.sh`
+- Reload the active one — `./waybar/scripts/reload-waybar.sh`
 
-## Matugen
+### Matugen
 
-`matugen` takes over multiple styling aspects, triggered dynamically via my "Hyper"paperpicker. Specifically, this covers: `waybar`, active window borders, `starship`, `mako`, `wlogout`, `fastfetch`, `btop`, Hypr-Prelock & `hyprlock` and `yazi`. 
+[Matugen](https://github.com/InioX/matugen) extracts a Material You color palette from the current wallpaper and propagates it to:
 
+- Waybar
+- Hyprland
+- Mako
+- Wlogout
+- Btop
+- Hypr-Prelock
+- Hyprlock
+- Ghostty (along with Starship, Fastfetch, and Yazi)
 
-## cowsay
+Special thanks to [Shorin's templates](https://github.com/SHORiN-KiWATA/shorin-niri/tree/main/dotfiles/.config/matugen/templates/gtk-folder) — Thunar folder icons follow the active theme as well.
 
-"What does the cow say?"
+## Screenshots
 
-## waybar
-
-Check out my two `waybar` setup in `./waybar`. You can switch the `waybar` styles between `top` and `bottom` by using keybind `super + F1`. To reload `waybar`, use keybind `super + F2`.
-
-## hyprsunset
-
-Use keybind `super + F3` to turn down gamma, `super + F4` to turn the light down, `super + F5` to reload.
-
-## Credits & Acknowledgements
-
-This setup is built on the shoulders of giants. A huge thank you to the open-source community and the following creators for their amazing work and inspiration:
-
-* **Rofi Themes:** The beautiful `Rofi` configuration used in this setup is entirely the work of [@anti1090x](https://github.com/adi1090x/rofi). I did not include it in my dotfiles to respect the original work—please visit their repository to grab the themes!
-* **Wlogout:** Design and color palette heavily inspired by [Catppuccin](https://github.com/catppuccin/catppuccin).
-* **Ghostty:** Terminal shaders and cursor effects are pulled from the awesome [ghostty-shaders](https://github.com/0xhckr/ghostty-shaders) and [cursor-effects](https://github.com/sahaj-b/ghostty-cursor-shaders) repository.
-
-## Notice: Migration from SwayNC to Mako
-
-Yep previously I gave up `mako` and tried `swaync`. But I cannot come up with ANY idea about what should be placed there... 
-So I came back, `swaync` is no longer maintained... Sorry :)
-
-## New scrolling long-screenshot added
-
-To fix the longshot issue in `wanland`, I made a program in `C`, `bash` scripts and `Python`. It allows you to select an area which needs capturing. 
-Then the program will stitch the recoeded video into a long `PNG` image. Check my repo `hypr-longshot` for details.
-
-# Screenshots
-
-![1](./rice/rice1.png)
-![2](./rice/rice2.png)
-![3](./rice/rice3.png)
-![5](./rice/rice5.png)
-![6](./rice/rice6.png)
-![7](./rice/rice7.png)
-![8](./rice/rice8.png)
-![9](./rice/rice9.png)
-![10](./rice/rice10.png)
-![waybar1](./rice/waybar1.png)
-![waybar2](./rice/waybar2.png)
-![paper](./rice/paper.png)
-![11](./rice/rice11.gif)
-![paper](./rice/paperpicker.gif)
+*Coming soon.*

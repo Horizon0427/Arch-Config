@@ -1,0 +1,80 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[░▒▓](blue)\
+[  ](bg:blue fg:black)\
+[](bg:green fg:blue)\
+$username\
+$hostname\
+[](bg:yellow fg:green)\
+$directory\
+[](fg:yellow bg:blue)\
+$git_branch\
+$git_status\
+[](fg:blue bg:black)\
+$nodejs\
+$rust\
+$golang\
+$php\
+[](fg:black bg:black)\
+$time\
+[ ](fg:black)\
+\n$character"""
+
+[username]
+show_always = true
+style_user = "bg:green fg:black"
+style_root = "bg:green fg:black"
+format = '[ $user ]($style)'
+
+[hostname]
+ssh_only = false
+style = "bg:green fg:black"
+format = '[@$hostname]($style)'
+
+[directory]
+style = "fg:black bg:yellow"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "🎧 "
+"Pictures" = " "
+
+[git_branch]
+symbol = ""
+style = "bg:blue"
+format = '[[ $symbol $branch ](fg:black bg:blue)]($style)'
+
+[git_status]
+style = "bg:blue"
+format = '[[($all_status$ahead_behind )](fg:black bg:blue)]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:cyan"
+format = '[[ $symbol ($version) ](fg:black bg:cyan)]($style)'
+
+[rust]
+symbol = ""
+style = "bg:cyan"
+format = '[[ $symbol ($version) ](fg:black bg:cyan)]($style)'
+
+[golang]
+symbol = ""
+style = "bg:cyan"
+format = '[[ $symbol ($version) ](fg:black bg:cyan)]($style)'
+
+[php]
+symbol = ""
+style = "bg:cyan"
+format = '[[ $symbol ($version) ](fg:black bg:cyan)]($style)'
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:black"
+format = '[[  $time ](fg:cyan bg:black)]($style)'
