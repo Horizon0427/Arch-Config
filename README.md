@@ -61,3 +61,9 @@ Thanks to Hyprland's precise transparency-filtering capabilities, Waybar is them
 ---
 
 ## Gallery
+<img width="3072" height="1920" alt="overview" src="https://github.com/user-attachments/assets/5327332d-8484-40c4-a992-350fcf7b4ec0" />
+<img width="3072" height="1920" alt="waybar-bottom" src="https://github.com/user-attachments/assets/54b4582a-edd0-497f-85ad-76a212c13337" />
+<img width="3072" height="1920" alt="waybar-top" src="https://github.com/user-attachments/assets/db03d546-50a1-426e-b4a4-6f8ec6bbe072" />
+https://github.com/user-attachments/assets/69db9834-f806-4be3-bcbe-072944caee68
+
+
