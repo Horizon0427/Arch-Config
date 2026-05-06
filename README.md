@@ -4,8 +4,6 @@
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=22&pause=1000&color=00A9FF&center=true&vCenter=true&width=600&lines=Welcome+to+my+Arch+Linux+configuration;A+hand-tuned+setup+centered+around+Hyprland)](https://git.io/typing-svg)
 
-*A focused, hand-tuned setup featuring liquid glass aesthetics and custom C/Raylib utilities.*
-
 ![Arch Linux](https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)
 ![Hyprland](https://img.shields.io/badge/Hyprland-00DACF?style=for-the-badge&logo=hyprland&logoColor=white)
 </div>
