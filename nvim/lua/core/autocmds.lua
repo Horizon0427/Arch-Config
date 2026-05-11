@@ -53,8 +53,6 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 })
 
 -- fcitx5: switch to ASCII whenever entering normal/command mode.
--- Must be synchronous — async (jobstart) lets the next keypress through
--- before fcitx5 finishes switching, causing hjkl / i to be intercepted.
 if vim.fn.executable("fcitx5-remote") == 1 then
   local function im_off()
     vim.fn.system("fcitx5-remote -c")
