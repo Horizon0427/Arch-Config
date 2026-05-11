@@ -1,0 +1,6 @@
+hl.env("XCURSOR_THEME",    "BreezeX-RosePine-Linux")
+hl.env("XCURSOR_SIZE",     "28")
+hl.env("HYPRCURSOR_THEME", "BreezeX-RosePine-Linux")
+hl.env("HYPRCURSOR_SIZE",  "28")
+hl.env("QT_IM_MODULE",     "fcitx")
+hl.env("XMODIFIERS",       "@im=fcitx")

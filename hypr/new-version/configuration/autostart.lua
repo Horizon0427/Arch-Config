@@ -1,0 +1,16 @@
+-- 正确 API：hl.exec_once() 不存在；
+-- exec-once 等价物是在 "hyprland.start" 事件中用 hl.exec_cmd() 执行。
+hl.on("hyprland.start", function()
+    hl.exec_cmd("mako")
+    hl.exec_cmd("/usr/lib/hyprpolkitagent/hyprpolkitagent")
+    hl.exec_cmd("waybar -c ~/.config/waybar/config-top.jsonc -s ~/.config/waybar/style-top.css")
+    hl.exec_cmd("blueman-applet")
+    hl.exec_cmd("nm-applet")
+    hl.exec_cmd("hypridle")
+    hl.exec_cmd("awww-daemon")
+    hl.exec_cmd("copyq")
+    hl.exec_cmd("fcitx5")
+    hl.exec_cmd([[echo "Xft.dpi:192" | xrdb -merge]])
+    hl.exec_cmd("hyprsunset -t 6500 -g 100")
+    hl.exec_cmd("hyprpm reload -n")
+end)

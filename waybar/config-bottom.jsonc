@@ -100,13 +100,18 @@
     },
 
     "custom/longshot": {
-        "format": "{}",
+        "format": "{icon}",
+        "format-icons": {
+            "idle": "󰹑",
+            "selecting": "󰆞",
+            "recording": "🔴",
+            "stitching": "󰑮"
+        },
+        "exec": "state=$(~/Python-projects/longshot_tool/longshot.sh status); echo \"{\\\"alt\\\": \\\"$state\\\", \\\"class\\\": \\\"$state\\\"}\"",
         "return-type": "json",
-        "exec": "if [ -f /tmp/longshot_recording.pid ]; then echo '{\"text\": \"🔴\", \"class\": \"recording\"}'; else echo '{\"text\": \"󰹑\", \"class\": \"idle\"}'; fi",
-        "interval": "once",
-        "signal": 8,
-        "on-click": "~/Python-projects/longshot_tool/longshot.sh",
-        "on-click-right": "~/Python-projects/longshot_tool/longshot.sh cancel",
+        "interval": 1, 
+        "on-click": "if [ $(~/Python-projects/longshot_tool/longshot.sh status) = 'idle' ]; then ~/Python-projects/longshot_tool/longshot.sh start; else ~/Python-projects/longshot_tool/longshot.sh stop; fi &",
+        "on-click-right": "~/Python-projects/longshot_tool/longshot.sh cancel &",
         "tooltip": true,
         "tooltip-format": "左键: 开始/结束长截图\n右键: 直接取消并丢弃"
     },

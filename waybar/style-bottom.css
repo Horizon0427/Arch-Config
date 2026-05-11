@@ -145,11 +145,14 @@ tooltip {
 }
 
 #custom-longshot.idle:hover { color: @tertiary; }
+#custom-longshot.recording { color: @tertiary; }
+#custom-longshot.stitching { color: @tertiary; }
 #custom-longshot.recording {
     padding: 0 8px;
     color: @error;
     outline: 1px solid alpha(@error, 0.60);
-    animation: pulse-record 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation: blink 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    transition: none;
 }
 
 #tray {
@@ -369,8 +372,8 @@ tooltip label {
 }
 
 @keyframes pulse-record {
-    0%   { opacity: 1;   box-shadow: 0 0 5px  alpha(@error, 0.4); }
-    50%  { opacity: 0.7; box-shadow: 0 0 15px alpha(@error, 0.8); outline-color: @error; }
-    100% { opacity: 1;   box-shadow: 0 0 5px  alpha(@error, 0.4); }
+    0%   { opacity: 1;   box-shadow: 0 0 3px  alpha(@error, 0.4); }
+    50%  { opacity: 0.7; box-shadow: 0 0 7px alpha(@error, 0.8); outline-color: @error; }
+    100% { opacity: 1;   box-shadow: 0 0 3px  alpha(@error, 0.4); }
 }
 

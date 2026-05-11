@@ -1,0 +1,93 @@
+local mainMod     = "SUPER"
+local terminal    = "ghostty"
+local fileManager = "thunar"
+local menu        = "rofi -show drun -theme ~/.config/rofi/launchers/type-7/style-2.rasi"
+
+-- ── 应用与系统 ────────────────────────────────────────────────
+hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("google-chrome-stable"))
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("flclash"))
+hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("~/.config/custom_wall_paper/wallpicker"))
+hl.bind(mainMod .. " + C", hl.dsp.window.close())
+hl.bind(mainMod .. " + U", hl.dsp.exec_cmd([[command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit]]))
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
+hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + X", hl.dsp.workspace.toggle_special("spotify"))
+hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle_layout.sh"))
+hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("~/.config/hypr/scripts/ghostty_cursor.sh"))
+
+hl.bind(mainMod .. " + F1", hl.dsp.exec_cmd("~/.config/waybar/scripts/toggle-waybar.sh"))
+hl.bind(mainMod .. " + F2", hl.dsp.exec_cmd("~/.config/waybar/scripts/reload-waybar.sh"))
+hl.bind(mainMod .. " + F3", hl.dsp.exec_cmd("hyprctl hyprsunset temperature 4000"))
+hl.bind(mainMod .. " + F4", hl.dsp.exec_cmd("hyprctl hyprsunset gamma 80"))
+hl.bind(mainMod .. " + F5", hl.dsp.exec_cmd([[sh -c 'hyprctl hyprsunset identity && hyprctl hyprsunset gamma 100']]))
+
+hl.bind(mainMod .. " + ALT + L",   hl.dsp.exec_cmd("~/.config/hypr/scripts/smart_lock.sh"))
+hl.bind(mainMod .. " + ALT + V",   hl.dsp.exec_cmd("copyq toggle"))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot.sh"))
+
+-- ── 焦点移动 ──────────────────────────────────────────────────
+hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left"  }))
+hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up"    }))
+hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down"  }))
+
+-- ── 工作区切换（for 循环替代 20 行重复绑定）────────────────────
+for i = 1, 9 do
+    hl.bind(mainMod .. " + " .. i,       hl.dsp.focus({ workspace = i        }))
+    hl.bind(mainMod .. " + ALT + " .. i, hl.dsp.window.move({ workspace = i  }))
+end
+hl.bind(mainMod .. " + 0",       hl.dsp.focus({ workspace = 10       }))
+hl.bind(mainMod .. " + ALT + 0", hl.dsp.window.move({ workspace = 10 }))
+
+hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
+
+-- ── Scrolling 布局：原有操作 ──────────────────────────────────
+hl.bind(mainMod .. " + W",            hl.dsp.layout("colresize +conf"))
+hl.bind(mainMod .. " + O",            hl.dsp.layout("fit all"))
+hl.bind(mainMod .. " + ALT + O",      hl.dsp.layout("fit active"))
+hl.bind(mainMod .. " + ALT + P",      hl.dsp.layout("promote"))
+hl.bind(mainMod .. " + bracketleft",  hl.dsp.layout("colresize -0.1"))
+hl.bind(mainMod .. " + bracketright", hl.dsp.layout("colresize +0.1"))
+hl.bind(mainMod .. " + comma",        hl.dsp.layout("swapcol l"))
+hl.bind(mainMod .. " + period",       hl.dsp.layout("swapcol r"))
+
+-- ── Scrolling 布局：0.55 新增 ─────────────────────────────────
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.layout("expel"))
+hl.bind(mainMod .. " + SHIFT + I", hl.dsp.layout("consume"))
+hl.bind(mainMod .. " + SHIFT + T", hl.dsp.layout("consume_or_expel prev"))
+hl.bind(mainMod .. " + M",         hl.dsp.layout("center"))
+
+-- ── Dwindle 布局 ──────────────────────────────────────────────
+hl.bind(mainMod .. " + T", hl.dsp.layout("rotatesplit"))  -- 0.55 新增
+hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
+
+-- ── 窗口组管理 ────────────────────────────────────────────────
+-- hl.dsp.moveintoorcreategroup() 在当前 API 中不存在，使用 hyprctl 兜底
+hl.bind(mainMod .. " + CTRL + left",  hl.dsp.exec_cmd("hyprctl dispatch moveintoorcreategroup l"))
+hl.bind(mainMod .. " + CTRL + right", hl.dsp.exec_cmd("hyprctl dispatch moveintoorcreategroup r"))
+hl.bind(mainMod .. " + CTRL + up",    hl.dsp.exec_cmd("hyprctl dispatch moveintoorcreategroup u"))
+hl.bind(mainMod .. " + CTRL + down",  hl.dsp.exec_cmd("hyprctl dispatch moveintoorcreategroup d"))
+
+-- ── 鼠标 ──────────────────────────────────────────────────────
+hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
+hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+
+-- ── 多媒体 / 功能键 ───────────────────────────────────────────
+local el = { locked = true, repeating = true }
+local l  = { locked = true }
+
+hl.bind("XF86AudioRaiseVolume",  hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), el)
+hl.bind("XF86AudioLowerVolume",  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),       el)
+hl.bind("XF86AudioMute",         hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),      el)
+hl.bind("XF86AudioMicMute",      hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),    el)
+hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),                   el)
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                   el)
+hl.bind("Print",                 hl.dsp.exec_cmd([[grim ~/Pictures/quickshot/quickshot_$(date +'%Y-%m-%d_%H-%M-%S').png]]), l)
+hl.bind("XF86AudioNext",         hl.dsp.exec_cmd("playerctl next"),       l)
+hl.bind("XF86AudioPause",        hl.dsp.exec_cmd("playerctl play-pause"), l)
+hl.bind("XF86AudioPlay",         hl.dsp.exec_cmd("playerctl play-pause"), l)
+hl.bind("XF86AudioPrev",         hl.dsp.exec_cmd("playerctl previous"),   l)

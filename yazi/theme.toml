@@ -1,0 +1,169 @@
+[mgr]
+cwd = { fg = "white" }
+
+find_keyword  = { fg = "red", bold = true, italic = true, underline = true }
+find_position = { fg = "red", bold = true, italic = true }
+
+marker_copied   = { fg = "yellow", bg = "black" }
+marker_cut      = { fg = "red", bg = "black" }
+marker_marked   = { fg = "red", bg = "red" }
+marker_selected = { fg = "yellow", bg = "yellow" }
+
+count_copied   = { fg = "black", bg = "yellow" }
+count_cut      = { fg = "white", bg = "red" }
+count_selected = { fg = "black", bg = "green" }
+
+border_symbol = "│"
+border_style  = { fg = "blue" }
+
+[indicator]
+padding = { open = "█", close = "█" }
+
+[tabs]
+active    = { fg = "green", bold = true }
+inactive  = { fg = "blue" }
+sep_inner = { open = "[", close = "]" }
+
+[mode]
+# Normal 模式使用 Primary (Green)
+normal_main = { bg = "green", fg = "black", bold = true }
+normal_alt  = { bg = "black", fg = "white" }
+
+# Select 模式使用 Secondary (Blue)
+select_main = { bg = "blue", fg = "black", bold = true }
+select_alt  = { bg = "black", fg = "white" }
+
+# Unset 模式使用 Tertiary (Yellow)
+unset_main = { bg = "yellow", fg = "black", bold = true }
+unset_alt  = { bg = "black", fg = "white" }
+
+[status]
+sep_left  = { open = "🭁", close = "🭠" }
+sep_right = { open = "🭁", close = "🭠" }
+
+perm_type  = { fg = "blue" }
+perm_write = { fg = "yellow" }
+perm_read  = { fg = "red" }
+perm_exec  = { fg = "cyan" }
+perm_sep   = { fg = "black" }
+
+progress_label  = { bold = true }
+progress_normal = { fg = "green", bg = "black" }
+progress_error  = { fg = "red", bg = "black" }
+
+[which]
+cols = 3
+mask = { bg = "black" }
+cand = { fg = "green" }
+rest = { fg = "white" }
+desc = { fg = "white" }
+separator = " ▶ "
+separator_style = { fg = "white" }
+
+[notify]
+title_info  = { fg = "yellow" }
+title_warn  = { fg = "green" }
+title_error = { fg = "red" }
+
+[pick]
+border = { fg = "green" }
+active = { fg = "yellow", bold = true }
+inactive = {}
+
+[input]
+border = { fg = "green" }
+value  = { fg = "white" }
+
+[cmp]
+border = { fg = "green", bg = "black" }
+
+[tasks]
+border  = { fg = "green" }
+title   = {}
+hovered = { fg = "yellow", underline = true }
+
+[help]
+on     = { fg = "white" }
+run    = { fg = "white" }
+footer = { fg = "black", bg = "blue" }
+
+[filetype]
+rules = [
+    { mime = "image/*", fg = "cyan" },
+    { mime = "{audio,video}/*", fg = "yellow" },
+    { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "magenta" },
+    { mime = "application/{pdf,doc,rtf}", fg = "green" },
+
+    { url = "*", is = "orphan", bg = "red" },
+    { url = "*", is = "exec", fg = "green" },
+
+    { url = "*", fg = "white" },
+    { url = "*/", fg = "blue" },
+]
+
+[icon]
+prepend_conds = [
+    { if = "dir & hidden", text = "", fg = "black" },
+    { if = "dir", text = "", fg = "blue" },
+    
+    { if = "orphan", text = "󰌌", fg = "red" },
+    { if = "link", text = "󰌷", fg = "yellow" },
+    
+    { if = "exec & !dir", text = "󰆧", fg = "cyan" },
+    { if = "hidden", text = "󰈙", fg = "white" },
+]
+
+prepend_dirs = [
+    { name = "Desktop", text = "", fg = "green" },
+    { name = "Documents", text = "󰈙", fg = "green" },
+    { name = "Downloads", text = "󰇚", fg = "green" },
+    { name = "Pictures", text = "󰉏", fg = "green" },
+    { name = "Music", text = "󰎆", fg = "green" },
+    { name = "Videos", text = "󰕧", fg = "green" },
+    { name = "Public", text = "", fg = "green" },
+
+    { name = ".config", text = "", fg = "blue" },
+    { name = ".git", text = "󰊢", fg = "blue" },
+    { name = "Github", text = "󰊢", fg = "blue" },
+    { name = "src", text = "", fg = "blue" },
+]
+
+prepend_exts = [
+    { name = "png", text = "󰉏", fg = "yellow" },
+    { name = "jpg", text = "󰉏", fg = "yellow" },
+    { name = "jpeg", text = "󰉏", fg = "yellow" },
+    { name = "webp", text = "󰉏", fg = "yellow" },
+    { name = "svg", text = "󰜡", fg = "yellow" },
+    { name = "mp4", text = "󰕧", fg = "yellow" },
+    { name = "mkv", text = "󰕧", fg = "yellow" },
+    { name = "mp3", text = "󰎆", fg = "yellow" },
+    { name = "flac", text = "󰎆", fg = "yellow" },
+
+    { name = "zip", text = "󰛫", fg = "magenta" },
+    { name = "tar", text = "󰛫", fg = "magenta" },
+    { name = "gz", text = "󰛫", fg = "magenta" },
+    { name = "rar", text = "󰛫", fg = "magenta" },
+    { name = "7z", text = "󰛫", fg = "magenta" },
+
+    { name = "conf", text = "", fg = "green" },
+    { name = "toml", text = "", fg = "green" },
+    { name = "yaml", text = "", fg = "green" },
+    { name = "yml", text = "", fg = "green" },
+    { name = "json", text = "", fg = "green" },
+    { name = "sh", text = "", fg = "green" },
+    { name = "bash", text = "", fg = "green" },
+    { name = "py", text = "", fg = "green" },
+    { name = "rs", text = "", fg = "green" },
+    { name = "c", text = "", fg = "green" },
+    { name = "cpp", text = "", fg = "green" },
+    { name = "md", text = "", fg = "green" },
+    { name = "txt", text = "󰈙", fg = "white" },
+]
+
+prepend_files = [
+    { name = "PKGBUILD", text = "", fg = "green" },
+    { name = "README.md", text = "󰂺", fg = "blue" },
+    { name = "Makefile", text = "", fg = "blue" },
+    { name = ".bashrc", text = "", fg = "blue" },
+    { name = ".zshrc", text = "", fg = "blue" },
+]

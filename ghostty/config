@@ -1,5 +1,8 @@
 config-file = matugen-colors
-
+font-family = "Maple Mono NF CN"
+font-size = 12
+font-feature = "liga"
+font-feature = "calt"
 background-opacity = 0.75
 window-decoration = false
 app-notifications = false
