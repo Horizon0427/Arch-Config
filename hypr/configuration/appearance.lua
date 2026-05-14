@@ -19,7 +19,7 @@ hl.config({
         snap = {
             enabled        = true,
             window_gap     = 10,
-            monitor_gap    = 20,
+            monitor_gap    = 10,
             border_overlap = true,
             respect_gaps   = true,
         },
@@ -32,10 +32,10 @@ hl.config({
         inactive_opacity   = 1.0,
         fullscreen_opacity = 1.0,
         shadow = {
-            enabled      = true,
-            range        = 4,
-            render_power = 3,
-            color        = "rgba(1a1a1aee)",
+            enabled      = false,
+            range        = 2,
+            render_power = 2,
+            color        = colors.primary,
         },
         blur = {
             enabled           = true,
@@ -44,10 +44,10 @@ hl.config({
             vibrancy          = 0.1696,
             new_optimizations = true,
             popups            = true,
-            input_methods     = true,
+            xray              = true,
         },
         glow = {
-            enabled      = true,
+            enabled      = false,
             range        = 12,
             render_power = 3,
             color        = colors.primary,

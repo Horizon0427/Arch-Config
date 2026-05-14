@@ -16,7 +16,7 @@
 | ----------------- | ------------------- |
 | Operating System  | Arch GNU/Linux      |
 | Window Manager    | Hyprland (Wayland)  |
-| Status Bar        | Waybar              |
+| Status Bar        | Ironbar             |
 | Shell             | Fish                |
 | Terminal Emulator | Ghostty             |
 
@@ -48,6 +48,13 @@ Run it through `./hypr/scripts/screenshot.sh`, or wire the script into a Waybar 
 Thanks to Hyprland's precise transparency-filtering capabilities, Waybar is themed with a translucent, liquid-glass effect. Two configurations live under `./waybar/`:
 - **Toggle:** `./waybar/scripts/toggle-waybar.sh`
 - **Reload:** `./waybar/scripts/reload-waybar.sh`
+
+### Ironbar - Better Liquid Glass
+
+I have migrated my status bar setup from Waybar to Ironbar. 
+While Waybar served me well, Ironbar's underlying UI engine handles complex CSS significantly better. 
+This switch unlocked the ability to implement much richer, buttery-smooth animations, complex gradients, 
+and advanced shadow effects that just weren't feasible before.
 
 ### Matugen Color Palette
 

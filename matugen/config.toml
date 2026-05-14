@@ -1,52 +1,57 @@
 [config]
 
 [templates.waybar]
-input_path = "~/.config/matugen/templates/colors.css"
-output_path = "~/.config/waybar/colors.css"
+input_path = '~/.config/matugen/templates/colors.css'
+output_path = '~/.config/waybar/colors.css'
 
 [templates.hyprland]
-input_path = "~/.config/matugen/templates/hyprland_colors.lua"
-output_path = "~/.config/hypr/configuration/colors.lua"
+input_path = '~/.config/matugen/templates/hyprland_colors.lua'
+output_path = '~/.config/hypr/configuration/colors.lua'
 
 [templates.hyprland-colors]
-input_path = "~/.config/matugen/templates/colors-hyprland.conf"
-output_path = "~/.config/hypr/colors.conf"
+input_path = '~/.config/matugen/templates/colors-hyprland.conf'
+output_path = '~/.config/hypr/colors.conf'
 
 [templates.mako]
-input_path = "~/.config/matugen/templates/mako"
-output_path = "~/.config/mako/config"
+input_path = '~/.config/matugen/templates/mako'
+output_path = '~/.config/mako/config'
 
 [templates.wlogout]
-input_path = "~/.config/matugen/templates/wlogout.css"
-output_path = "~/.config/wlogout/style.css"
+input_path = '~/.config/matugen/templates/wlogout.css'
+output_path = '~/.config/wlogout/style.css'
 
 [templates.btop]
-input_path = "~/.config/matugen/templates/btop.theme"
-output_path = "~/.config/btop/themes/matugen.theme"
+input_path = '~/.config/matugen/templates/btop.theme'
+output_path = '~/.config/btop/themes/matugen.theme'
 
 [templates.hyprlock]
-input_path = "~/.config/matugen/templates/hyprlock.conf"
-output_path = "~/.config/hypr/hyprlock.conf"
+input_path = '~/.config/matugen/templates/hyprlock.conf'
+output_path = '~/.config/hypr/hyprlock.conf'
 
 [templates.prelock]
-input_path = "~/.config/matugen/templates/prelock-color.txt"
-output_path = "~/.config/hypr/lock_animation/prelock_color"
+input_path = '~/.config/matugen/templates/prelock-color.txt'
+output_path = '~/.config/hypr/lock_animation/prelock_color'
 
 [templates.ghostty]
-input_path = "~/.config/matugen/templates/ghostty-theme.conf"
-output_path = "~/.config/ghostty/matugen-colors"
-post_hook = "killall -SIGUSR2 ghostty"
+input_path = '~/.config/matugen/templates/ghostty-theme.conf'
+output_path = '~/.config/ghostty/matugen-colors'
+post_hook = 'killall -SIGUSR2 ghostty'
 
 [templates.gtk-folder]
-input_path = "~/.config/matugen/templates/gtk-folder/recolor.sh"
-output_path = "~/.cache/matugen/recoloricons.sh"
-post_hook = "bash ~/.cache/matugen/recoloricons.sh &"
+input_path = '~/.config/matugen/templates/gtk-folder/recolor.sh'
+output_path = '~/.cache/matugen/recoloricons.sh'
+post_hook = 'bash ~/.cache/matugen/recoloricons.sh &'
 
 [templates.gtk3]
-input_path = "~/.config/matugen/templates/gtk3-theme.css"
-output_path = "~/.local/share/themes/adw-gtk3-dark-matugen/gtk-3.0/gtk.css"
-post_hook = "bash ~/.config/matugen/scripts/reload-gtk.sh"
+input_path = '~/.config/matugen/templates/gtk3-theme.css'
+output_path = '~/.local/share/themes/adw-gtk3-dark-matugen/gtk-3.0/gtk.css'
+post_hook = 'bash ~/.config/matugen/scripts/reload-gtk.sh'
 
 [templates.gtk4]
-input_path ="~/.config/matugen/templates/gtk-colors.css"
-output_path = "~/.config/gtk-4.0/colors.css"
+input_path ='~/.config/matugen/templates/gtk-colors.css'
+output_path = '~/.config/gtk-4.0/colors.css'
+post_hook = 'bash ~/.config/matugen/scripts/reload-gtk.sh'
+
+[templates.ironbar]
+input_path = '~/.config/matugen/templates/colors.css'
+output_path = '~/.config/ironbar/colors.css'

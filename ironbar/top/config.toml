@@ -1,0 +1,196 @@
+position = "top"
+height = 24
+margin_top = 4
+margin_bottom = 4
+
+
+[[start]]
+type = "workspaces"
+hidden = ["special:spotify"]
+
+
+
+[[center]]
+type = "script"
+class = "custom-battery"
+mode = "poll"
+interval = 30000
+cmd = """
+  cap=$(cat /sys/class/power_supply/BAT*/capacity | head -n 1)
+  stat=$(cat /sys/class/power_supply/BAT*/status | head -n 1)
+  if [ "$stat" = "Charging" ]; then
+    icon=""
+  elif [ "$cap" -ge 90 ]; then
+    icon=""
+  elif [ "$cap" -ge 60 ]; then
+    icon=""
+  elif [ "$cap" -ge 30 ]; then
+    icon=""
+  elif [ "$cap" -ge 15 ]; then
+    icon=""
+  else
+    icon=""
+  fi
+  echo "${cap}% $icon" 
+"""
+
+[[center]]
+type = "script"
+class = "volume"
+mode = "poll"
+interval = 200
+cmd = """
+  active=$(pactl list sinks short 2>/dev/null | awk '/RUNNING/{print $2; exit}')
+  [ -z "$active" ] && active=$(pactl info 2>/dev/null | awk '/Default Sink/{print $3}')
+  vol=$(pactl get-sink-volume "$active" 2>/dev/null | grep -oE '[0-9]+%' | head -1 | tr -d '%')
+  vol=${vol:-0}
+  muted=$(pactl get-sink-mute "$active" 2>/dev/null | grep -c 'yes')
+  is_hp=0
+  pactl list sinks short 2>/dev/null | grep -qi 'bluez' && is_hp=1
+  if [ "$is_hp" -eq 0 ]; then
+    port=$(pactl list sinks 2>/dev/null | awk -v s="$active" '/Name: /{in_s=($2==s)} in_s && /Active Port:/{print $3; exit}')
+    echo "$port" | grep -Eqi 'headphone|headset|earphone' && is_hp=1
+  fi
+  if [ "$muted" -gt 0 ]; then
+    echo "󰝟 ${vol}%"
+  elif [ "$is_hp" -eq 1 ]; then
+    echo "󰋋 ${vol}%"
+  elif [ "$vol" -ge 30 ]; then
+    echo "󰕾 ${vol}%"
+  elif [ "$vol" -ge 10 ]; then
+    echo "󰖀 ${vol}%"
+  else
+    echo "󰕿 ${vol}%"
+  fi
+"""
+on_scroll_up   = "~/.config/ironbar/scripts/vol_ctl.sh up"
+on_scroll_down = "~/.config/ironbar/scripts/vol_ctl.sh down"
+on_click_left  = "pavucontrol &"
+on_click_right = "~/.config/ironbar/scripts/vol_ctl.sh mute"
+
+
+[[center]]
+type = "script"
+class = "brightness"
+mode = "poll"
+interval = 500
+cmd = """
+  b=$(brightnessctl -d amdgpu_bl1 i | awk -F'[()%]' '/Current brightness/ {print $2}')
+  [ -z "$b" ] && b=100
+  if [ "$b" -ge 88 ]; then echo ""
+  elif [ "$b" -ge 77 ]; then echo ""
+  elif [ "$b" -ge 66 ]; then echo ""
+  elif [ "$b" -ge 55 ]; then echo ""
+  elif [ "$b" -ge 44 ]; then echo ""
+  elif [ "$b" -ge 33 ]; then echo ""
+  elif [ "$b" -ge 22 ]; then echo ""
+  elif [ "$b" -ge 11 ]; then echo ""
+  else echo ""
+  fi
+"""
+on_scroll_up = "brightnessctl -d amdgpu_bl1 set +5%"
+on_scroll_down = "brightnessctl -d amdgpu_bl1 set 5%-"
+
+
+[[center]]
+type = "script"
+class = "clock"
+mode = "poll"
+interval = 1000
+cmd = "date +'%H:%M'"
+
+
+[[center]]
+type = "script"
+class = "power-btn"
+mode = "watch"
+cmd = """
+  t=$(grep '@define-color tertiary '  ~/.config/ironbar/colors.css | awk '{print $3}' | tr -d ';')
+  e=$(grep '@define-color error '     ~/.config/ironbar/colors.css | awk '{print $3}' | tr -d ';')
+  r=$(grep '@define-color primary '   ~/.config/ironbar/colors.css | awk '{print $3}' | tr -d ';')
+  while true; do
+    p=$(cat /sys/firmware/acpi/platform_profile 2>/dev/null)
+    case "$p" in
+      balanced)    echo "<span color='${t:-#b0c9e7}'></span>" ;;
+      performance) echo "<span color='${e:-#ffb4ab}'></span>" ;;
+      *)           echo "<span color='${r:-#81d5ce}'></span>" ;;
+    esac
+    sleep 0.1
+  done
+"""
+tooltip = "{{cat /sys/firmware/acpi/platform_profile 2>/dev/null}}"
+on_click_left = "p=$(cat /sys/firmware/acpi/platform_profile 2>/dev/null); if [ \"$p\" = 'balanced' ]; then powerprofilesctl set performance; elif [ \"$p\" = 'performance' ]; then powerprofilesctl set power-saver; else powerprofilesctl set balanced; fi"
+
+
+[[center]]
+type = "script"
+class = "network"
+mode = "poll"
+interval = 10000
+cmd = "nmcli -t -f TYPE,STATE dev | grep -q '^wifi:connected' && echo '' || echo '󰖪'"
+
+
+[[center]]
+type = "script"
+class = "longshot"
+mode = "poll"
+interval = 200
+cmd = """
+  s=$(~/Python-projects/longshot_tool/longshot.sh status)
+  case "$s" in
+    recording) echo '' ;;
+    stitching) echo '󰑮' ;;
+    *)         echo '󰹑' ;;
+  esac
+"""
+on_click_left = "if [ \"$(~/Python-projects/longshot_tool/longshot.sh status)\" = 'idle' ]; then ~/Python-projects/longshot_tool/longshot.sh start; else ~/Python-projects/longshot_tool/longshot.sh stop; fi &"
+on_click_right = "~/Python-projects/longshot_tool/longshot.sh cancel &"
+
+
+[[center]]
+type = "script"
+class = "cava"
+mode = "watch"
+cmd = "~/.config/ironbar/scripts/cava.sh"
+
+
+[[end]]
+type = "label"
+name = "prev"
+label = "󰒮"
+show_if = "pgrep -x spotify"
+tooltip = "Previous"
+on_click_left = "playerctl previous"
+
+[[end]]
+type = "script"
+class = "play-pause"
+mode = "poll"
+interval = 500
+show_if = "pgrep -x spotify"
+cmd = "if [ \"$(playerctl status 2>/dev/null)\" = 'Playing' ]; then echo ' '; else echo '󰎆 '; fi"
+tooltip = "{{playerctl metadata title 2>/dev/null}} — {{playerctl metadata artist 2>/dev/null}}"
+on_click_left = "playerctl play-pause"
+
+[[end]]
+type = "label"
+name = "next"
+label = "󰒭"
+show_if = "pgrep -x spotify"
+tooltip = "Next"
+on_click_left = "playerctl next"
+
+
+
+[[end]]
+type = "tray"
+icon_size = 18
+on_click_left = "menu"
+on_click_right = "activate"
+
+
+[[end]]
+type = "label"
+name = "power"
+label = "⏻"
+on_click_left = "wlogout -b 3 -T 300 -B 300"

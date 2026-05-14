@@ -1,6 +1,3 @@
--- ══════════════════════════════════════════
--- 窗口规则
--- ══════════════════════════════════════════
 hl.window_rule({
     name  = "suppress-maximize-events",
     match = { class = ".*" },
@@ -86,9 +83,17 @@ hl.window_rule({
     workspace = "special:spotify",
 })
 
--- ══════════════════════════════════════════
--- Layer 规则
--- ══════════════════════════════════════════
+hl.window_rule({
+  name   = "volume",
+  match  = { class = "^(org.pulseaudio.pavucontrol)$" },
+  float  = true;
+  center = true;
+  size   = "800 600";
+})
+
+
+
+
 hl.layer_rule({
     name  = "wlogout_blur",
     match = { namespace = "^(logout_dialog)$" },
@@ -105,4 +110,11 @@ hl.layer_rule({
     name  = "Liquid_Glass_Waybar",
     match = { namespace = "^(waybar)$" },
     blur = true, ignore_alpha = 0.25,
+})
+
+hl.layer_rule({
+    name  = "Liquid_Glass_Ironbar",
+    match = { namespace = "^(ironbar)$" },
+    blur = true, 
+    ignore_alpha = 0.1,
 })

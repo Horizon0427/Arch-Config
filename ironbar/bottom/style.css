@@ -1,0 +1,271 @@
+@import "../colors.css";
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", sans-serif;
+    font-size: 14px;
+    min-height: 28px;
+}
+
+window {
+    background-color: transparent;
+    color: @on-surface;
+}
+
+.network, .volume, .brightness, .custom-battery, .clock, 
+.power-btn, .cava, .longshot, .workspaces .item, 
+#prev, .play-pause, #next, .tray, #power {
+    margin: 3px 3px;
+    border-radius: 10px;
+    
+    background-size: 300% 300%;
+    background-position: 0% 0%;
+    background-image: linear-gradient(135deg,
+        alpha(@primary, 0.30) 0%,
+        alpha(@surface-variant, 0.10) 25%,
+        alpha(@tertiary, 0.30) 50%,
+        alpha(@surface-variant, 0.10) 75%,
+        alpha(@primary, 0.30) 100%
+    );
+
+    outline: 1px solid rgba(255, 255, 255, 0.10);
+    outline-offset: -1px;
+    box-shadow:
+        inset 1.5px 1.5px 1px alpha(@primary, 0.45),
+        inset -1.5px -1.5px 1px alpha(@tertiary, 0.35),
+        0 2px 6px rgba(0, 0, 0, 0.25);
+
+    transform: scale(1.0) translateY(0);
+    transition: 
+        background-position 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+        padding 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+        color 0.3s ease;
+}
+
+.network:hover, .volume:hover, .brightness:hover, .custom-battery:hover, .clock:hover,
+.cava:hover, .longshot:hover, .power-btn:hover, .workspaces .item:hover, 
+#prev:hover, .play-pause:hover, #next:hover, #power:hover {
+    color: @tertiary;
+    background-position: 100% 100%;
+    transform: scale(1.1) translateY(1px);
+
+    box-shadow:
+        inset 1.5px 1.5px 1px alpha(@tertiary, 0.65),
+        inset -1.5px -1.5px 1px alpha(@primary, 0.65),
+        0 4px 10px rgba(0, 0, 0, 0.28),
+        0 0 8px alpha(@primary, 0.15),
+        0 0 8px alpha(@tertiary, 0.15);
+
+    transition: 
+        background-position 0.3s cubic-bezier(0.20, 0.00, 0.00, 1.00),
+        box-shadow 0.3s cubic-bezier(0.20, 0.00, 0.00, 1.00),
+        transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+        padding 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+        color 0.3s ease;
+}
+
+.network:active, .volume:active, .brightness:active, .custom-battery:active, .clock:active,
+.cava:active, .longshot:active, .power-btn:active, .workspaces .item:active, 
+#prev:active, .play-pause:active, #next:active, #power:active {
+    background:
+        linear-gradient(180deg,
+            rgba(0, 0, 0, 0.08) 0%,
+            rgba(0, 0, 0, 0.00) 40%),
+        linear-gradient(135deg,
+            alpha(@surface-variant, 0.40) 0%,
+            alpha(@surface-variant, 0.18) 50%,
+            alpha(@surface-variant, 0.28) 100%);
+
+    box-shadow:
+        inset 0 3px 5px rgba(0, 0, 0, 0.22),
+        inset 0 1px 2px rgba(0, 0, 0, 0.18),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+        0 1px 3px rgba(0, 0, 0, 0.10);
+
+    text-shadow: none;
+    transform: scale(0.93) translateY(1.5px);
+
+    transition:
+        transform  0.10s cubic-bezier(0.25, 1, 0.35, 1),
+        box-shadow 0.10s ease,
+        background 0.10s ease;
+}
+
+.network        { padding: 0 25px 0 18px; color: @primary; }
+.custom-battery { padding: 0 14px 0 10px; color: @primary; min-width: 55px; }
+.clock          { padding: 0 14px;        color: @primary; font-weight: bold; }
+.volume         { padding: 0 16px;        color: @primary; }
+.longshot       { padding: 0 20px 0 16px; color: @primary; }
+.brightness     { padding: 0 17px 0 17px; color: @primary; }
+.cava           { padding: 0 22px;        color: @primary; font-weight: bold; letter-spacing: -1px; }
+
+.workspaces {
+    margin: 1px 6px;
+    padding: 3px;
+    background: transparent;
+    border-radius: 16px;
+    outline: 1.5px solid alpha(@tertiary, 0.45);
+    outline-offset: -1px;
+    box-shadow:
+        0 0 12px alpha(@tertiary, 0.10),
+        inset 0 0 8px alpha(@tertiary, 0.05);
+}
+
+.workspaces .item {
+    margin: 2px 2px;
+    padding: 0 8px;
+    color: @primary;
+}
+
+.workspaces .item.focused {
+    padding: 0 20px;
+    color: @tertiary;
+    text-shadow: 0 0 6px alpha(@tertiary, 0.65);
+}
+
+#prev, .play-pause, #next {
+    padding: 0 12px;
+    color: @primary;
+    font-size: 18px;
+}
+
+#prev { 
+    margin-left: 2px; 
+    margin-right: 0; 
+    border-radius: 10px 0 0 10px; 
+}
+
+.play-pause { 
+    margin-left: 0; 
+    margin-right: 0; 
+    padding: 0 14px 0 10px; 
+    border-radius: 0; 
+    font-size: 16px; 
+}
+
+#next { 
+    margin-left: 0; 
+    margin-right: 2px; 
+    border-radius: 0 10px 10px 0; 
+}
+
+#prev:hover, .play-pause:hover, #next:hover {
+    color: @tertiary;
+    transform: scale(1.1) translateY(0px);
+}
+
+.tray {
+    padding: 0 10px;
+}
+
+.tray button {
+    margin: 0 2px;
+    padding: 2px 4px;
+    background: transparent;
+    border-radius: 4px;
+    transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tray button:hover  { transform: scale(1.35); }
+.tray button:active { transform: scale(0.90); }
+
+.power-btn {
+    padding: 0 28px 0 25px;
+    font-size: 17px;
+}
+
+.power-btn:hover {
+    box-shadow:
+        inset 1.5px 1.5px 1px alpha(@tertiary, 0.65),
+        inset -1.5px -1.5px 1px alpha(@primary, 0.65),
+        0 4px 10px rgba(0, 0, 0, 0.28),
+        0 0 10px alpha(@error, 0.18),
+        0 0 10px alpha(@primary, 0.20),
+        0 0 10px alpha(@tertiary, 0.22);
+    text-shadow: 0 0 8px alpha(@tertiary, 0.55);
+}
+
+#power {
+    margin: 3px 6px;
+    padding: 0 22px 1px 18px;
+    color: @error;
+    font-size: 18px;
+    background-image: linear-gradient(135deg,
+        alpha(@error, 0.28) 0%,
+        alpha(@error-container, 0.2) 25%,
+        alpha(@on-error-container, 0.1) 50%,
+        alpha(@error-container, 0.2) 75%,
+        alpha(@error, 0.28) 100%
+    );
+    box-shadow:
+        inset 1.5px 1.5px 1px alpha(@error, 0.45),
+        inset -1.5px -1.5px 1px alpha(@error-container, 0.35),
+        0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+#power:hover {
+    color: @on-error;
+    text-shadow: 0 0 8px alpha(@error, 0.65);
+    background-position: 100% 100%;
+    box-shadow:
+        inset 1.5px 1.5px 1px alpha(@error-container, 0.65),
+        inset -1.5px -1.5px 1px alpha(@error, 0.70),
+        0 4px 10px rgba(0, 0, 0, 0.28),
+        0 0 12px alpha(@error, 0.30),
+        0 0 6px alpha(@on-error-container, 0.18);
+}
+
+tooltip {
+    padding: 6px 10px;
+    color: @tertiary;
+    background-image: linear-gradient(135deg, alpha(@on-primary, 0.75) 0%, alpha(@tertiary, 0.50) 100%);
+    border: 2px solid alpha(@primary, 0.50);
+    border-radius: 6px;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.35),
+        inset 1px 1px 1px alpha(@primary, 0.15);
+}
+
+popover > contents {
+    padding: 4px;
+    color: @primary;
+    background-color: alpha(@surface, 0.85);
+    background-image: linear-gradient(135deg, alpha(@primary, 0.08) 0%, alpha(@tertiary, 0.08) 100%);
+    border: 1.5px solid alpha(@primary, 0.65);
+    /* [修改]: Popover 圆角 24px -> 12px */
+    border-radius: 12px;
+    box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.45),
+        inset 1.5px 1.5px 1px alpha(@primary, 0.25);
+}
+
+popover > contents separator {
+    margin: 6px 4px;
+    min-height: 1px;
+    background-color: alpha(@primary, 0.25);
+    border: none;
+}
+
+popover contents button, 
+popover contents menuitem,
+popover contents modelbutton {
+    margin: 0; 
+    padding: 0 8px;
+    color: @primary; 
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+popover contents button:hover, 
+popover contents menuitem:hover,
+popover contents modelbutton:hover {
+    background-color: alpha(@primary, 0.20);
+    border-radius: 6px;
+    box-shadow: inset 0 0 6px alpha(@primary, 0.15); 
+}

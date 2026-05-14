@@ -3,7 +3,6 @@ local terminal    = "ghostty"
 local fileManager = "thunar"
 local menu        = "rofi -show drun -theme ~/.config/rofi/launchers/type-7/style-2.rasi"
 
--- ── 应用与系统 ────────────────────────────────────────────────
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
@@ -18,8 +17,8 @@ hl.bind(mainMod .. " + X", hl.dsp.workspace.toggle_special("spotify"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle_layout.sh"))
 hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("~/.config/hypr/scripts/ghostty_cursor.sh"))
 
-hl.bind(mainMod .. " + F1", hl.dsp.exec_cmd("~/.config/waybar/scripts/toggle-waybar.sh"))
-hl.bind(mainMod .. " + F2", hl.dsp.exec_cmd("~/.config/waybar/scripts/reload-waybar.sh"))
+hl.bind(mainMod .. " + F1", hl.dsp.exec_cmd("~/.config/ironbar/scripts/toggle-ironbar.sh"))
+hl.bind(mainMod .. " + F2", hl.dsp.exec_cmd("~/.config/ironbar/scripts/reload-ironbar.sh"))
 hl.bind(mainMod .. " + F3", hl.dsp.exec_cmd("hyprctl hyprsunset temperature 4000"))
 hl.bind(mainMod .. " + F4", hl.dsp.exec_cmd("hyprctl hyprsunset gamma 80"))
 hl.bind(mainMod .. " + F5", hl.dsp.exec_cmd([[sh -c 'hyprctl hyprsunset identity && hyprctl hyprsunset gamma 100']]))
@@ -28,13 +27,11 @@ hl.bind(mainMod .. " + ALT + L",   hl.dsp.exec_cmd("~/.config/hypr/scripts/smart
 hl.bind(mainMod .. " + ALT + V",   hl.dsp.exec_cmd("copyq toggle"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot.sh"))
 
--- ── 焦点移动 ──────────────────────────────────────────────────
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left"  }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up"    }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down"  }))
 
--- ── 工作区切换（for 循环替代 20 行重复绑定）────────────────────
 for i = 1, 9 do
     hl.bind(mainMod .. " + " .. i,       hl.dsp.focus({ workspace = i        }))
     hl.bind(mainMod .. " + ALT + " .. i, hl.dsp.window.move({ workspace = i  }))
@@ -45,7 +42,6 @@ hl.bind(mainMod .. " + ALT + 0", hl.dsp.window.move({ workspace = 10 }))
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 
--- ── Scrolling 布局：原有操作 ──────────────────────────────────
 hl.bind(mainMod .. " + W",            hl.dsp.layout("colresize +conf"))
 hl.bind(mainMod .. " + O",            hl.dsp.layout("fit all"))
 hl.bind(mainMod .. " + ALT + O",      hl.dsp.layout("fit active"))
@@ -55,28 +51,27 @@ hl.bind(mainMod .. " + bracketright", hl.dsp.layout("colresize +0.1"))
 hl.bind(mainMod .. " + comma",        hl.dsp.layout("swapcol l"))
 hl.bind(mainMod .. " + period",       hl.dsp.layout("swapcol r"))
 
--- ── Scrolling 布局：0.55 新增 ─────────────────────────────────
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.layout("expel"))
 hl.bind(mainMod .. " + SHIFT + I", hl.dsp.layout("consume"))
 hl.bind(mainMod .. " + SHIFT + T", hl.dsp.layout("consume_or_expel prev"))
 hl.bind(mainMod .. " + M",         hl.dsp.layout("center"))
 
--- ── Dwindle 布局 ──────────────────────────────────────────────
-hl.bind(mainMod .. " + T", hl.dsp.layout("rotatesplit"))  -- 0.55 新增
+hl.bind(mainMod .. " + T", hl.dsp.layout("rotatesplit"))
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
 
--- ── 窗口组管理 ────────────────────────────────────────────────
--- hl.dsp.moveintoorcreategroup() 在当前 API 中不存在，使用 hyprctl 兜底
-hl.bind(mainMod .. " + CTRL + left",  hl.dsp.exec_cmd("hyprctl dispatch moveintoorcreategroup l"))
-hl.bind(mainMod .. " + CTRL + right", hl.dsp.exec_cmd("hyprctl dispatch moveintoorcreategroup r"))
-hl.bind(mainMod .. " + CTRL + up",    hl.dsp.exec_cmd("hyprctl dispatch moveintoorcreategroup u"))
-hl.bind(mainMod .. " + CTRL + down",  hl.dsp.exec_cmd("hyprctl dispatch moveintoorcreategroup d"))
+--hl.bind(mainMod .. " + CTRL + left",  hl.dsp.exec_cmd("hyprctl dispatch moveintoorcreategroup l"))
+--hl.bind(mainMod .. " + CTRL + right", hl.dsp.exec_cmd("hyprctl dispatch moveintoorcreategroup r"))
+--hl.bind(mainMod .. " + CTRL + up",    hl.dsp.exec_cmd("hyprctl dispatch moveintoorcreategroup u"))
+--hl.bind(mainMod .. " + CTRL + down",  hl.dsp.exec_cmd("hyprctl dispatch moveintoorcreategroup d"))
+hl.bind(mainMod .. " + CTRL + left",  hl.dsp.window.move({ into_or_create_group = "l" }))
+hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.move({ into_or_create_group = "r" }))
+hl.bind(mainMod .. " + CTRL + up",    hl.dsp.window.move({ into_or_create_group = "u" }))
+hl.bind(mainMod .. " + CTRL + down",  hl.dsp.window.move({ into_or_create_group = "d" }))
+hl.bind(mainMod .. " + CTRL + O", hl.dsp.window.move({ out_of_group = true }))
 
--- ── 鼠标 ──────────────────────────────────────────────────────
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
--- ── 多媒体 / 功能键 ───────────────────────────────────────────
 local el = { locked = true, repeating = true }
 local l  = { locked = true }
 

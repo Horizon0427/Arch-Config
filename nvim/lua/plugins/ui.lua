@@ -46,8 +46,7 @@ return {
     config = function()
       local starter = require("mini.starter")
 
-      -- 增加一个 indent 变量，用空格把整个菜单块往右推，对齐标题中心
-      local indent = "       " -- 这里放了7个空格，如果觉得还不够右，可以继续加空格
+      local indent = "       "
       local HINT_COL = 30
       local function act(icon, label, hint, action_val, sec)
         local used = vim.fn.strwidth(icon) + 2 + vim.fn.strwidth(label)
@@ -59,7 +58,6 @@ return {
         }
       end
 
-      -- 把 section 标题变为空行，让排版更透气
       local function sections_as_spacers(content)
         local out = {}
         for _, line in ipairs(content) do
@@ -76,9 +74,6 @@ return {
         return out
       end
 
-      -- j/k navigation: must hook AFTER MiniStarterOpened, because mini.starter
-      -- re-registers all letter keys (including j/k) to add_to_query() at the
-      -- end of its open() call, overwriting any FileType-based keymaps.
       vim.api.nvim_create_autocmd("User", {
         pattern = "MiniStarterOpened",
         callback = function()
@@ -125,7 +120,6 @@ return {
 
         footer = function()
           local stats = require("lazy").stats()
-          -- Lazy 启动极快时可能会显示 0ms，如果需要更精确可以去掉 math.floor
           local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
           return "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms"
         end,
