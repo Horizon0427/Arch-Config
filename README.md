@@ -73,7 +73,7 @@ and advanced shadow effects that just weren't feasible before.
 
 ## Gallery
 
-[overview](./showcase/overview.png)
-[matugen](./showcase/matugen.png)
-[hyprlock](./showcase/hyprlock.png)
-[showcase](./showcase/showcase.mp4)
+![overview](./showcase/overview.png)
+![matugen](./showcase/matugen.png)
+![hyprlock](./showcase/hyprlock.png)
+![showcase](./showcase/showcase.mp4)
