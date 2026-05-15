@@ -103,7 +103,6 @@ on_scroll_up = "brightnessctl -d amdgpu_bl1 set +5%"
 on_scroll_down = "brightnessctl -d amdgpu_bl1 set 5%-"
 
 
-# ================= 中间 (center) ================= #
 
 [[center]]
 type = "script"
@@ -127,7 +126,6 @@ tooltip = "{{cat /sys/firmware/acpi/platform_profile 2>/dev/null}}"
 on_click_left = "p=$(cat /sys/firmware/acpi/platform_profile 2>/dev/null); if [ \"$p\" = 'balanced' ]; then powerprofilesctl set performance; elif [ \"$p\" = 'performance' ]; then powerprofilesctl set power-saver; else powerprofilesctl set balanced; fi"
 
 
-# ================= 右侧 (end) ================= #
 
 [[end]]
 type = "script"
@@ -146,12 +144,23 @@ on_click_left = "playerctl previous"
 [[end]]
 type = "script"
 class = "play-pause"
-mode = "poll"
-interval = 200
+mode = "watch"
 show_if = "pgrep -x spotify"
-cmd = "if [ \"$(playerctl status 2>/dev/null)\" = 'Playing' ]; then echo ' '; else echo '󰎆 '; fi"
+cmd = """
+  _show() {
+    case "$1" in
+      Playing) echo ' ' ;;
+      *)       echo '󰎆 ' ;;
+    esac
+  }
+  _show "$(playerctl --player=spotify status 2>/dev/null)"
+  playerctl --player=spotify --follow status 2>/dev/null | while IFS= read -r s; do
+    _show "$s"
+  done
+"""
 tooltip = "{{playerctl metadata title 2>/dev/null}} — {{playerctl metadata artist 2>/dev/null}}"
 on_click_left = "playerctl play-pause"
+
 
 [[end]]
 type = "label"

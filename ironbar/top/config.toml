@@ -165,10 +165,20 @@ on_click_left = "playerctl previous"
 [[end]]
 type = "script"
 class = "play-pause"
-mode = "poll"
-interval = 500
+mode = "watch"
 show_if = "pgrep -x spotify"
-cmd = "if [ \"$(playerctl status 2>/dev/null)\" = 'Playing' ]; then echo ' '; else echo '󰎆 '; fi"
+cmd = """
+  _show() {
+    case "$1" in
+      Playing) echo ' ' ;;
+      *)       echo '󰎆 ' ;;
+    esac
+  }
+  _show "$(playerctl --player=spotify status 2>/dev/null)"
+  playerctl --player=spotify --follow status 2>/dev/null | while IFS= read -r s; do
+    _show "$s"
+  done
+"""
 tooltip = "{{playerctl metadata title 2>/dev/null}} — {{playerctl metadata artist 2>/dev/null}}"
 on_click_left = "playerctl play-pause"
 

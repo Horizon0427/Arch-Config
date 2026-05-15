@@ -51,10 +51,14 @@ Thanks to Hyprland's precise transparency-filtering capabilities, Waybar is them
 
 ### Ironbar - Better Liquid Glass
 
-I have migrated my status bar setup from Waybar to Ironbar. 
+**I have migrated my status bar setup from Waybar to Ironbar.**
+
 While Waybar served me well, Ironbar's underlying UI engine handles complex CSS significantly better. 
 This switch unlocked the ability to implement much richer, buttery-smooth animations, complex gradients, 
 and advanced shadow effects that just weren't feasible before.
+
+- **Toggle:** `./ironbar/scripts/toggle-ironbar.sh`
+- **Reload:** `./ironbar/scripts/reload-ironbar.sh`
 
 ### Matugen Color Palette
 
@@ -68,14 +72,8 @@ and advanced shadow effects that just weren't feasible before.
 ---
 
 ## Gallery
-<img width="3072" height="1920" alt="overview" src="https://github.com/user-attachments/assets/5327332d-8484-40c4-a992-350fcf7b4ec0" />
-waybar-bottom:
-<img width="3072" height="1920" alt="waybar-bottom" src="https://github.com/user-attachments/assets/54b4582a-edd0-497f-85ad-76a212c13337" />
 
-waybar-top:
-<img width="3072" height="1920" alt="waybar-top" src="https://github.com/user-attachments/assets/db03d546-50a1-426e-b4a4-6f8ec6bbe072" />
-
-
-https://github.com/user-attachments/assets/69db9834-f806-4be3-bcbe-072944caee68
-
-
+[overview](./showcase/overview.png)
+[matugen](./showcase/matugen.png)
+[hyprlock](./showcase/hyprlock.png)
+[showcase](./showcase/showcase.mp4)

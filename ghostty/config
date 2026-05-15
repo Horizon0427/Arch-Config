@@ -6,7 +6,7 @@ font-feature = "calt"
 background-opacity = 0.75
 window-decoration = false
 app-notifications = false
-custom-shader = cursor-effects/cursor_warp.glsl
+custom-shader = cursor-effects/warp.glsl
 custom-shader = shaders/bloom.glsl
 custom-shader-animation = always
 
