@@ -8,13 +8,13 @@
 }
 
 window {
-    background-color: alpha(#121318, 0.55);
+    background-color: alpha(#19120c, 0.55);
     background-image: none; 
 }
 
 button {
-    color: #e3e1e9;
-    background-color: alpha(#34343a, 0.78);
+    color: #efe0d5;
+    background-color: alpha(#3c332c, 0.78);
     background-repeat: no-repeat;
     background-position: center 30%;
     background-size: 28%;
@@ -23,15 +23,15 @@ button {
     margin: 130px 40px 230px 40px; 
     padding: 130px 20px 30px 20px;
     
-    border: 2px solid alpha(#e3e1e9, 0.15); 
+    border: 2px solid alpha(#efe0d5, 0.15); 
     border-radius: 36px;
     box-shadow: none; 
 }
 
 button:hover {
-    color: #1c2d61;
-    background-color: alpha(#b5c4ff, 0.95);
-    border: 2px solid #b5c4ff;
+    color: #4a2800;
+    background-color: alpha(#fdb975, 0.95);
+    border: 2px solid #fdb975;
     background-size: 30%; 
     
     margin: 112px 26px 212px 26px; 
@@ -41,7 +41,7 @@ button:hover {
 
 button:active {
     background-size: 28%;
-    background-color: alpha(#b5c4ff, 0.7); 
+    background-color: alpha(#fdb975, 0.7); 
     
     margin: 124px 36px 224px 36px; 
     padding: 136px 24px 36px 24px;
@@ -60,13 +60,13 @@ button:active {
 }
 
 #reboot:hover {
-    color: #432740;
-    background-color: alpha(#e3badb, 0.95);
-    border: 2px solid #e3badb;
+    color: #2b3410;
+    background-color: alpha(#c0cc9a, 0.95);
+    border: 2px solid #c0cc9a;
     box-shadow: none;
 }
 #reboot:active {
-    background-color: alpha(#e3badb, 0.7);
+    background-color: alpha(#c0cc9a, 0.7);
     box-shadow: none;
 }
 

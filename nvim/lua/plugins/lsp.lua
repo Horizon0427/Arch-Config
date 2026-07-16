@@ -5,7 +5,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "williamboman/mason.nvim" },
     opts = {
-      ensure_installed = { "lua_ls", "clangd", "pyright", "taplo" },
+      ensure_installed = { "lua_ls", "clangd", "pyright", "taplo", "texlab" },
       automatic_installation = false,
     },
   },
@@ -82,11 +82,23 @@ return {
 
       vim.lsp.config("taplo", {})
 
+      -- LaTeX: texlab drives completion (commands, \begin/\end environments,
+      -- labels, citations). vimtex still handles compilation + viewing, so we
+      -- turn texlab's own build off to avoid double-compiling.
+      vim.lsp.config("texlab", {
+        settings = {
+          texlab = {
+            build  = { onSave = false },
+            chktex = { onEdit = false, onOpenAndSave = false },
+          },
+        },
+      })
+
       -- Zig: uncomment + :MasonInstall zls to enable
       -- vim.lsp.config("zls", {})
       -- vim.lsp.enable("zls")
 
-      vim.lsp.enable({ "lua_ls", "clangd", "pyright", "taplo" })
+      vim.lsp.enable({ "lua_ls", "clangd", "pyright", "taplo", "texlab" })
     end,
   },
 

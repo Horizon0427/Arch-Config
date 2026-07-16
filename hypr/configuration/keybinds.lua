@@ -1,12 +1,12 @@
 local mainMod     = "SUPER"
 local terminal    = "ghostty"
 local fileManager = "thunar"
-local menu        = "rofi -show drun -theme ~/.config/rofi/launchers/type-7/style-2.rasi"
+local menu        = "walker"
 
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("google-chrome-stable"))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("flclash"))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("~/.config/custom_wall_paper/wallpicker"))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
@@ -29,6 +29,8 @@ hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("~/.config/hypr/scripts/scree
 
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left"  }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + H",     hl.dsp.focus({ direction = "left"  }))
+hl.bind(mainMod .. " + L",     hl.dsp.focus({ direction = "right"  }))
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up"    }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down"  }))
 
@@ -56,13 +58,9 @@ hl.bind(mainMod .. " + SHIFT + I", hl.dsp.layout("consume"))
 hl.bind(mainMod .. " + SHIFT + T", hl.dsp.layout("consume_or_expel prev"))
 hl.bind(mainMod .. " + M",         hl.dsp.layout("center"))
 
-hl.bind(mainMod .. " + T", hl.dsp.layout("rotatesplit"))
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + N", hl.dsp.layout("rotatesplit"))
 
---hl.bind(mainMod .. " + CTRL + left",  hl.dsp.exec_cmd("hyprctl dispatch moveintoorcreategroup l"))
---hl.bind(mainMod .. " + CTRL + right", hl.dsp.exec_cmd("hyprctl dispatch moveintoorcreategroup r"))
---hl.bind(mainMod .. " + CTRL + up",    hl.dsp.exec_cmd("hyprctl dispatch moveintoorcreategroup u"))
---hl.bind(mainMod .. " + CTRL + down",  hl.dsp.exec_cmd("hyprctl dispatch moveintoorcreategroup d"))
 hl.bind(mainMod .. " + CTRL + left",  hl.dsp.window.move({ into_or_create_group = "l" }))
 hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.move({ into_or_create_group = "r" }))
 hl.bind(mainMod .. " + CTRL + up",    hl.dsp.window.move({ into_or_create_group = "u" }))
@@ -75,7 +73,7 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 local el = { locked = true, repeating = true }
 local l  = { locked = true }
 
-hl.bind("XF86AudioRaiseVolume",  hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), el)
+hl.bind("XF86AudioRaiseVolume",  hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),  el)
 hl.bind("XF86AudioLowerVolume",  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),       el)
 hl.bind("XF86AudioMute",         hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),      el)
 hl.bind("XF86AudioMicMute",      hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),    el)

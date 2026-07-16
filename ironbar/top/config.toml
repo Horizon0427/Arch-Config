@@ -9,6 +9,43 @@ type = "workspaces"
 hidden = ["special:spotify"]
 
 
+[[start]]
+type = "label"
+name = "prev"
+label = "󰒮"
+show_if = "pgrep -x spotify"
+tooltip = "Previous"
+on_click_left = "playerctl previous"
+
+[[start]]
+type = "script"
+class = "play-pause"
+mode = "watch"
+show_if = "pgrep -x spotify"
+cmd = """
+  _show() {
+    case "$1" in
+      Playing) echo ' ' ;;
+      *)       echo '󰎆 ' ;;
+    esac
+  }
+  _show "$(playerctl --player=spotify status 2>/dev/null)"
+  playerctl --player=spotify --follow status 2>/dev/null | while IFS= read -r s; do
+    _show "$s"
+  done
+"""
+tooltip = "{{playerctl metadata title 2>/dev/null}} — {{playerctl metadata artist 2>/dev/null}}"
+on_click_left = "playerctl play-pause"
+
+[[start]]
+type = "label"
+name = "next"
+label = "󰒭"
+show_if = "pgrep -x spotify"
+tooltip = "Next"
+on_click_left = "playerctl next"
+
+
 
 [[center]]
 type = "script"
@@ -96,18 +133,21 @@ on_scroll_down = "brightnessctl -d amdgpu_bl1 set 5%-"
 type = "script"
 class = "clock"
 mode = "poll"
-interval = 1000
+interval = 500
 cmd = "date +'%H:%M'"
+tooltip = "{{date +'%Y-%m-%d %A'}}"
 
 
 [[center]]
 type = "script"
+name = "power-btn"
 class = "power-btn"
 mode = "watch"
 cmd = """
   t=$(grep '@define-color tertiary '  ~/.config/ironbar/colors.css | awk '{print $3}' | tr -d ';')
   e=$(grep '@define-color error '     ~/.config/ironbar/colors.css | awk '{print $3}' | tr -d ';')
   r=$(grep '@define-color primary '   ~/.config/ironbar/colors.css | awk '{print $3}' | tr -d ';')
+  last=""
   while true; do
     p=$(cat /sys/firmware/acpi/platform_profile 2>/dev/null)
     case "$p" in
@@ -115,7 +155,21 @@ cmd = """
       performance) echo "<span color='${e:-#ffb4ab}'></span>" ;;
       *)           echo "<span color='${r:-#81d5ce}'></span>" ;;
     esac
-    sleep 0.1
+    # Map the profile to a CSS class and tint the whole glass block to match
+    # the icon, via ironbar's runtime add/remove-class IPC. Only fire on change.
+    case "$p" in
+      balanced)    cls="profile-balanced" ;;
+      performance) cls="profile-performance" ;;
+      *)           cls="profile-powersaver" ;;
+    esac
+    if [ "$cls" != "$last" ]; then
+      ironbar style remove-class power-btn profile-balanced    >/dev/null 2>&1
+      ironbar style remove-class power-btn profile-performance >/dev/null 2>&1
+      ironbar style remove-class power-btn profile-powersaver  >/dev/null 2>&1
+      ironbar style add-class    power-btn "$cls"              >/dev/null 2>&1
+      last="$cls"
+    fi
+    sleep 0.2
   done
 """
 tooltip = "{{cat /sys/firmware/acpi/platform_profile 2>/dev/null}}"
@@ -124,10 +178,21 @@ on_click_left = "p=$(cat /sys/firmware/acpi/platform_profile 2>/dev/null); if [ 
 
 [[center]]
 type = "script"
-class = "network"
+class = "bluetooth"
 mode = "poll"
-interval = 10000
-cmd = "nmcli -t -f TYPE,STATE dev | grep -q '^wifi:connected' && echo '' || echo '󰖪'"
+interval = 3000
+cmd = """
+  if rfkill list bluetooth 2>/dev/null | grep -q 'Soft blocked: yes' \\
+     || ! bluetoothctl show 2>/dev/null | grep -q 'Powered: yes'; then
+    echo '󰂲'
+  elif bluetoothctl devices Connected 2>/dev/null | grep -q .; then
+    echo '󰂱'
+  else
+    echo '󰂯'
+  fi
+"""
+tooltip = "{{bluetoothctl devices Connected 2>/dev/null | sed 's/^Device [^ ]* //' | paste -sd ', ' - | grep . || echo 'No device connected'}}"
+on_click_left = "blueman-manager &"
 
 
 [[center]]
@@ -154,49 +219,12 @@ mode = "watch"
 cmd = "~/.config/ironbar/scripts/cava.sh"
 
 
-[[end]]
-type = "label"
-name = "prev"
-label = "󰒮"
-show_if = "pgrep -x spotify"
-tooltip = "Previous"
-on_click_left = "playerctl previous"
-
-[[end]]
-type = "script"
-class = "play-pause"
-mode = "watch"
-show_if = "pgrep -x spotify"
-cmd = """
-  _show() {
-    case "$1" in
-      Playing) echo ' ' ;;
-      *)       echo '󰎆 ' ;;
-    esac
-  }
-  _show "$(playerctl --player=spotify status 2>/dev/null)"
-  playerctl --player=spotify --follow status 2>/dev/null | while IFS= read -r s; do
-    _show "$s"
-  done
-"""
-tooltip = "{{playerctl metadata title 2>/dev/null}} — {{playerctl metadata artist 2>/dev/null}}"
-on_click_left = "playerctl play-pause"
-
-[[end]]
-type = "label"
-name = "next"
-label = "󰒭"
-show_if = "pgrep -x spotify"
-tooltip = "Next"
-on_click_left = "playerctl next"
-
-
 
 [[end]]
 type = "tray"
 icon_size = 18
-on_click_left = "menu"
-on_click_right = "activate"
+on_click_left = "activate"
+on_click_right = "menu"
 
 
 [[end]]

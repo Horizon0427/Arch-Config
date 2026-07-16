@@ -18,7 +18,7 @@
         "bar": {
             "char": {
                 "elapsed": "■",
-                "total": "□"
+                "total": "┄"
             },
             "width": 13
         },
@@ -32,143 +32,128 @@
 
         {
             "type": "custom",
-            "format": "\u001b[90m╭──────────────────────────── System ────────────────────────────"
+            "format": "\u001b[1;34m╭─ Hardware\u001b[0m"
         },
         {
             "type": "host",
-            "key": "│  Host       ",
-            "keyColor": "green",
-            "keyWidth": 16
-        },
-        {
-            "type": "os",
-            "key": "│ ├ OS       ",
-            "keyColor": "green",
-            "keyWidth": 16
+            "key": "\u001b[34m├─   Host\u001b[0m",
+            "keyColor": "blue",
+            "keyWidth": 18
         },
         {
             "type": "kernel",
-            "key": "│ ├ Kernel   ",
-            "keyColor": "green",
-            "keyWidth": 16
-        },
-        {
-            "type": "bios",
-            "key": "│ ├ BIOS     ",
-            "keyColor": "green",
-            "keyWidth": 16
-        },
-        {
-            "type": "de",
-            "key": "│ ├ DE       ",
-            "keyColor": "green",
-            "keyWidth": 16
-        },
-        {
-            "type": "wm",
-            "key": "│ ├󱂬 WM       ",
-            "keyColor": "green",
-            "keyWidth": 16
-        },
-        {
-            "type": "wmtheme",
-            "key": "│ └󰉼 Theme    ",
-            "keyColor": "green",
-            "keyWidth": 16
-        },
-        {
-            "type": "custom",
-            "format": "\u001b[90m╰───────────────────────────────────────────────────────────────┘"
-        },
-
-        "break",
-
-        {
-            "type": "custom",
-            "format": "\u001b[90m╭─────────────────────────── Hardware ──────────────────────────┐"
+            "key": "\u001b[34m├─   Kernel\u001b[0m",
+            "keyColor": "blue",
+            "keyWidth": 18
         },
         {
             "type": "cpu",
-            "key": "│  CPU      ",
+            "key": "\u001b[34m├─ 󰻠  CPU\u001b[0m",
             "keyColor": "blue",
-            "keyWidth": 16
+            "keyWidth": 18
         },
         {
             "type": "gpu",
-            "key": "│ ├ GPU       ",
+            "key": "\u001b[34m├─ 󰢮  GPU\u001b[0m",
             "keyColor": "blue",
-            "keyWidth": 16
+            "keyWidth": 18
         },
         {
             "type": "memory",
-            "key": "│ ├ Memory   ",
+            "key": "\u001b[34m├─   Memory\u001b[0m",
             "keyColor": "blue",
-            "keyWidth": 16
+            "keyWidth": 18
         },
         {
             "type": "disk",
-            "key": "│ └ Disk     ",
+            "key": "\u001b[34m╰─   Disk\u001b[0m",
+            "folders": "/",
             "keyColor": "blue",
-            "keyWidth": 16
+            "keyWidth": 18
         },
+        
+        "break",
+
         {
             "type": "custom",
-            "format": "\u001b[90m╰───────────────────────────────────────────────────────────────┘"
+            "format": "\u001b[1;32m╭─ Environment\u001b[0m"
+        },
+        {
+            "type": "os",
+            "key": "\u001b[32m├─   OS\u001b[0m",
+            "keyColor": "green",
+            "keyWidth": 18
+        },
+        {
+            "type": "wm",
+            "key": "\u001b[32m├─   WM\u001b[0m",
+            "keyColor": "green",
+            "keyWidth": 18
+        },
+        {
+            "type": "terminal",
+            "key": "\u001b[32m├─ 󰊠  Terminal\u001b[0m",
+            "keyColor": "green",
+            "keyWidth": 18
+        },
+        {
+            "type": "shell",
+            "key": "\u001b[32m├─ 󰈺  Shell\u001b[0m",
+            "keyColor": "green",
+            "keyWidth": 18
+        },
+        {
+            "type": "packages",
+            "key": "\u001b[32m├─ 󰏖  Packages\u001b[0m",
+            "keyColor": "green",
+            "keyWidth": 18
+        },
+        {
+            "type": "command",
+            "key": "\u001b[32m╰─   OS Age\u001b[0m",
+            "keyColor": "green",
+            "keyWidth": 18,
+            "text": "birth_install=$(stat -c %W /); current=$(date +%s); days_difference=$(((current - birth_install) / 86400)); echo $days_difference days"
         },
 
         "break",
 
         {
             "type": "custom",
-            "format": "\u001b[90m╭──────────────────────────── Session ──────────────────────────┐"
-        },
-        {
-            "type": "shell",
-            "key": "│  Shell    ",
-            "keyColor": "yellow",
-            "keyWidth": 16
-        },
-        {
-            "type": "terminal",
-            "key": "│ ├ Terminal ",
-            "keyColor": "yellow",
-            "keyWidth": 16
-        },
-        {
-            "type": "packages",
-            "key": "│ ├󰏖 Packages ",
-            "keyColor": "yellow",
-            "keyWidth": 16
-        },
-        {
-            "type": "command",
-            "key": "│ ├󰩹 OS Age   ",
-            "keyColor": "yellow",
-            "keyWidth": 16,
-            "text": "birth_install=$(stat -c %W /); current=$(date +%s); time_progression=$((current - birth_install)); days_difference=$((time_progression / 86400)); echo $days_difference days"
+            "format": "\u001b[1;33m╭─ Live Status\u001b[0m"
         },
         {
             "type": "uptime",
-            "key": "│ ├ Uptime   ",
+            "key": "\u001b[33m├─   Uptime\u001b[0m",
             "keyColor": "yellow",
-            "keyWidth": 16
+            "keyWidth": 18
         },
         {
-            "type": "datetime",
-            "key": "│ └󰃰 DateTime ",
+            "type": "battery",
+            "key": "\u001b[33m├─   Battery\u001b[0m",
             "keyColor": "yellow",
-            "keyWidth": 16
+            "keyWidth": 18
         },
         {
-            "type": "custom",
-            "format": "\u001b[90m╰───────────────────────────────────────────────────────────────"
+            "type": "wifi",
+            "key": "\u001b[33m├─   Wi-Fi\u001b[0m",
+            "keyColor": "yellow",
+            "keyWidth": 18,
+            "format": "{4}"
+        },
+        {
+            "type": "command",
+            "key": "\u001b[33m╰─ 󰎆  Media\u001b[0m",
+            "keyColor": "yellow",
+            "keyWidth": 18,
+            "text": "playerctl metadata --format '{{title}}' 2>/dev/null || echo 'none'"
         },
 
         "break",
 
         {
             "type": "colors",
-            "paddingLeft": 3,
+            "paddingLeft": 2,
             "symbol": "circle"
         }
     ]

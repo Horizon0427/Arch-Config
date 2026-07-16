@@ -1,5 +1,9 @@
 [config]
 
+[templates.waybar]
+input_path = '~/.config/matugen/templates/colors.css'
+output_path = '~/.config/waybar/colors.css'
+
 [templates.hyprland]
 input_path = '~/.config/matugen/templates/hyprland_colors.lua'
 output_path = '~/.config/hypr/configuration/colors.lua'
@@ -51,3 +55,7 @@ post_hook = 'bash ~/.config/matugen/scripts/reload-gtk.sh'
 [templates.ironbar]
 input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/ironbar/colors.css'
+
+[templates.walker]
+input_path = '~/.config/matugen/templates/walker-colors.css'
+output_path = '~/.config/walker/themes/minimal/colors.css'

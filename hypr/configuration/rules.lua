@@ -86,10 +86,36 @@ hl.window_rule({
 hl.window_rule({
   name   = "volume",
   match  = { class = "^(org.pulseaudio.pavucontrol)$" },
-  float  = true;
-  center = true;
-  size   = "800 600";
+  float  = true,
+  center = true,
+  size   = "800 600",
 })
+
+hl.window_rule({
+    name = "rename",
+    match = { class = "thunar", title = "^重命名.*" }, 
+    float = true,
+    center = true,
+    size = "500 200",
+})
+
+hl.window_rule({
+  name = "bluetooth",
+  match = { class = "^(blueman-manager)$"},
+  float = true,
+  center = true,
+  size = "750 500",
+})
+
+hl.window_rule({
+    name  = "float-sokoban",
+    match = { class = "^(Sokoban)$" },
+    float = true,
+    center = true,
+})
+
+
+
 
 
 
@@ -116,5 +142,12 @@ hl.layer_rule({
     name  = "Liquid_Glass_Ironbar",
     match = { namespace = "^(ironbar)$" },
     blur = true, 
+    ignore_alpha = 0.1,
+})
+
+hl.layer_rule({
+    name  = "Liquid_Glass_Walker",
+    match = { namespace = "^(walker)$" },
+    blur = true,
     ignore_alpha = 0.1,
 })

@@ -33,5 +33,5 @@ hl.animation({ leaf = "workspacesOut",    enabled = true, speed = 7, bezier = "e
 hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 7, bezier = "easeInOutCubic", style = "slidevert"     })
 
 
-hl.animation({ leaf = "layersIn",  enabled = true, speed = 8, bezier = "layerEase", style = "popin 60%" })
+hl.animation({ leaf = "layersIn",  enabled = true, speed = 2, bezier = "layerEase", style = "popin 60%" })
 hl.animation({ leaf = "layersOut", enabled = true, speed = 6, bezier = "layerEase", style = "popin 60%" })

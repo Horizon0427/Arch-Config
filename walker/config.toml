@@ -1,0 +1,30 @@
+theme = "minimal"
+
+hide_quick_activation = true
+hide_action_hints = true
+hide_return_action = true
+
+[columns]
+"desktopapplications" = 2
+
+[placeholders]
+"default" = { input = "Search", list = "" }
+
+[keybinds]
+close = ["Escape"]
+
+next = ["Down", "ctrl j"]
+previous = ["Up", "ctrl k"]
+left = ["Left", "ctrl h"]
+right = ["Right", "ctrl l"]
+down = ["Down", "ctrl j"]
+up = ["Up", "ctrl k"]
+quick_activate = []
+
+[providers]
+default = ["desktopapplications"]
+empty = ["desktopapplications"]
+ignore_preview = ["desktopapplications"]
+
+[providers.actions]
+fallback = []

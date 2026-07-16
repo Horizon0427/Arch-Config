@@ -1,0 +1,217 @@
+@import "colors.css";
+
+* {
+  all: unset;
+  font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", sans-serif;
+  font-size: 14px;
+}
+
+window,
+.window {
+  color: @on-surface;
+  background-color: transparent;
+}
+
+scrollbar {
+  opacity: 0;
+}
+
+.normal-icons {
+  -gtk-icon-size: 16px;
+}
+
+.large-icons,
+.item-image {
+  -gtk-icon-size: 32px;
+}
+
+.box-wrapper {
+  padding: 18px;
+  border-radius: 26px;
+  background-color: alpha(@surface-container, 0.46);
+  background-image: linear-gradient(
+    135deg,
+    alpha(@primary, 0.12) 0%,
+    alpha(@secondary, 0.06) 50%,
+    alpha(@tertiary, 0.12) 100%
+  );
+  outline: 1px solid alpha(@outline, 0.34);
+  outline-offset: -1px;
+  transform: scale(1);
+  transform-origin: center;
+  box-shadow:
+    inset 1px 1px 0 alpha(@on-surface, 0.14),
+    inset -1px -1px 0 alpha(@outline-variant, 0.24),
+    0 18px 48px alpha(@shadow, 0.34);
+}
+
+.search-container {
+  border-radius: 16px;
+}
+
+.input {
+  min-height: 28px;
+  padding: 11px 15px;
+  color: @on-surface;
+  caret-color: @primary;
+  background-color: alpha(@surface-container-high, 0.42);
+  background-image: linear-gradient(
+    135deg,
+    alpha(@primary, 0.10),
+    alpha(@tertiary, 0.07)
+  );
+  border-radius: 16px;
+  outline: 1px solid alpha(@outline, 0.30);
+  outline-offset: -1px;
+  box-shadow:
+    inset 1px 1px 0 alpha(@on-surface, 0.10),
+    inset -1px -1px 0 alpha(@outline-variant, 0.18);
+  transition:
+    outline-color 250ms ease,
+    box-shadow 250ms ease;
+}
+
+.input:focus,
+.input:active {
+  outline-color: alpha(@primary, 0.68);
+  box-shadow:
+    inset 1px 1px 0 alpha(@primary, 0.28),
+    inset -1px -1px 0 alpha(@tertiary, 0.20),
+    0 0 12px alpha(@primary, 0.12);
+}
+
+.input placeholder {
+  color: alpha(@on-surface-variant, 0.68);
+}
+
+.input selection {
+  color: @on-primary;
+  background-color: alpha(@primary, 0.78);
+}
+
+.content-container,
+.scroll,
+.list {
+  background-color: transparent;
+}
+
+.list {
+  padding: 2px;
+  color: @on-surface;
+}
+
+.list > child {
+  background-color: transparent;
+}
+
+.item-box {
+  min-height: 44px;
+  margin: 5px;
+  padding: 11px 12px;
+  color: @on-surface;
+  background-color: alpha(@surface-container, 0.20);
+  background-image: linear-gradient(
+    135deg,
+    alpha(@primary, 0.30) 0%,
+    alpha(@surface-variant, 0.10) 25%,
+    alpha(@tertiary, 0.30) 50%,
+    alpha(@surface-variant, 0.10) 75%,
+    alpha(@primary, 0.30) 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 300% 300%;
+  background-position: 0% 0%;
+  border-radius: 16px;
+  outline: 1px solid alpha(@on-surface, 0.10);
+  outline-offset: -1px;
+  transform: scale(1);
+  transform-origin: center;
+  box-shadow:
+    inset 1.5px 1.5px 1px alpha(@primary, 0.42),
+    inset -1.5px -1.5px 1px alpha(@tertiary, 0.34),
+    0 2px 7px alpha(@shadow, 0.24);
+  transition:
+    background-position 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    outline-color 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 420ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 300ms ease;
+}
+
+.list > child:hover .item-box,
+.list > child:selected .item-box {
+  color: @tertiary;
+  background-position: 100% 100%;
+  outline-color: alpha(@tertiary, 0.48);
+  transform: scale(1.025);
+  box-shadow:
+    inset 1.5px 1.5px 1px alpha(@tertiary, 0.62),
+    inset -1.5px -1.5px 1px alpha(@primary, 0.58),
+    0 4px 12px alpha(@shadow, 0.28),
+    0 0 10px alpha(@primary, 0.14),
+    0 0 10px alpha(@tertiary, 0.14);
+  transition:
+    background-position 300ms cubic-bezier(0.2, 0, 0, 1),
+    outline-color 300ms cubic-bezier(0.2, 0, 0, 1),
+    box-shadow 300ms cubic-bezier(0.2, 0, 0, 1),
+    transform 240ms cubic-bezier(0.2, 0, 0, 1),
+    color 300ms ease;
+}
+
+.list > child:active .item-box {
+  background-position: 75% 75%;
+  transform: scale(0.985);
+  box-shadow:
+    inset 0 3px 6px alpha(@shadow, 0.28),
+    inset 0 -1px 0 alpha(@on-surface, 0.10),
+    0 1px 3px alpha(@shadow, 0.18);
+  transition:
+    background-position 100ms ease,
+    box-shadow 100ms ease,
+    transform 100ms ease;
+}
+
+.item-text {
+  font-weight: 600;
+}
+
+.item-subtext {
+  color: @on-surface-variant;
+  font-size: 12px;
+  opacity: 0.72;
+}
+
+.list > child:hover .item-text,
+.list > child:selected .item-text {
+  text-shadow: 0 0 8px alpha(@tertiary, 0.36);
+}
+
+.list > child:hover .item-subtext,
+.list > child:selected .item-subtext {
+  color: @on-surface;
+  opacity: 0.88;
+}
+
+.item-image,
+.item-image-text {
+  margin-right: 8px;
+}
+
+.item-image-text {
+  font-size: 28px;
+}
+
+.placeholder,
+.elephant-hint {
+  color: @on-surface-variant;
+  opacity: 0.64;
+}
+
+.error {
+  padding: 10px;
+  color: @on-error-container;
+  background-color: alpha(@error-container, 0.82);
+  border-radius: 12px;
+  outline: 1px solid alpha(@error, 0.54);
+  outline-offset: -1px;
+}

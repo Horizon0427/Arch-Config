@@ -60,6 +60,11 @@ and advanced shadow effects that just weren't feasible before.
 - **Toggle:** `./ironbar/scripts/toggle-ironbar.sh`
 - **Reload:** `./ironbar/scripts/reload-ironbar.sh`
 
+### Walker - Same as Ironbar
+
+**GTK4 is DOPE.**
+
+
 ### Matugen Color Palette
 
 [Matugen](https://github.com/InioX/matugen) extracts a Material You color palette from the current wallpaper and propagates it across the system:
@@ -76,4 +81,6 @@ and advanced shadow effects that just weren't feasible before.
 ![overview](./showcase/overview.png)
 ![matugen](./showcase/matugen.png)
 ![hyprlock](./showcase/hyprlock.png)
-![showcase](./showcase/showcase_compressed.mp4)
+![ironbar](./showcase/ironbar-bottom.png)
+![ironbar](./showcase/ironbar-top.png)
+![walker](./showcase/walker.png)

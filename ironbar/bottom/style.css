@@ -16,8 +16,8 @@ window {
     color: @on-surface;
 }
 
-.network, .volume, .brightness, .custom-battery, .clock, 
-.power-btn, .cava, .longshot, .workspaces .item, 
+.bluetooth, .volume, .brightness, .custom-battery, .clock,
+.cava, .longshot, .workspaces .item,
 #prev, .play-pause, #next, .tray, #power {
     margin: 3px 3px;
     border-radius: 10px;
@@ -48,8 +48,8 @@ window {
         color 0.3s ease;
 }
 
-.network:hover, .volume:hover, .brightness:hover, .custom-battery:hover, .clock:hover,
-.cava:hover, .longshot:hover, .power-btn:hover, .workspaces .item:hover, 
+.bluetooth:hover, .volume:hover, .brightness:hover, .custom-battery:hover, .clock:hover,
+.cava:hover, .longshot:hover, .workspaces .item:hover,
 #prev:hover, .play-pause:hover, #next:hover, #power:hover {
     color: @tertiary;
     background-position: 100% 100%;
@@ -70,8 +70,8 @@ window {
         color 0.3s ease;
 }
 
-.network:active, .volume:active, .brightness:active, .custom-battery:active, .clock:active,
-.cava:active, .longshot:active, .power-btn:active, .workspaces .item:active, 
+.bluetooth:active, .volume:active, .brightness:active, .custom-battery:active, .clock:active,
+.cava:active, .longshot:active, .workspaces .item:active,
 #prev:active, .play-pause:active, #next:active, #power:active {
     background:
         linear-gradient(180deg,
@@ -97,12 +97,12 @@ window {
         background 0.10s ease;
 }
 
-.network        { padding: 0 20px 0 14px; color: @primary; }
-.custom-battery { padding: 0 10px 0 6px; color: @primary; min-width: 55px; }
+.bluetooth      { padding: 0 15px; color: @primary; font-size: 18px; }
+.custom-battery { padding: 0 16px 0 10px; color: @primary; }
 .clock          { padding: 0 10px;        color: @primary; font-weight: bold; }
 .volume         { padding: 0 12px;        color: @primary; }
-.longshot       { padding: 0 16px 0 12px; color: @primary; }
-.brightness     { padding: 0 15px; color: @primary; }
+.longshot       { padding: 0 16px 0 12px; color: @primary; font-size: 16px; }
+.brightness     { padding: 0 15px;        color: @primary; font-size: 16px; }
 .cava           { padding: 0 20px;        color: @primary; font-weight: bold; letter-spacing: -1px; }
 
 .workspaces {
@@ -176,19 +176,130 @@ window {
 .tray button:active { transform: scale(0.90); }
 
 .power-btn {
+    margin: 3px 3px;
     padding: 0 28px 0 25px;
+    border-radius: 10px;
     font-size: 17px;
+
+    background-size: 300% 300%;
+    background-position: 0% 0%;
+    background-image: linear-gradient(135deg,
+        alpha(@primary, 0.30) 0%,
+        alpha(@surface-variant, 0.10) 25%,
+        alpha(@tertiary, 0.30) 50%,
+        alpha(@surface-variant, 0.10) 75%,
+        alpha(@primary, 0.30) 100%
+    );
+
+    outline: 1px solid rgba(255, 255, 255, 0.10);
+    outline-offset: -1px;
+    box-shadow:
+        inset 1.5px 1.5px 1px alpha(@primary, 0.45),
+        inset -1.5px -1.5px 1px alpha(@tertiary, 0.35),
+        0 2px 6px rgba(0, 0, 0, 0.25);
+
+    transition:
+        background-position 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        background-image 0.3s ease,
+        box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+        color 0.3s ease;
+}
+
+.power-btn.profile-balanced {
+    background-image: linear-gradient(135deg,
+        alpha(@tertiary, 0.34) 0%,
+        alpha(@surface-variant, 0.10) 25%,
+        alpha(@tertiary, 0.22) 50%,
+        alpha(@surface-variant, 0.10) 75%,
+        alpha(@tertiary, 0.34) 100%
+    );
+    box-shadow:
+        inset 1.5px 1.5px 1px alpha(@tertiary, 0.50),
+        inset -1.5px -1.5px 1px alpha(@tertiary, 0.30),
+        0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.power-btn.profile-performance {
+    background-image: linear-gradient(135deg,
+        alpha(@error, 0.34) 0%,
+        alpha(@surface-variant, 0.10) 25%,
+        alpha(@error, 0.22) 50%,
+        alpha(@surface-variant, 0.10) 75%,
+        alpha(@error, 0.34) 100%
+    );
+    box-shadow:
+        inset 1.5px 1.5px 1px alpha(@error, 0.50),
+        inset -1.5px -1.5px 1px alpha(@error, 0.30),
+        0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.power-btn.profile-powersaver {
+    background-image: linear-gradient(135deg,
+        alpha(@primary, 0.34) 0%,
+        alpha(@surface-variant, 0.10) 25%,
+        alpha(@primary, 0.22) 50%,
+        alpha(@surface-variant, 0.10) 75%,
+        alpha(@primary, 0.34) 100%
+    );
+    box-shadow:
+        inset 1.5px 1.5px 1px alpha(@primary, 0.50),
+        inset -1.5px -1.5px 1px alpha(@primary, 0.30),
+        0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 .power-btn:hover {
+    background-position: 100% 100%;
+    transform: scale(1.1) translateY(1px);
+}
+
+.power-btn.profile-balanced:hover {
     box-shadow:
         inset 1.5px 1.5px 1px alpha(@tertiary, 0.65),
-        inset -1.5px -1.5px 1px alpha(@primary, 0.65),
+        inset -1.5px -1.5px 1px alpha(@tertiary, 0.45),
         0 4px 10px rgba(0, 0, 0, 0.28),
-        0 0 10px alpha(@error, 0.18),
-        0 0 10px alpha(@primary, 0.20),
-        0 0 10px alpha(@tertiary, 0.22);
+        0 0 12px alpha(@tertiary, 0.30);
     text-shadow: 0 0 8px alpha(@tertiary, 0.55);
+}
+
+.power-btn.profile-performance:hover {
+    box-shadow:
+        inset 1.5px 1.5px 1px alpha(@error, 0.65),
+        inset -1.5px -1.5px 1px alpha(@error, 0.45),
+        0 4px 10px rgba(0, 0, 0, 0.28),
+        0 0 12px alpha(@error, 0.30);
+    text-shadow: 0 0 8px alpha(@error, 0.55);
+}
+
+.power-btn.profile-powersaver:hover {
+    box-shadow:
+        inset 1.5px 1.5px 1px alpha(@primary, 0.65),
+        inset -1.5px -1.5px 1px alpha(@primary, 0.45),
+        0 4px 10px rgba(0, 0, 0, 0.28),
+        0 0 12px alpha(@primary, 0.30);
+    text-shadow: 0 0 8px alpha(@primary, 0.55);
+}
+
+.power-btn:active {
+    background:
+        linear-gradient(180deg,
+            rgba(0, 0, 0, 0.08) 0%,
+            rgba(0, 0, 0, 0.00) 40%),
+        linear-gradient(135deg,
+            alpha(@surface-variant, 0.40) 0%,
+            alpha(@surface-variant, 0.18) 50%,
+            alpha(@surface-variant, 0.28) 100%);
+    box-shadow:
+        inset 0 3px 5px rgba(0, 0, 0, 0.22),
+        inset 0 1px 2px rgba(0, 0, 0, 0.18),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+        0 1px 3px rgba(0, 0, 0, 0.10);
+    text-shadow: none;
+    transform: scale(0.93) translateY(1.5px);
+    transition:
+        transform  0.10s cubic-bezier(0.25, 1, 0.35, 1),
+        box-shadow 0.10s ease,
+        background 0.10s ease;
 }
 
 #power {
