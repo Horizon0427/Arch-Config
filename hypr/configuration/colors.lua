@@ -1,5 +1,5 @@
 return {
-        primary   = "rgb(fdb975)",
-        secondary = "rgb(e1c1a4)",
-        inactive  = "rgb(c0cc9a)",
+        primary   = "rgb(b0c6ff)",
+        secondary = "rgb(c0c6dc)",
+        inactive  = "rgb(e0bbdd)",
 }

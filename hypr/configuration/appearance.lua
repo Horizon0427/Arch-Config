@@ -52,6 +52,7 @@ hl.config({
             render_power = 3,
             color        = colors.primary,
         },
+        
     },
 
     dwindle = {
