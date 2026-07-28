@@ -1,0 +1,106 @@
+set selection-clipboard       clipboard
+set database                  sqlite
+set filemonitor               glib
+set continuous-hist-save      true
+set incremental-search        true
+set abort-clear-search        true
+set jumplist-size             2000
+
+set adjust-open               best-fit
+set page-mode                 none
+set pages-per-row             1
+set first-page-column         1:2
+set advance-pages-per-row     true
+set page-h-padding            8
+set page-v-padding            8
+set scroll-step               40
+set zoom-step                 10
+set zoom-min                  10
+set zoom-max                  1000
+
+set guioptions                s
+set statusbar-h-padding       8
+set statusbar-v-padding       3
+set font                      "SauceCodePro Nerd Font Mono normal 10"
+
+set default-bg                "#1a1b26"
+set default-fg                "#c0caf5"
+
+set statusbar-bg              "#16161e"
+set statusbar-fg              "#c0caf5"
+set inputbar-bg               "#16161e"
+set inputbar-fg               "#7aa2f7"
+
+set completion-bg             "#1f2335"
+set completion-fg             "#c0caf5"
+set completion-group-bg       "#16161e"
+set completion-group-fg       "#7dcfff"
+set completion-highlight-bg   "#7aa2f7"
+set completion-highlight-fg   "#1a1b26"
+
+set notification-bg           "#1f2335"
+set notification-fg           "#c0caf5"
+set notification-warning-bg   "#e0af68"
+set notification-warning-fg   "#1a1b26"
+set notification-error-bg     "#f7768e"
+set notification-error-fg     "#1a1b26"
+
+set index-bg                  "#1a1b26"
+set index-fg                  "#c0caf5"
+set index-active-bg           "#7aa2f7"
+set index-active-fg           "#1a1b26"
+
+set highlight-color           "rgba(224,175,104,0.35)"
+set highlight-active-color    "rgba(122,162,247,0.55)"
+set highlight-fg              "#1a1b26"
+
+set render-loading-bg         "#1a1b26"
+set render-loading-fg         "#7aa2f7"
+
+set recolor                   false
+set recolor-lightcolor        "#1a1b26"
+set recolor-darkcolor         "#c0caf5"
+set recolor-reverse-video     true
+set recolor-keephue           true
+
+map j              scroll down
+map k              scroll up
+map h              scroll left
+map l              scroll right
+map <C-d>          scroll half-down
+map <C-u>          scroll half-up
+map <C-f>          scroll full-down
+map <C-b>          scroll full-up
+map gg             goto top
+map G              goto bottom
+
+map J              navigate next
+map K              navigate previous
+map <PageUp>       navigate previous
+map <PageDown>     navigate next
+
+map n              search forward
+map N              search backward
+map <C-o>          jumplist backward
+map <C-i>          jumplist forward
+map <Esc>          abort
+
+map +              zoom in
+map -              zoom out
+map =              zoom in
+map 0              adjust_window best-fit
+map w              adjust_window width
+map i              recolor
+map f              toggle_fullscreen
+map [fullscreen] f toggle_fullscreen
+map <Tab>          toggle_index
+map d              toggle_page_mode
+map c              cycle_first_column
+map s              toggle_statusbar
+map R              rotate rotate-cw
+
+map r              reload
+map o              file_chooser
+map y              copy_filepath
+map p              print
+map q              quit
