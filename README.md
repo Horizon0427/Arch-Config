@@ -78,9 +78,4 @@ and advanced shadow effects that just weren't feasible before.
 
 ## Gallery
 
-![overview](./showcase/overview.png)
-![matugen](./showcase/matugen.png)
-![hyprlock](./showcase/hyprlock.png)
-![ironbar](./showcase/ironbar-bottom.png)
-![ironbar](./showcase/ironbar-top.png)
-![walker](./showcase/walker.png)
+i will do it tomorrow.
