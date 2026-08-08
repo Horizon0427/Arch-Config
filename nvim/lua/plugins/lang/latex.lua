@@ -6,12 +6,15 @@ return {
     init = function()
       vim.g.vimtex_view_method = "zathura"
 
+      vim.g.vimtex_compiler_latexmk_engines = {
+        _ = "-xelatex",
+      }
+
       vim.g.vimtex_compiler_latexmk = {
         build_dir  = "",
         continuous = 1,
         executable = "latexmk",
         options    = {
-          "-xelatex",
           "-verbose",
           "-file-line-error",
           "-synctex=1",

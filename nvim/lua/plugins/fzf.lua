@@ -17,9 +17,7 @@ return {
         border  = "rounded",
         preview = { border = "border" },
       },
-      -- j/k navigate the results list.
       -- Trade-off: j/k can no longer be typed in the query box;
-      -- use other characters to filter, or arrows as fallback.
       keymap = {
         fzf = {
           ["j"]       = "down",

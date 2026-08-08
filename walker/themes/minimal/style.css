@@ -2,7 +2,7 @@
 
 * {
   all: unset;
-  font-family: "SauceCodePro Nerd Font Propo", "Symbols Nerd Font", sans-serif;
+  font-family: "Anthropic Serif Text", "SauceCodePro Nerd Font Propo", "Symbols Nerd Font", "Noto Sans Mono CJK SC", serif;
   font-size: 14px;
 }
 

@@ -39,8 +39,8 @@ hl.config({
         },
         blur = {
             enabled           = true,
-            size              = 7,
-            passes            = 3,
+            size              = 3,
+            passes            = 4,
             vibrancy          = 0.1696,
             new_optimizations = true,
             popups            = true,
@@ -74,5 +74,13 @@ hl.config({
     misc = {
         force_default_wallpaper = -1,
         disable_hyprland_logo   = false,
+    },
+
+    cursor = {
+        no_hardware_cursors = false,
+    },
+
+    render = {
+        direct_scanout = 1,
     },
 })

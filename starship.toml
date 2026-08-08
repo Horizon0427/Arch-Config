@@ -11,12 +11,12 @@ $directory\
 [](fg:yellow bg:blue)\
 $git_branch\
 $git_status\
-[](fg:blue bg:black)\
+[](fg:blue bg:cyan)\
 $nodejs\
 $rust\
 $golang\
 $php\
-[](fg:black bg:black)\
+[](fg:cyan bg:black)\
 $time\
 [ ](fg:black)\
 \n$character"""

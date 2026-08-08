@@ -5,7 +5,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "williamboman/mason.nvim" },
     opts = {
-      ensure_installed = { "lua_ls", "clangd", "pyright", "taplo", "texlab" },
+      ensure_installed = { "lua_ls", "taplo", "texlab" },
       automatic_installation = false,
     },
   },
@@ -14,18 +14,15 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = { "williamboman/mason-lspconfig.nvim", "folke/lazydev.nvim" },
     config = function()
-      -- Use LspAttach instead of per-server on_attach
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
           local bufnr = args.buf
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if not client then return end
 
-          -- Inlay hints off (no parameter-name annotations inside calls)
           if vim.lsp.inlay_hint then
             vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
           end
-          -- Let conform.nvim handle formatting
           client.server_capabilities.documentFormattingProvider = false
           client.server_capabilities.documentRangeFormattingProvider = false
 
@@ -46,7 +43,6 @@ return {
         end,
       })
 
-      -- Configure servers with the new vim.lsp.config API (nvim 0.11+)
       vim.lsp.config("lua_ls", {
         settings = {
           Lua = {
@@ -82,9 +78,6 @@ return {
 
       vim.lsp.config("taplo", {})
 
-      -- LaTeX: texlab drives completion (commands, \begin/\end environments,
-      -- labels, citations). vimtex still handles compilation + viewing, so we
-      -- turn texlab's own build off to avoid double-compiling.
       vim.lsp.config("texlab", {
         settings = {
           texlab = {
@@ -94,9 +87,6 @@ return {
         },
       })
 
-      -- Zig: uncomment + :MasonInstall zls to enable
-      -- vim.lsp.config("zls", {})
-      -- vim.lsp.enable("zls")
 
       vim.lsp.enable({ "lua_ls", "clangd", "pyright", "taplo", "texlab" })
     end,

@@ -84,6 +84,10 @@ CAVACONF
             bg_pid=""
             echo "$idle_output"
         fi
-        timeout 5s pactl subscribe 2>/dev/null | grep --line-buffered "sink-input" | head -n 1 >/dev/null
+        # Keep the wait in Ironbar's process group so a hard restart cannot
+        # leave a short-lived orphaned subscriber behind.
+        timeout --foreground 5s pactl subscribe 2>/dev/null \
+            | grep --line-buffered "sink-input" \
+            | head -n 1 >/dev/null
     fi
 done

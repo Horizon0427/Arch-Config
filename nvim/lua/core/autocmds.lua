@@ -2,7 +2,6 @@ local augroup = function(name)
   return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
--- Highlight yanked region briefly
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup("highlight_yank"),
   callback = function()
@@ -10,13 +9,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
--- Equalise splits when the terminal is resized
 vim.api.nvim_create_autocmd("VimResized", {
   group = augroup("resize_splits"),
   callback = function() vim.cmd("tabdo wincmd =") end,
 })
 
--- 2-space indent for common config/markup filetypes
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("filetype_indent"),
   pattern = { "lua", "json", "jsonc", "css", "toml", "yaml", "markdown", "html" },
@@ -26,9 +23,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Markdown: quick bold / italic helpers (localleader = "\")
---   <localleader>b  bold the word under cursor / wrap the visual selection
---   <localleader>i  italic the word under cursor / wrap the visual selection
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("markdown_emphasis"),
   pattern = "markdown",
@@ -45,7 +39,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Close certain utility windows with just q
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("close_with_q"),
   pattern = { "help", "man", "qf", "checkhealth", "lspinfo" },
@@ -54,7 +47,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Hide crosshair in insert mode; restore on leaving
 local crosshair = augroup("crosshair")
 vim.api.nvim_create_autocmd("InsertEnter", {
   group = crosshair,
@@ -71,54 +63,111 @@ vim.api.nvim_create_autocmd("InsertLeave", {
   end,
 })
 
--- fcitx5: Chinese IME active only in Insert mode; state is saved/restored
--- so re-entering Insert mode resumes the same IME state as when you left.
 if vim.fn.executable("fcitx5-remote") == 1 then
   local fcitx5 = augroup("fcitx5")
-  -- 1 = inactive (ASCII), 2 = active (Chinese)
-  local saved_im = 1
 
-  local function im_off()
-    vim.fn.system("fcitx5-remote -c")
+  local INACTIVE, ACTIVE = 1, 2 -- fcitx5-remote 的状态码：1=英文/未激活 2=中文
+  local FLAG = (vim.env.XDG_RUNTIME_DIR or "/tmp") .. "/nvim-jk-escape"
+  local saved_insert = INACTIVE
+  local saved_cmdline = {} -- 按命令行类型（: / ? 等）分别记忆
+
+  local function im_state()
+    local ok, res = pcall(function()
+      return vim.system({ "fcitx5-remote" }, { text = true }):wait(300)
+    end)
+    if not ok then
+      return INACTIVE
+    end
+    return tonumber(((res.stdout or ""):match("%d+"))) or INACTIVE
   end
 
-  local function im_save_and_off()
-    saved_im = tonumber(vim.fn.system("fcitx5-remote")) or 1
-    im_off()
+  local function im_set(state)
+    pcall(vim.system, { "fcitx5-remote", state == ACTIVE and "-o" or "-c" })
   end
 
-  local function im_restore()
-    if saved_im == 2 then
-      vim.fn.system("fcitx5-remote -o")
+  local function mark_insert(on)
+    if on then
+      local f = io.open(FLAG, "w")
+      if f then
+        f:write(tostring(vim.fn.getpid()))
+        f:close()
+      end
+    else
+      os.remove(FLAG)
     end
   end
 
-  -- Restore IME state on entering Insert (e.g. was Chinese before last <Esc>)
   vim.api.nvim_create_autocmd("InsertEnter", {
     group = fcitx5,
-    callback = im_restore,
+    callback = function()
+      mark_insert(true)
+      if saved_insert == ACTIVE then
+        im_set(ACTIVE)
+      end
+    end,
   })
 
-  -- Save state then switch to ASCII; covers i→n and command mode exit
-  vim.api.nvim_create_autocmd({ "InsertLeave", "CmdlineLeave" }, {
+  vim.api.nvim_create_autocmd("InsertLeave", {
     group = fcitx5,
-    callback = im_save_and_off,
+    callback = function()
+      mark_insert(false)
+      saved_insert = im_state()
+      if saved_insert == ACTIVE then
+        im_set(INACTIVE)
+      end
+    end,
   })
 
-  -- Belt-and-suspenders: kill IME on any path into normal/operator/select
-  vim.api.nvim_create_autocmd("ModeChanged", {
+  vim.api.nvim_create_autocmd("CmdlineEnter", {
     group = fcitx5,
-    pattern = { "*:n", "*:no", "*:ns" },
-    callback = im_off,
+    callback = function(ev)
+      if saved_cmdline[ev.file] == ACTIVE then
+        im_set(ACTIVE)
+      end
+    end,
   })
 
-  -- Override the plain jk → <Esc> keymap so it also disables Chinese IME.
-  -- Pressing jk in Chinese mode switches to ASCII then exits Insert mode.
-  -- (Requires the terminal to forward keystrokes through fcitx5 preedit;
-  --  if fcitx5 holds `j` in preedit, use <Esc> which cancels preedit first.)
-  local esc = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
-  vim.keymap.set("i", "jk", function()
-    vim.fn.system("fcitx5-remote -c")
-    vim.api.nvim_feedkeys(esc, "n", false)
-  end, { silent = true, desc = "Exit insert + disable IME" })
+  vim.api.nvim_create_autocmd("CmdlineLeave", {
+    group = fcitx5,
+    callback = function(ev)
+      saved_cmdline[ev.file] = im_state()
+      if saved_cmdline[ev.file] == ACTIVE then
+        im_set(INACTIVE)
+      end
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("FocusLost", {
+    group = fcitx5,
+    callback = function()
+      mark_insert(false)
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("FocusGained", {
+    group = fcitx5,
+    callback = function()
+      if vim.fn.mode():sub(1, 1) == "i" then
+        mark_insert(true)
+      end
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("VimEnter", {
+    group = fcitx5,
+    callback = function()
+      mark_insert(false)
+      im_set(INACTIVE)
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("VimLeavePre", {
+    group = fcitx5,
+    callback = function()
+      mark_insert(false)
+      pcall(function()
+        vim.system({ "fcitx5-remote", "-c" }):wait(300)
+      end)
+    end,
+  })
 end

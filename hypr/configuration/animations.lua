@@ -14,7 +14,7 @@ hl.animation({ leaf = "windowsMove", enabled = true, speed = 10, bezier = "easeO
 
 
 hl.animation({ leaf = "border",      enabled = true, speed = 4,  bezier = "quickSnap"                   })
-hl.animation({ leaf = "borderangle", enabled = true, speed = 30, bezier = "linear",    style = "loop"   })
+hl.animation({ leaf = "borderangle", enabled = false, speed = 30, bezier = "linear",    style = "loop"   })
 
 
 hl.animation({ leaf = "fade",       enabled = true, speed = 4, bezier = "layerEase" })
@@ -23,6 +23,9 @@ hl.animation({ leaf = "fadeOut",    enabled = true, speed = 4, bezier = "layerEa
 hl.animation({ leaf = "fadeSwitch", enabled = true, speed = 4, bezier = "layerEase" })
 hl.animation({ leaf = "fadeShadow", enabled = true, speed = 4, bezier = "layerEase" })
 hl.animation({ leaf = "fadeDim",    enabled = true, speed = 4, bezier = "layerEase" })
+
+hl.animation({ leaf = "fadeLayersIn",  enabled = true, speed = 4, bezier = "layerEase" })
+hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 4, bezier = "layerEase" })
 
 
 hl.animation({ leaf = "fadePopups", enabled = true, speed = 3, bezier = "layerEase" })

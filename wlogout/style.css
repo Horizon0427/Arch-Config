@@ -8,13 +8,13 @@
 }
 
 window {
-    background-color: alpha(#121318, 0.55);
+    background-color: alpha(#0e1514, 0.55);
     background-image: none; 
 }
 
 button {
-    color: #e2e2e9;
-    background-color: alpha(#33343a, 0.78);
+    color: #dde4e2;
+    background-color: alpha(#2f3635, 0.78);
     background-repeat: no-repeat;
     background-position: center 30%;
     background-size: 28%;
@@ -23,15 +23,15 @@ button {
     margin: 130px 40px 230px 40px; 
     padding: 130px 20px 30px 20px;
     
-    border: 2px solid alpha(#e2e2e9, 0.15); 
+    border: 2px solid alpha(#dde4e2, 0.15); 
     border-radius: 36px;
     box-shadow: none; 
 }
 
 button:hover {
-    color: #152e60;
-    background-color: alpha(#b0c6ff, 0.95);
-    border: 2px solid #b0c6ff;
+    color: #003734;
+    background-color: alpha(#81d5ce, 0.95);
+    border: 2px solid #81d5ce;
     background-size: 30%; 
     
     margin: 112px 26px 212px 26px; 
@@ -41,7 +41,7 @@ button:hover {
 
 button:active {
     background-size: 28%;
-    background-color: alpha(#b0c6ff, 0.7); 
+    background-color: alpha(#81d5ce, 0.7); 
     
     margin: 124px 36px 224px 36px; 
     padding: 136px 24px 36px 24px;
@@ -60,13 +60,13 @@ button:active {
 }
 
 #reboot:hover {
-    color: #412742;
-    background-color: alpha(#e0bbdd, 0.95);
-    border: 2px solid #e0bbdd;
+    color: #19324a;
+    background-color: alpha(#b0c9e7, 0.95);
+    border: 2px solid #b0c9e7;
     box-shadow: none;
 }
 #reboot:active {
-    background-color: alpha(#e0bbdd, 0.7);
+    background-color: alpha(#b0c9e7, 0.7);
     box-shadow: none;
 }
 

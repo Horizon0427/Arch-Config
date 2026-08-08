@@ -15,6 +15,7 @@ require("lazy").setup({
 }, {
   defaults = { lazy = false },
   install = { colorscheme = { "tokyonight" } },
+  rocks = { enabled = false },
   checker = { enabled = false },
   change_detection = { enabled = false },
   performance = {

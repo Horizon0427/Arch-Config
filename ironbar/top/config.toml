@@ -2,6 +2,7 @@ position = "top"
 height = 24
 margin_top = 4
 margin_bottom = 4
+ironvar_defaults.spotify_running = "false"
 
 
 [[start]]
@@ -13,37 +14,26 @@ hidden = ["special:spotify"]
 type = "label"
 name = "prev"
 label = "󰒮"
-show_if = "pgrep -x spotify"
+show_if = "#spotify_running"
 tooltip = "Previous"
-on_click_left = "playerctl previous"
+on_click_left = "~/.config/ironbar/scripts/modules/spotify.sh previous"
 
 [[start]]
 type = "script"
 class = "play-pause"
 mode = "watch"
-show_if = "pgrep -x spotify"
-cmd = """
-  _show() {
-    case "$1" in
-      Playing) echo ' ' ;;
-      *)       echo '󰎆 ' ;;
-    esac
-  }
-  _show "$(playerctl --player=spotify status 2>/dev/null)"
-  playerctl --player=spotify --follow status 2>/dev/null | while IFS= read -r s; do
-    _show "$s"
-  done
-"""
-tooltip = "{{playerctl metadata title 2>/dev/null}} — {{playerctl metadata artist 2>/dev/null}}"
-on_click_left = "playerctl play-pause"
+show_if = "#spotify_running"
+cmd = "~/.config/ironbar/scripts/modules/spotify.sh watch"
+tooltip = "{{~/.config/ironbar/scripts/modules/spotify.sh metadata}}"
+on_click_left = "~/.config/ironbar/scripts/modules/spotify.sh toggle"
 
 [[start]]
 type = "label"
 name = "next"
 label = "󰒭"
-show_if = "pgrep -x spotify"
+show_if = "#spotify_running"
 tooltip = "Next"
-on_click_left = "playerctl next"
+on_click_left = "~/.config/ironbar/scripts/modules/spotify.sh next"
 
 
 
@@ -52,58 +42,17 @@ type = "script"
 class = "custom-battery"
 mode = "poll"
 interval = 30000
-cmd = """
-  cap=$(cat /sys/class/power_supply/BAT*/capacity | head -n 1)
-  stat=$(cat /sys/class/power_supply/BAT*/status | head -n 1)
-  if [ "$stat" = "Charging" ]; then
-    icon=""
-  elif [ "$cap" -ge 90 ]; then
-    icon=""
-  elif [ "$cap" -ge 60 ]; then
-    icon=""
-  elif [ "$cap" -ge 30 ]; then
-    icon=""
-  elif [ "$cap" -ge 15 ]; then
-    icon=""
-  else
-    icon=""
-  fi
-  echo "${cap}% $icon" 
-"""
+cmd = "~/.config/ironbar/scripts/modules/battery.sh"
 
 [[center]]
 type = "script"
 class = "volume"
-mode = "poll"
-interval = 200
-cmd = """
-  active=$(pactl list sinks short 2>/dev/null | awk '/RUNNING/{print $2; exit}')
-  [ -z "$active" ] && active=$(pactl info 2>/dev/null | awk '/Default Sink/{print $3}')
-  vol=$(pactl get-sink-volume "$active" 2>/dev/null | grep -oE '[0-9]+%' | head -1 | tr -d '%')
-  vol=${vol:-0}
-  muted=$(pactl get-sink-mute "$active" 2>/dev/null | grep -c 'yes')
-  is_hp=0
-  pactl list sinks short 2>/dev/null | grep -qi 'bluez' && is_hp=1
-  if [ "$is_hp" -eq 0 ]; then
-    port=$(pactl list sinks 2>/dev/null | awk -v s="$active" '/Name: /{in_s=($2==s)} in_s && /Active Port:/{print $3; exit}')
-    echo "$port" | grep -Eqi 'headphone|headset|earphone' && is_hp=1
-  fi
-  if [ "$muted" -gt 0 ]; then
-    echo "󰝟 ${vol}%"
-  elif [ "$is_hp" -eq 1 ]; then
-    echo "󰋋 ${vol}%"
-  elif [ "$vol" -ge 30 ]; then
-    echo "󰕾 ${vol}%"
-  elif [ "$vol" -ge 10 ]; then
-    echo "󰖀 ${vol}%"
-  else
-    echo "󰕿 ${vol}%"
-  fi
-"""
-on_scroll_up   = "~/.config/ironbar/scripts/vol_ctl.sh up"
-on_scroll_down = "~/.config/ironbar/scripts/vol_ctl.sh down"
-on_click_left  = "pavucontrol &"
-on_click_right = "~/.config/ironbar/scripts/vol_ctl.sh mute"
+mode = "watch"
+cmd = "~/.config/ironbar/scripts/modules/volume.sh watch"
+on_scroll_up   = "~/.config/ironbar/scripts/modules/volume.sh up"
+on_scroll_down = "~/.config/ironbar/scripts/modules/volume.sh down"
+on_click_left  = "~/.config/ironbar/scripts/modules/volume.sh open"
+on_click_right = "~/.config/ironbar/scripts/modules/volume.sh mute"
 
 
 [[center]]
@@ -111,31 +60,17 @@ type = "script"
 class = "brightness"
 mode = "poll"
 interval = 500
-cmd = """
-  b=$(brightnessctl -d amdgpu_bl1 i | awk -F'[()%]' '/Current brightness/ {print $2}')
-  [ -z "$b" ] && b=100
-  if [ "$b" -ge 88 ]; then echo ""
-  elif [ "$b" -ge 77 ]; then echo ""
-  elif [ "$b" -ge 66 ]; then echo ""
-  elif [ "$b" -ge 55 ]; then echo ""
-  elif [ "$b" -ge 44 ]; then echo ""
-  elif [ "$b" -ge 33 ]; then echo ""
-  elif [ "$b" -ge 22 ]; then echo ""
-  elif [ "$b" -ge 11 ]; then echo ""
-  else echo ""
-  fi
-"""
-on_scroll_up = "brightnessctl -d amdgpu_bl1 set +5%"
-on_scroll_down = "brightnessctl -d amdgpu_bl1 set 5%-"
+cmd = "~/.config/ironbar/scripts/modules/brightness.sh status"
+on_scroll_up = "~/.config/ironbar/scripts/modules/brightness.sh up"
+on_scroll_down = "~/.config/ironbar/scripts/modules/brightness.sh down"
 
 
 [[center]]
 type = "script"
 class = "clock"
-mode = "poll"
-interval = 500
-cmd = "date +'%H:%M'"
-tooltip = "{{date +'%Y-%m-%d %A'}}"
+mode = "watch"
+cmd = "~/.config/ironbar/scripts/modules/clock.sh watch"
+tooltip = "{{~/.config/ironbar/scripts/modules/clock.sh date}}"
 
 
 [[center]]
@@ -143,73 +78,27 @@ type = "script"
 name = "power-btn"
 class = "power-btn"
 mode = "watch"
-cmd = """
-  t=$(grep '@define-color tertiary '  ~/.config/ironbar/colors.css | awk '{print $3}' | tr -d ';')
-  e=$(grep '@define-color error '     ~/.config/ironbar/colors.css | awk '{print $3}' | tr -d ';')
-  r=$(grep '@define-color primary '   ~/.config/ironbar/colors.css | awk '{print $3}' | tr -d ';')
-  last=""
-  while true; do
-    p=$(cat /sys/firmware/acpi/platform_profile 2>/dev/null)
-    case "$p" in
-      balanced)    echo "<span color='${t:-#b0c9e7}'></span>" ;;
-      performance) echo "<span color='${e:-#ffb4ab}'></span>" ;;
-      *)           echo "<span color='${r:-#81d5ce}'></span>" ;;
-    esac
-    # Map the profile to a CSS class and tint the whole glass block to match
-    # the icon, via ironbar's runtime add/remove-class IPC. Only fire on change.
-    case "$p" in
-      balanced)    cls="profile-balanced" ;;
-      performance) cls="profile-performance" ;;
-      *)           cls="profile-powersaver" ;;
-    esac
-    if [ "$cls" != "$last" ]; then
-      ironbar style remove-class power-btn profile-balanced    >/dev/null 2>&1
-      ironbar style remove-class power-btn profile-performance >/dev/null 2>&1
-      ironbar style remove-class power-btn profile-powersaver  >/dev/null 2>&1
-      ironbar style add-class    power-btn "$cls"              >/dev/null 2>&1
-      last="$cls"
-    fi
-    sleep 0.2
-  done
-"""
-tooltip = "{{cat /sys/firmware/acpi/platform_profile 2>/dev/null}}"
-on_click_left = "p=$(cat /sys/firmware/acpi/platform_profile 2>/dev/null); if [ \"$p\" = 'balanced' ]; then powerprofilesctl set performance; elif [ \"$p\" = 'performance' ]; then powerprofilesctl set power-saver; else powerprofilesctl set balanced; fi"
+cmd = "~/.config/ironbar/scripts/modules/power-profile.sh watch"
+tooltip = "{{~/.config/ironbar/scripts/modules/power-profile.sh current}}"
+on_click_left = "~/.config/ironbar/scripts/modules/power-profile.sh toggle"
 
 
 [[center]]
 type = "script"
 class = "bluetooth"
-mode = "poll"
-interval = 3000
-cmd = """
-  if rfkill list bluetooth 2>/dev/null | grep -q 'Soft blocked: yes' \\
-     || ! bluetoothctl show 2>/dev/null | grep -q 'Powered: yes'; then
-    echo '󰂲'
-  elif bluetoothctl devices Connected 2>/dev/null | grep -q .; then
-    echo '󰂱'
-  else
-    echo '󰂯'
-  fi
-"""
-tooltip = "{{bluetoothctl devices Connected 2>/dev/null | sed 's/^Device [^ ]* //' | paste -sd ', ' - | grep . || echo 'No device connected'}}"
-on_click_left = "blueman-manager &"
+mode = "watch"
+cmd = "~/.config/ironbar/scripts/modules/bluetooth.sh watch"
+tooltip = "{{~/.config/ironbar/scripts/modules/bluetooth.sh tooltip}}"
+on_click_left = "~/.config/ironbar/scripts/modules/bluetooth.sh open"
 
 
 [[center]]
 type = "script"
 class = "longshot"
-mode = "poll"
-interval = 200
-cmd = """
-  s=$(~/Python-projects/longshot_tool/longshot.sh status)
-  case "$s" in
-    recording) echo '' ;;
-    stitching) echo '󰑮' ;;
-    *)         echo '󰹑' ;;
-  esac
-"""
-on_click_left = "if [ \"$(~/Python-projects/longshot_tool/longshot.sh status)\" = 'idle' ]; then ~/Python-projects/longshot_tool/longshot.sh start; else ~/Python-projects/longshot_tool/longshot.sh stop; fi &"
-on_click_right = "~/Python-projects/longshot_tool/longshot.sh cancel &"
+mode = "watch"
+cmd = "/home/horizon/python-projects/hypr-longshot/.venv/bin/python /home/horizon/python-projects/hypr-longshot/longshot.py watch --icon"
+on_click_left = "/home/horizon/python-projects/hypr-longshot/.venv/bin/python /home/horizon/python-projects/hypr-longshot/longshot.py toggle"
+on_click_right = "/home/horizon/python-projects/hypr-longshot/.venv/bin/python /home/horizon/python-projects/hypr-longshot/longshot.py cancel"
 
 
 [[center]]
@@ -223,7 +112,7 @@ cmd = "~/.config/ironbar/scripts/cava.sh"
 [[end]]
 type = "tray"
 icon_size = 18
-on_click_left = "activate"
+on_click_left = "default"
 on_click_right = "menu"
 
 

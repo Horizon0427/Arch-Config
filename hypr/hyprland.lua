@@ -4,9 +4,10 @@ package.path = config_dir .. "/?.lua;" .. config_dir .. "/?/init.lua;" .. packag
 
 require("configuration.monitors")
 require("configuration.env")
+require("configuration.cursor_fix") -- must come after configuration.env
 require("configuration.autostart")
 require("configuration.appearance")
-require("configuration.animations")
+require("configuration.animations2")
 require("configuration.scrolling")
 require("configuration.input")
 require("configuration.keybinds")

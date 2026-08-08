@@ -19,21 +19,16 @@ hl.window_rule({
 })
 
 hl.window_rule({
-    name  = "float-waypaper",
-    match = { class = "^(waypaper)$" },
-    float = true, center = true,
-})
-
-hl.window_rule({
     name  = "float-copyq",
     match = { class = "^(com.github.hluk.copyq)$" },
     float = true, center = true,
 })
 
 hl.window_rule({
-    name  = "float-screenshot",
-    match = { class = "be.alexandervanhee.gradia" },
+    name  = "float-satty",
+    match = { title = "^(satty)$" },
     float = true, center = true,
+    size = "800 600",
 })
 
 hl.window_rule({
@@ -56,7 +51,7 @@ hl.window_rule({
 
 hl.window_rule({
     name  = "longshot-overlay-rules",
-    match = { class = "^(longshot_overlay)$" },
+    match = { class = "^(longshot)$" },
     float            = true,
     border_size      = 0,
     rounding         = 0,
@@ -64,6 +59,7 @@ hl.window_rule({
     no_shadow        = true,
     no_initial_focus = true,
     no_focus         = true,
+    no_anim          = true,
     pin              = true,
     suppress_event   = "activatefocus maximize fullscreen",
 })
@@ -107,13 +103,6 @@ hl.window_rule({
   size = "750 500",
 })
 
-hl.window_rule({
-    name  = "float-sokoban",
-    match = { class = "^(Sokoban)$" },
-    float = true,
-    center = true,
-})
-
 
 
 
@@ -132,11 +121,6 @@ hl.layer_rule({
     no_anim = true,
 })
 
-hl.layer_rule({
-    name  = "Liquid_Glass_Waybar",
-    match = { namespace = "^(waybar)$" },
-    blur = true, ignore_alpha = 0.25,
-})
 
 hl.layer_rule({
     name  = "Liquid_Glass_Ironbar",

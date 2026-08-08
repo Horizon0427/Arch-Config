@@ -1,4 +1,3 @@
--- Disable netrw so nvim-tree handles directory opens
 vim.g.loaded_netrw       = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -33,11 +32,9 @@ return {
       filters = {
         dotfiles = false,
       },
-      -- Auto-close when nvim-tree is the only remaining window
       on_attach = function(bufnr)
         local api = require("nvim-tree.api")
         api.config.mappings.default_on_attach(bufnr)
-        -- close tree when it's the last window
         vim.api.nvim_create_autocmd("WinClosed", {
           buffer = bufnr,
           callback = function()

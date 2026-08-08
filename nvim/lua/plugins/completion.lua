@@ -16,13 +16,11 @@ return {
 
       completion = {
         trigger = {
-          -- Only auto-pop on LSP trigger chars (. -> :: :), not on every keystroke
           show_on_keyword                    = false,
           show_on_trigger_character          = true,
           show_on_insert_on_trigger_character = true,
         },
         documentation = {
-          -- Don't auto-open doc popup; use <C-Space> again inside the menu to show
           auto_show       = false,
           auto_show_delay_ms = 500,
           window = { border = "rounded" },
@@ -31,7 +29,6 @@ return {
         menu = { border = "rounded" },
       },
 
-      -- Signature help popup disabled; trigger manually with <C-k>
       signature = { enabled = false },
 
       sources = {

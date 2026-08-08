@@ -5,8 +5,8 @@ hl.config({
         direction                = "right",
         focus_fit_method         = 1,
         follow_focus             = true,
-        wrap_focus               = true,
-        wrap_swapcol             = true,
+        wrap_focus               = false,
+        wrap_swapcol             = false,
         follow_min_visible       = 1.0
     },
 })

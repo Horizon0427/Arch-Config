@@ -1,8 +1,5 @@
 [config]
 
-[templates.waybar]
-input_path = '~/.config/matugen/templates/colors.css'
-output_path = '~/.config/waybar/colors.css'
 
 [templates.hyprland]
 input_path = '~/.config/matugen/templates/hyprland_colors.lua'
@@ -37,6 +34,10 @@ input_path = '~/.config/matugen/templates/ghostty-theme.conf'
 output_path = '~/.config/ghostty/matugen-colors'
 post_hook = 'killall -SIGUSR2 ghostty'
 
+[templates.nvim]
+input_path = '~/.config/matugen/templates/nvim-colors.lua'
+output_path = '~/.cache/matugen/nvim-colors.lua'
+
 [templates.gtk-folder]
 input_path = '~/.config/matugen/templates/gtk-folder/recolor.sh'
 output_path = '~/.cache/matugen/recoloricons.sh'
@@ -55,7 +56,38 @@ post_hook = 'bash ~/.config/matugen/scripts/reload-gtk.sh'
 [templates.ironbar]
 input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/ironbar/colors.css'
+post_hook = '~/.config/ironbar/scripts/ironbar-control.sh reload >/dev/null 2>&1 &'
 
 [templates.walker]
 input_path = '~/.config/matugen/templates/walker-colors.css'
 output_path = '~/.config/walker/themes/minimal/colors.css'
+
+[templates.copyq]
+input_path = '~/.config/matugen/templates/copyq.ini'
+output_path = '~/.config/copyq/themes/matugen.ini'
+post_hook = 'copyq eval -- "loadTheme(\"$HOME/.config/copyq/themes/matugen.ini\")" >/dev/null 2>&1 || true'
+
+[templates.fcitx5]
+input_path = '~/.config/matugen/templates/fcitx5-theme.conf'
+output_path = '~/.local/share/fcitx5/themes/catppuccin-mocha-mauve/theme.conf'
+
+[templates.fcitx5-panel]
+input_path = '~/.config/matugen/templates/fcitx5-panel.svg'
+output_path = '~/.local/share/fcitx5/themes/catppuccin-mocha-mauve/panel.svg'
+
+[templates.fcitx5-highlight]
+input_path = '~/.config/matugen/templates/fcitx5-highlight.svg'
+output_path = '~/.local/share/fcitx5/themes/catppuccin-mocha-mauve/highlight.svg'
+post_hook = 'fcitx5 -r -d'
+
+[templates.codex]
+input_path = '~/.config/matugen/templates/codex-theme.json'
+output_path = '~/.codex/matugen/theme.json'
+# post_hook = 'bash ~/.config/matugen/scripts/apply-codex-theme.sh >/dev/null 2>&1 || true'
+
+# FlClash (Flutter) reads this file at startup and watches it with inotify,
+# so the theme colour hot-reloads without restarting the app.
+# Requires the locally patched build in ~/.local/lib/flclash.
+[templates.flclash]
+input_path = '~/.config/matugen/templates/flclash-color.txt'
+output_path = '~/.local/share/com.follow.clash/matugen_color'

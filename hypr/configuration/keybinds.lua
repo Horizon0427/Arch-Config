@@ -8,29 +8,38 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("flclash"))
-hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("~/.config/custom_wall_paper/wallpicker"))
+hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("~/.local/bin/wallpicker"))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + U", hl.dsp.exec_cmd([[command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit]]))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + X", hl.dsp.workspace.toggle_special("spotify"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle_layout.sh"))
-hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("~/.config/hypr/scripts/ghostty_cursor.sh"))
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle_animation.sh"))
 
-hl.bind(mainMod .. " + F1", hl.dsp.exec_cmd("~/.config/ironbar/scripts/toggle-ironbar.sh"))
-hl.bind(mainMod .. " + F2", hl.dsp.exec_cmd("~/.config/ironbar/scripts/reload-ironbar.sh"))
-hl.bind(mainMod .. " + F3", hl.dsp.exec_cmd("hyprctl hyprsunset temperature 4000"))
-hl.bind(mainMod .. " + F4", hl.dsp.exec_cmd("hyprctl hyprsunset gamma 80"))
-hl.bind(mainMod .. " + F5", hl.dsp.exec_cmd([[sh -c 'hyprctl hyprsunset identity && hyprctl hyprsunset gamma 100']]))
+hl.bind(mainMod .. " + F1", hl.dsp.exec_cmd("~/.config/ironbar/scripts/ironbar-control.sh toggle"))
+hl.bind(mainMod .. " + F2", hl.dsp.exec_cmd("~/.config/ironbar/scripts/ironbar-control.sh reload"))
 
 hl.bind(mainMod .. " + ALT + L",   hl.dsp.exec_cmd("~/.config/hypr/scripts/smart_lock.sh"))
 hl.bind(mainMod .. " + ALT + V",   hl.dsp.exec_cmd("copyq toggle"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot.sh"))
 
-hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left"  }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + H",     hl.dsp.focus({ direction = "left"  }))
-hl.bind(mainMod .. " + L",     hl.dsp.focus({ direction = "right"  }))
+local function focus_horizontal(direction, scrolling_direction)
+    return function()
+        local workspace = hl.get_active_workspace()
+
+        if workspace and workspace.tiled_layout == "scrolling" then
+            hl.dispatch(hl.dsp.layout("focus " .. scrolling_direction))
+        else
+            hl.dispatch(hl.dsp.focus({ direction = direction }))
+        end
+    end
+end
+
+hl.bind(mainMod .. " + left",  focus_horizontal("left",  "l"))
+hl.bind(mainMod .. " + right", focus_horizontal("right", "r"))
+hl.bind(mainMod .. " + H",     focus_horizontal("left",  "l"))
+hl.bind(mainMod .. " + L",     focus_horizontal("right", "r"))
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up"    }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down"  }))
 

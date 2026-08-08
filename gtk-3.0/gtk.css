@@ -1,0 +1,10 @@
+@binding-set thunar-vim-navigation {
+  bind "h" { "move-cursor" (visual-positions, -1); };
+  bind "j" { "move-cursor" (display-lines, 1); };
+  bind "k" { "move-cursor" (display-lines, -1); };
+  bind "l" { "move-cursor" (visual-positions, 1); };
+}
+
+.standard-view .view {
+  -gtk-key-bindings: thunar-vim-navigation;
+}
