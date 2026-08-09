@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="854"
+  height="190"
+  viewBox="0 0 854 190"
+  role="img"
+  aria-labelledby="title description"
+>
+  <title id="title">Horizon's Dotfiles</title>
+  <desc id="description">An animated ivory, beige, and pale-gold wave header.</desc>
+
+  <style>
+    .title,
+    .subtitle {
+      fill: #40372f;
+      font-family: "Anthropic Serif Text", "Noto Serif", Georgia, "Times New Roman", serif;
+      text-anchor: middle;
+      dominant-baseline: middle;
+      animation: fade-in 1.2s ease-in-out forwards;
+    }
+
+    .title {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.15px;
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+
+  <!-- Palette: edit these stops to recolor the complete header. -->
+  <defs>
+    <linearGradient id="header-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f4f1eb"/>
+      <stop offset="50%" stop-color="#eadcc5"/>
+      <stop offset="100%" stop-color="#d9bd91"/>
+    </linearGradient>
+  </defs>
+
+  <g fill="url(#header-gradient)" opacity="0.4">
+    <path d="M0 0L 0 110Q 213.5 150 427 120T 854 145L 854 0 Z">
+      <animate
+        attributeName="d"
+        dur="20s"
+        repeatCount="indefinite"
+        keyTimes="0;0.333;0.667;1"
+        calcMode="spline"
+        keySplines="0.2 0 0.2 1;0.2 0 0.2 1;0.2 0 0.2 1"
+        values="M0 0L 0 110Q 213.5 150 427 120T 854 145L 854 0 Z;M0 0L 0 135Q 213.5 150 427 130T 854 120L 854 0 Z;M0 0L 0 155Q 213.5 125 427 155T 854 120L 854 0 Z;M0 0L 0 110Q 213.5 150 427 120T 854 145L 854 0 Z"
+      />
+    </path>
+
+    <path d="M0 0L 0 125Q 213.5 170 427 140T 854 150L 854 0 Z">
+      <animate
+        attributeName="d"
+        dur="20s"
+        begin="-10s"
+        repeatCount="indefinite"
+        keyTimes="0;0.333;0.667;1"
+        calcMode="spline"
+        keySplines="0.2 0 0.2 1;0.2 0 0.2 1;0.2 0 0.2 1"
+        values="M0 0L 0 125Q 213.5 170 427 140T 854 150L 854 0 Z;M0 0L 0 140Q 213.5 110 427 110T 854 130L 854 0 Z;M0 0L 0 135Q 213.5 115 427 140T 854 155L 854 0 Z;M0 0L 0 125Q 213.5 170 427 140T 854 150L 854 0 Z"
+      />
+    </path>
+  </g>
+
+  <text class="title" x="50%" y="36%">Horizon's Dotfiles</text>
+</svg>

@@ -96,9 +96,9 @@ on_click_left = "~/.config/ironbar/scripts/modules/bluetooth.sh open"
 type = "script"
 class = "longshot"
 mode = "watch"
-cmd = "/home/horizon/python-projects/hypr-longshot/.venv/bin/python /home/horizon/python-projects/hypr-longshot/longshot.py watch --icon"
-on_click_left = "/home/horizon/python-projects/hypr-longshot/.venv/bin/python /home/horizon/python-projects/hypr-longshot/longshot.py toggle"
-on_click_right = "/home/horizon/python-projects/hypr-longshot/.venv/bin/python /home/horizon/python-projects/hypr-longshot/longshot.py cancel"
+cmd = "/home/horizon/Projects/python-projects/hypr-longshot/.venv/bin/python /home/horizon/Projects/python-projects/hypr-longshot/longshot.py watch --icon"
+on_click_left = "/home/horizon/Projects/python-projects/hypr-longshot/.venv/bin/python /home/horizon/Projects/python-projects/hypr-longshot/longshot.py toggle"
+on_click_right = "/home/horizon/Projects/python-projects/hypr-longshot/.venv/bin/python /home/horizon/Projects/python-projects/hypr-longshot/longshot.py cancel"
 
 
 [[center]]

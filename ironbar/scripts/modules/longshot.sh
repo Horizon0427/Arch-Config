@@ -1,12 +1,19 @@
 #!/usr/bin/env bash
 
-longshot_bin="${IRONBAR_LONGSHOT_BIN:-/home/horizon/python-projects/hypr-longshot/longshot.sh}"
+if [[ -n "${IRONBAR_LONGSHOT_BIN:-}" ]]; then
+    longshot_cmd=("$IRONBAR_LONGSHOT_BIN")
+else
+    longshot_cmd=(
+        /home/horizon/Projects/python-projects/hypr-longshot/.venv/bin/python
+        /home/horizon/Projects/python-projects/hypr-longshot/longshot.py
+    )
+fi
 longshot_log="${XDG_RUNTIME_DIR:-/tmp}/ironbar-longshot.log"
 
 current_status() {
     local status
 
-    status=$("$longshot_bin" status 2>/dev/null) || status="idle"
+    status=$("${longshot_cmd[@]}" status 2>/dev/null) || status="idle"
     printf '%s\n' "${status:-idle}"
 }
 
@@ -23,7 +30,7 @@ run_async() {
     # Ironbar's command runner may tear down the command's process group as
     # soon as this wrapper exits.  stop/cancel need to outlive the wrapper so
     # they can wait for wf-recorder and then close the overlay.
-    setsid -f "$longshot_bin" "$1" </dev/null >>"$longshot_log" 2>&1
+    setsid -f "${longshot_cmd[@]}" "$1" </dev/null >>"$longshot_log" 2>&1
 }
 
 case "${1:-status}" in

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="854"
+  height="44"
+  viewBox="0 0 854 44"
+  role="img"
+  aria-labelledby="title description"
+>
+  <title id="title">Desktop stack badges</title>
+  <desc id="description">Centered Arch Linux and Hyprland badges.</desc>
+
+  <!--
+    This is the editable layout source for badge-strip.png.
+    The two badges occupy 253.5 px; x=300.25 centers them in the 854 px header width.
+  -->
+  <image x="300.25" y="8" width="126.5" height="28" href="badges/arch-linux.svg" xlink:href="badges/arch-linux.svg"/>
+  <image x="438.75" y="8" width="115" height="28" href="badges/hyprland.svg" xlink:href="badges/hyprland.svg"/>
+</svg>
