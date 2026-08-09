@@ -1,6 +1,6 @@
-![Horizon's Dotfiles](./assets/readme/header.svg)
+![Horizon's Dotfiles](./assets/readme/v2-header.svg)
 
-![Arch Linux · Hyprland](./assets/readme/badge-strip.png)
+![Arch Linux · Hyprland](./assets/readme/v2-badge-strip.png)
 
 *Welcome to my GitHub repository, where I host some of my Archlinux and Hyprland configurations.*
 

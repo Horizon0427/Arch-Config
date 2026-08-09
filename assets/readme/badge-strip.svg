@@ -12,7 +12,7 @@
   <desc id="description">Centered Arch Linux and Hyprland badges.</desc>
 
   <!--
-    This is the editable layout source for the 2x badge-strip.png.
+    This is the editable layout source for the 2x v2-badge-strip.png.
     The two badges occupy 253.5 px; x=300.25 centers them in the 854 px header width.
   -->
   <image x="300.25" y="8" width="126.5" height="28" href="badges/arch-linux.svg" xlink:href="badges/arch-linux.svg"/>
