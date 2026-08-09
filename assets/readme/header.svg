@@ -8,12 +8,12 @@
   aria-labelledby="title description"
 >
   <title id="title">Horizon's Dotfiles</title>
-  <desc id="description">An animated ivory, beige, and pale-gold wave header.</desc>
+  <desc id="description">An animated bright ice-blue and white wave header.</desc>
 
   <style>
     .title,
     .subtitle {
-      fill: #40372f;
+      fill: #18344a;
       font-family: "Anthropic Serif Text", "Noto Serif", Georgia, "Times New Roman", serif;
       text-anchor: middle;
       dominant-baseline: middle;
@@ -41,13 +41,13 @@
   <!-- Palette: edit these stops to recolor the complete header. -->
   <defs>
     <linearGradient id="header-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#f4f1eb"/>
-      <stop offset="50%" stop-color="#eadcc5"/>
-      <stop offset="100%" stop-color="#d9bd91"/>
+      <stop offset="0%" stop-color="#f8fcff"/>
+      <stop offset="50%" stop-color="#e0f4ff"/>
+      <stop offset="100%" stop-color="#b9e7ff"/>
     </linearGradient>
   </defs>
 
-  <g fill="url(#header-gradient)" opacity="0.4">
+  <g fill="url(#header-gradient)" opacity="0.78">
     <path d="M0 0L 0 110Q 213.5 150 427 120T 854 145L 854 0 Z">
       <animate
         attributeName="d"
