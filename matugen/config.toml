@@ -5,25 +5,21 @@
 input_path = '~/.config/matugen/templates/hyprland_colors.lua'
 output_path = '~/.config/hypr/configuration/colors.lua'
 
-[templates.hyprland-colors]
-input_path = '~/.config/matugen/templates/colors-hyprland.conf'
-output_path = '~/.config/hypr/colors.conf'
-
 [templates.mako]
-input_path = '~/.config/matugen/templates/mako'
-output_path = '~/.config/mako/config'
+input_path = '~/.config/matugen/templates/mako-colors.conf'
+output_path = '~/.config/mako/colors.conf'
 
 [templates.wlogout]
-input_path = '~/.config/matugen/templates/wlogout.css'
-output_path = '~/.config/wlogout/style.css'
+input_path = '~/.config/matugen/templates/gtk-palette.css'
+output_path = '~/.config/wlogout/colors.css'
 
 [templates.btop]
 input_path = '~/.config/matugen/templates/btop.theme'
 output_path = '~/.config/btop/themes/matugen.theme'
 
 [templates.hyprlock]
-input_path = '~/.config/matugen/templates/hyprlock.conf'
-output_path = '~/.config/hypr/hyprlock.conf'
+input_path = '~/.config/matugen/templates/hyprlock-colors.conf'
+output_path = '~/.config/hypr/hyprlock-colors.conf'
 
 [templates.prelock]
 input_path = '~/.config/matugen/templates/prelock-color.txt'
@@ -32,40 +28,34 @@ output_path = '~/.config/hypr/lock_animation/prelock_color'
 [templates.ghostty]
 input_path = '~/.config/matugen/templates/ghostty-theme.conf'
 output_path = '~/.config/ghostty/matugen-colors'
-post_hook = 'killall -SIGUSR2 ghostty'
 
 [templates.nvim]
 input_path = '~/.config/matugen/templates/nvim-colors.lua'
 output_path = '~/.cache/matugen/nvim-colors.lua'
 
-[templates.gtk-folder]
-input_path = '~/.config/matugen/templates/gtk-folder/recolor.sh'
-output_path = '~/.cache/matugen/recoloricons.sh'
-post_hook = 'bash ~/.cache/matugen/recoloricons.sh &'
+[templates.gtk-icons]
+input_path = '~/.config/matugen/templates/gtk-icons.conf'
+output_path = '~/.cache/matugen/gtk-icons.conf'
 
 [templates.gtk3]
-input_path = '~/.config/matugen/templates/gtk3-theme.css'
-output_path = '~/.local/share/themes/adw-gtk3-dark-matugen/gtk-3.0/gtk.css'
-post_hook = 'bash ~/.config/matugen/scripts/reload-gtk.sh'
+input_path = '~/.config/matugen/templates/gtk3-colors.css'
+output_path = '~/.local/share/themes/adw-gtk3-dark-matugen/gtk-3.0/colors.css'
 
 [templates.gtk4]
-input_path ='~/.config/matugen/templates/gtk-colors.css'
+input_path = '~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/gtk-4.0/colors.css'
-post_hook = 'bash ~/.config/matugen/scripts/reload-gtk.sh'
 
 [templates.ironbar]
-input_path = '~/.config/matugen/templates/colors.css'
+input_path = '~/.config/matugen/templates/gtk-palette.css'
 output_path = '~/.config/ironbar/colors.css'
-post_hook = '~/.config/ironbar/scripts/ironbar-control.sh reload >/dev/null 2>&1 &'
 
 [templates.walker]
-input_path = '~/.config/matugen/templates/walker-colors.css'
+input_path = '~/.config/matugen/templates/gtk-palette.css'
 output_path = '~/.config/walker/themes/minimal/colors.css'
 
 [templates.copyq]
 input_path = '~/.config/matugen/templates/copyq.ini'
 output_path = '~/.config/copyq/themes/matugen.ini'
-post_hook = 'copyq eval -- "loadTheme(\"$HOME/.config/copyq/themes/matugen.ini\")" >/dev/null 2>&1 || true'
 
 [templates.fcitx5]
 input_path = '~/.config/matugen/templates/fcitx5-theme.conf'
@@ -78,16 +68,11 @@ output_path = '~/.local/share/fcitx5/themes/catppuccin-mocha-mauve/panel.svg'
 [templates.fcitx5-highlight]
 input_path = '~/.config/matugen/templates/fcitx5-highlight.svg'
 output_path = '~/.local/share/fcitx5/themes/catppuccin-mocha-mauve/highlight.svg'
-post_hook = 'fcitx5 -r -d'
 
 [templates.codex]
 input_path = '~/.config/matugen/templates/codex-theme.json'
 output_path = '~/.codex/matugen/theme.json'
-# post_hook = 'bash ~/.config/matugen/scripts/apply-codex-theme.sh >/dev/null 2>&1 || true'
 
-# FlClash (Flutter) reads this file at startup and watches it with inotify,
-# so the theme colour hot-reloads without restarting the app.
-# Requires the locally patched build in ~/.local/lib/flclash.
 [templates.flclash]
 input_path = '~/.config/matugen/templates/flclash-color.txt'
 output_path = '~/.local/share/com.follow.clash/matugen_color'

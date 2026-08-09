@@ -1,3 +1,5 @@
+@import "colors.css";
+
 * {
     background-image: none;
     box-shadow: none;
@@ -8,13 +10,13 @@
 }
 
 window {
-    background-color: alpha(#0e1514, 0.55);
+    background-color: alpha(@surface, 0.55);
     background-image: none; 
 }
 
 button {
-    color: #dde4e2;
-    background-color: alpha(#2f3635, 0.78);
+    color: @on-surface;
+    background-color: alpha(@surface-container-highest, 0.78);
     background-repeat: no-repeat;
     background-position: center 30%;
     background-size: 28%;
@@ -23,15 +25,15 @@ button {
     margin: 130px 40px 230px 40px; 
     padding: 130px 20px 30px 20px;
     
-    border: 2px solid alpha(#dde4e2, 0.15); 
+    border: 2px solid alpha(@on-surface, 0.15); 
     border-radius: 36px;
     box-shadow: none; 
 }
 
 button:hover {
-    color: #003734;
-    background-color: alpha(#81d5ce, 0.95);
-    border: 2px solid #81d5ce;
+    color: @on-primary;
+    background-color: alpha(@primary, 0.95);
+    border: 2px solid @primary;
     background-size: 30%; 
     
     margin: 112px 26px 212px 26px; 
@@ -41,7 +43,7 @@ button:hover {
 
 button:active {
     background-size: 28%;
-    background-color: alpha(#81d5ce, 0.7); 
+    background-color: alpha(@primary, 0.7); 
     
     margin: 124px 36px 224px 36px; 
     padding: 136px 24px 36px 24px;
@@ -49,24 +51,24 @@ button:active {
 }
 
 #shutdown:hover {
-    color: #690005;
-    background-color: alpha(#ffb4ab, 0.95);
-    border: 2px solid #ffb4ab;
+    color: @on-error;
+    background-color: alpha(@error, 0.95);
+    border: 2px solid @error;
     box-shadow: none;
 }
 #shutdown:active {
-    background-color: alpha(#ffb4ab, 0.7);
+    background-color: alpha(@error, 0.7);
     box-shadow: none;
 }
 
 #reboot:hover {
-    color: #19324a;
-    background-color: alpha(#b0c9e7, 0.95);
-    border: 2px solid #b0c9e7;
+    color: @on-tertiary;
+    background-color: alpha(@tertiary, 0.95);
+    border: 2px solid @tertiary;
     box-shadow: none;
 }
 #reboot:active {
-    background-color: alpha(#b0c9e7, 0.7);
+    background-color: alpha(@tertiary, 0.7);
     box-shadow: none;
 }
 

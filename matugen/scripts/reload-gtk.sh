@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 # GTK3 (Wayland backend): gtk-theme toggle forces CSS reload from disk
 gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
 # sleep 0.3

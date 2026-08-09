@@ -1,11 +1,4 @@
 font=Cozette 11
-
-background-color=#0e1514
-
-text-color=#dde4e2
-
-border-color=#81d5ce
-
 border-size=2
 border-radius=20
 width=300
@@ -14,7 +7,4 @@ padding=10
 format=<b>%a</b>\n%s\n%b
 default-timeout=3000
 
-[urgency=high]
-border-color=#ffb4ab
-background-color=#93000a
-text-color=#ffdad6
+include=~/.config/mako/colors.conf

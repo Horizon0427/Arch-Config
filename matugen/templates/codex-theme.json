@@ -1,0 +1,20 @@
+{
+  "variant": "dark",
+  "codeThemeId": "absolutely",
+  "theme": {
+    "accent": "{{colors.primary.default.hex}}",
+    "contrast": 48,
+    "fonts": {
+      "code": "\"SauceCodePro Nerd Font Mono\", \"Noto Sans Mono CJK SC\", ui-monospace, monospace",
+      "ui": "\"Anthropic Serif Text\", \"Noto Sans CJK SC\", system-ui, sans-serif"
+    },
+    "ink": "{{colors.on_surface.default.hex}}",
+    "opaqueWindows": false,
+    "semanticColors": {
+      "diffAdded": "#00c853",
+      "diffRemoved": "{{colors.error.default.hex}}",
+      "skill": "{{colors.primary.default.hex}}"
+    },
+    "surface": "{{colors.surface_container.default.hex}}"
+  }
+}

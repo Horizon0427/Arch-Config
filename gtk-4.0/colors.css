@@ -1,4 +1,3 @@
-
 @define-color accent_color #81d5ce;
 @define-color accent_fg_color #9df2ea;
 @define-color accent_bg_color #00504c;
@@ -19,7 +18,6 @@
 @define-color dialog_bg_color #1a2120;
 @define-color dialog_fg_color #dde4e2;
 @define-color borders #3f4947;
-
 @define-color theme_selected_bg_color #00504c;
 @define-color theme_selected_fg_color #9df2ea;
 @define-color theme_unfocused_selected_bg_color #161d1c;

@@ -1,12 +1,52 @@
 #!/usr/bin/env bash
 
-MAIN_COLOR="{{colors.secondary_fixed_dim.default.hex}}"
-MAIN_SHADOW="{{colors.secondary_container.default.hex}}"
-MAIN_DARKER_SHADOW="{{colors.on_secondary.default.hex}}"
-MAIN_HILIGHT="{{colors.secondary.default.hex}}"
-INVERSE_MAIN_COLOR="{{colors.tertiary_fixed_dim.default.hex}}"
-INVERSE_MAIN_HIGHLT="{{colors.tertiary.default.hex}}"
-INVERSE_MAIN_SHADOW="{{colors.tertiary_container.default.hex}}"
+set -euo pipefail
+
+check_only=false
+if [[ "${1:-}" == --check ]]; then
+  check_only=true
+  shift
+fi
+
+PALETTE_FILE="${1:-$HOME/.cache/matugen/gtk-icons.conf}"
+[[ -r "$PALETTE_FILE" ]] || {
+  printf 'gtk icon palette is not readable: %s\n' "$PALETTE_FILE" >&2
+  exit 1
+}
+
+declare -A palette=()
+while IFS='=' read -r key value; do
+  [[ -n "$key" && "$value" =~ ^#[[:xdigit:]]{6}$ ]] || {
+    printf 'invalid gtk icon palette entry: %s=%s\n' "$key" "$value" >&2
+    exit 1
+  }
+  palette["$key"]="$value"
+done < "$PALETTE_FILE"
+
+required_colors=(
+  MAIN_COLOR MAIN_SHADOW MAIN_DARKER_SHADOW MAIN_HIGHLIGHT
+  INVERSE_MAIN_COLOR INVERSE_MAIN_HIGHLIGHT INVERSE_MAIN_SHADOW
+  TRASH_PAPER HTML_DEEP PRESENTATION_STAND AUDIO_PALE AUDIO_DEEP
+)
+for key in "${required_colors[@]}"; do
+  [[ -n "${palette[$key]:-}" ]] || {
+    printf 'missing gtk icon palette color: %s\n' "$key" >&2
+    exit 1
+  }
+done
+
+if [[ "$check_only" == true ]]; then
+  printf 'gtk icon palette ok: %s\n' "$PALETTE_FILE"
+  exit 0
+fi
+
+MAIN_COLOR=${palette[MAIN_COLOR]}
+MAIN_SHADOW=${palette[MAIN_SHADOW]}
+MAIN_DARKER_SHADOW=${palette[MAIN_DARKER_SHADOW]}
+MAIN_HILIGHT=${palette[MAIN_HIGHLIGHT]}
+INVERSE_MAIN_COLOR=${palette[INVERSE_MAIN_COLOR]}
+INVERSE_MAIN_HIGHLT=${palette[INVERSE_MAIN_HIGHLIGHT]}
+INVERSE_MAIN_SHADOW=${palette[INVERSE_MAIN_SHADOW]}
 PAPER_COLOR="#fafafa"
 PAPER_FOLE_COLOR="#deddda"
 COLOR_FOLDER_BODY=$MAIN_COLOR
@@ -16,7 +56,7 @@ COLOR_FOLDER_SHADOW=$MAIN_SHADOW
 COLOR_ACCENT_BODY=$INVERSE_MAIN_COLOR
 COLOR_ACCENT_LIGHT=$INVERSE_MAIN_HIGHLT
 COLOR_ACCENT_DARK=$INVERSE_MAIN_SHADOW
-COLOR_TRASH_PAPER="{{colors.on_tertiary_container.default.hex}}"
+COLOR_TRASH_PAPER=${palette[TRASH_PAPER]}
 
 COLOR_SCRIPT_BODY=$MAIN_SHADOW
 COLOR_SCRIPT_HIGHLIGHT=$MAIN_HILIGHT
@@ -30,7 +70,7 @@ COLOR_HTML_HIGHLIGHT=$MAIN_HILIGHT
 COLOR_HTML_BODY=$MAIN_SHADOW
 COLOR_HTML_MID=$MAIN_SHADOW
 COLOR_HTML_SHADOW=$MAIN_DARKER_SHADOW
-COLOR_HTML_DEEP="{{colors.surface_container.default.hex}}"
+COLOR_HTML_DEEP=${palette[HTML_DEEP]}
 COLOR_DOC_PAPER=$PAPER_COLOR
 COLOR_DOC_FOLD=$PAPER_FOLE_COLOR
 
@@ -53,13 +93,13 @@ COLOR_PRES_CHART_BLUE=$MAIN_COLOR
 COLOR_PRES_CHART_BLUE_DEEP=$MAIN_SHADOW
 COLOR_PRES_CHART_GREEN=$INVERSE_MAIN_COLOR
 COLOR_PRES_CHART_GREEN_DEEP=$INVERSE_MAIN_SHADOW
-COLOR_PRES_STAND_DARK="{{colors.outline.default.hex}}"
-COLOR_PRES_STAND_LIGHT="{{colors.outline.default.hex}}"
-COLOR_AUDIO_PALE="{{colors.tertiary_fixed.default.hex}}"
+COLOR_PRES_STAND_DARK=${palette[PRESENTATION_STAND]}
+COLOR_PRES_STAND_LIGHT=${palette[PRESENTATION_STAND]}
+COLOR_AUDIO_PALE=${palette[AUDIO_PALE]}
 COLOR_AUDIO_HIGHLIGHT=$INVERSE_MAIN_HIGHLT
 COLOR_AUDIO_BODY=$INVERSE_MAIN_COLOR
 COLOR_AUDIO_SHADOW=$INVERSE_MAIN_SHADOW
-COLOR_AUDIO_DEEP="{{colors.on_tertiary_container.default.hex}}"
+COLOR_AUDIO_DEEP=${palette[AUDIO_DEEP]}
 
 CMD_FOLDER="
 s/#a4caee/$COLOR_FOLDER_BODY/g;
@@ -155,7 +195,11 @@ s/#38ec8b/$COLOR_AUDIO_HIGHLIGHT/g;
 s/#38f39d/$COLOR_AUDIO_HIGHLIGHT/g;
 s/#8ff0a4/$COLOR_AUDIO_PALE/g"
 
-TEMPLATE_DIR="$HOME/.config/matugen/templates/gtk-folder/Adwaita-Matugen"
+TEMPLATE_DIR="$HOME/.config/matugen/assets/gtk-icons/Adwaita-Matugen"
+[[ -d "$TEMPLATE_DIR" ]] || {
+  printf 'gtk icon assets are missing: %s\n' "$TEMPLATE_DIR" >&2
+  exit 1
+}
 CURRENT_THEME=$(gsettings get org.gnome.desktop.interface icon-theme | tr -d "'")
 
 if [[ "$CURRENT_THEME" == "Adwaita-Matugen-A" ]]; then
@@ -169,7 +213,7 @@ mkdir -p "$TARGET_DIR"
 cp -rf --reflink=auto --no-preserve=mode,ownership "$TEMPLATE_DIR/"* "$TARGET_DIR/"
 sed -i "s/Name=.*/Name=$TARGET_THEME/" "$TARGET_DIR/index.theme"
 
-find "$TARGET_DIR" -name "*.png" -print0 | xargs -0 -P0 -I {} magick "{}" \
+find "$TARGET_DIR" -name "*.png" -print0 | xargs -0 -r -P0 -I {} magick "{}" \
   -channel RGB -colorspace gray -sigmoidal-contrast 10,50% \
   +level-colors "$COLOR_FOLDER_SHADOW","$COLOR_FOLDER_BODY" \
   +channel "{}"
@@ -177,35 +221,35 @@ find "$TARGET_DIR" -name "*.png" -print0 | xargs -0 -P0 -I {} magick "{}" \
 # [Group 1] Folders
 find "$TARGET_DIR/scalable" \
   \( -name "folder*.svg" -o -name "user-home*.svg" -o -name "user-desktop*.svg" -o -name "user-bookmarks*.svg" -o -name "inode-directory*.svg" \) \
-  -print0 | xargs -0 -P0 sed -i "$CMD_FOLDER"
+  -print0 | xargs -0 -r -P0 sed -i "$CMD_FOLDER"
 
 # [Group 2] Network
-find "$TARGET_DIR/scalable" -name "network*.svg" -print0 | xargs -0 -P0 sed -i --follow-symlinks "$CMD_NETWORK"
+find "$TARGET_DIR/scalable" -name "network*.svg" -print0 | xargs -0 -r -P0 sed -i --follow-symlinks "$CMD_NETWORK"
 
 # [Group 3] Trash
-find "$TARGET_DIR/scalable" -name "user-trash*.svg" -print0 | xargs -0 -P0 sed -i --follow-symlinks "$CMD_TRASH"
+find "$TARGET_DIR/scalable" -name "user-trash*.svg" -print0 | xargs -0 -r -P0 sed -i --follow-symlinks "$CMD_TRASH"
 
 # [Group 4] Mimetypes - Script & Executable
 find "$TARGET_DIR/scalable/mimetypes" \
   \( -name "text-x-script*.svg" -o -name "application-x-executable*.svg" \) \
-  -print0 | xargs -0 -P0 sed -i "$CMD_SCRIPT"
+  -print0 | xargs -0 -r -P0 sed -i "$CMD_SCRIPT"
 
 # [Group 5] Mimetypes - Addon
-find "$TARGET_DIR/scalable/mimetypes" -name "application-x-addon*.svg" -print0 | xargs -0 -P0 sed -i "$CMD_ADDON"
+find "$TARGET_DIR/scalable/mimetypes" -name "application-x-addon*.svg" -print0 | xargs -0 -r -P0 sed -i "$CMD_ADDON"
 
 # [Group 6] Mimetypes - HTML
-find "$TARGET_DIR/scalable/mimetypes" -name "text-html*.svg" -print0 | xargs -0 -P0 sed -i "$CMD_HTML"
+find "$TARGET_DIR/scalable/mimetypes" -name "text-html*.svg" -print0 | xargs -0 -r -P0 sed -i "$CMD_HTML"
 
 # [Group 7] Mimetypes - Font
-find "$TARGET_DIR/scalable/mimetypes" -name "font-x-generic*.svg" -print0 | xargs -0 -P0 sed -i "$CMD_FONT"
+find "$TARGET_DIR/scalable/mimetypes" -name "font-x-generic*.svg" -print0 | xargs -0 -r -P0 sed -i "$CMD_FONT"
 
 # [Group 8] Mimetypes - Document
-find "$TARGET_DIR/scalable/mimetypes" -name "x-office-document*.svg" -print0 | xargs -0 -P0 sed -i "$CMD_DOC"
+find "$TARGET_DIR/scalable/mimetypes" -name "x-office-document*.svg" -print0 | xargs -0 -r -P0 sed -i "$CMD_DOC"
 
 # [Group 9] Mimetypes - Presentation
-find "$TARGET_DIR/scalable/mimetypes" -name "x-office-presentation*.svg" -print0 | xargs -0 -P0 sed -i "$CMD_PRES"
+find "$TARGET_DIR/scalable/mimetypes" -name "x-office-presentation*.svg" -print0 | xargs -0 -r -P0 sed -i "$CMD_PRES"
 # [Group 10] Mimetypes - Audio
-find "$TARGET_DIR/scalable/mimetypes" -name "audio-x-generic*.svg" -print0 | xargs -0 -P0 sed -i "$CMD_AUDIO"
+find "$TARGET_DIR/scalable/mimetypes" -name "audio-x-generic*.svg" -print0 | xargs -0 -r -P0 sed -i "$CMD_AUDIO"
 gsettings set org.gnome.desktop.interface icon-theme "$TARGET_THEME"
 flatpak override --user --env=ICON_THEME="$TARGET_THEME" 2>/dev/null || true
 
