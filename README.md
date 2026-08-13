@@ -2,7 +2,7 @@
 
 ![Arch Linux · Hyprland](./assets/readme/v2-badge-strip.png)
 
-*Welcome to my GitHub repository, where I host some of my Archlinux and Hyprland configurations. Emmm and also this is my personal dotfiles, not a drop-in configuration. Hardware, locale, paths and dependencies are hard-coded. Do have a check if u wanna give a try ;)*
+*Welcome to my GitHub repository, where I host some of my Archlinux and Hyprland configurations. Emmm and also this is my personal dotfiles, not a drop-in configuration. Hardware, locale, paths and dependencies are hard-coded. Do have a manual check if u wanna give a try ;)*
 
 ---
 
