@@ -2,11 +2,11 @@
 
 ![Arch Linux · Hyprland](./assets/readme/v2-badge-strip.png)
 
-*Welcome to my GitHub repository, where I host some of my Archlinux and Hyprland configurations.*
+*Welcome to my GitHub repository, where I host some of my Archlinux and Hyprland configurations. Emmm and also this is my personal dotfiles, not a drop-in configuration. Hardware, locale, paths and dependencies are hard-coded. Do have a check if u wanna give a try ;)*
 
 ---
 
-Here are stuffs I've selected for my laptop.
+Here are stuffs I've selected for my laptop. 
 
 * **Operating System:** Arch GNU/Linux
 * **Window Manager:** Hyprland

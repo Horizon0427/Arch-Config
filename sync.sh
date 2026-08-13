@@ -3,7 +3,7 @@
 set -euo pipefail
 
 CONFIG_DIR="$HOME/.config"
-DOTFILES_DIR="$HOME/dotfiles"
+DOTFILES_DIR="$HOME/Projects/dotfiles"
 
 DRY_RUN=false
 RSYNC_ARGS=(-av --existing)

@@ -2,12 +2,10 @@
 
 set -euo pipefail
 
-# GTK3 (Wayland backend): gtk-theme toggle forces CSS reload from disk
+# GTK3 reloads its named theme when gtk-theme changes.
 gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
-# sleep 0.3
+sleep 0.2
 gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark-matugen'
 
-# GTK4 / libadwaita: color-scheme toggle forces full CSS reinitialize
-gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
-# sleep 0.2
-gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+# GTK4 has no generic trigger that rereads ~/.config/gtk-4.0/gtk.css.
+# GTK4 consumers reload their own generated files or update on restart.

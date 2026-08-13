@@ -76,3 +76,7 @@ output_path = '~/.codex/matugen/theme.json'
 [templates.flclash]
 input_path = '~/.config/matugen/templates/flclash-color.txt'
 output_path = '~/.local/share/com.follow.clash/matugen_color'
+
+[templates.mdr]
+input_path = '~/.config/matugen/templates/mdr-colors.css'
+output_path = '~/.config/mdr/colors.css'

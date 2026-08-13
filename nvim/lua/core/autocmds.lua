@@ -28,6 +28,31 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function(ev)
     local o = { buffer = ev.buf, silent = true }
+    vim.keymap.set("n", "<localleader>ll", function()
+      local path = vim.api.nvim_buf_get_name(ev.buf)
+      if path == "" then
+        vim.notify("Save the Markdown file before opening MDR", vim.log.levels.WARN)
+        return
+      end
+      if vim.fn.executable("mdr") ~= 1 then
+        vim.notify("mdr is not available in PATH", vim.log.levels.ERROR)
+        return
+      end
+
+      local saved, save_error = pcall(vim.api.nvim_buf_call, ev.buf, function()
+        vim.cmd("silent update")
+      end)
+      if not saved then
+        vim.notify("Could not save Markdown: " .. tostring(save_error), vim.log.levels.ERROR)
+        return
+      end
+
+      path = vim.fn.fnamemodify(path, ":p")
+      local started, job = pcall(vim.fn.jobstart, { "mdr", path }, { detach = true })
+      if not started or job <= 0 then
+        vim.notify("Could not start MDR: " .. tostring(job), vim.log.levels.ERROR)
+      end
+    end, vim.tbl_extend("force", o, { desc = "Save and open in MDR" }))
     vim.keymap.set("x", "<localleader>b", "c**<C-r>\"**<Esc>",
       vim.tbl_extend("force", o, { desc = "Bold selection" }))
     vim.keymap.set("n", "<localleader>b", "viwc**<C-r>\"**<Esc>",
