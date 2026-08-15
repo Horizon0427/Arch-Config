@@ -27,9 +27,6 @@ status_icon() {
 }
 
 run_async() {
-    # Ironbar's command runner may tear down the command's process group as
-    # soon as this wrapper exits.  stop/cancel need to outlive the wrapper so
-    # they can wait for wf-recorder and then close the overlay.
     setsid -f "${longshot_cmd[@]}" "$1" </dev/null >>"$longshot_log" 2>&1
 }
 

@@ -36,7 +36,6 @@ watch_status() {
                 *"member=InterfacesAdded"*|\
                 *"member=InterfacesRemoved"*|\
                 *"member=NameOwnerChanged"*)
-                    # BlueZ often emits several signals for one device action.
                     while IFS= read -r -t 0.05 event; do :; done
                     status_icon
                     ;;
@@ -49,7 +48,6 @@ watch_status() {
                 2>/dev/null
         )
 
-        # Recovery path for a system-bus restart.
         sleep 1
         status_icon
     done

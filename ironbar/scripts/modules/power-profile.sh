@@ -77,7 +77,6 @@ write_rail_spine_css() {
     css_file=$(rail_spine_css_path)
     umask 077
 
-    # Keep one uniform profile-coloured glow along the whole spine. Node and
     # icon animations carry the local interaction; the line stays quiet.
     printf '%s\n' \
         '#bar {' \
@@ -93,8 +92,6 @@ load_rail_spine_css_with_retry() {
     rail_spine_enabled || return 0
     css_file=$(rail_spine_css_path)
 
-    # The module can emit before Ironbar's IPC endpoint is ready. Loading the
-    # sheet once is enough: Ironbar then watches this path for profile updates.
     for _ in {1..5}; do
         if timeout 0.5s ironbar style load-css "$css_file" >/dev/null 2>&1; then
             return 0
@@ -127,9 +124,6 @@ write_blade_strip_css() {
     css_file=$(blade_strip_css_path)
     umask 077
 
-    # The whole carrier follows the selected profile. Three same-colour ramps
-    # concentrate the optical cut beside the icons, then disperse smoothly to
-    # full transparency at the screen edge.
     printf '%s\n' \
         '#bar {' \
         '    background-image:' \
@@ -173,8 +167,6 @@ set_runtime_class_with_retry() {
     local class="$1"
     local previous_class="$2"
 
-    # The first IPC call can race the module being attached during startup.
-    # Keep the retry bounded and event-local; there is no background polling.
     for _ in {1..5}; do
         if set_runtime_class "$class" "$previous_class"; then
             return 0
@@ -243,7 +235,6 @@ watch_profile() {
                 2>/dev/null
         )
 
-        # Reconnect only if the daemon or system bus disappears.
         sleep 1
     done
 }

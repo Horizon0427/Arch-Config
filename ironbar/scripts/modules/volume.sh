@@ -86,14 +86,10 @@ watch_status() {
 
     status_line
 
-    # pactl subscribe stays idle until PipeWire/PulseAudio reports a relevant
-    # change. Reconnect if the audio server is restarted.
     while true; do
         while IFS= read -r event; do
             case "$event" in
                 *" on sink "*|*" on server "*|*" on card "*)
-                    # A single user action can emit several related events.
-                    # Drain the short burst, then render the final state once.
                     while IFS= read -r -t 0.03 event; do :; done
                     status_line
                     ;;
@@ -114,8 +110,6 @@ change_volume() {
     [[ "$step" =~ ^[1-9][0-9]*$ ]] || step=2
     [[ "$maximum" =~ ^[1-9][0-9]*$ ]] || maximum=100
 
-    # Scroll events can overlap. Serialize the read/modify/write section so
-    # fast scrolling neither loses steps nor races past the cap.
     exec {lock_fd}>"$lock_file" || return 1
     flock "$lock_fd" || return 1
 

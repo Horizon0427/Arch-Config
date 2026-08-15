@@ -7,7 +7,6 @@ watch_format() {
     while true; do
         date +"$format"
 
-        # Wake on the next minute boundary instead of polling twice a second.
         now=$(date +%s)
         wait_seconds=$((60 - now % 60))
         sleep "$wait_seconds"

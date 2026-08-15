@@ -21,8 +21,6 @@ status() {
 set_running_ironvar() {
     local value=$1
 
-    # The watcher can start while Ironbar's IPC endpoint is still settling.
-    # Retry only on a real state transition, never on a background interval.
     for _ in {1..5}; do
         if timeout 0.5s ironbar var set "$ironvar_key" "$value" \
             >/dev/null 2>&1; then
@@ -71,7 +69,6 @@ watch_status() {
                 *"PropertiesChanged"*|\
                 *"The name org.mpris.MediaPlayer2.spotify is owned by"*|\
                 *"The name org.mpris.MediaPlayer2.spotify does not have an owner"*)
-                    # Metadata and playback changes can arrive as a short burst.
                     while IFS= read -r -t 0.03 event; do :; done
                     sync_state
                     ;;
@@ -83,7 +80,6 @@ watch_status() {
                 2>/dev/null
         )
 
-        # Recovery path for a session-bus restart.
         sleep 1
         sync_state
     done
