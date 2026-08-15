@@ -85,4 +85,8 @@ Thanks to the [GTK folder templates and scripts](https://github.com/SHORiN-KiWAT
 
 ![Ironbar top](./assets/readme/rice/ironbar-top.png)
 
+![Ironbar left](./assets/readme/rice/ironbar-left.png)
+
+![Ironbar right](./assets/readme/rice/ironbar-right.png)
+
 ![Wlogout](./assets/readme/rice/wlogout.png)

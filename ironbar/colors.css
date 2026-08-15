@@ -1,20 +1,20 @@
 /* Primary */
-@define-color primary #c0c1ff;
-@define-color on-primary #292a60;
-@define-color primary-container #404178;
-@define-color on-primary-container #e1e0ff;
+@define-color primary #a0cafd;
+@define-color on-primary #003258;
+@define-color primary-container #194975;
+@define-color on-primary-container #d1e4ff;
 
 /* Secondary */
-@define-color secondary #c6c4dd;
-@define-color on-secondary #2e2f42;
-@define-color secondary-container #454559;
-@define-color on-secondary-container #e2e0f9;
+@define-color secondary #bbc7db;
+@define-color on-secondary #253140;
+@define-color secondary-container #3b4858;
+@define-color on-secondary-container #d7e3f7;
 
 /* Tertiary */
-@define-color tertiary #e9b9d3;
-@define-color on-tertiary #46263a;
-@define-color tertiary-container #5f3c51;
-@define-color on-tertiary-container #ffd8ec;
+@define-color tertiary #d6bee4;
+@define-color on-tertiary #3b2948;
+@define-color tertiary-container #523f5f;
+@define-color on-tertiary-container #f2daff;
 
 /* Error */
 @define-color error #ffb4ab;
@@ -23,22 +23,22 @@
 @define-color on-error-container #ffdad6;
 
 /* Surfaces */
-@define-color background #131318;
-@define-color on-background #e4e1e9;
-@define-color surface #131318;
-@define-color on-surface #e4e1e9;
-@define-color surface-variant #47464f;
-@define-color on-surface-variant #c8c5d0;
-@define-color surface-dim #131318;
-@define-color surface-bright #39383f;
-@define-color surface-container-lowest #0e0e13;
-@define-color surface-container-low #1b1b21;
-@define-color surface-container #1f1f25;
-@define-color surface-container-high #2a292f;
-@define-color surface-container-highest #35343a;
+@define-color background #111418;
+@define-color on-background #e1e2e8;
+@define-color surface #111418;
+@define-color on-surface #e1e2e8;
+@define-color surface-variant #43474e;
+@define-color on-surface-variant #c3c7cf;
+@define-color surface-dim #111418;
+@define-color surface-bright #36393e;
+@define-color surface-container-lowest #0b0e13;
+@define-color surface-container-low #191c20;
+@define-color surface-container #1d2024;
+@define-color surface-container-high #272a2f;
+@define-color surface-container-highest #32353a;
 
 /* Edges and depth */
-@define-color outline #918f9a;
-@define-color outline-variant #47464f;
+@define-color outline #8d9199;
+@define-color outline-variant #43474e;
 @define-color shadow #000000;
 @define-color scrim #000000;
