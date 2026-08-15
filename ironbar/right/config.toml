@@ -159,7 +159,7 @@ class = "blade-cava blade-cava-upper"
 path = "/home/horizon/.config/ironbar/right/cava-upper.lua"
 frequency = 33
 width = 42
-height = 180
+height = 228
 
 [[center]]
 type = "custom"
@@ -191,7 +191,7 @@ class = "blade-cava blade-cava-lower"
 path = "/home/horizon/.config/ironbar/right/cava-lower.lua"
 frequency = 33
 width = 42
-height = 180
+height = 228
 
 
 [[end]]

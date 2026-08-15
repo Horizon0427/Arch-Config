@@ -3,6 +3,12 @@ local terminal    = "ghostty"
 local fileManager = "thunar"
 local menu        = "walker"
 
+hl.config({
+    binds = {
+        scroll_event_delay = 150,
+    },
+})
+
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
@@ -52,6 +58,34 @@ hl.bind(mainMod .. " + ALT + 0", hl.dsp.window.move({ workspace = 10 }))
 
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
+
+local ZOOM_MIN  = 1.0
+local ZOOM_MAX  = 6.0
+local ZOOM_STEP = 2.0
+
+local function set_cursor_zoom(factor)
+    hl.config({
+        cursor = {
+            zoom_factor = math.max(ZOOM_MIN, math.min(ZOOM_MAX, factor)),
+        },
+    })
+end
+
+local function adjust_cursor_zoom(multiplier)
+    set_cursor_zoom(hl.get_config("cursor.zoom_factor") * multiplier)
+end
+
+hl.bind(mainMod .. " + SHIFT + mouse_up", function()
+    adjust_cursor_zoom(ZOOM_STEP)
+end)
+
+hl.bind(mainMod .. " + SHIFT + mouse_down", function()
+    adjust_cursor_zoom(1 / ZOOM_STEP)
+end)
+
+hl.bind(mainMod .. " + SHIFT + Z", function()
+    set_cursor_zoom(ZOOM_MIN)
+end)
 
 hl.bind(mainMod .. " + W",            hl.dsp.layout("colresize +conf"))
 hl.bind(mainMod .. " + O",            hl.dsp.layout("fit all"))

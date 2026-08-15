@@ -122,11 +122,11 @@ case "$action" in
     toggle)
         side=$(ironbar_current_side)
         case "$side" in
+            left) next_side=top ;;
             top) next_side=bottom ;;
-            bottom) next_side=left ;;
-            left) next_side=right ;;
-            right) next_side=top ;;
-            *) next_side=top ;;
+            bottom) next_side=right ;;
+            right) next_side=left ;;
+            *) next_side=left ;;
         esac
         if ironbar_stop; then
             ironbar_start "$next_side"

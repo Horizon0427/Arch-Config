@@ -577,16 +577,24 @@ popover > contents {
 }
 
 .rail-tray-popup {
-    padding: 7px;
-    background-color: alpha(@surface, 0.94);
-    background-image: none;
+    padding: 8px;
+    background-color: alpha(@surface-container, 0.98);
+    background-image:
+        radial-gradient(circle at left center,
+            alpha(@primary, 0.18),
+            transparent 48%),
+        linear-gradient(145deg,
+            alpha(@surface-bright, 0.40),
+            alpha(@surface-container-low, 0.98));
     background-clip: border-box;
-    border: 1px solid alpha(@tertiary, 0.30);
-    border-radius: 11px;
+    border: 1px solid alpha(@outline, 0.34);
+    border-radius: 12px;
     outline: none;
     box-shadow:
-        0 0 12px alpha(@primary, 0.16),
-        0 8px 24px alpha(@shadow, 0.34);
+        inset 1px 0 0 alpha(@primary, 0.16),
+        inset 0 1px 0 alpha(@on-surface, 0.08),
+        4px 8px 24px alpha(@shadow, 0.42),
+        0 0 14px alpha(@primary, 0.12);
 }
 
 .rail-tray-popup .tray {
@@ -600,33 +608,157 @@ popover > contents {
     min-height: 20px;
     margin: 2px;
     padding: 3px;
-    background-color: alpha(@surface-variant, 0.24);
-    border-radius: 7px;
-    box-shadow: none;
+    background-color: alpha(@surface-variant, 0.20);
+    background-image: linear-gradient(145deg,
+        alpha(@on-surface, 0.06),
+        alpha(@primary, 0.04));
+    border: 1px solid alpha(@outline, 0.16);
+    border-radius: 8px;
+    outline: none;
+    box-shadow: inset 0 1px 0 alpha(@on-surface, 0.06);
+    transform: scale(1);
     transition:
         background-color 0.20s ease,
+        border-color 0.20s ease,
         box-shadow 0.24s ease,
         transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 #popup-tray-gate .tray .item:hover,
 .popup-rail-tray .tray .item:hover {
-    background-color: alpha(@tertiary, 0.18);
-    box-shadow: 0 0 10px alpha(@tertiary, 0.24);
-    transform: scale(1.08);
+    background-color: alpha(@primary-container, 0.56);
+    background-image: linear-gradient(145deg,
+        alpha(@primary, 0.18),
+        alpha(@tertiary, 0.14));
+    border-color: alpha(@primary, 0.36);
+    box-shadow:
+        inset 2px 0 0 alpha(@primary, 0.72),
+        inset 0 1px 0 alpha(@on-surface, 0.10),
+        2px 3px 10px alpha(@shadow, 0.26),
+        0 0 10px alpha(@tertiary, 0.16);
+    transform: translateX(1px) scale(1.08);
+}
+
+#popup-tray-gate .tray .item:active,
+.popup-rail-tray .tray .item:active {
+    background-color: alpha(@tertiary-container, 0.62);
+    border-color: alpha(@tertiary, 0.42);
+    box-shadow: inset 2px 0 0 alpha(@tertiary, 0.78);
+    transform: translateX(1px) scale(0.96);
 }
 
 .rail-tray-popup popover > contents,
 .rail-tray-popup popover contents {
-    padding: 7px;
+    min-height: 0;
+    padding: 6px;
     background-color: alpha(@surface-container-high, 0.98);
-    background-image: none;
+    background-image:
+        radial-gradient(circle at left center,
+            alpha(@primary, 0.14),
+            transparent 42%),
+        linear-gradient(145deg,
+            alpha(@surface-bright, 0.32),
+            alpha(@surface-container, 0.98));
     background-clip: border-box;
-    border: 1px solid alpha(@outline, 0.30);
+    border: 1px solid alpha(@outline, 0.34);
     border-radius: 9px;
     box-shadow:
-        0 6px 18px alpha(@shadow, 0.38),
+        inset 1px 0 0 alpha(@primary, 0.16),
+        inset 0 1px 0 alpha(@on-surface, 0.08),
+        5px 7px 20px alpha(@shadow, 0.42),
         0 0 10px alpha(@primary, 0.10);
+}
+
+.rail-tray-popup popover contents separator {
+    min-height: 1px;
+    margin: 4px 6px;
+    background-color: alpha(@outline, 0.16);
+    background-image: linear-gradient(to right,
+        alpha(@primary, 0.42),
+        alpha(@tertiary, 0.28) 46%,
+        transparent);
+}
+
+.rail-tray-popup popover contents button,
+.rail-tray-popup popover contents menuitem,
+.rail-tray-popup popover contents modelbutton {
+    min-height: 24px;
+    margin: 1px;
+    padding: 1px 9px;
+    color: @on-surface;
+    background: transparent;
+    border: 1px solid alpha(@outline, 0.00);
+    border-radius: 7px;
+    outline: none;
+    box-shadow: none;
+    transform: none;
+    transition:
+        color 0.18s ease,
+        background-color 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.22s ease;
+}
+
+.rail-tray-popup popover contents button:hover,
+.rail-tray-popup popover contents menuitem:hover,
+.rail-tray-popup popover contents modelbutton:hover {
+    color: @on-primary-container;
+    background-color: alpha(@primary-container, 0.58);
+    background-image: linear-gradient(to right,
+        alpha(@primary, 0.18),
+        alpha(@tertiary, 0.10));
+    border-color: alpha(@primary, 0.30);
+    box-shadow:
+        inset 2px 0 0 alpha(@primary, 0.76),
+        inset 0 1px 0 alpha(@on-surface, 0.08),
+        2px 3px 8px alpha(@shadow, 0.22);
+    transform: none;
+}
+
+.rail-tray-popup popover contents button:active,
+.rail-tray-popup popover contents menuitem:active,
+.rail-tray-popup popover contents modelbutton:active,
+.rail-tray-popup popover contents modelbutton:checked {
+    color: @on-tertiary-container;
+    background-color: alpha(@tertiary-container, 0.64);
+    border-color: alpha(@tertiary, 0.34);
+    box-shadow: inset 2px 0 0 alpha(@tertiary, 0.78);
+    transform: none;
+}
+
+.rail-tray-popup popover contents button:disabled,
+.rail-tray-popup popover contents menuitem:disabled,
+.rail-tray-popup popover contents modelbutton:disabled {
+    color: alpha(@on-surface, 0.38);
+    background: transparent;
+    box-shadow: none;
+}
+
+.rail-tray-popup popover contents,
+.rail-tray-popup popover contents box,
+.rail-tray-popup popover contents button,
+.rail-tray-popup popover contents menuitem,
+.rail-tray-popup popover contents modelbutton,
+.rail-tray-popup popover contents label,
+.rail-tray-popup popover contents accelerator {
+    min-height: 0;
+    font-family: "Anthropic Serif Text", "Noto Sans Mono CJK SC", serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+}
+
+.rail-tray-popup popover contents label {
+    padding: 0;
+    color: inherit;
+    background: transparent;
+    text-shadow: 0 1px 2px alpha(@shadow, 0.36);
+}
+
+.rail-tray-popup popover contents accelerator,
+.rail-tray-popup popover contents image {
+    min-height: 0;
+    color: alpha(@on-surface-variant, 0.76);
 }
 
 tooltip,
@@ -636,23 +768,28 @@ tooltip.background {
     background-image:
         linear-gradient(to bottom,
             transparent 0%,
-            alpha(@tertiary, 0.94) 24%,
+            alpha(@primary, 0.94) 24%,
             alpha(@tertiary, 0.94) 76%,
             transparent 100%),
-        linear-gradient(to bottom,
-            alpha(@surface-bright, 0.54),
+        radial-gradient(circle at left center,
+            alpha(@primary, 0.12),
+            transparent 56%),
+        linear-gradient(145deg,
+            alpha(@surface-bright, 0.58),
             alpha(@surface-container, 0.96));
     background-repeat: no-repeat;
-    background-size: 2px 100%, 100% 100%;
-    background-position: left top, left top;
+    background-size: 2px 100%, 100% 100%, 100% 100%;
+    background-position: left top, left top, left top;
     background-clip: padding-box;
-    border: 1px solid alpha(@outline, 0.34);
-    border-radius: 8px;
+    border: 1px solid alpha(@outline, 0.36);
+    border-radius: 10px;
     outline: none;
-    padding: 7px 10px 7px 12px;
+    padding: 8px 11px 8px 14px;
     box-shadow:
-        0 7px 22px alpha(@shadow, 0.42),
-        0 0 12px alpha(@primary, 0.12);
+        inset 1px 0 0 alpha(@primary, 0.18),
+        inset 0 1px 0 alpha(@on-surface, 0.09),
+        7px 8px 24px alpha(@shadow, 0.44),
+        0 0 14px alpha(@primary, 0.12);
 }
 
 tooltip box,
@@ -665,8 +802,13 @@ tooltip label {
     font-family: "Anthropic Serif Text", "JetBrainsMono Nerd Font", "Noto Sans Mono CJK SC", serif;
     font-size: 12px;
     font-weight: 500;
+    text-shadow: 0 1px 2px alpha(@shadow, 0.42);
 }
 
+.rail-tray-popup,
+.rail-tray-popup label,
+.rail-tray-popup button,
+.rail-tray-popup popover label,
 popover.menu label {
     font-family: "Anthropic Serif Text", "Noto Sans Mono CJK SC", serif;
     font-weight: 400;

@@ -5,6 +5,8 @@ local COLORS_PATH = (os.getenv("HOME") or "/home/horizon")
 local PROFILE_PATH = "/sys/firmware/acpi/platform_profile"
 local SOURCE_BANDS = 9
 local DISPLAY_BANDS = 12
+local ACTIVE_HEIGHT = 180
+local EDGE_BUFFER = 24
 local VISUAL_GAIN = 1.32
 local ATTACK_RESPONSE = 0.74
 local RELEASE_RESPONSE = 0.29
@@ -62,12 +64,6 @@ local function new_renderer(channel)
         red = 0.50,
         green = 0.84,
         blue = 0.81,
-        dispersion_red = 0.69,
-        dispersion_green = 0.79,
-        dispersion_blue = 0.91,
-        fringe_red = 1.00,
-        fringe_green = 0.71,
-        fringe_blue = 0.67,
         last_palette_check = 0,
     }
 
@@ -118,152 +114,87 @@ local function new_renderer(channel)
 
         local profile = read_first_line(PROFILE_PATH) or "power-saver"
         local colour_name = "primary"
-        local dispersion_name = "tertiary"
-        local fringe_name = "error"
         local fallback = { 0.50, 0.84, 0.81 }
-        local dispersion_fallback = { 0.69, 0.79, 0.91 }
-        local fringe_fallback = { 1.00, 0.71, 0.67 }
 
         if profile == "balanced" then
             colour_name = "tertiary"
-            dispersion_name = "primary"
             fallback = { 0.69, 0.79, 0.91 }
-            dispersion_fallback = { 0.50, 0.84, 0.81 }
         elseif profile == "performance" then
             colour_name = "error"
-            dispersion_name = "tertiary"
-            fringe_name = "primary"
             fallback = { 1.00, 0.71, 0.67 }
-            dispersion_fallback = { 0.69, 0.79, 0.91 }
-            fringe_fallback = { 0.50, 0.84, 0.81 }
         end
 
         local colour = parse_colour(colour_name, fallback)
-        local dispersion = parse_colour(
-            dispersion_name,
-            dispersion_fallback
-        )
-        local fringe = parse_colour(fringe_name, fringe_fallback)
         state.red, state.green, state.blue = colour[1], colour[2], colour[3]
-        state.dispersion_red = dispersion[1]
-        state.dispersion_green = dispersion[2]
-        state.dispersion_blue = dispersion[3]
-        state.fringe_red = fringe[1]
-        state.fringe_green = fringe[2]
-        state.fringe_blue = fringe[3]
     end
 
     local function set_colour(cr, alpha)
         cr:set_source_rgba(state.red, state.green, state.blue, alpha)
     end
 
-    local function set_dispersion(cr, alpha)
-        cr:set_source_rgba(
-            state.dispersion_red,
-            state.dispersion_green,
-            state.dispersion_blue,
-            alpha
-        )
-    end
-
-    local function set_fringe(cr, alpha)
-        cr:set_source_rgba(
-            state.fringe_red,
-            state.fringe_green,
-            state.fringe_blue,
-            alpha
-        )
-    end
-
-    local function set_mix(cr, amount, alpha)
-        local inverse = 1 - amount
-        cr:set_source_rgba(
-            state.red * inverse + state.dispersion_red * amount,
-            state.green * inverse + state.dispersion_green * amount,
-            state.blue * inverse + state.dispersion_blue * amount,
-            alpha
-        )
-    end
-
-    local function paint_beam(cr, origin_x, y, length, energy)
-        local segments = 5
-        for segment = 0, segments - 1 do
-            local proximity = 1 - segment / segments
-            local dispersion = segment / (segments - 1)
-            local right_x = origin_x - length * segment / segments
-            local left_x = origin_x - length * (segment + 1) / segments
-            local alpha = (0.035 + 0.19 * energy) * proximity * proximity
-
-            set_mix(cr, dispersion * 0.82, alpha)
-            cr:set_line_width(0.48 + 0.28 * proximity)
-            cr:move_to(left_x, y)
-            cr:line_to(right_x, y)
-            cr:stroke()
-
-            set_dispersion(cr, alpha * (0.28 + 0.42 * dispersion))
-            cr:set_line_width(0.32)
-            cr:move_to(left_x, y - 0.58)
-            cr:line_to(right_x, y - 0.58)
-            cr:stroke()
-
-            set_fringe(cr, alpha * (0.10 + 0.20 * dispersion))
-            cr:set_line_width(0.28)
-            cr:move_to(left_x, y + 0.58)
-            cr:line_to(right_x, y + 0.58)
-            cr:stroke()
+    local function scaled_points(points, origin_x, scale)
+        local result = {}
+        for index, point in ipairs(points) do
+            result[index] = {
+                x = origin_x - (origin_x - point.x) * scale,
+                y = point.y,
+            }
         end
-
-        set_colour(cr, 0.26 + 0.36 * energy)
-        cr:set_line_width(0.72)
-        cr:move_to(origin_x - 1.8, y)
-        cr:line_to(origin_x, y)
-        cr:stroke()
+        return result
     end
 
-    local function paint_shard(cr, x, y, lit)
-        local tail = 1.7 + 3.5 * lit
+    local function trace_contour(cr, points)
+        cr:move_to(points[1].x, points[1].y)
+        for index = 2, #points do
+            local previous = points[index - 1]
+            local point = points[index]
+            local middle_y = (previous.y + point.y) * 0.5
+            cr:curve_to(
+                previous.x,
+                middle_y,
+                point.x,
+                middle_y,
+                point.x,
+                point.y
+            )
+        end
+    end
 
-        set_dispersion(cr, 0.070 + 0.20 * lit)
-        cr:set_line_width(1.35)
-        cr:move_to(x - tail, y)
-        cr:line_to(x - 0.35, y)
-        cr:stroke()
-
-        set_dispersion(cr, 0.12 + 0.24 * lit)
-        cr:set_line_width(0.34)
-        cr:move_to(x - tail + 0.30, y - 0.62)
-        cr:line_to(x - 0.45, y - 0.62)
-        cr:stroke()
-
-        set_fringe(cr, 0.035 + 0.10 * lit)
-        cr:set_line_width(0.30)
-        cr:move_to(x - tail + 0.55, y + 0.62)
-        cr:line_to(x - 0.45, y + 0.62)
-        cr:stroke()
-
-        set_mix(cr, 0.34, 0.22 + 0.42 * lit)
-        cr:set_line_width(0.60)
-        cr:move_to(x - 1.0 - 1.4 * lit, y)
-        cr:line_to(x + 0.05, y)
-        cr:stroke()
-
-        set_colour(cr, 0.38 + 0.56 * lit)
-        cr:move_to(x + 0.45, y)
-        cr:line_to(x - 0.45, y - 0.64)
-        cr:line_to(x - 0.45, y + 0.64)
+    local function fill_fog(cr, points, origin_x, alpha)
+        cr:new_path()
+        trace_contour(cr, points)
+        cr:line_to(origin_x, points[#points].y)
+        cr:line_to(origin_x, points[1].y)
         cr:close_path()
+        set_colour(cr, alpha)
         cr:fill()
     end
 
+    local fog_layers = {
+        { scale = 1.08, alpha = 0.004, pulse = 0.010 },
+        { scale = 1.00, alpha = 0.006, pulse = 0.014 },
+        { scale = 0.92, alpha = 0.009, pulse = 0.020 },
+        { scale = 0.82, alpha = 0.013, pulse = 0.028 },
+        { scale = 0.71, alpha = 0.017, pulse = 0.036 },
+        { scale = 0.58, alpha = 0.023, pulse = 0.046 },
+        { scale = 0.44, alpha = 0.030, pulse = 0.056 },
+        { scale = 0.30, alpha = 0.037, pulse = 0.065 },
+        { scale = 0.18, alpha = 0.045, pulse = 0.075 },
+    }
+
     return function(cr, width, height)
         width = width or 36
-        height = height or 180
+        height = height or (ACTIVE_HEIGHT + 2 * EDGE_BUFFER)
         refresh_palette()
 
         local targets = read_targets()
         local origin_x = width - 5
         local max_length = math.max(8, origin_x - 3)
-        local row_height = height / DISPLAY_BANDS
+        local buffer = math.min(EDGE_BUFFER, math.max(0, (height - 1) * 0.25))
+        local active_height = math.min(ACTIVE_HEIGHT, height - 2 * buffer)
+        local active_top = (height - active_height) * 0.5
+        local row_height = active_height / DISPLAY_BANDS
+        local raw_energy = {}
 
         for index = 1, DISPLAY_BANDS do
             local target = targets
@@ -279,25 +210,73 @@ local function new_renderer(channel)
                 current = 0
             end
             state.levels[index] = current
+            raw_energy[index] = (current / 7) ^ 0.78
+        end
 
-            if current > 0 then
-                local energy = current / 7
-                local y = (index - 0.5) * row_height
-                local length = energy * max_length
-
-                paint_beam(cr, origin_x, y, length, energy)
-
-                local shard_count = 7
-                local lit_extent = energy * shard_count
-                for shard = 0, shard_count - 1 do
-                    local lit = clamp(lit_extent - shard, 0, 1)
-                    if lit > 0.02 then
-                        local x = origin_x
-                            - shard * max_length / (shard_count - 1)
-                        paint_shard(cr, x, y, lit)
-                    end
-                end
+        local energies = {}
+        local average_energy = 0
+        local peak_energy = 0
+        for index = 1, DISPLAY_BANDS do
+            local previous = raw_energy[math.max(1, index - 1)]
+            local current = raw_energy[index]
+            local following = raw_energy[math.min(DISPLAY_BANDS, index + 1)]
+            local energy = (previous + 2 * current + following) * 0.25
+            energies[index] = energy
+            average_energy = average_energy + energy
+            if energy > peak_energy then
+                peak_energy = energy
             end
+        end
+        average_energy = average_energy / DISPLAY_BANDS
+
+        local base_width = 1.7
+        local top_length = base_width
+            + energies[1] * (max_length - base_width)
+        local bottom_length = base_width
+            + energies[DISPLAY_BANDS] * (max_length - base_width)
+        local points = {
+            { x = origin_x, y = 0.5 },
+            {
+                x = origin_x - top_length * 0.04,
+                y = buffer * 0.32,
+            },
+            {
+                x = origin_x - top_length * 0.18,
+                y = buffer * 0.62,
+            },
+            {
+                x = origin_x - top_length * 0.48,
+                y = buffer * 0.86,
+            },
+        }
+        for index = 1, DISPLAY_BANDS do
+            local energy = energies[index]
+            local length = base_width + energy * (max_length - base_width)
+            points[#points + 1] = {
+                x = origin_x - length,
+                y = active_top + (index - 0.5) * row_height,
+            }
+        end
+        for _, stop in ipairs({
+            { position = 0.86, width = 0.48 },
+            { position = 0.62, width = 0.18 },
+            { position = 0.32, width = 0.04 },
+        }) do
+            points[#points + 1] = {
+                x = origin_x - bottom_length * stop.width,
+                y = height - buffer * stop.position,
+            }
+        end
+        points[#points + 1] = { x = origin_x, y = height - 0.5 }
+
+        local fog_activity = 0.68 * average_energy + 0.32 * peak_energy
+        for _, layer in ipairs(fog_layers) do
+            fill_fog(
+                cr,
+                scaled_points(points, origin_x, layer.scale),
+                origin_x,
+                layer.alpha + layer.pulse * fog_activity
+            )
         end
     end
 end
