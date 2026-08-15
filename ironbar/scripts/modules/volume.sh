@@ -25,13 +25,23 @@ sink_volume() {
     printf '%s\n' "$volume"
 }
 
+print_status() {
+    local volume=$1 icon=$2
+
+    if [[ "${IRONBAR_RAIL_COMPACT:-0}" == 1 ]]; then
+        printf '%s\n' "$icon"
+    else
+        printf '%s%% %s\n' "$volume" "$icon"
+    fi
+}
+
 status_line() {
-    local sink volume muted active_port
+    local sink volume muted active_port icon
     local is_headphones=0
 
     sink=$(active_sink)
     if [[ -z "$sink" ]]; then
-        printf '0%% 󰕿\n'
+        print_status 0 '󰕿'
         return
     fi
 
@@ -57,16 +67,18 @@ status_line() {
     fi
 
     if ((muted)); then
-        printf '%s%% 󰝟\n' "$volume"
+        icon='󰝟'
     elif ((is_headphones)); then
-        printf '%s%% 󰋋\n' "$volume"
+        icon='󰋋'
     elif ((volume >= 30)); then
-        printf '%s%% 󰕾\n' "$volume"
+        icon='󰕾'
     elif ((volume >= 10)); then
-        printf '%s%% 󰖀\n' "$volume"
+        icon='󰖀'
     else
-        printf '%s%% 󰕿\n' "$volume"
+        icon='󰕿'
     fi
+
+    print_status "$volume" "$icon"
 }
 
 watch_status() {

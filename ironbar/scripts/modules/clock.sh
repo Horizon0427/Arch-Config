@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
-watch_time() {
+watch_format() {
+    local format="$1"
     local now wait_seconds
 
     while true; do
-        date +'%H:%M'
+        date +"$format"
 
         # Wake on the next minute boundary instead of polling twice a second.
         now=$(date +%s)
@@ -13,12 +14,20 @@ watch_time() {
     done
 }
 
+watch_time() {
+    watch_format '%H:%M'
+}
+
 case "${1:-time}" in
-    time) date +'%H:%M' ;;
-    watch) watch_time ;;
-    date) date +'%Y-%m-%d %A' ;;
+    time)         date +'%H:%M' ;;
+    hour)         date +'%H' ;;
+    minute)       date +'%M' ;;
+    watch)        watch_time ;;
+    watch-hour)   watch_format '%H' ;;
+    watch-minute) watch_format '%M' ;;
+    date)         date +'%Y-%m-%d %A' ;;
     *)
-        printf 'Usage: %s {time|watch|date}\n' "$0" >&2
+        printf 'Usage: %s {time|hour|minute|watch|watch-hour|watch-minute|date}\n' "$0" >&2
         exit 2
         ;;
 esac

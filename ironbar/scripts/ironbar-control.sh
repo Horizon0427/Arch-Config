@@ -7,23 +7,29 @@ lock_file="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/ironbar-control.lock"
 
 ironbar_server_pids() {
     ps -C ironbar -o pid=,stat=,args= 2>/dev/null \
-        | awk '$2 !~ /^Z/ && $0 ~ /\/(top|bottom)\/config\.toml/ { print $1 }'
+        | awk '$2 !~ /^Z/ && $0 ~ /\/(top|bottom|left|right)\/config\.toml/ { print $1 }'
 }
 
 ironbar_current_side() {
-    if ps -C ironbar -o stat=,args= 2>/dev/null \
-        | awk '$1 !~ /^Z/ && $0 ~ /\/bottom\/config\.toml/ { found = 1 } END { exit !found }'; then
-        printf 'bottom\n'
-    else
-        printf 'top\n'
-    fi
+    local side
+
+    side=$(
+        ps -C ironbar -o stat=,args= 2>/dev/null \
+            | awk '
+                $1 !~ /^Z/ && match($0, /\/(top|bottom|left|right)\/config\.toml/, m) {
+                    print m[1]
+                    exit
+                }
+            '
+    )
+    printf '%s\n' "${side:-top}"
 }
 
 ironbar_start() {
     local side=${1:-top}
 
     case "$side" in
-        top|bottom) ;;
+        top|bottom|left|right) ;;
         *) printf 'invalid side: %s\n' "$side" >&2; return 2 ;;
     esac
 
@@ -90,7 +96,7 @@ ironbar_stop() {
 }
 
 usage() {
-    printf 'usage: %s {start [top|bottom]|stop|reload|toggle|status}\n' "$0" >&2
+    printf 'usage: %s {start [top|bottom|left|right]|stop|reload|toggle|status}\n' "$0" >&2
 }
 
 action=${1:-status}
@@ -115,8 +121,15 @@ case "$action" in
         ;;
     toggle)
         side=$(ironbar_current_side)
+        case "$side" in
+            top) next_side=bottom ;;
+            bottom) next_side=left ;;
+            left) next_side=right ;;
+            right) next_side=top ;;
+            *) next_side=top ;;
+        esac
         if ironbar_stop; then
-            [[ "$side" == top ]] && ironbar_start bottom || ironbar_start top
+            ironbar_start "$next_side"
         fi
         ;;
     status)

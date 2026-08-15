@@ -4,7 +4,11 @@ shopt -s nullglob
 
 batteries=(/sys/class/power_supply/BAT*)
 if ((${#batteries[@]} == 0)); then
-    printf 'N/A \n'
+    if [[ "${IRONBAR_RAIL_COMPACT:-0}" == 1 ]]; then
+        printf '\n'
+    else
+        printf 'N/A \n'
+    fi
     exit 0
 fi
 
@@ -30,4 +34,8 @@ else
     icon=""
 fi
 
-printf '%s%% %s\n' "$capacity" "$icon"
+if [[ "${IRONBAR_RAIL_COMPACT:-0}" == 1 ]]; then
+    printf '%s\n' "$icon"
+else
+    printf '%s%% %s\n' "$capacity" "$icon"
+fi

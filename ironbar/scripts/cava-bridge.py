@@ -14,6 +14,7 @@ from pathlib import Path
 
 
 IDLE_FRAME = ("▁" * 18 + "\n").encode()
+BLOCK_LEVELS = {char: level for level, char in enumerate("▁▂▃▄▅▆▇█")}
 
 
 def socket_path() -> Path:
@@ -21,6 +22,28 @@ def socket_path() -> Path:
     bridge_dir = runtime_dir / "ironbar-cava"
     bridge_dir.mkdir(mode=0o700, parents=True, exist_ok=True)
     return bridge_dir / "bridge.sock"
+
+
+def snapshot_path() -> Path:
+    return socket_path().with_name("frame")
+
+
+def snapshot_frame(frame: bytes) -> bytes:
+    """Convert the glyph frame into cheap-to-parse numeric levels for Cairo."""
+    text = frame.decode(errors="replace").rstrip("\r\n")
+    levels = [BLOCK_LEVELS[char] for char in text if char in BLOCK_LEVELS]
+    if not levels:
+        levels = [0] * 18
+    return (";".join(str(level) for level in levels) + "\n").encode()
+
+
+def write_snapshot(path: Path, frame: bytes) -> None:
+    try:
+        path.write_bytes(snapshot_frame(frame))
+    except OSError:
+        # The stream bridge remains useful even if the optional Cairo snapshot
+        # cannot be exposed for a frame.
+        pass
 
 
 def broadcast(clients: set[socket.socket], frame: bytes) -> None:
@@ -40,6 +63,7 @@ def broadcast(clients: set[socket.socket], frame: bytes) -> None:
 
 def serve(producer_path: str) -> int:
     path = socket_path()
+    snapshot = snapshot_path()
     path.unlink(missing_ok=True)
 
     server = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
@@ -63,6 +87,11 @@ def serve(producer_path: str) -> int:
 
     clients: set[socket.socket] = set()
     latest = IDLE_FRAME
+    write_snapshot(snapshot, latest)
+    try:
+        os.chmod(snapshot, 0o600)
+    except OSError:
+        pass
     pending = b""
     running = True
 
@@ -102,6 +131,7 @@ def serve(producer_path: str) -> int:
                     while b"\n" in pending:
                         line, pending = pending.split(b"\n", 1)
                         latest = line + b"\n"
+                        write_snapshot(snapshot, latest)
                         broadcast(clients, latest)
     finally:
         selector.close()
@@ -109,6 +139,7 @@ def serve(producer_path: str) -> int:
             client.close()
         server.close()
         path.unlink(missing_ok=True)
+        snapshot.unlink(missing_ok=True)
 
         if producer.poll() is None:
             producer.terminate()
