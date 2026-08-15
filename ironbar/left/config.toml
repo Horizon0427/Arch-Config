@@ -1,0 +1,330 @@
+name = "left-rail"
+position = "left"
+height = 38
+margin_top = 10
+margin_bottom = 10
+margin_left = 2
+margin_right = 2
+anchor_to_edges = true
+exclusive_zone = true
+popup_gap = 8
+ironvar_defaults.spotify_running = "false"
+
+
+[[start]]
+type = "custom"
+class = "rail-item rail-clock"
+tooltip = "{{~/.config/ironbar/scripts/modules/clock.sh date}}"
+
+[[start.bar]]
+type = "box"
+class = "rail-row"
+orientation = "horizontal"
+
+[[start.bar.widgets]]
+type = "box"
+class = "rail-marker"
+halign = "center"
+valign = "center"
+
+[[start.bar.widgets]]
+type = "box"
+class = "rail-clock-stack"
+orientation = "vertical"
+
+[[start.bar.widgets.widgets]]
+type = "script"
+class = "rail-clock-digit rail-hour"
+mode = "watch"
+cmd = "~/.config/ironbar/scripts/modules/clock.sh watch-hour"
+
+[[start.bar.widgets.widgets]]
+type = "script"
+class = "rail-clock-digit rail-minute"
+mode = "watch"
+cmd = "~/.config/ironbar/scripts/modules/clock.sh watch-minute"
+
+[[start]]
+type = "workspaces"
+class = "rail-workspaces"
+hidden = ["special:spotify"]
+sort = "index"
+
+[start.name_map]
+1 = "I"
+2 = "II"
+3 = "III"
+4 = "IV"
+5 = "V"
+6 = "VI"
+7 = "VII"
+8 = "VIII"
+9 = "IX"
+10 = "X"
+
+[[start]]
+type = "custom"
+class = "rail-item rail-media rail-media-prev"
+show_if = "#spotify_running"
+transition_type = "crossfade"
+tooltip = "Previous"
+on_click_left = "~/.config/ironbar/scripts/modules/spotify.sh previous"
+
+[[start.bar]]
+type = "box"
+class = "rail-row"
+orientation = "horizontal"
+
+[[start.bar.widgets]]
+type = "box"
+class = "rail-marker"
+halign = "center"
+valign = "center"
+
+[[start.bar.widgets]]
+type = "label"
+class = "rail-icon"
+label = "󰒮"
+
+[[start]]
+type = "custom"
+class = "rail-item rail-media rail-spotify"
+show_if = "#spotify_running"
+transition_type = "crossfade"
+tooltip = "{{~/.config/ironbar/scripts/modules/spotify.sh metadata}}"
+on_click_left = "~/.config/ironbar/scripts/modules/spotify.sh toggle"
+
+[[start.bar]]
+type = "box"
+class = "rail-row"
+orientation = "horizontal"
+
+[[start.bar.widgets]]
+type = "box"
+class = "rail-marker"
+halign = "center"
+valign = "center"
+
+[[start.bar.widgets]]
+type = "script"
+class = "rail-icon"
+mode = "watch"
+cmd = "~/.config/ironbar/scripts/modules/spotify.sh watch"
+
+[[start]]
+type = "custom"
+class = "rail-item rail-media rail-media-next"
+show_if = "#spotify_running"
+transition_type = "crossfade"
+tooltip = "Next"
+on_click_left = "~/.config/ironbar/scripts/modules/spotify.sh next"
+
+[[start.bar]]
+type = "box"
+class = "rail-row"
+orientation = "horizontal"
+
+[[start.bar.widgets]]
+type = "box"
+class = "rail-marker"
+halign = "center"
+valign = "center"
+
+[[start.bar.widgets]]
+type = "label"
+class = "rail-icon"
+label = "󰒭"
+
+
+[[center]]
+type = "cairo"
+class = "rail-cava rail-cava-left"
+path = "/home/horizon/.config/ironbar/left/cava-left.lua"
+frequency = 33
+width = 36
+height = 180
+
+[[center]]
+type = "custom"
+name = "power-btn"
+class = "rail-item rail-profile"
+tooltip = "{{~/.config/ironbar/scripts/modules/power-profile.sh current}}"
+on_click_left = "~/.config/ironbar/scripts/modules/power-profile.sh toggle"
+
+[[center.bar]]
+type = "box"
+class = "rail-row"
+orientation = "horizontal"
+
+[[center.bar.widgets]]
+type = "box"
+class = "rail-marker"
+halign = "center"
+valign = "center"
+
+[[center.bar.widgets]]
+type = "script"
+class = "rail-icon"
+mode = "watch"
+cmd = "IRONBAR_RAIL_PROFILE=1 ~/.config/ironbar/scripts/modules/power-profile.sh watch"
+
+[[center]]
+type = "cairo"
+class = "rail-cava rail-cava-right"
+path = "/home/horizon/.config/ironbar/left/cava-right.lua"
+frequency = 33
+width = 36
+height = 180
+
+
+[[end]]
+type = "custom"
+class = "rail-item rail-longshot"
+tooltip = "Longshot · right click to cancel"
+on_click_left = "/home/horizon/Projects/python-projects/hypr-longshot/.venv/bin/python /home/horizon/Projects/python-projects/hypr-longshot/longshot.py toggle"
+on_click_right = "/home/horizon/Projects/python-projects/hypr-longshot/.venv/bin/python /home/horizon/Projects/python-projects/hypr-longshot/longshot.py cancel"
+
+[[end.bar]]
+type = "box"
+class = "rail-row"
+orientation = "horizontal"
+
+[[end.bar.widgets]]
+type = "box"
+class = "rail-marker"
+halign = "center"
+valign = "center"
+
+[[end.bar.widgets]]
+type = "script"
+class = "rail-icon"
+mode = "watch"
+cmd = "/home/horizon/Projects/python-projects/hypr-longshot/.venv/bin/python /home/horizon/Projects/python-projects/hypr-longshot/longshot.py watch --icon"
+
+[[end]]
+type = "custom"
+class = "rail-item rail-brightness"
+tooltip = "Brightness · scroll to adjust"
+on_scroll_up = "~/.config/ironbar/scripts/modules/brightness.sh up"
+on_scroll_down = "~/.config/ironbar/scripts/modules/brightness.sh down"
+
+[[end.bar]]
+type = "box"
+class = "rail-row"
+orientation = "horizontal"
+
+[[end.bar.widgets]]
+type = "box"
+class = "rail-marker"
+halign = "center"
+valign = "center"
+
+[[end.bar.widgets]]
+type = "script"
+class = "rail-icon"
+mode = "poll"
+interval = 500
+cmd = "~/.config/ironbar/scripts/modules/brightness.sh status"
+
+[[end]]
+type = "custom"
+class = "rail-item rail-volume"
+tooltip = "{{~/.config/ironbar/scripts/modules/volume.sh status}}"
+on_scroll_up = "~/.config/ironbar/scripts/modules/volume.sh up"
+on_scroll_down = "~/.config/ironbar/scripts/modules/volume.sh down"
+on_click_left = "~/.config/ironbar/scripts/modules/volume.sh open"
+on_click_right = "~/.config/ironbar/scripts/modules/volume.sh mute"
+
+[[end.bar]]
+type = "box"
+class = "rail-row"
+orientation = "horizontal"
+
+[[end.bar.widgets]]
+type = "box"
+class = "rail-marker"
+halign = "center"
+valign = "center"
+
+[[end.bar.widgets]]
+type = "script"
+class = "rail-icon"
+mode = "watch"
+cmd = "IRONBAR_RAIL_COMPACT=1 ~/.config/ironbar/scripts/modules/volume.sh watch"
+
+[[end]]
+type = "custom"
+class = "rail-item rail-bluetooth"
+tooltip = "{{~/.config/ironbar/scripts/modules/bluetooth.sh tooltip}}"
+on_click_left = "~/.config/ironbar/scripts/modules/bluetooth.sh open"
+
+[[end.bar]]
+type = "box"
+class = "rail-row"
+orientation = "horizontal"
+
+[[end.bar.widgets]]
+type = "box"
+class = "rail-marker"
+halign = "center"
+valign = "center"
+
+[[end.bar.widgets]]
+type = "script"
+class = "rail-icon"
+mode = "watch"
+cmd = "~/.config/ironbar/scripts/modules/bluetooth.sh watch"
+
+[[end]]
+type = "custom"
+name = "tray-gate"
+class = "rail-item rail-tray"
+tooltip = "System tray · click to toggle"
+
+[[end.bar]]
+type = "button"
+name = "tray-gate-button"
+class = "rail-row"
+orientation = "horizontal"
+on_click = "popup:toggle"
+
+[[end.bar.widgets]]
+type = "box"
+class = "rail-marker"
+halign = "center"
+valign = "center"
+
+[[end.bar.widgets]]
+type = "label"
+class = "rail-icon rail-tray-icon"
+label = "󰀻"
+
+[[end.popup]]
+type = "tray"
+class = "rail-tray-popup"
+direction = "horizontal"
+icon_size = 20
+on_click_left = "default"
+on_click_right = "menu"
+
+[[end]]
+type = "custom"
+class = "rail-item rail-power"
+tooltip = "Power menu"
+on_click_left = "wlogout -b 3 -T 300 -B 300"
+
+[[end.bar]]
+type = "box"
+class = "rail-row"
+orientation = "horizontal"
+
+[[end.bar.widgets]]
+type = "box"
+class = "rail-marker"
+halign = "center"
+valign = "center"
+
+[[end.bar.widgets]]
+type = "label"
+class = "rail-icon"
+label = "⏻"

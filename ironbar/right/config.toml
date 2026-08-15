@@ -1,0 +1,377 @@
+name = "right-blade"
+position = "right"
+height = 44
+margin_top = 10
+margin_bottom = 10
+margin_left = 2
+margin_right = 2
+anchor_to_edges = true
+exclusive_zone = true
+popup_gap = 8
+ironvar_defaults.spotify_running = "false"
+
+
+[[start]]
+type = "custom"
+class = "blade-cap blade-cap-top"
+
+[[start.bar]]
+type = "box"
+class = "blade-cap-row"
+orientation = "horizontal"
+
+[[start.bar.widgets]]
+type = "box"
+class = "blade-cap-line"
+halign = "end"
+valign = "center"
+
+[[start]]
+type = "custom"
+class = "blade-clock"
+tooltip = "{{~/.config/ironbar/scripts/modules/clock.sh date}}"
+
+[[start.bar]]
+type = "box"
+class = "blade-row blade-clock-row"
+orientation = "horizontal"
+
+[[start.bar.widgets]]
+type = "box"
+class = "blade-clock-stack"
+orientation = "vertical"
+halign = "center"
+valign = "center"
+
+[[start.bar.widgets.widgets]]
+type = "script"
+class = "blade-clock-digit blade-hour"
+mode = "watch"
+cmd = "~/.config/ironbar/scripts/modules/clock.sh watch-hour"
+
+[[start.bar.widgets.widgets]]
+type = "script"
+class = "blade-clock-digit blade-minute"
+mode = "watch"
+cmd = "~/.config/ironbar/scripts/modules/clock.sh watch-minute"
+
+[[start.bar.widgets]]
+type = "box"
+class = "blade-node"
+halign = "center"
+valign = "center"
+
+[[start]]
+type = "workspaces"
+class = "blade-workspaces"
+hidden = ["special:spotify"]
+sort = "index"
+
+[start.name_map]
+1 = "1"
+2 = "2"
+3 = "3"
+4 = "4"
+5 = "5"
+6 = "6"
+7 = "7"
+8 = "8"
+9 = "9"
+10 = "10"
+
+[[start]]
+type = "custom"
+class = "blade-item blade-media blade-media-prev"
+show_if = "#spotify_running"
+transition_type = "crossfade"
+tooltip = "Previous"
+on_click_left = "~/.config/ironbar/scripts/modules/spotify.sh previous"
+
+[[start.bar]]
+type = "box"
+class = "blade-row"
+orientation = "horizontal"
+
+[[start.bar.widgets]]
+type = "label"
+class = "blade-icon"
+label = "󰒮"
+
+[[start.bar.widgets]]
+type = "box"
+class = "blade-node"
+halign = "center"
+valign = "center"
+
+[[start]]
+type = "custom"
+class = "blade-item blade-media blade-spotify"
+show_if = "#spotify_running"
+transition_type = "crossfade"
+tooltip = "{{~/.config/ironbar/scripts/modules/spotify.sh metadata}}"
+on_click_left = "~/.config/ironbar/scripts/modules/spotify.sh toggle"
+
+[[start.bar]]
+type = "box"
+class = "blade-row"
+orientation = "horizontal"
+
+[[start.bar.widgets]]
+type = "script"
+class = "blade-icon"
+mode = "watch"
+cmd = "~/.config/ironbar/scripts/modules/spotify.sh watch"
+
+[[start.bar.widgets]]
+type = "box"
+class = "blade-node"
+halign = "center"
+valign = "center"
+
+[[start]]
+type = "custom"
+class = "blade-item blade-media blade-media-next"
+show_if = "#spotify_running"
+transition_type = "crossfade"
+tooltip = "Next"
+on_click_left = "~/.config/ironbar/scripts/modules/spotify.sh next"
+
+[[start.bar]]
+type = "box"
+class = "blade-row"
+orientation = "horizontal"
+
+[[start.bar.widgets]]
+type = "label"
+class = "blade-icon"
+label = "󰒭"
+
+[[start.bar.widgets]]
+type = "box"
+class = "blade-node"
+halign = "center"
+valign = "center"
+
+
+[[center]]
+type = "cairo"
+class = "blade-cava blade-cava-upper"
+path = "/home/horizon/.config/ironbar/right/cava-upper.lua"
+frequency = 33
+width = 42
+height = 180
+
+[[center]]
+type = "custom"
+name = "power-btn"
+class = "blade-profile"
+tooltip = "{{~/.config/ironbar/scripts/modules/power-profile.sh current}}"
+on_click_left = "~/.config/ironbar/scripts/modules/power-profile.sh toggle"
+
+[[center.bar]]
+type = "box"
+class = "blade-row blade-profile-row"
+orientation = "horizontal"
+
+[[center.bar.widgets]]
+type = "script"
+class = "blade-profile-state"
+mode = "watch"
+cmd = "IRONBAR_BLADE_PROFILE=1 ~/.config/ironbar/scripts/modules/power-profile.sh watch"
+
+[[center.bar.widgets]]
+type = "box"
+class = "blade-core"
+halign = "center"
+valign = "center"
+
+[[center]]
+type = "cairo"
+class = "blade-cava blade-cava-lower"
+path = "/home/horizon/.config/ironbar/right/cava-lower.lua"
+frequency = 33
+width = 42
+height = 180
+
+
+[[end]]
+type = "custom"
+class = "blade-item blade-longshot"
+tooltip = "Longshot · right click to cancel"
+on_click_left = "/home/horizon/Projects/python-projects/hypr-longshot/.venv/bin/python /home/horizon/Projects/python-projects/hypr-longshot/longshot.py toggle"
+on_click_right = "/home/horizon/Projects/python-projects/hypr-longshot/.venv/bin/python /home/horizon/Projects/python-projects/hypr-longshot/longshot.py cancel"
+
+[[end.bar]]
+type = "box"
+class = "blade-row"
+orientation = "horizontal"
+
+[[end.bar.widgets]]
+type = "script"
+class = "blade-icon"
+mode = "watch"
+cmd = "/home/horizon/Projects/python-projects/hypr-longshot/.venv/bin/python /home/horizon/Projects/python-projects/hypr-longshot/longshot.py watch --icon"
+
+[[end.bar.widgets]]
+type = "box"
+class = "blade-node"
+halign = "center"
+valign = "center"
+
+[[end]]
+type = "custom"
+class = "blade-item blade-brightness"
+tooltip = "Brightness · scroll to adjust"
+on_scroll_up = "~/.config/ironbar/scripts/modules/brightness.sh up"
+on_scroll_down = "~/.config/ironbar/scripts/modules/brightness.sh down"
+
+[[end.bar]]
+type = "box"
+class = "blade-row"
+orientation = "horizontal"
+
+[[end.bar.widgets]]
+type = "script"
+class = "blade-icon"
+mode = "poll"
+interval = 500
+cmd = "~/.config/ironbar/scripts/modules/brightness.sh status"
+
+[[end.bar.widgets]]
+type = "box"
+class = "blade-node"
+halign = "center"
+valign = "center"
+
+[[end]]
+type = "custom"
+class = "blade-item blade-volume"
+tooltip = "{{~/.config/ironbar/scripts/modules/volume.sh status}}"
+on_scroll_up = "~/.config/ironbar/scripts/modules/volume.sh up"
+on_scroll_down = "~/.config/ironbar/scripts/modules/volume.sh down"
+on_click_left = "~/.config/ironbar/scripts/modules/volume.sh open"
+on_click_right = "~/.config/ironbar/scripts/modules/volume.sh mute"
+
+[[end.bar]]
+type = "box"
+class = "blade-row"
+orientation = "horizontal"
+
+[[end.bar.widgets]]
+type = "script"
+class = "blade-icon"
+mode = "watch"
+cmd = "IRONBAR_RAIL_COMPACT=1 ~/.config/ironbar/scripts/modules/volume.sh watch"
+
+[[end.bar.widgets]]
+type = "box"
+class = "blade-node"
+halign = "center"
+valign = "center"
+
+[[end]]
+type = "custom"
+class = "blade-item blade-bluetooth"
+tooltip = "{{~/.config/ironbar/scripts/modules/bluetooth.sh tooltip}}"
+on_click_left = "~/.config/ironbar/scripts/modules/bluetooth.sh open"
+
+[[end.bar]]
+type = "box"
+class = "blade-row"
+orientation = "horizontal"
+
+[[end.bar.widgets]]
+type = "script"
+class = "blade-icon"
+mode = "watch"
+cmd = "~/.config/ironbar/scripts/modules/bluetooth.sh watch"
+
+[[end.bar.widgets]]
+type = "box"
+class = "blade-node"
+halign = "center"
+valign = "center"
+
+[[end]]
+type = "custom"
+name = "tray-gate"
+class = "blade-item blade-tray"
+tooltip = "System tray · click to toggle"
+
+[[end.bar]]
+type = "button"
+name = "tray-gate-button"
+class = "blade-row"
+orientation = "horizontal"
+on_click = "popup:toggle"
+
+[[end.bar.widgets]]
+type = "label"
+class = "blade-icon blade-tray-icon"
+label = "󰀻"
+
+[[end.bar.widgets]]
+type = "box"
+class = "blade-node"
+halign = "center"
+valign = "center"
+
+[[end.popup]]
+type = "tray"
+class = "blade-tray-popup"
+direction = "horizontal"
+icon_size = 20
+on_click_left = "default"
+on_click_right = "menu"
+
+[[end]]
+type = "custom"
+class = "blade-separator blade-separator-bottom"
+
+[[end.bar]]
+type = "box"
+class = "blade-separator-row"
+orientation = "horizontal"
+
+[[end.bar.widgets]]
+type = "box"
+class = "blade-separator-line"
+halign = "end"
+valign = "center"
+
+[[end]]
+type = "custom"
+class = "blade-item blade-power"
+tooltip = "Power menu"
+on_click_left = "wlogout -b 3 -T 300 -B 300"
+
+[[end.bar]]
+type = "box"
+class = "blade-row"
+orientation = "horizontal"
+
+[[end.bar.widgets]]
+type = "label"
+class = "blade-icon"
+label = "⏻"
+
+[[end.bar.widgets]]
+type = "box"
+class = "blade-node"
+halign = "center"
+valign = "center"
+
+[[end]]
+type = "custom"
+class = "blade-cap blade-cap-bottom"
+
+[[end.bar]]
+type = "box"
+class = "blade-cap-row"
+orientation = "horizontal"
+
+[[end.bar.widgets]]
+type = "box"
+class = "blade-cap-line"
+halign = "end"
+valign = "center"

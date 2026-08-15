@@ -1,0 +1,900 @@
+@import "../colors.css";
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", sans-serif;
+    font-size: 14px;
+    min-width: 0;
+    min-height: 0;
+}
+
+window,
+.background,
+button {
+    color: @on-surface;
+    background: transparent;
+    box-shadow: none;
+}
+
+#bar {
+    background-color: transparent;
+    background-image:
+        linear-gradient(to right,
+            transparent 0,
+            transparent 27px,
+            alpha(@primary, 0.52) 27px,
+            alpha(@primary, 0.38) 30px,
+            alpha(@primary, 0.25) 33px,
+            alpha(@primary, 0.14) 37px,
+            alpha(@primary, 0.055) 41px,
+            alpha(@primary, 0.00) 44px),
+        linear-gradient(to right,
+            transparent 0,
+            transparent 27px,
+            alpha(@primary, 0.40) 27px,
+            alpha(@primary, 0.25) 29px,
+            alpha(@primary, 0.12) 32px,
+            alpha(@primary, 0.040) 36px,
+            alpha(@primary, 0.00) 40px,
+            transparent 44px),
+        linear-gradient(to right,
+            transparent 0,
+            transparent 27px,
+            alpha(@primary, 0.34) 27px,
+            alpha(@primary, 0.12) 29px,
+            alpha(@primary, 0.00) 31px,
+            transparent 44px);
+    background-repeat: no-repeat;
+    background-size: 100% 100%, 100% 100%, 100% 100%;
+    background-position: left top, left top, left top;
+}
+
+#bar #start,
+#bar #center,
+#bar #end {
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.blade-row,
+.blade-cap-row,
+.blade-separator-row {
+    min-width: 42px;
+    background: transparent;
+}
+
+.blade-row {
+    min-height: 28px;
+}
+
+.blade-item {
+    min-width: 42px;
+    min-height: 28px;
+    margin: 2px 0;
+    background: transparent;
+}
+
+
+.blade-item .blade-row,
+.blade-clock-row,
+.blade-profile-row {
+    background-image:
+        linear-gradient(to bottom,
+            transparent 0%,
+            alpha(@tertiary, 0.16) 14%,
+            alpha(@primary, 0.70) 38%,
+            alpha(@on-primary-container, 0.98) 50%,
+            alpha(@tertiary, 0.72) 62%,
+            alpha(@error, 0.16) 86%,
+            transparent 100%),
+        radial-gradient(ellipse at 82% center,
+            alpha(@on-primary-container, 0.22) 0%,
+            alpha(@primary, 0.20) 22%,
+            alpha(@tertiary, 0.14) 46%,
+            alpha(@error, 0.060) 70%,
+            transparent 100%),
+        linear-gradient(to left,
+            alpha(@primary, 0.26) 0%,
+            alpha(@tertiary, 0.20) 20%,
+            alpha(@primary, 0.12) 48%,
+            alpha(@error, 0.050) 72%,
+            alpha(@tertiary, 0.018) 86%,
+            transparent 100%);
+    background-repeat: no-repeat;
+    background-size:
+        0 24px,
+        0 28px,
+        0 16px;
+    background-position:
+        right 15px center,
+        right 15px center,
+        right 15px center;
+    transition:
+        background-size 0.52s cubic-bezier(0.16, 1, 0.30, 1),
+        background-position 0.56s cubic-bezier(0.16, 1, 0.30, 1);
+}
+
+.blade-icon {
+    min-width: 18px;
+    min-height: 26px;
+    margin-left: 10px;
+    margin-right: 3px;
+    color: alpha(@on-surface, 0.72);
+    font-size: 15px;
+    text-shadow: 0 0 0 alpha(@tertiary, 0.00);
+    transform: translateX(0) scale(1);
+    transition:
+        color 0.26s ease,
+        text-shadow 0.38s ease,
+        transform 0.36s cubic-bezier(0.16, 1, 0.30, 1);
+}
+
+.blade-node {
+    min-width: 8px;
+    min-height: 8px;
+    margin-right: 3px;
+    padding: 0;
+    background-color: alpha(@primary, 0.72);
+    border-radius: 0;
+    outline: 1px solid alpha(@on-surface, 0.16);
+    outline-offset: 1px;
+    box-shadow:
+        -2px 0 4px alpha(@primary, 0.14),
+        0 0 0 alpha(@tertiary, 0.00);
+    transform: rotate(45deg) scale(0.72);
+    transition:
+        background-color 0.28s ease,
+        outline-color 0.28s ease,
+        box-shadow 0.40s ease,
+        transform 0.42s cubic-bezier(0.16, 1, 0.30, 1);
+}
+
+.blade-item:hover .blade-row,
+.blade-clock:hover .blade-clock-row,
+.blade-profile:hover .blade-profile-row {
+    background-size:
+        2px 24px,
+        42px 28px,
+        42px 16px;
+    background-position:
+        right 29px center,
+        right 4px center,
+        right 4px center;
+    transition-duration: 0.38s, 0.44s;
+}
+
+.blade-item:hover .blade-icon {
+    color: @on-primary-container;
+    text-shadow:
+        1px 0 0 alpha(@primary, 0.52),
+        -1px 0 0 alpha(@tertiary, 0.78),
+        3px 0 7px alpha(@error, 0.12),
+        -8px 0 12px alpha(@primary, 0.24);
+    transform: translateX(-2.5px) scale(1.035);
+    transition-delay: 0.06s, 0.04s, 0.02s;
+}
+
+.blade-item:hover .blade-node,
+.blade-clock:hover .blade-node {
+    background-color: @tertiary;
+    outline-color: alpha(@on-primary-container, 0.72);
+    box-shadow:
+        -5px 0 11px alpha(@primary, 0.58),
+        0 0 10px alpha(@tertiary, 0.78),
+        0 0 19px alpha(@tertiary, 0.36);
+    transform: rotate(135deg) scale(1.18);
+    transition-delay: 0.04s, 0.04s, 0.02s, 0s;
+}
+
+.blade-item:active .blade-icon {
+    color: @on-surface-variant;
+    text-shadow: none;
+    transform: translateX(0) scale(0.90);
+    transition-duration: 0.09s;
+}
+
+.blade-item:active .blade-node {
+    background-color: @surface-variant;
+    outline-color: alpha(@on-surface-variant, 0.60);
+    box-shadow: 0 0 5px alpha(@primary, 0.26);
+    transform: rotate(180deg) scale(0.50);
+    transition-duration: 0.09s;
+}
+
+.blade-media .blade-icon {
+    color: alpha(@tertiary, 0.80);
+}
+
+.blade-media .blade-node {
+    background-color: alpha(@tertiary, 0.78);
+}
+
+.blade-media-prev .blade-icon,
+.blade-media-next .blade-icon {
+    font-size: 20px;
+    transform: translateX(-2px) scale(1);
+}
+
+.blade-spotify .blade-icon {
+    font-size: 14px;
+    transform: translateX(0px) scale(1);
+}
+
+.blade-media-prev:hover .blade-icon,
+.blade-media-next:hover .blade-icon {
+    transform: translateX(-2px) scale(1.03);
+}
+
+.blade-spotify:hover .blade-icon {
+    transform: translateX(-1.5px) scale(1.03);
+}
+
+.blade-cap {
+    min-width: 42px;
+    min-height: 10px;
+}
+
+.blade-cap-row {
+    min-height: 10px;
+}
+
+.blade-cap-line {
+    min-width: 14px;
+    min-height: 1px;
+    margin-right: 1px;
+    background-color: transparent;
+    background-image: linear-gradient(to right,
+        alpha(@primary, 0.86) 0%,
+        alpha(@tertiary, 0.46) 28%,
+        alpha(@primary, 0.10) 70%,
+        transparent 100%);
+    box-shadow: 2px 0 3px alpha(@primary, 0.10);
+    transform-origin: right center;
+}
+
+.blade-cap-top .blade-cap-line {
+    transform: rotate(40deg);
+}
+
+.blade-cap-bottom .blade-cap-line {
+    transform: rotate(-40deg);
+}
+
+.blade-separator {
+    min-width: 42px;
+    min-height: 15px;
+}
+
+.blade-separator-row {
+    min-height: 15px;
+}
+
+.blade-separator-line {
+    min-width: 13px;
+    min-height: 1px;
+    margin-right: 2px;
+    background: linear-gradient(to right,
+        alpha(@primary, 0.62) 0%,
+        alpha(@tertiary, 0.25) 34%,
+        transparent 100%);
+}
+
+.blade-separator-bottom {
+    min-height: 13px;
+}
+
+.blade-separator-bottom .blade-separator-row {
+    min-height: 13px;
+}
+
+.workspaces {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+.workspaces .item {
+    min-width: 42px;
+    min-height: 28px;
+    margin: 2px 0;
+    padding: 0;
+    color: alpha(@on-surface, 0.66);
+    background-color: transparent;
+    background-image:
+        linear-gradient(to bottom,
+            transparent 0%,
+            alpha(@tertiary, 0.16) 14%,
+            alpha(@primary, 0.70) 38%,
+            alpha(@on-primary-container, 0.98) 50%,
+            alpha(@tertiary, 0.72) 62%,
+            alpha(@error, 0.16) 86%,
+            transparent 100%),
+        radial-gradient(ellipse at 82% center,
+            alpha(@on-primary-container, 0.22) 0%,
+            alpha(@primary, 0.20) 22%,
+            alpha(@tertiary, 0.14) 46%,
+            alpha(@error, 0.060) 70%,
+            transparent 100%),
+        linear-gradient(to left,
+            alpha(@primary, 0.26) 0%,
+            alpha(@tertiary, 0.20) 20%,
+            alpha(@primary, 0.12) 48%,
+            alpha(@error, 0.050) 72%,
+            alpha(@tertiary, 0.018) 86%,
+            transparent 100%),
+        linear-gradient(to right,
+            alpha(@primary, 0.72) 0%,
+            alpha(@tertiary, 0.28) 36%,
+            transparent 100%);
+    background-repeat: no-repeat;
+    background-size:
+        0 24px,
+        0 28px,
+        0 16px,
+        8px 1px;
+    background-position:
+        right 15px center,
+        right 15px center,
+        right 15px center,
+        right 7px center;
+    text-shadow: 0 0 0 alpha(@tertiary, 0.00);
+    transition:
+        color 0.28s ease,
+        background-size 0.52s cubic-bezier(0.16, 1, 0.30, 1),
+        background-position 0.56s cubic-bezier(0.16, 1, 0.30, 1),
+        text-shadow 0.40s ease;
+}
+
+.workspaces .item label {
+    min-width: 14px;
+    margin-left: 11px;
+    margin-right: 17px;
+    font-family: "Anthropic Serif Text", "JetBrainsMono Nerd Font", serif;
+    font-size: 13px;
+    font-weight: 600;
+    transform: translateX(0) scale(1);
+    transition: transform 0.36s cubic-bezier(0.16, 1, 0.30, 1);
+}
+
+.workspaces .item.visible:not(.focused) {
+    color: alpha(@primary, 0.90);
+    background-size:
+        0 24px,
+        0 28px,
+        0 16px,
+        13px 1px;
+    background-position:
+        right 15px center,
+        right 15px center,
+        right 15px center,
+        right 2px center;
+}
+
+.workspaces .item:hover:not(.focused) {
+    color: @on-primary-container;
+    background-size:
+        2px 24px,
+        42px 28px,
+        42px 16px,
+        28px 1px;
+    background-position:
+        right 29px center,
+        right 4px center,
+        right 4px center,
+        right 4px center;
+    text-shadow:
+        1px 0 0 alpha(@primary, 0.50),
+        -1px 0 0 alpha(@tertiary, 0.74),
+        3px 0 7px alpha(@error, 0.10),
+        -7px 0 11px alpha(@primary, 0.22);
+}
+
+.workspaces .item:hover:not(.focused) label {
+    transform: translateX(-2px) scale(1.03);
+    transition-delay: 0.03s;
+}
+
+.workspaces .item.focused {
+    color: @on-tertiary-container;
+    background-size:
+        2px 24px,
+        42px 20px,
+        42px 8px,
+        36px 2px;
+    background-position:
+        right 28px center,
+        right 4px center,
+        right 4px center,
+        right 4px center;
+    text-shadow:
+        1px 0 0 alpha(@primary, 0.46),
+        -1px 0 0 alpha(@tertiary, 0.68),
+        -7px 0 11px alpha(@primary, 0.20);
+}
+
+.workspaces .item.focused label {
+    transform: translateX(-2px) scale(1.03);
+}
+
+.workspaces .item:active {
+    color: @on-surface-variant;
+    background-size:
+        1px 18px,
+        24px 18px,
+        24px 8px,
+        20px 1px;
+    text-shadow: none;
+    transition-duration: 0.09s;
+}
+
+.workspaces .item.urgent:not(.focused) {
+    color: @error;
+    background-image:
+        linear-gradient(to bottom,
+            transparent 0%,
+            alpha(@tertiary, 0.14) 14%,
+            alpha(@error, 0.72) 38%,
+            alpha(@on-error-container, 0.98) 50%,
+            alpha(@error, 0.78) 62%,
+            alpha(@primary, 0.18) 86%,
+            transparent 100%),
+        radial-gradient(ellipse at 82% center,
+            alpha(@on-error-container, 0.24) 0%,
+            alpha(@error, 0.22) 22%,
+            alpha(@tertiary, 0.13) 46%,
+            alpha(@primary, 0.060) 70%,
+            transparent 100%),
+        linear-gradient(to left,
+            alpha(@error, 0.28) 0%,
+            alpha(@tertiary, 0.18) 22%,
+            alpha(@error, 0.12) 50%,
+            alpha(@primary, 0.050) 74%,
+            alpha(@error, 0.018) 86%,
+            transparent 100%),
+        linear-gradient(to right,
+            alpha(@error, 0.82) 0%,
+            alpha(@tertiary, 0.30) 38%,
+            transparent 100%);
+    background-size:
+        0 24px,
+        0 28px,
+        0 16px,
+        18px 1px;
+    text-shadow: -5px 0 9px alpha(@error, 0.32);
+}
+
+.workspaces .item.urgent:hover:not(.focused) {
+    background-size:
+        2px 24px,
+        42px 28px,
+        42px 16px,
+        30px 1px;
+    background-position:
+        right 29px center,
+        right 4px center,
+        right 4px center,
+        right 4px center;
+}
+
+.blade-clock {
+    min-width: 42px;
+    min-height: 44px;
+}
+
+.blade-clock-row {
+    min-height: 44px;
+}
+
+.blade-clock-stack {
+    min-width: 18px;
+    min-height: 38px;
+    margin-left: 10px;
+    margin-right: 3px;
+}
+
+.blade-clock-digit {
+    min-width: 18px;
+    min-height: 17px;
+    color: alpha(@on-surface, 0.68);
+    font-family: "Anthropic Serif Text", "JetBrainsMono Nerd Font", serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    text-shadow: 0 0 0 alpha(@tertiary, 0.00);
+    transition:
+        color 0.30s ease,
+        text-shadow 0.38s ease;
+}
+
+.blade-minute {
+    color: alpha(@primary, 0.84);
+}
+
+.blade-clock:hover .blade-clock-digit {
+    color: @on-primary-container;
+    text-shadow:
+        1px 0 0 alpha(@primary, 0.48),
+        -1px 0 0 alpha(@tertiary, 0.72),
+        3px 0 7px alpha(@error, 0.10),
+        -7px 0 11px alpha(@primary, 0.22);
+    transition-delay: 0.06s, 0.04s;
+}
+
+.blade-cava {
+    min-width: 42px;
+    min-height: 180px;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.blade-cava-upper {
+    margin-bottom: 8px;
+}
+
+.blade-cava-lower {
+    margin-top: 8px;
+}
+
+.blade-profile {
+    min-width: 42px;
+    min-height: 28px;
+    transform: translateX(-3.5px) scale(1.2);
+}
+
+.blade-profile-row {
+    min-height: 28px;
+}
+
+.blade-core {
+    min-width: 7px;
+    min-height: 7px;
+    margin-left: 0;
+    margin-right: 4px;
+    background-color: @tertiary;
+    outline: 1px solid alpha(@on-surface, 0.18);
+    outline-offset: 1px;
+    box-shadow:
+        -1px 0 0 alpha(@primary, 0.22),
+        -4px 0 5px alpha(@tertiary, 0.22);
+    transform: rotate(45deg) scale(0.82);
+    transition:
+        background-color 0.30s ease,
+        box-shadow 0.38s ease,
+        transform 0.36s cubic-bezier(0.16, 1, 0.30, 1);
+}
+
+.blade-profile-state {
+    min-width: 18px;
+    min-height: 26px;
+    margin-left: 10px;
+    margin-right: 3px;
+    color: alpha(@on-surface, 0.78);
+    font-size: 17px;
+    text-shadow: -3px 0 5px alpha(@tertiary, 0.22);
+    transform: translateX(0) scale(1);
+    transition:
+        text-shadow 0.38s ease,
+        transform 0.34s cubic-bezier(0.16, 1, 0.30, 1);
+}
+
+.blade-profile:hover .blade-profile-state {
+    text-shadow:
+        1px 0 0 alpha(@primary, 0.54),
+        -1px 0 0 alpha(@tertiary, 0.80),
+        3px 0 7px alpha(@error, 0.12),
+        -8px 0 12px alpha(@primary, 0.24);
+    transform: translateX(-2.5px) scale(1.035);
+    transition-delay: 0.04s, 0.02s;
+}
+
+.blade-profile:hover .blade-core {
+    box-shadow:
+        -1px 0 0 alpha(@primary, 0.76),
+        -4px 0 5px alpha(@tertiary, 0.52),
+        -9px 0 11px alpha(@primary, 0.15);
+    transform: rotate(135deg) scale(1.22);
+}
+
+.blade-profile.profile-powersaver .blade-core {
+    background-color: @primary;
+}
+
+.blade-profile.profile-powersaver .blade-profile-state {
+    text-shadow: -3px 0 5px alpha(@primary, 0.28);
+}
+
+.blade-profile.profile-balanced .blade-core {
+    background-color: @tertiary;
+}
+
+.blade-profile.profile-balanced .blade-profile-state {
+    text-shadow: -3px 0 5px alpha(@tertiary, 0.28);
+}
+
+.blade-profile.profile-performance .blade-core {
+    background-color: @error;
+    outline-color: alpha(@error, 0.52);
+    box-shadow:
+        -1px 0 0 alpha(@error, 0.48),
+        -5px 0 7px alpha(@error, 0.26);
+}
+
+.blade-profile.profile-performance .blade-profile-state {
+    text-shadow: -4px 0 7px alpha(@error, 0.34);
+}
+
+.blade-profile.profile-powersaver:hover .blade-profile-row {
+    background-image:
+        linear-gradient(to bottom,
+            transparent 0%,
+            alpha(@primary, 0.18) 14%,
+            alpha(@primary, 0.74) 38%,
+            alpha(@on-primary-container, 0.98) 50%,
+            alpha(@primary, 0.78) 62%,
+            alpha(@primary, 0.18) 86%,
+            transparent 100%),
+        radial-gradient(ellipse at 82% center,
+            alpha(@on-primary-container, 0.25) 0%,
+            alpha(@primary, 0.24) 26%,
+            alpha(@primary, 0.12) 56%,
+            transparent 100%),
+        linear-gradient(to left,
+            alpha(@primary, 0.34) 0%,
+            alpha(@primary, 0.24) 24%,
+            alpha(@primary, 0.13) 52%,
+            alpha(@primary, 0.045) 78%,
+            transparent 100%);
+}
+
+.blade-profile.profile-balanced:hover .blade-profile-row {
+    background-image:
+        linear-gradient(to bottom,
+            transparent 0%,
+            alpha(@tertiary, 0.18) 14%,
+            alpha(@tertiary, 0.74) 38%,
+            alpha(@on-tertiary-container, 0.98) 50%,
+            alpha(@tertiary, 0.78) 62%,
+            alpha(@tertiary, 0.18) 86%,
+            transparent 100%),
+        radial-gradient(ellipse at 82% center,
+            alpha(@on-tertiary-container, 0.25) 0%,
+            alpha(@tertiary, 0.24) 26%,
+            alpha(@tertiary, 0.12) 56%,
+            transparent 100%),
+        linear-gradient(to left,
+            alpha(@tertiary, 0.34) 0%,
+            alpha(@tertiary, 0.24) 24%,
+            alpha(@tertiary, 0.13) 52%,
+            alpha(@tertiary, 0.045) 78%,
+            transparent 100%);
+}
+
+.blade-profile.profile-performance:hover .blade-profile-row {
+    background-image:
+        linear-gradient(to bottom,
+            transparent 0%,
+            alpha(@error, 0.18) 14%,
+            alpha(@error, 0.74) 38%,
+            alpha(@on-error-container, 0.98) 50%,
+            alpha(@error, 0.78) 62%,
+            alpha(@error, 0.18) 86%,
+            transparent 100%),
+        radial-gradient(ellipse at 82% center,
+            alpha(@on-error-container, 0.25) 0%,
+            alpha(@error, 0.24) 26%,
+            alpha(@error, 0.12) 56%,
+            transparent 100%),
+        linear-gradient(to left,
+            alpha(@error, 0.34) 0%,
+            alpha(@error, 0.24) 24%,
+            alpha(@error, 0.13) 52%,
+            alpha(@error, 0.045) 78%,
+            transparent 100%);
+}
+
+.blade-brightness .blade-icon {
+    transform: translateX(-1.5px) scale(1);
+}
+
+.blade-longshot .blade-icon {
+    font-size: 14px;
+    transform: translateX(-2px) scale(1);
+}
+
+.blade-longshot:hover .blade-icon {
+    transform: translateX(-1px) scale(1.03);
+}
+
+.blade-volume .blade-icon {
+    transform: translateX(-1px) scale(1);
+}
+
+.blade-bluetooth .blade-icon {
+    font-size: 16px;
+    transform: translateX(-1px) scale(1);
+}
+
+.blade-tray-icon {
+    font-size: 14px;
+    transform: translateX(-1px) scale(1);
+}
+
+.blade-power {
+    margin-top: 1px;
+}
+
+.blade-power .blade-icon {
+    color: alpha(@error, 0.76);
+    font-size: 13px;
+    transform: translateX(-3px) scale(1);
+}
+
+.blade-power .blade-node {
+    background-color: alpha(@error, 0.78);
+    outline-color: alpha(@error, 0.42);
+}
+
+.blade-power:hover .blade-icon {
+    color: @error;
+    text-shadow:
+        1px 0 0 alpha(@tertiary, 0.46),
+        -1px 0 0 alpha(@error, 0.82),
+        3px 0 7px alpha(@primary, 0.12),
+        -8px 0 12px alpha(@error, 0.26);
+    transform: translateX(-2px) scale(1.035);
+    transition-delay: 0.06s, 0.04s, 0.02s;
+}
+
+.blade-power:hover .blade-node {
+    background-color: @error;
+    outline-color: alpha(@on-error-container, 0.76);
+    box-shadow:
+        -5px 0 11px alpha(@error, 0.62),
+        0 0 10px alpha(@error, 0.82),
+        0 0 19px alpha(@error, 0.38);
+}
+
+.blade-power .blade-row,
+.blade-profile.profile-performance .blade-profile-row {
+    background-image:
+        linear-gradient(to bottom,
+            transparent 0%,
+            alpha(@tertiary, 0.14) 14%,
+            alpha(@error, 0.72) 38%,
+            alpha(@on-error-container, 0.98) 50%,
+            alpha(@error, 0.78) 62%,
+            alpha(@primary, 0.18) 86%,
+            transparent 100%),
+        radial-gradient(ellipse at 82% center,
+            alpha(@on-error-container, 0.24) 0%,
+            alpha(@error, 0.22) 22%,
+            alpha(@tertiary, 0.13) 46%,
+            alpha(@primary, 0.060) 70%,
+            transparent 100%),
+        linear-gradient(to left,
+            alpha(@error, 0.28) 0%,
+            alpha(@tertiary, 0.18) 22%,
+            alpha(@error, 0.12) 50%,
+            alpha(@primary, 0.050) 74%,
+            alpha(@error, 0.018) 86%,
+            transparent 100%);
+}
+
+popover,
+popover.background,
+popover > contents {
+    background: transparent;
+    background-image: none;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    box-shadow: none;
+}
+
+#popup-tray-gate,
+.popup-blade-tray {
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.blade-tray-popup {
+    padding: 7px;
+    background-color: alpha(@surface, 0.94);
+    background-image: none;
+    background-clip: border-box;
+    border: 1px solid alpha(@tertiary, 0.30);
+    border-radius: 11px;
+    outline: none;
+    box-shadow:
+        -4px 0 12px alpha(@primary, 0.16),
+        -10px 8px 22px alpha(@shadow, 0.34);
+}
+
+.blade-tray-popup .tray {
+    padding: 0;
+    background: transparent;
+}
+
+#popup-tray-gate .tray .item,
+.popup-blade-tray .tray .item {
+    min-width: 20px;
+    min-height: 20px;
+    margin: 2px;
+    padding: 3px;
+    background-color: alpha(@surface-variant, 0.24);
+    border-radius: 7px;
+    box-shadow: none;
+    transition:
+        background-color 0.20s ease,
+        box-shadow 0.24s ease,
+        transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#popup-tray-gate .tray .item:hover,
+.popup-blade-tray .tray .item:hover {
+    background-color: alpha(@tertiary, 0.18);
+    box-shadow: 0 0 10px alpha(@tertiary, 0.24);
+    transform: scale(1.08);
+}
+
+.blade-tray-popup popover > contents,
+.blade-tray-popup popover contents {
+    padding: 7px;
+    background-color: alpha(@surface-container-high, 0.98);
+    background-image: none;
+    background-clip: border-box;
+    border: 1px solid alpha(@outline, 0.30);
+    border-radius: 9px;
+    box-shadow:
+        -6px 6px 18px alpha(@shadow, 0.38),
+        -3px 0 10px alpha(@primary, 0.10);
+}
+
+.blade-tray-popup,
+.blade-tray-popup label,
+.blade-tray-popup button,
+.blade-tray-popup popover label,
+popover.menu label {
+    font-family: "Anthropic Serif Text", "Noto Sans Mono CJK SC", serif;
+    font-weight: 400;
+}
+
+tooltip,
+tooltip.background {
+    color: @on-surface;
+    background-color: alpha(@surface-container-high, 0.97);
+    background-image:
+        linear-gradient(to left,
+            alpha(@tertiary, 0.92),
+            alpha(@tertiary, 0.92)),
+        linear-gradient(to bottom,
+            alpha(@surface-bright, 0.50),
+            alpha(@surface-container, 0.96));
+    background-repeat: no-repeat;
+    background-size: 2px 100%, 100% 100%;
+    background-position: right top, left top;
+    border: 1px solid alpha(@outline, 0.32);
+    border-radius: 8px;
+    padding: 7px 12px 7px 10px;
+    box-shadow:
+        -10px 7px 20px alpha(@shadow, 0.40),
+        -4px 0 11px alpha(@primary, 0.10);
+}
+
+tooltip box,
+tooltip label {
+    color: @on-surface;
+    background: transparent;
+    padding: 0;
+    font-family: "Anthropic Serif Text", "JetBrainsMono Nerd Font", "Noto Sans Mono CJK SC", serif;
+    font-size: 12px;
+    font-weight: 500;
+}
