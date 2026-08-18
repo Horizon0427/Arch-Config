@@ -25,15 +25,12 @@ inactive  = { fg = "#a0b185" }
 sep_inner = { open = "[", close = "]" }
 
 [mode]
-# Normal mode uses Primary (Green).
 normal_main = { bg = "green", fg = "black", bold = true }
 normal_alt  = { bg = "black", fg = "white" }
 
-# Select mode uses Secondary (Blue).
 select_main = { bg = "blue", fg = "black", bold = true }
 select_alt  = { bg = "black", fg = "white" }
 
-# Unset mode uses Tertiary (Yellow).
 unset_main = { bg = "yellow", fg = "black", bold = true }
 unset_alt  = { bg = "black", fg = "white" }
 

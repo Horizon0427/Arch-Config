@@ -148,7 +148,7 @@ button {
 
 .rail-power .rail-icon {
     font-size: 13px;
-    transform: translateX(-1px) scale(1.05);
+    transform: translateX(-2px) scale(1.05);
 }
 
 .rail-media .rail-icon,

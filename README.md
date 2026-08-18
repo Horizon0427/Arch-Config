@@ -20,9 +20,21 @@ Here are stuffs I've selected for my laptop.
 # Individual/Collaborative Projects
 
 
-## Hypr-Prelock
+## [Hypr-Prelock](./prelock)
 
-This is a simple C animation program using `Raylib` that displays a padlock rotating and scaling up. Bind it to run before Hyprlock for a more engaging lock screen experience.
+Hypr-Prelock is a small C/Raylib transition layer that runs immediately before Hyprlock. It now provides five independently selectable animations: the original rotating padlock, counter-moving bars, a translucent diagonal sweep, a dual-vortex meteor field, and a liquid-glass membrane with real screen-space refraction.
+
+> [!IMPORTANT]
+> The Matugen templates in this repository target my custom build with an additional `contrary` palette and are not directly compatible with upstream Matugen. Prelock itself remains usable without Matugen: a missing palette automatically falls back to a monochrome theme. See the [Prelock compatibility and installation notes](./prelock/README.md).
+
+The launcher selects an animation at random by default, accepts a specific style from the command line, and uses a private FIFO to start Hyprlock only after the selected animation reaches its final frame. The liquid mode captures the focused output through `grim` directly into memory, while Matugen supplies a shared semantic palette for every style.
+
+The source is kept in `~/.local/src/prelock`; `make install` atomically deploys the executable to `~/.local/bin/prelock` and the liquid shader to `~/.local/share/prelock`:
+
+```bash
+cd ~/.local/src/prelock
+make install
+```
 
 ## [Hypr-Longshot](https://github.com/Horizon0427/hypr-longshot)
 

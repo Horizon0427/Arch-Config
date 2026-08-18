@@ -47,6 +47,7 @@ hl.window_rule({
     name  = "prelock-fullscreen",
     match = { class = "^(Smooth_Prelock)$" },
     fullscreen = true,
+    no_anim    = true,
 })
 
 hl.window_rule({

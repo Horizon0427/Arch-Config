@@ -31,8 +31,8 @@ input_path = '~/.config/matugen/templates/hyprlock-colors.conf'
 output_path = '~/.config/hypr/hyprlock-colors.conf'
 
 [templates.prelock]
-input_path = '~/.config/matugen/templates/prelock-color.txt'
-output_path = '~/.config/hypr/lock_animation/prelock_color'
+input_path = '~/.config/matugen/templates/prelock-palette.conf'
+output_path = '~/.config/prelock/palette.conf'
 
 [templates.ghostty]
 input_path = '~/.config/matugen/templates/ghostty-theme.conf'

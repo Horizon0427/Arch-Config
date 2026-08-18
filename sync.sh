@@ -4,6 +4,8 @@ set -euo pipefail
 
 CONFIG_DIR="$HOME/.config"
 DOTFILES_DIR="$HOME/Projects/dotfiles"
+PRELOCK_SOURCE="$HOME/.local/src/prelock"
+PRELOCK_TARGET="$DOTFILES_DIR/prelock"
 
 DRY_RUN=false
 RSYNC_ARGS=(-av --existing)
@@ -42,7 +44,7 @@ for target in "$DOTFILES_DIR"/*; do
   item=${target##*/}
 
   case "$item" in
-    README.md|LICENSE|sync.sh|assets|showcase)
+    README.md|LICENSE|sync.sh|assets|showcase|prelock)
       continue
       ;;
   esac
@@ -59,6 +61,14 @@ for target in "$DOTFILES_DIR"/*; do
     echo "Skipping: $item (no matching source in $CONFIG_DIR)"
   fi
 done
+
+if [[ -d "$PRELOCK_TARGET" && -d "$PRELOCK_SOURCE" ]]; then
+  echo "Refreshing existing files: prelock (~/.local/src)"
+  rsync "${RSYNC_ARGS[@]}" --exclude=/prelock \
+    "$PRELOCK_SOURCE/" "$PRELOCK_TARGET/"
+elif [[ -d "$PRELOCK_TARGET" ]]; then
+  echo "Skipping: prelock (no matching source in $PRELOCK_SOURCE)"
+fi
 
 if [[ "$DRY_RUN" == true ]]; then
   echo "Dry run complete. No files, commits, or remote branches were changed."

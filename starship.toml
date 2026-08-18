@@ -289,7 +289,6 @@ style = "fg:accent_mid"
 version_format = "${major}.${minor}"
 format = '[───](fg:rail_dim)[◆](fg:accent_mid bold)[ $symbol $version ]($style)[◆](fg:accent_mid bold)'
 
-# The lower rail carries only ephemeral command state and the input node.
 [status]
 disabled = false
 symbol = "×"

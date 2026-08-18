@@ -1,15 +1,8 @@
-# README!
+# Matugen compatibility
 
-## Matugen Configuration File Instructions
+> [!WARNING]
+> These templates target my custom Matugen build. They are not directly compatible with the officially packaged upstream Matugen.
 
-**The configuration here is NOT applicable to the OFFICIALLY packaged Matugen.**
+I added a `contrary` palette to Matugen and use it in several templates. Upstream Matugen cannot resolve expressions such as `palettes.contrary._80` and will stop while rendering those templates.
 
-I pulled the Matugen source code, added a new color variable `contrary`, 
-and used this variable in templates.
-
-The original version of Matugen cannot recognize this variable
-and therefore stops working.
-
-If you want to refer to my configuration, 
-please manually replace `contrary` with a variable 
-that can be correctly recognized by native Matugen.
+To reuse this configuration with upstream Matugen, replace every `contrary` reference with an upstream color or palette available in your installed version. Hypr-Prelock can also run without Matugen by using its built-in monochrome fallback or a handwritten `~/.config/prelock/palette.conf`.
