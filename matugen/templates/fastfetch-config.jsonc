@@ -33,43 +33,43 @@
         {
             "type": "custom",
             "format": "\u001b[1m╭─ Hardware\u001b[0m",
-            "outputColor": "#bbcd9e"
+            "outputColor": "{{palettes.contrary._80.hex}}"
         },
         {
             "type": "host",
             "key": "├─   Host",
-            "keyColor": "#bbcd9e",
+            "keyColor": "{{palettes.contrary._80.hex}}",
             "keyWidth": 18
         },
         {
             "type": "kernel",
             "key": "├─   Kernel",
-            "keyColor": "#bbcd9e",
+            "keyColor": "{{palettes.contrary._80.hex}}",
             "keyWidth": 18
         },
         {
             "type": "cpu",
             "key": "├─ 󰻠  CPU",
-            "keyColor": "#bbcd9e",
+            "keyColor": "{{palettes.contrary._80.hex}}",
             "keyWidth": 18
         },
         {
             "type": "gpu",
             "key": "├─ 󰢮  GPU",
-            "keyColor": "#bbcd9e",
+            "keyColor": "{{palettes.contrary._80.hex}}",
             "keyWidth": 18
         },
         {
             "type": "memory",
             "key": "├─   Memory",
-            "keyColor": "#bbcd9e",
+            "keyColor": "{{palettes.contrary._80.hex}}",
             "keyWidth": 18
         },
         {
             "type": "disk",
             "key": "╰─   Disk",
             "folders": "/",
-            "keyColor": "#bbcd9e",
+            "keyColor": "{{palettes.contrary._80.hex}}",
             "keyWidth": 18
         },
 

@@ -24,271 +24,325 @@ button {
     background-color: transparent;
     background-image:
         linear-gradient(to right,
-            transparent 0,
-            transparent 27px,
-            alpha(@primary, 0.52) 27px,
-            alpha(@primary, 0.38) 30px,
-            alpha(@primary, 0.25) 33px,
-            alpha(@primary, 0.14) 37px,
-            alpha(@primary, 0.055) 41px,
-            alpha(@primary, 0.00) 44px),
+            transparent 2px,
+            alpha(@primary, 0.00) 2px,
+            alpha(@primary, 0.06) 5px,
+            alpha(@tertiary, 0.12) 8px,
+            alpha(@primary, 0.06) 11px,
+            alpha(@primary, 0.00) 14px,
+            transparent 14px),
         linear-gradient(to right,
-            transparent 0,
-            transparent 27px,
-            alpha(@primary, 0.40) 27px,
-            alpha(@primary, 0.25) 29px,
-            alpha(@primary, 0.12) 32px,
-            alpha(@primary, 0.040) 36px,
-            alpha(@primary, 0.00) 40px,
-            transparent 44px),
-        linear-gradient(to right,
-            transparent 0,
-            transparent 27px,
-            alpha(@primary, 0.34) 27px,
-            alpha(@primary, 0.12) 29px,
-            alpha(@primary, 0.00) 31px,
-            transparent 44px);
+            transparent 7px,
+            alpha(@primary, 0.28) 7px,
+            alpha(@tertiary, 0.34) 8px,
+            transparent 9px);
     background-repeat: no-repeat;
-    background-size: 100% 100%, 100% 100%, 100% 100%;
-    background-position: left top, left top, left top;
+    background-size: 100% 100%;
+    background-position: 20px 0;
 }
 
 #bar #start,
 #bar #center,
 #bar #end {
-    padding-top: 1px;
-    padding-bottom: 1px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
-.blade-row,
-.blade-cap-row,
-.blade-separator-row {
-    min-width: 42px;
-    background: transparent;
-}
-
-.blade-row {
-    min-height: 28px;
-}
-
-.blade-item {
-    min-width: 42px;
+.rail-item {
+    min-width: 36px;
     min-height: 28px;
     margin: 2px 0;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.rail-row {
+    min-width: 36px;
+    min-height: 28px;
     background: transparent;
 }
 
-
-.blade-item .blade-row,
-.blade-clock-row,
-.blade-profile-row {
-    background-image:
-        linear-gradient(to bottom,
-            transparent 0%,
-            alpha(@tertiary, 0.16) 14%,
-            alpha(@primary, 0.70) 38%,
-            alpha(@on-primary-container, 0.98) 50%,
-            alpha(@tertiary, 0.72) 62%,
-            alpha(@error, 0.16) 86%,
-            transparent 100%),
-        radial-gradient(ellipse at 82% center,
-            alpha(@on-primary-container, 0.22) 0%,
-            alpha(@primary, 0.20) 22%,
-            alpha(@tertiary, 0.14) 46%,
-            alpha(@error, 0.060) 70%,
-            transparent 100%),
-        linear-gradient(to left,
-            alpha(@primary, 0.26) 0%,
-            alpha(@tertiary, 0.20) 20%,
-            alpha(@primary, 0.12) 48%,
-            alpha(@error, 0.050) 72%,
-            alpha(@tertiary, 0.018) 86%,
-            transparent 100%);
-    background-repeat: no-repeat;
-    background-size:
-        0 24px,
-        0 28px,
-        0 16px;
-    background-position:
-        27px center,
-        27px center,
-        27px center;
-    transition:
-        background-size 0.52s cubic-bezier(0.16, 1, 0.30, 1),
-        background-position 0.56s cubic-bezier(0.16, 1, 0.30, 1);
-}
-
-.blade-icon {
-    min-width: 18px;
-    min-height: 26px;
-    margin-left: 10px;
-    margin-right: 3px;
-    color: alpha(@on-surface, 0.72);
-    font-size: 15px;
-    text-shadow: 0 0 0 alpha(@tertiary, 0.00);
-    transform: translateX(0) scale(1);
-    transition:
-        color 0.26s ease,
-        text-shadow 0.38s ease,
-        transform 0.36s cubic-bezier(0.16, 1, 0.30, 1);
-}
-
-.blade-node {
+.rail-marker {
     min-width: 8px;
     min-height: 8px;
-    margin-right: 3px;
+    margin-left: 4px;
+    margin-right: 4px;
     padding: 0;
-    background-color: alpha(@primary, 0.72);
+    background-color: alpha(@contrary, 0.84);
     border-radius: 0;
-    outline: 1px solid alpha(@on-surface, 0.16);
+    outline: 1px solid alpha(@contrary, 0.88);
     outline-offset: 1px;
     box-shadow:
-        -2px 0 4px alpha(@primary, 0.14),
-        0 0 0 alpha(@tertiary, 0.00);
-    transform: rotate(45deg) scale(0.72);
+        6px 0 12px alpha(@primary, 0.00),
+        0 0 12px alpha(@tertiary, 0.00),
+        0 0 23px alpha(@contrary, 0.00);
+    transform: rotate(-45deg) scale(0.84);
     transition:
-        background-color 0.28s ease,
-        outline-color 0.28s ease,
-        box-shadow 0.40s ease,
-        transform 0.42s cubic-bezier(0.16, 1, 0.30, 1);
+        background-color 0.24s ease,
+        outline-color 0.24s ease,
+        box-shadow 0.26s cubic-bezier(0.2, 0, 0, 1),
+        transform 0.34s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.blade-item:hover .blade-row,
-.blade-clock:hover .blade-clock-row,
-.blade-profile:hover .blade-profile-row {
-    background-size:
-        2px 24px,
-        42px 28px,
-        42px 16px;
-    background-position:
-        11px center,
-        -4px center,
-        -4px center;
-    transition-duration: 0.38s, 0.44s;
-}
-
-.blade-item:hover .blade-icon {
-    color: @on-primary-container;
+.rail-icon {
+    min-width: 18px;
+    min-height: 26px;
+    margin-left: 2px;
+    color: alpha(@on-surface, 0.78);
+    font-size: 15px;
     text-shadow:
-        1px 0 0 alpha(@primary, 0.52),
-        -1px 0 0 alpha(@tertiary, 0.78),
-        3px 0 7px alpha(@error, 0.12),
-        -8px 0 12px alpha(@primary, 0.24);
-    transform: translateX(-2.5px) scale(1.035);
-    transition-delay: 0.06s, 0.04s, 0.02s;
+        0 0 7px alpha(@tertiary, 0.00),
+        0 0 14px alpha(@tertiary, 0.00),
+        0 0 19px alpha(@contrary, 0.00);
+    transform: translateX(0) scale(1);
+    transition:
+        color 0.24s ease,
+        text-shadow 0.30s ease,
+        transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.blade-item:hover .blade-node,
-.blade-clock:hover .blade-node {
-    background-color: @tertiary;
-    outline-color: alpha(@on-primary-container, 0.72);
-    box-shadow:
-        -5px 0 11px alpha(@primary, 0.58),
-        0 0 10px alpha(@tertiary, 0.78),
-        0 0 19px alpha(@tertiary, 0.36);
-    transform: rotate(135deg) scale(1.18);
-    transition-delay: 0.04s, 0.04s, 0.02s, 0s;
-}
-
-.blade-item:active .blade-icon {
-    color: @on-surface-variant;
-    text-shadow: none;
-    transform: translateX(0) scale(0.90);
-    transition-duration: 0.09s;
-}
-
-.blade-item:active .blade-node {
-    background-color: @surface-variant;
-    outline-color: alpha(@on-surface-variant, 0.60);
-    box-shadow: 0 0 5px alpha(@primary, 0.26);
-    transform: rotate(180deg) scale(0.50);
-    transition-duration: 0.09s;
-}
-
-.blade-media .blade-icon {
-    color: alpha(@tertiary, 0.80);
-}
-
-.blade-media .blade-node {
-    background-color: alpha(@tertiary, 0.78);
-}
-
-.blade-media-prev .blade-icon,
-.blade-media-next .blade-icon {
+.rail-media-prev .rail-icon {
     font-size: 20px;
-    transform: translateX(-2px) scale(1);
+    transform: translateX(-0.5px) scale(1);
 }
 
-.blade-spotify .blade-icon {
+.rail-media-next .rail-icon {
+    font-size: 20px;
+    transform: translateX(-0.5px) scale(1);
+}
+
+.rail-spotify .rail-icon {
     font-size: 14px;
-    transform: translateX(0px) scale(1);
+    transform: translateX(3px) scale(1);
 }
 
-.blade-media-prev:hover .blade-icon,
-.blade-media-next:hover .blade-icon {
-    transform: translateX(-2px) scale(1.03);
+.rail-profile .rail-icon {
+    font-size: 18px;
+    transform: translateX(-3px) scale(1);
 }
 
-.blade-spotify:hover .blade-icon {
-    transform: translateX(-1.5px) scale(1.03);
+.rail-longshot .rail-icon {
+    font-size: 14px;
+    transform: translateX(0) scale(1);
 }
 
-.blade-cap {
-    min-width: 42px;
-    min-height: 10px;
+.rail-brightness .rail-icon {
+    font-size: 15px;
+    transform: translateX(-0.5px) scale(1);
 }
 
-.blade-cap-row {
-    min-height: 10px;
+.rail-volume .rail-icon {
+    font-size: 15px;
+    transform: translateX(-0.5px) scale(1);
 }
 
-.blade-cap-line {
-    min-width: 14px;
-    min-height: 1px;
-    margin-right: 1px;
-    background-color: transparent;
-    background-image: linear-gradient(to right,
-        alpha(@primary, 0.86) 0%,
-        alpha(@tertiary, 0.46) 28%,
-        alpha(@primary, 0.10) 70%,
-        transparent 100%);
-    box-shadow: 2px 0 3px alpha(@primary, 0.10);
-    transform-origin: right center;
+.rail-bluetooth .rail-icon {
+    font-size: 16px;
+    transform: translateX(-0.5px) scale(1);
 }
 
-.blade-cap-top .blade-cap-line {
-    transform: rotate(40deg);
+.rail-tray .rail-icon {
+    transform: translateX(-1px) scale(1);
 }
 
-.blade-cap-bottom .blade-cap-line {
-    transform: rotate(-40deg);
+.rail-power .rail-icon {
+    font-size: 13px;
+    transform: translateX(-1px) scale(1.05);
 }
 
-.blade-separator {
-    min-width: 42px;
-    min-height: 15px;
+.rail-media .rail-icon,
+.rail-longshot .rail-icon,
+.rail-brightness .rail-icon,
+.rail-volume .rail-icon,
+.rail-bluetooth .rail-icon,
+.rail-tray .rail-icon,
+.rail-awake .rail-icon {
+    color: @primary;
 }
 
-.blade-separator-row {
-    min-height: 15px;
+.rail-item:hover .rail-marker {
+    background-color: @tertiary;
+    outline-color: alpha(@contrary, 0.92);
+    box-shadow:
+        6px 0 12px alpha(@contrary, 0.48),
+        0 0 12px alpha(@tertiary, 0.72),
+        0 0 23px alpha(@contrary, 0.62);
+    transform: rotate(-225deg) scale(1.55);
 }
 
-.blade-separator-line {
-    min-width: 13px;
-    min-height: 1px;
-    margin-right: 2px;
-    background: linear-gradient(to right,
-        alpha(@primary, 0.62) 0%,
-        alpha(@tertiary, 0.25) 34%,
-        transparent 100%);
+.rail-item:hover .rail-icon {
+    color: @contrary;
+    text-shadow:
+        0 0 7px alpha(@contrary, 0.86),
+        0 0 14px alpha(@tertiary, 0.46),
+        0 0 19px alpha(@primary, 0.26);
+    transform: translateX(-3px) scale(1.06);
 }
 
-.blade-separator-bottom {
-    min-height: 13px;
+.rail-media-prev:hover .rail-icon {
+    transform: translateX(-3.5px) scale(1.06);
 }
 
-.blade-separator-bottom .blade-separator-row {
-    min-height: 13px;
+.rail-media-next:hover .rail-icon {
+    transform: translateX(-3.5px) scale(1.06);
+}
+
+.rail-spotify:hover .rail-icon {
+    transform: translateX(-0.5px) scale(1.06);
+}
+
+.rail-profile:hover .rail-icon {
+    transform: translateX(-6px) scale(1.06);
+}
+
+.rail-longshot:hover .rail-icon {
+    transform: translateX(-3px) scale(1.06);
+}
+
+.rail-brightness:hover .rail-icon {
+    transform: translateX(-4px) scale(1.06);
+}
+
+.rail-volume:hover .rail-icon {
+    transform: translateX(-2.5px) scale(1.06);
+}
+
+.rail-tray:hover .rail-icon {
+    transform: translateX(-3.8px) scale(1.06);
+}
+
+.rail-power:hover .rail-icon {
+    transform: translateX(-5px) scale(1.06);
+}
+
+.rail-item:active .rail-marker {
+    background-color: @surface-variant;
+    outline-color: alpha(@on-surface-variant, 0.62);
+    box-shadow:
+        6px 0 12px alpha(@primary, 0.10),
+        0 0 12px alpha(@tertiary, 0.00),
+        0 0 23px alpha(@contrary, 0.00);
+    transform: rotate(-180deg) scale(0.52);
+    transition-duration: 0.10s;
+}
+
+.rail-item:active .rail-icon {
+    color: @on-surface-variant;
+    text-shadow:
+        0 0 7px alpha(@tertiary, 0.00),
+        0 0 14px alpha(@tertiary, 0.00),
+        0 0 19px alpha(@contrary, 0.00);
+    transform: translateX(-1px) scale(0.88);
+    transition-duration: 0.10s;
+}
+
+.rail-media-prev:active .rail-icon {
+    transform: translateX(-1.5px) scale(0.88);
+}
+
+.rail-media-next:active .rail-icon {
+    transform: translateX(-2.5px) scale(0.88);
+}
+
+.rail-spotify:active .rail-icon {
+    transform: translateX(-3.5px) scale(0.88);
+}
+
+.rail-profile:active .rail-icon {
+    transform: translateX(1px) scale(0.88);
+}
+
+.rail-longshot:active .rail-icon {
+    transform: translateX(1px) scale(0.88);
+}
+
+.rail-brightness:active .rail-icon {
+    transform: translateX(-2px) scale(0.88);
+}
+
+.rail-volume:active .rail-icon {
+    transform: translateX(-0.5px) scale(0.88);
+}
+
+.rail-tray:active .rail-icon {
+    transform: translateX(-1.8px) scale(0.88);
+}
+
+.rail-power:active .rail-icon {
+    transform: translateX(0) scale(0.88);
+}
+
+.rail-clock {
+    min-height: 36px;
+    margin-bottom: 2px;
+}
+
+.rail-clock .rail-row {
+    min-height: 36px;
+}
+
+.rail-clock-stack {
+    min-width: 18px;
+    min-height: 28px;
+    margin-left: 2px;
+}
+
+.rail-clock-digit {
+    min-width: 18px;
+    min-height: 12px;
+    color: alpha(@on-surface, 0.74);
+    font-family: "Anthropic Serif Text", "JetBrainsMono Nerd Font", serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    text-shadow: 0 0 0 alpha(@tertiary, 0.00);
+    transition:
+        color 0.24s ease,
+        text-shadow 0.30s ease,
+        transform 0.30s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.rail-hour {
+    color: @tertiary;
+}
+
+.rail-minute {
+    color: alpha(@primary, 0.82);
+}
+
+.rail-clock:hover .rail-clock-digit {
+    color: @contrary;
+    text-shadow: 0 0 8px alpha(@contrary, 0.78);
+    transform: translateX(-2px) scale(1.06);
+}
+
+@keyframes workspace-focus-lock {
+    0% {
+        background-size: 6px 6px, 13px 13px, 2px 4px;
+        background-position: 25px center, 21.5px center, 27px center;
+    }
+    58% {
+        background-size: 10px 24px, 21px 28px, 3px 28px;
+        background-position: 23px center, 17.5px center, 26.5px center;
+    }
+    100% {
+        background-size: 7px 20px, 17px 28px, 2px 28px;
+        background-position: 24.5px center, 19.5px center, 27px center;
+    }
+}
+
+@keyframes workspace-urgent-pulse {
+    0%, 100% {
+        background-size: 7px 7px, 14px 14px, 2px 8px;
+        text-shadow: 0 0 5px alpha(@error, 0.42);
+    }
+    50% {
+        background-size: 10px 10px, 20px 20px, 2px 22px;
+        text-shadow:
+            0 0 8px alpha(@error, 0.82),
+            0 0 14px alpha(@error, 0.34);
+    }
 }
 
 .workspaces {
@@ -298,492 +352,326 @@ button {
 }
 
 .workspaces .item {
-    min-width: 42px;
+    min-width: 36px;
     min-height: 28px;
     margin: 2px 0;
     padding: 0;
-    color: alpha(@on-surface, 0.66);
+    color: @contrary;
     background-color: transparent;
     background-image:
+        radial-gradient(circle at center,
+            alpha(@contrary, 0.88) 0%,
+            alpha(@contrary, 0.88) 43%,
+            transparent 68%),
+        radial-gradient(ellipse at center,
+            alpha(@contrary, 0.18) 0%,
+            alpha(@contrary, 0.07) 50%,
+            transparent 74%),
         linear-gradient(to bottom,
             transparent 0%,
-            alpha(@tertiary, 0.16) 14%,
-            alpha(@primary, 0.70) 38%,
-            alpha(@on-primary-container, 0.98) 50%,
-            alpha(@tertiary, 0.72) 62%,
-            alpha(@error, 0.16) 86%,
-            transparent 100%),
-        radial-gradient(ellipse at 82% center,
-            alpha(@on-primary-container, 0.22) 0%,
-            alpha(@primary, 0.20) 22%,
-            alpha(@tertiary, 0.14) 46%,
-            alpha(@error, 0.060) 70%,
-            transparent 100%),
-        linear-gradient(to left,
-            alpha(@primary, 0.26) 0%,
-            alpha(@tertiary, 0.20) 20%,
-            alpha(@primary, 0.12) 48%,
-            alpha(@error, 0.050) 72%,
-            alpha(@tertiary, 0.018) 86%,
-            transparent 100%),
-        linear-gradient(to right,
-            alpha(@primary, 0.72) 0%,
-            alpha(@tertiary, 0.28) 36%,
+            alpha(@contrary, 0.14) 24%,
+            alpha(@contrary, 0.36) 50%,
+            alpha(@contrary, 0.14) 76%,
             transparent 100%);
     background-repeat: no-repeat;
-    background-size:
-        0 24px,
-        0 28px,
-        0 16px,
-        8px 1px;
-    background-position:
-        27px center,
-        27px center,
-        27px center,
-        27px center;
-    text-shadow: 0 0 0 alpha(@tertiary, 0.00);
+    background-size: 6px 6px, 13px 13px, 2px 4px;
+    background-position: 25px center, 21.5px center, 27px center;
+    box-shadow: none;
     transition:
-        color 0.28s ease,
-        background-size 0.52s cubic-bezier(0.16, 1, 0.30, 1),
-        background-position 0.56s cubic-bezier(0.16, 1, 0.30, 1),
-        text-shadow 0.40s ease;
+        color 0.22s ease,
+        background-size 0.22s cubic-bezier(0.40, 0, 0.70, 1),
+        background-position 0.22s ease,
+        text-shadow 0.24s ease;
 }
 
 .workspaces .item label {
     min-width: 14px;
-    margin-left: 11px;
-    margin-right: 17px;
+    margin-right: 16px;
     font-family: "Anthropic Serif Text", "JetBrainsMono Nerd Font", serif;
     font-size: 13px;
     font-weight: 600;
     transform: translateX(0) scale(1);
-    transition: transform 0.36s cubic-bezier(0.16, 1, 0.30, 1);
+    transition:
+        color 0.22s ease,
+        text-shadow 0.24s ease,
+        transform 0.28s cubic-bezier(0.34, 1.42, 0.64, 1);
 }
 
 .workspaces .item.visible:not(.focused) {
-    color: alpha(@primary, 0.90);
-    background-size:
-        0 24px,
-        0 28px,
-        0 16px,
-        13px 1px;
-    background-position:
-        27px center,
-        27px center,
-        27px center,
-        27px center;
+    color: @contrary;
+    background-size: 7px 7px, 14px 14px, 2px 10px;
+    background-position: 24.5px center, 21px center, 27px center;
 }
 
 .workspaces .item:hover:not(.focused) {
-    color: @on-primary-container;
-    background-size:
-        2px 24px,
-        42px 28px,
-        42px 16px,
-        28px 1px;
-    background-position:
-        11px center,
-        -4px center,
-        -4px center,
-        10px center;
+    color: @contrary;
+    background-image:
+        radial-gradient(circle at center,
+            @contrary 0%,
+            @contrary 46%,
+            transparent 68%),
+        radial-gradient(ellipse at center,
+            alpha(@contrary, 0.40) 0%,
+            alpha(@tertiary, 0.14) 52%,
+            transparent 76%),
+        linear-gradient(to bottom,
+            transparent 0%,
+            alpha(@primary, 0.18) 18%,
+            alpha(@contrary, 0.66) 50%,
+            alpha(@tertiary, 0.22) 82%,
+            transparent 100%);
+    background-size: 10px 10px, 18px 18px, 2px 20px;
+    background-position: 23px center, 19px center, 27px center;
     text-shadow:
-        1px 0 0 alpha(@primary, 0.50),
-        -1px 0 0 alpha(@tertiary, 0.74),
-        3px 0 7px alpha(@error, 0.10),
-        -7px 0 11px alpha(@primary, 0.22);
+        0 0 7px alpha(@contrary, 0.84),
+        0 0 13px alpha(@tertiary, 0.40),
+        0 0 18px alpha(@primary, 0.22);
+    transition:
+        color 0.20s ease,
+        background-size 0.28s cubic-bezier(0.34, 1.42, 0.64, 1),
+        background-position 0.28s ease,
+        text-shadow 0.28s ease;
 }
 
 .workspaces .item:hover:not(.focused) label {
-    transform: translateX(-2px) scale(1.03);
-    transition-delay: 0.03s;
+    transform: translateX(-2px) scale(1.04);
 }
 
 .workspaces .item.focused {
-    color: @on-tertiary-container;
-    background-size:
-        2px 24px,
-        42px 20px,
-        42px 8px,
-        36px 2px;
-    background-position:
-        12px center,
-        -4px center,
-        -4px center,
-        2px center;
+    color: @tertiary;
+    background-image:
+        radial-gradient(circle at center,
+            @tertiary 0%,
+            @tertiary 48%,
+            transparent 70%),
+        radial-gradient(ellipse at center,
+            alpha(@tertiary, 0.26) 0%,
+            alpha(@tertiary, 0.13) 50%,
+            transparent 76%),
+        linear-gradient(to bottom,
+            transparent 0%,
+            alpha(@tertiary, 0.16) 12%,
+            alpha(@tertiary, 0.72) 50%,
+            alpha(@contrary, 0.16) 88%,
+            transparent 100%);
+    background-size: 7px 20px, 17px 28px, 2px 28px;
+    background-position: 24.5px center, 19.5px center, 27px center;
     text-shadow:
-        1px 0 0 alpha(@primary, 0.46),
-        -1px 0 0 alpha(@tertiary, 0.68),
-        -7px 0 11px alpha(@primary, 0.20);
+        0 0 8px alpha(@tertiary, 0.84),
+        0 0 15px alpha(@primary, 0.26),
+        0 0 19px alpha(@contrary, 0.16);
+    animation: workspace-focus-lock 0.38s cubic-bezier(0.22, 0.88, 0.32, 1) 1;
+    transition:
+        color 0.24s ease,
+        background-size 0.36s cubic-bezier(0.22, 1.42, 0.36, 1),
+        background-position 0.34s ease,
+        text-shadow 0.34s ease;
 }
 
 .workspaces .item.focused label {
     transform: translateX(-2px) scale(1.03);
 }
 
+.workspaces .item.focused:hover {
+    color: @tertiary;
+    background-size: 9px 22px, 20px 28px, 3px 28px;
+    background-position: 23.5px center, 18px center, 26.5px center;
+    text-shadow:
+        0 0 8px alpha(@tertiary, 0.82),
+        0 0 15px alpha(@contrary, 0.34),
+        0 0 19px alpha(@primary, 0.20);
+}
+
+.workspaces .item.focused:hover label {
+    transform: translateX(-3px) scale(1.06);
+}
+
 .workspaces .item:active {
     color: @on-surface-variant;
-    background-size:
-        1px 18px,
-        24px 18px,
-        24px 8px,
-        20px 1px;
-    text-shadow: none;
+    background-size: 5px 13px, 11px 17px, 1px 14px;
+    background-position: 25.5px center, 22.5px center, 27.5px center;
+    text-shadow: 0 0 4px alpha(@primary, 0.28);
+    transition-duration: 0.09s;
+}
+
+.workspaces .item:active label {
+    transform: translateX(-1px) scale(0.92);
     transition-duration: 0.09s;
 }
 
 .workspaces .item.urgent:not(.focused) {
     color: @error;
     background-image:
+        radial-gradient(circle at center,
+            @error 0%,
+            @error 44%,
+            transparent 68%),
+        radial-gradient(ellipse at center,
+            alpha(@error, 0.36) 0%,
+            alpha(@error, 0.10) 52%,
+            transparent 76%),
         linear-gradient(to bottom,
             transparent 0%,
-            alpha(@tertiary, 0.14) 14%,
-            alpha(@error, 0.72) 38%,
-            alpha(@on-error-container, 0.98) 50%,
-            alpha(@error, 0.78) 62%,
-            alpha(@primary, 0.18) 86%,
-            transparent 100%),
-        radial-gradient(ellipse at 82% center,
-            alpha(@on-error-container, 0.24) 0%,
-            alpha(@error, 0.22) 22%,
-            alpha(@tertiary, 0.13) 46%,
-            alpha(@primary, 0.060) 70%,
-            transparent 100%),
-        linear-gradient(to left,
-            alpha(@error, 0.28) 0%,
-            alpha(@tertiary, 0.18) 22%,
-            alpha(@error, 0.12) 50%,
-            alpha(@primary, 0.050) 74%,
-            alpha(@error, 0.018) 86%,
-            transparent 100%),
-        linear-gradient(to right,
-            alpha(@error, 0.82) 0%,
-            alpha(@tertiary, 0.30) 38%,
+            alpha(@error, 0.16) 18%,
+            alpha(@error, 0.62) 50%,
+            alpha(@error, 0.16) 82%,
             transparent 100%);
-    background-size:
-        0 24px,
-        0 28px,
-        0 16px,
-        18px 1px;
-    text-shadow: -5px 0 9px alpha(@error, 0.32);
+    animation: workspace-urgent-pulse 1.8s ease-in-out infinite;
 }
 
-.workspaces .item.urgent:hover:not(.focused) {
-    background-size:
-        2px 24px,
-        42px 28px,
-        42px 16px,
-        30px 1px;
-    background-position:
-        11px center,
-        -4px center,
-        -4px center,
-        8px center;
-}
-
-.blade-clock {
-    min-width: 42px;
-    min-height: 44px;
-}
-
-.blade-clock-row {
-    min-height: 44px;
-}
-
-.blade-clock-stack {
-    min-width: 18px;
-    min-height: 38px;
-    margin-left: 10px;
+.rail-profile .rail-marker {
+    min-width: 10px;
+    min-height: 10px;
+    margin-left: 3px;
     margin-right: 3px;
+    transform: rotate(-45deg) scale(0.90);
 }
 
-.blade-clock-digit {
-    min-width: 18px;
-    min-height: 17px;
-    color: alpha(@on-surface, 0.68);
-    font-family: "Anthropic Serif Text", "JetBrainsMono Nerd Font", serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: -0.2px;
-    text-shadow: 0 0 0 alpha(@tertiary, 0.00);
+.rail-profile-injection {
+    min-width: 2px;
+    min-height: 10px;
+    margin-left: 7px;
+    margin-right: -9px;
+    padding: 0;
+    opacity: 0;
+    background-color: transparent;
+    transform-origin: center center;
+    transform: scale(1, 0.04);
     transition:
-        color 0.30s ease,
-        text-shadow 0.38s ease;
+        opacity 0.18s ease,
+        background-color 0.20s ease,
+        transform 0.36s cubic-bezier(0.16, 1, 0.30, 1);
 }
 
-.blade-minute {
-    color: alpha(@primary, 0.84);
+.rail-profile:hover .rail-profile-injection {
+    opacity: 0.92;
+    transform: scale(1, 102);
 }
 
-.blade-clock:hover .blade-clock-digit {
-    color: @on-primary-container;
+.rail-profile.profile-balanced .rail-profile-injection {
+    background-color: @error;
+}
+
+.rail-profile.profile-performance .rail-profile-injection {
+    background-color: @contrary;
+}
+
+.rail-profile.profile-powersaver .rail-profile-injection {
+    background-color: @tertiary;
+}
+
+.rail-profile:hover .rail-marker {
+    transform: rotate(-225deg) scale(1.52);
+}
+
+.rail-profile.profile-balanced .rail-marker {
+    background-color: @tertiary;
+}
+
+.rail-profile.profile-powersaver .rail-marker {
+    background-color: @contrary;
+    outline-color: alpha(@contrary, 0.64);
+}
+
+.rail-profile.profile-powersaver .rail-icon {
+    color: @contrary;
+}
+
+.rail-profile.profile-performance .rail-marker,
+.rail-power .rail-marker {
+    background-color: @error;
+    outline-color: alpha(@error, 0.52);
+}
+
+.rail-profile.profile-performance .rail-icon,
+.rail-power .rail-icon {
+    color: @error;
+}
+
+.rail-awake {
+    margin-top: 0px;
+}
+
+.rail-awake .rail-icon {
+    font-size: 12px;
+    transform: translateX(-3px) scale(1);
+}
+
+.rail-awake:hover .rail-icon {
+    transform: translateX(-7px) scale(1.06);
+}
+
+.rail-awake.stay-awake-active .rail-marker {
+    background-color: @contrary;
+    outline-color: alpha(@contrary, 0.96);
+    box-shadow:
+        6px 0 12px alpha(@primary, 0.52),
+        0 0 12px alpha(@tertiary, 0.68),
+        0 0 23px alpha(@contrary, 0.78);
+    transform: rotate(-45deg) scale(1.30);
+}
+
+.rail-awake.stay-awake-active .rail-icon {
+    color: @primary;
+    font-size: 13px;
     text-shadow:
-        1px 0 0 alpha(@primary, 0.48),
-        -1px 0 0 alpha(@tertiary, 0.72),
-        3px 0 7px alpha(@error, 0.10),
-        -7px 0 11px alpha(@primary, 0.22);
-    transition-delay: 0.06s, 0.04s;
+        0 0 7px alpha(@contrary, 0.90),
+        0 0 14px alpha(@tertiary, 0.54),
+        0 0 19px alpha(@primary, 0.28);
+    transform: translateX(-5px) scale(1.10);
 }
 
-.blade-cava {
-    min-width: 42px;
-    min-height: 228px;
+.rail-awake.stay-awake-active:hover .rail-marker {
+    background-color: @tertiary;
+    outline-color: alpha(@contrary, 0.96);
+    transform: rotate(-225deg) scale(1.68);
+}
+
+.rail-awake.stay-awake-active:hover .rail-icon {
+    transform: translateX(-7px) scale(1.16);
+}
+
+.rail-power {
+    margin-top: 2px;
+}
+
+.rail-power:hover .rail-marker {
+    background-color: @error;
+    outline-color: alpha(@error, 0.92);
+    box-shadow:
+        6px 0 12px alpha(@error, 0.58),
+        0 0 12px alpha(@error, 0.88),
+        0 0 23px alpha(@contrary, 0.28);
+}
+
+.rail-power:hover .rail-icon {
+    color: @error;
+    text-shadow:
+        0 0 7px alpha(@error, 0.84),
+        0 0 14px alpha(@error, 0.38),
+        0 0 19px alpha(@contrary, 0.18);
+
+}
+
+.rail-cava {
+    min-width: 36px;
+    min-height: 180px;
     margin: 0;
     padding: 0;
     background: transparent;
     box-shadow: none;
 }
 
-.blade-cava-upper {
+.rail-cava-left {
     margin-bottom: 8px;
 }
 
-.blade-cava-lower {
+.rail-cava-right {
     margin-top: 8px;
 }
 
-.blade-profile {
-    min-width: 42px;
-    min-height: 28px;
-    transform: translateX(-3.5px) scale(1.2);
-}
-
-.blade-profile-row {
-    min-height: 28px;
-}
-
-.blade-core {
-    min-width: 7px;
-    min-height: 7px;
-    margin-left: 0;
-    margin-right: 4px;
-    background-color: @tertiary;
-    outline: 1px solid alpha(@on-surface, 0.18);
-    outline-offset: 1px;
-    box-shadow:
-        -1px 0 0 alpha(@primary, 0.22),
-        -4px 0 5px alpha(@tertiary, 0.22);
-    transform: rotate(45deg) scale(0.82);
-    transition:
-        background-color 0.30s ease,
-        box-shadow 0.38s ease,
-        transform 0.36s cubic-bezier(0.16, 1, 0.30, 1);
-}
-
-.blade-profile-state {
-    min-width: 18px;
-    min-height: 26px;
-    margin-left: 10px;
-    margin-right: 3px;
-    color: alpha(@on-surface, 0.78);
-    font-size: 17px;
-    text-shadow: -3px 0 5px alpha(@tertiary, 0.22);
-    transform: translateX(0) scale(1);
-    transition:
-        text-shadow 0.38s ease,
-        transform 0.34s cubic-bezier(0.16, 1, 0.30, 1);
-}
-
-.blade-profile:hover .blade-profile-state {
-    text-shadow:
-        1px 0 0 alpha(@primary, 0.54),
-        -1px 0 0 alpha(@tertiary, 0.80),
-        3px 0 7px alpha(@error, 0.12),
-        -8px 0 12px alpha(@primary, 0.24);
-    transform: translateX(-2.5px) scale(1.035);
-    transition-delay: 0.04s, 0.02s;
-}
-
-.blade-profile:hover .blade-core {
-    box-shadow:
-        -1px 0 0 alpha(@primary, 0.76),
-        -4px 0 5px alpha(@tertiary, 0.52),
-        -9px 0 11px alpha(@primary, 0.15);
-    transform: rotate(135deg) scale(1.22);
-}
-
-.blade-profile.profile-powersaver .blade-core {
-    background-color: @primary;
-}
-
-.blade-profile.profile-powersaver .blade-profile-state {
-    text-shadow: -3px 0 5px alpha(@primary, 0.28);
-}
-
-.blade-profile.profile-balanced .blade-core {
-    background-color: @tertiary;
-}
-
-.blade-profile.profile-balanced .blade-profile-state {
-    text-shadow: -3px 0 5px alpha(@tertiary, 0.28);
-}
-
-.blade-profile.profile-performance .blade-core {
-    background-color: @error;
-    outline-color: alpha(@error, 0.52);
-    box-shadow:
-        -1px 0 0 alpha(@error, 0.48),
-        -5px 0 7px alpha(@error, 0.26);
-}
-
-.blade-profile.profile-performance .blade-profile-state {
-    text-shadow: -4px 0 7px alpha(@error, 0.34);
-}
-
-.blade-profile.profile-powersaver:hover .blade-profile-row {
-    background-image:
-        linear-gradient(to bottom,
-            transparent 0%,
-            alpha(@primary, 0.18) 14%,
-            alpha(@primary, 0.74) 38%,
-            alpha(@on-primary-container, 0.98) 50%,
-            alpha(@primary, 0.78) 62%,
-            alpha(@primary, 0.18) 86%,
-            transparent 100%),
-        radial-gradient(ellipse at 82% center,
-            alpha(@on-primary-container, 0.25) 0%,
-            alpha(@primary, 0.24) 26%,
-            alpha(@primary, 0.12) 56%,
-            transparent 100%),
-        linear-gradient(to left,
-            alpha(@primary, 0.34) 0%,
-            alpha(@primary, 0.24) 24%,
-            alpha(@primary, 0.13) 52%,
-            alpha(@primary, 0.045) 78%,
-            transparent 100%);
-}
-
-.blade-profile.profile-balanced:hover .blade-profile-row {
-    background-image:
-        linear-gradient(to bottom,
-            transparent 0%,
-            alpha(@tertiary, 0.18) 14%,
-            alpha(@tertiary, 0.74) 38%,
-            alpha(@on-tertiary-container, 0.98) 50%,
-            alpha(@tertiary, 0.78) 62%,
-            alpha(@tertiary, 0.18) 86%,
-            transparent 100%),
-        radial-gradient(ellipse at 82% center,
-            alpha(@on-tertiary-container, 0.25) 0%,
-            alpha(@tertiary, 0.24) 26%,
-            alpha(@tertiary, 0.12) 56%,
-            transparent 100%),
-        linear-gradient(to left,
-            alpha(@tertiary, 0.34) 0%,
-            alpha(@tertiary, 0.24) 24%,
-            alpha(@tertiary, 0.13) 52%,
-            alpha(@tertiary, 0.045) 78%,
-            transparent 100%);
-}
-
-.blade-profile.profile-performance:hover .blade-profile-row {
-    background-image:
-        linear-gradient(to bottom,
-            transparent 0%,
-            alpha(@error, 0.18) 14%,
-            alpha(@error, 0.74) 38%,
-            alpha(@on-error-container, 0.98) 50%,
-            alpha(@error, 0.78) 62%,
-            alpha(@error, 0.18) 86%,
-            transparent 100%),
-        radial-gradient(ellipse at 82% center,
-            alpha(@on-error-container, 0.25) 0%,
-            alpha(@error, 0.24) 26%,
-            alpha(@error, 0.12) 56%,
-            transparent 100%),
-        linear-gradient(to left,
-            alpha(@error, 0.34) 0%,
-            alpha(@error, 0.24) 24%,
-            alpha(@error, 0.13) 52%,
-            alpha(@error, 0.045) 78%,
-            transparent 100%);
-}
-
-.blade-brightness .blade-icon {
-    transform: translateX(-1.5px) scale(1);
-}
-
-.blade-longshot .blade-icon {
+.rail-tray-icon {
     font-size: 14px;
-    transform: translateX(-2px) scale(1);
-}
-
-.blade-longshot:hover .blade-icon {
-    transform: translateX(-1px) scale(1.03);
-}
-
-.blade-volume .blade-icon {
-    transform: translateX(-1px) scale(1);
-}
-
-.blade-bluetooth .blade-icon {
-    font-size: 16px;
-    transform: translateX(-1px) scale(1);
-}
-
-.blade-tray-icon {
-    font-size: 14px;
-    transform: translateX(-1px) scale(1);
-}
-
-.blade-power {
-    margin-top: 1px;
-}
-
-.blade-power .blade-icon {
-    color: alpha(@error, 0.76);
-    font-size: 13px;
-    transform: translateX(-3px) scale(1);
-}
-
-.blade-power .blade-node {
-    background-color: alpha(@error, 0.78);
-    outline-color: alpha(@error, 0.42);
-}
-
-.blade-power:hover .blade-icon {
-    color: @error;
-    text-shadow:
-        1px 0 0 alpha(@tertiary, 0.46),
-        -1px 0 0 alpha(@error, 0.82),
-        3px 0 7px alpha(@primary, 0.12),
-        -8px 0 12px alpha(@error, 0.26);
-    transform: translateX(-2px) scale(1.035);
-    transition-delay: 0.06s, 0.04s, 0.02s;
-}
-
-.blade-power:hover .blade-node {
-    background-color: @error;
-    outline-color: alpha(@on-error-container, 0.76);
-    box-shadow:
-        -5px 0 11px alpha(@error, 0.62),
-        0 0 10px alpha(@error, 0.82),
-        0 0 19px alpha(@error, 0.38);
-}
-
-.blade-power .blade-row,
-.blade-profile.profile-performance .blade-profile-row {
-    background-image:
-        linear-gradient(to bottom,
-            transparent 0%,
-            alpha(@tertiary, 0.14) 14%,
-            alpha(@error, 0.72) 38%,
-            alpha(@on-error-container, 0.98) 50%,
-            alpha(@error, 0.78) 62%,
-            alpha(@primary, 0.18) 86%,
-            transparent 100%),
-        radial-gradient(ellipse at 82% center,
-            alpha(@on-error-container, 0.24) 0%,
-            alpha(@error, 0.22) 22%,
-            alpha(@tertiary, 0.13) 46%,
-            alpha(@primary, 0.060) 70%,
-            transparent 100%),
-        linear-gradient(to left,
-            alpha(@error, 0.28) 0%,
-            alpha(@tertiary, 0.18) 22%,
-            alpha(@error, 0.12) 50%,
-            alpha(@primary, 0.050) 74%,
-            alpha(@error, 0.018) 86%,
-            transparent 100%);
 }
 
 popover,
@@ -798,14 +686,17 @@ popover > contents {
 }
 
 #popup-tray-gate,
-.popup-blade-tray {
+.popup-rail-tray {
     padding: 0;
     background: transparent;
+    background-image: none;
     border: none;
+    border-radius: 0;
+    outline: none;
     box-shadow: none;
 }
 
-.blade-tray-popup {
+.rail-tray-popup {
     padding: 8px;
     background-color: alpha(@surface-container, 0.98);
     background-image:
@@ -826,13 +717,13 @@ popover > contents {
         0 0 14px alpha(@primary, 0.12);
 }
 
-.blade-tray-popup .tray {
+.rail-tray-popup .tray {
     padding: 0;
     background: transparent;
 }
 
 #popup-tray-gate .tray .item,
-.popup-blade-tray .tray .item {
+.popup-rail-tray .tray .item {
     min-width: 20px;
     min-height: 20px;
     margin: 2px;
@@ -849,12 +740,11 @@ popover > contents {
     transition:
         background-color 0.20s ease,
         border-color 0.20s ease,
-        box-shadow 0.24s ease,
         transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 #popup-tray-gate .tray .item:hover,
-.popup-blade-tray .tray .item:hover {
+.popup-rail-tray .tray .item:hover {
     background-color: alpha(@primary-container, 0.56);
     background-image: linear-gradient(215deg,
         alpha(@primary, 0.18),
@@ -869,15 +759,15 @@ popover > contents {
 }
 
 #popup-tray-gate .tray .item:active,
-.popup-blade-tray .tray .item:active {
+.popup-rail-tray .tray .item:active {
     background-color: alpha(@tertiary-container, 0.62);
     border-color: alpha(@tertiary, 0.42);
     box-shadow: inset -2px 0 0 alpha(@tertiary, 0.78);
     transform: translateX(-1px) scale(0.96);
 }
 
-.blade-tray-popup popover > contents,
-.blade-tray-popup popover contents {
+.rail-tray-popup popover > contents,
+.rail-tray-popup popover contents {
     min-height: 0;
     padding: 6px;
     background-color: alpha(@surface-container-high, 0.98);
@@ -898,7 +788,7 @@ popover > contents {
         0 0 10px alpha(@primary, 0.10);
 }
 
-.blade-tray-popup popover contents separator {
+.rail-tray-popup popover contents separator {
     min-height: 1px;
     margin: 4px 6px;
     background-color: alpha(@outline, 0.16);
@@ -908,9 +798,9 @@ popover > contents {
         transparent);
 }
 
-.blade-tray-popup popover contents button,
-.blade-tray-popup popover contents menuitem,
-.blade-tray-popup popover contents modelbutton {
+.rail-tray-popup popover contents button,
+.rail-tray-popup popover contents menuitem,
+.rail-tray-popup popover contents modelbutton {
     min-height: 24px;
     margin: 1px;
     padding: 1px 9px;
@@ -924,13 +814,12 @@ popover > contents {
     transition:
         color 0.18s ease,
         background-color 0.18s ease,
-        border-color 0.18s ease,
-        box-shadow 0.22s ease;
+        border-color 0.18s ease;
 }
 
-.blade-tray-popup popover contents button:hover,
-.blade-tray-popup popover contents menuitem:hover,
-.blade-tray-popup popover contents modelbutton:hover {
+.rail-tray-popup popover contents button:hover,
+.rail-tray-popup popover contents menuitem:hover,
+.rail-tray-popup popover contents modelbutton:hover {
     color: @on-primary-container;
     background-color: alpha(@primary-container, 0.58);
     background-image: linear-gradient(to left,
@@ -944,10 +833,10 @@ popover > contents {
     transform: none;
 }
 
-.blade-tray-popup popover contents button:active,
-.blade-tray-popup popover contents menuitem:active,
-.blade-tray-popup popover contents modelbutton:active,
-.blade-tray-popup popover contents modelbutton:checked {
+.rail-tray-popup popover contents button:active,
+.rail-tray-popup popover contents menuitem:active,
+.rail-tray-popup popover contents modelbutton:active,
+.rail-tray-popup popover contents modelbutton:checked {
     color: @on-tertiary-container;
     background-color: alpha(@tertiary-container, 0.64);
     border-color: alpha(@tertiary, 0.34);
@@ -955,21 +844,21 @@ popover > contents {
     transform: none;
 }
 
-.blade-tray-popup popover contents button:disabled,
-.blade-tray-popup popover contents menuitem:disabled,
-.blade-tray-popup popover contents modelbutton:disabled {
+.rail-tray-popup popover contents button:disabled,
+.rail-tray-popup popover contents menuitem:disabled,
+.rail-tray-popup popover contents modelbutton:disabled {
     color: alpha(@on-surface, 0.38);
     background: transparent;
     box-shadow: none;
 }
 
-.blade-tray-popup popover contents,
-.blade-tray-popup popover contents box,
-.blade-tray-popup popover contents button,
-.blade-tray-popup popover contents menuitem,
-.blade-tray-popup popover contents modelbutton,
-.blade-tray-popup popover contents label,
-.blade-tray-popup popover contents accelerator {
+.rail-tray-popup popover contents,
+.rail-tray-popup popover contents box,
+.rail-tray-popup popover contents button,
+.rail-tray-popup popover contents menuitem,
+.rail-tray-popup popover contents modelbutton,
+.rail-tray-popup popover contents label,
+.rail-tray-popup popover contents accelerator {
     min-height: 0;
     font-family: "Anthropic Serif Text", "Noto Sans Mono CJK SC", serif;
     font-size: 12px;
@@ -977,26 +866,17 @@ popover > contents {
     letter-spacing: 0.2px;
 }
 
-.blade-tray-popup popover contents label {
+.rail-tray-popup popover contents label {
     padding: 0;
     color: inherit;
     background: transparent;
     text-shadow: 0 1px 2px alpha(@shadow, 0.36);
 }
 
-.blade-tray-popup popover contents accelerator,
-.blade-tray-popup popover contents image {
+.rail-tray-popup popover contents accelerator,
+.rail-tray-popup popover contents image {
     min-height: 0;
     color: alpha(@on-surface-variant, 0.76);
-}
-
-.blade-tray-popup,
-.blade-tray-popup label,
-.blade-tray-popup button,
-.blade-tray-popup popover label,
-popover.menu label {
-    font-family: "Anthropic Serif Text", "Noto Sans Mono CJK SC", serif;
-    font-weight: 400;
 }
 
 tooltip,
@@ -1006,8 +886,8 @@ tooltip.background {
     background-image:
         linear-gradient(to bottom,
             transparent 0%,
-            alpha(@tertiary, 0.94) 24%,
-            alpha(@primary, 0.94) 76%,
+            alpha(@primary, 0.94) 24%,
+            alpha(@tertiary, 0.94) 76%,
             transparent 100%),
         radial-gradient(circle at right center,
             alpha(@primary, 0.12),
@@ -1017,9 +897,11 @@ tooltip.background {
             alpha(@surface-container, 0.96));
     background-repeat: no-repeat;
     background-size: 2px 100%, 100% 100%, 100% 100%;
-    background-position: right top, left top, left top;
+    background-position: right top, right top, right top;
+    background-clip: padding-box;
     border: 1px solid alpha(@outline, 0.36);
     border-radius: 10px;
+    outline: none;
     padding: 8px 14px 8px 11px;
     box-shadow:
         inset -1px 0 0 alpha(@primary, 0.18),
@@ -1032,9 +914,20 @@ tooltip box,
 tooltip label {
     color: @on-surface;
     background: transparent;
+    border: none;
+    border-radius: 0;
     padding: 0;
     font-family: "Anthropic Serif Text", "JetBrainsMono Nerd Font", "Noto Sans Mono CJK SC", serif;
     font-size: 12px;
     font-weight: 500;
     text-shadow: 0 1px 2px alpha(@shadow, 0.42);
+}
+
+.rail-tray-popup,
+.rail-tray-popup label,
+.rail-tray-popup button,
+.rail-tray-popup popover label,
+popover.menu label {
+    font-family: "Anthropic Serif Text", "Noto Sans Mono CJK SC", serif;
+    font-weight: 400;
 }

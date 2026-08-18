@@ -1,6 +1,6 @@
 local config_dir = (os.getenv("HOME") or "/home/horizon")
     .. "/.config/ironbar/right/"
-local new_mirrored_renderer = dofile(config_dir .. "cava-mirror.lua")
+local new_renderer = dofile(config_dir .. "cava-rail.lua")
 
-draw = new_mirrored_renderer("right")
+draw = new_renderer("right")
 return draw

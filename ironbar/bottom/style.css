@@ -28,13 +28,16 @@ window {
             rgba(255, 255, 255, 0.00) 44%,
             rgba(0, 0, 0, 0.08) 100%),
         linear-gradient(115deg,
-            alpha(@primary, 0.30) 0%,
-            alpha(@surface-variant, 0.10) 38%,
-            alpha(@tertiary, 0.30) 68%,
+            alpha(@primary, 0.32) 0%,
+            alpha(@contrary, 0.20) 20%,
+            alpha(@surface-variant, 0.08) 40%,
+            alpha(@tertiary, 0.28) 60%,
+            alpha(@tertiary, 0.12) 75%,
+            alpha(@contrary, 0.28) 88%,
             alpha(@primary, 0.24) 100%);
     background-repeat: no-repeat;
-    background-size: 160% 160%, 240% 240%;
-    background-position: 0% 0%, 0% 0%;
+    background-size: 180% 180%, 300% 300%;
+    background-position: 0% 0%, 0% 20%;
     background-color: alpha(@surface, 0.20);
 
     outline: 1px solid alpha(@on-surface, 0.14);
@@ -43,12 +46,12 @@ window {
         inset 1.5px 1.5px 1px alpha(@primary, 0.42),
         inset -1.5px -1.5px 1px alpha(@tertiary, 0.34),
         0 -2px 6px rgba(0, 0, 0, 0.25),
-        0 0 8px alpha(@primary, 0.00),
-        0 0 8px alpha(@tertiary, 0.00);
+        0 0 8px alpha(@tertiary, 0.00),
+        0 0 8px alpha(@contrary, 0.00);
     transform: scale(1) translateY(0);
 
     transition: 
-        background-position 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+        background-position 0.44s cubic-bezier(0.4, 0, 0.2, 1),
         outline-color 0.28s ease,
         transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
         color 0.3s ease;
@@ -57,18 +60,18 @@ window {
 .bluetooth:hover, .volume:hover, .brightness:hover, .custom-battery:hover, .clock:hover,
 .cava:hover, .longshot:hover, .workspaces .item:hover,
 #prev:hover, .play-pause:hover, #next:hover, #power:hover {
-    color: @tertiary;
-    background-position: 100% 100%, 100% 100%;
-    outline-color: alpha(@tertiary, 0.45);
+    color: @contrary;
+    background-position: 100% 100%, 100% 80%;
+    outline-color: alpha(@contrary, 0.62);
     box-shadow:
         inset 1.5px 1.5px 1px alpha(@tertiary, 0.62),
         inset -1.5px -1.5px 1px alpha(@primary, 0.58),
         0 -4px 10px rgba(0, 0, 0, 0.28),
-        0 0 8px alpha(@primary, 0.09),
-        0 0 8px alpha(@tertiary, 0.09);
+        0 0 8px alpha(@tertiary, 0.09),
+        0 0 8px alpha(@contrary, 0.18);
     transform: scale(1.1) translateY(1px);
     transition:
-        background-position 0.30s cubic-bezier(0.2, 0, 0, 1),
+        background-position 0.24s cubic-bezier(0.2, 0, 0, 1),
         outline-color 0.28s ease,
         transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
         color 0.3s ease;
@@ -92,8 +95,8 @@ window {
         inset 0 -3px 5px rgba(0, 0, 0, 0.22),
         inset 0 1px 0 rgba(255, 255, 255, 0.08),
         0 -1px 3px rgba(0, 0, 0, 0.10),
-        0 0 8px alpha(@primary, 0.00),
-        0 0 8px alpha(@tertiary, 0.00);
+        0 0 8px alpha(@tertiary, 0.00),
+        0 0 8px alpha(@contrary, 0.00);
     transform: scale(0.93) translateY(1.5px);
     transition:
         background 0.10s ease,
@@ -163,7 +166,7 @@ tooltip, tooltip label, popover > contents {
 }
 
 #prev:hover, .play-pause:hover, #next:hover {
-    color: @tertiary;
+    color: @contrary;
     transform: scale(1.1) translateY(0);
 }
 
@@ -177,7 +180,9 @@ tooltip, tooltip label, popover > contents {
     background-color: transparent;
     background-image: linear-gradient(145deg,
         alpha(@on-surface, 0.00),
-        alpha(@tertiary, 0.00));
+        alpha(@contrary, 0.00));
+    background-size: 220% 220%;
+    background-position: 0% 0%;
     outline: 1px solid alpha(@outline, 0.00);
     outline-offset: -1px;
     border-radius: 4px;
@@ -185,8 +190,8 @@ tooltip, tooltip label, popover > contents {
     transform: scale(1);
     transition:
         background-color 0.2s ease,
+        background-position 0.22s cubic-bezier(0.2, 0, 0, 1),
         outline-color 0.2s ease,
-        box-shadow 0.24s ease,
         transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -194,12 +199,14 @@ tooltip, tooltip label, popover > contents {
     background-color: alpha(@surface-container-highest, 0.48);
     background-image: linear-gradient(145deg,
         alpha(@primary, 0.16),
+        alpha(@tertiary, 0.20) 52%,
         alpha(@tertiary, 0.22));
-    outline-color: alpha(@tertiary, 0.34);
+    background-position: 100% 100%;
+    outline-color: alpha(@contrary, 0.56);
     box-shadow:
         inset 0 -1px 0 alpha(@on-surface, 0.12),
         0 -2px 8px alpha(@shadow, 0.22),
-        0 0 9px alpha(@tertiary, 0.14);
+        0 0 9px alpha(@contrary, 0.24);
     transform: scale(1.16) translateY(-1px);
 }
 
@@ -222,12 +229,16 @@ tooltip, tooltip label, popover > contents {
             rgba(255, 255, 255, 0.00) 44%,
             rgba(0, 0, 0, 0.08) 100%),
         linear-gradient(115deg,
-            alpha(@primary, 0.30) 0%,
-            alpha(@surface-variant, 0.10) 45%,
-            alpha(@tertiary, 0.30) 100%);
+            alpha(@primary, 0.32) 0%,
+            alpha(@contrary, 0.20) 20%,
+            alpha(@surface-variant, 0.08) 40%,
+            alpha(@tertiary, 0.28) 60%,
+            alpha(@tertiary, 0.12) 75%,
+            alpha(@contrary, 0.28) 88%,
+            alpha(@primary, 0.24) 100%);
     background-repeat: no-repeat;
-    background-size: 160% 160%, 240% 240%;
-    background-position: 0% 0%, 0% 0%;
+    background-size: 180% 180%, 300% 300%;
+    background-position: 0% 0%, 0% 20%;
     background-color: alpha(@surface, 0.20);
 
     outline: 1px solid alpha(@on-surface, 0.14);
@@ -236,12 +247,12 @@ tooltip, tooltip label, popover > contents {
         inset 1.5px 1.5px 1px alpha(@primary, 0.42),
         inset -1.5px -1.5px 1px alpha(@tertiary, 0.34),
         0 -2px 6px rgba(0, 0, 0, 0.25),
-        0 0 8px alpha(@primary, 0.00),
-        0 0 8px alpha(@tertiary, 0.00);
+        0 0 8px alpha(@tertiary, 0.00),
+        0 0 8px alpha(@contrary, 0.00);
     transform: scale(1) translateY(0);
 
     transition:
-        background-position 0.55s ease,
+        background-position 0.44s cubic-bezier(0.4, 0, 0.2, 1),
         outline-color 0.28s ease,
         transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
         color 0.3s ease;
@@ -252,7 +263,9 @@ tooltip, tooltip label, popover > contents {
         linear-gradient(145deg, rgba(255, 255, 255, 0.10), transparent 48%),
         linear-gradient(115deg,
             alpha(@tertiary, 0.34) 0%,
+            alpha(@contrary, 0.10) 26%,
             alpha(@surface-variant, 0.10) 48%,
+            alpha(@tertiary, 0.08) 74%,
             alpha(@tertiary, 0.22) 100%);
     outline-color: alpha(@tertiary, 0.40);
 }
@@ -262,7 +275,9 @@ tooltip, tooltip label, popover > contents {
         linear-gradient(145deg, rgba(255, 255, 255, 0.10), transparent 48%),
         linear-gradient(115deg,
             alpha(@error, 0.34) 0%,
+            alpha(@contrary, 0.07) 27%,
             alpha(@surface-variant, 0.10) 48%,
+            alpha(@tertiary, 0.06) 74%,
             alpha(@error, 0.22) 100%);
     outline-color: alpha(@error, 0.40);
 }
@@ -271,24 +286,26 @@ tooltip, tooltip label, popover > contents {
     background-image:
         linear-gradient(145deg, rgba(255, 255, 255, 0.10), transparent 48%),
         linear-gradient(115deg,
-            alpha(@primary, 0.34) 0%,
-            alpha(@surface-variant, 0.10) 48%,
-            alpha(@primary, 0.22) 100%);
-    outline-color: alpha(@primary, 0.40);
+            alpha(@contrary, 0.42) 0%,
+            alpha(@tertiary, 0.18) 26%,
+            alpha(@surface-variant, 0.08) 48%,
+            alpha(@primary, 0.14) 72%,
+            alpha(@contrary, 0.32) 100%);
+    outline-color: alpha(@contrary, 0.56);
 }
 
 .power-btn:hover {
-    background-position: 100% 100%, 100% 100%;
+    background-position: 100% 100%, 100% 80%;
     outline-color: alpha(@tertiary, 0.60);
     box-shadow:
         inset 1.5px 1.5px 1px alpha(@tertiary, 0.62),
         inset -1.5px -1.5px 1px alpha(@primary, 0.58),
         0 -4px 10px rgba(0, 0, 0, 0.28),
-        0 0 8px alpha(@primary, 0.09),
-        0 0 8px alpha(@tertiary, 0.09);
+        0 0 8px alpha(@tertiary, 0.09),
+        0 0 8px alpha(@contrary, 0.18);
     transform: scale(1.1) translateY(1px);
     transition:
-        background-position 0.30s cubic-bezier(0.2, 0, 0, 1),
+        background-position 0.24s cubic-bezier(0.2, 0, 0, 1),
         outline-color 0.28s ease,
         transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
         color 0.3s ease;
@@ -305,8 +322,8 @@ tooltip, tooltip label, popover > contents {
 }
 
 .power-btn.profile-powersaver:hover {
-    outline-color: alpha(@primary, 0.65);
-    text-shadow: 0 0 8px alpha(@primary, 0.55);
+    outline-color: alpha(@contrary, 0.78);
+    text-shadow: 0 0 8px alpha(@contrary, 0.72);
 }
 
 .power-btn:active {
@@ -323,8 +340,8 @@ tooltip, tooltip label, popover > contents {
         inset 0 -3px 5px rgba(0, 0, 0, 0.22),
         inset 0 1px 0 rgba(255, 255, 255, 0.08),
         0 -1px 3px rgba(0, 0, 0, 0.10),
-        0 0 8px alpha(@primary, 0.00),
-        0 0 8px alpha(@tertiary, 0.00);
+        0 0 8px alpha(@tertiary, 0.00),
+        0 0 8px alpha(@contrary, 0.00);
     transform: scale(0.93) translateY(1.5px);
     transition:
         background 0.10s ease,
@@ -435,8 +452,7 @@ popover contents modelbutton {
     transition:
         color 0.18s ease,
         background-color 0.18s ease,
-        border-color 0.18s ease,
-        box-shadow 0.22s ease;
+        border-color 0.18s ease;
 }
 
 popover contents button:hover,

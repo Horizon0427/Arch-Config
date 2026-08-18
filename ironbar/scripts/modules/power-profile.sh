@@ -34,11 +34,12 @@ profile_markup() {
     local tertiary="$2"
     local error="$3"
     local primary="$4"
+    local power_saver="$5"
 
     case "$profile" in
         balanced)    printf "<span color='%s'></span>\n" "${tertiary:-#b0c9e7}" ;;
         performance) printf "<span color='%s'></span>\n" "${error:-#ffb4ab}" ;;
-        *)           printf "<span color='%s'></span>\n" "${primary:-#81d5ce}" ;;
+        *)           printf "<span color='%s'></span>\n" "${power_saver:-${primary:-#81d5ce}}" ;;
     esac
 }
 
@@ -51,11 +52,12 @@ rail_spine_color() {
     local tertiary="$2"
     local error="$3"
     local primary="$4"
+    local power_saver="$5"
 
     case "$profile" in
         balanced)    printf '%s\n' "${tertiary:-#b0c9e7}" ;;
         performance) printf '%s\n' "${error:-#ffb4ab}" ;;
-        *)           printf '%s\n' "${primary:-#81d5ce}" ;;
+        *)           printf '%s\n' "${power_saver:-${primary:-#81d5ce}}" ;;
     esac
 }
 
@@ -69,11 +71,12 @@ write_rail_spine_css() {
     local tertiary="$2"
     local error="$3"
     local primary="$4"
+    local power_saver="$5"
     local color css_file
 
     rail_spine_enabled || return 0
 
-    color=$(rail_spine_color "$profile" "$tertiary" "$error" "$primary")
+    color=$(rail_spine_color "$profile" "$tertiary" "$error" "$primary" "$power_saver")
     css_file=$(rail_spine_css_path)
     umask 077
 
@@ -116,11 +119,12 @@ write_blade_strip_css() {
     local tertiary="$2"
     local error="$3"
     local primary="$4"
+    local power_saver="$5"
     local color css_file
 
     blade_strip_enabled || return 0
 
-    color=$(rail_spine_color "$profile" "$tertiary" "$error" "$primary")
+    color=$(rail_spine_color "$profile" "$tertiary" "$error" "$primary" "$power_saver")
     css_file=$(blade_strip_css_path)
     umask 077
 
@@ -178,19 +182,20 @@ set_runtime_class_with_retry() {
 }
 
 watch_profile() {
-    local tertiary error primary profile class event
+    local tertiary error primary power_saver profile class event
     local last_profile="" last_class="" spine_css_loaded=0 blade_css_loaded=0
 
     tertiary=$(profile_color tertiary)
     error=$(profile_color error)
     primary=$(profile_color primary)
+    power_saver=$(profile_color contrary)
 
     while true; do
         profile=$(current_profile)
         if [[ "$profile" != "$last_profile" ]]; then
-            profile_markup "$profile" "$tertiary" "$error" "$primary" || exit 0
-            write_rail_spine_css "$profile" "$tertiary" "$error" "$primary"
-            write_blade_strip_css "$profile" "$tertiary" "$error" "$primary"
+            profile_markup "$profile" "$tertiary" "$error" "$primary" "$power_saver" || exit 0
+            write_rail_spine_css "$profile" "$tertiary" "$error" "$primary" "$power_saver"
+            write_blade_strip_css "$profile" "$tertiary" "$error" "$primary" "$power_saver"
             last_profile="$profile"
         fi
         if rail_spine_enabled && ((spine_css_loaded == 0)); then
@@ -215,9 +220,9 @@ watch_profile() {
                 *"ActiveProfile"*)
                     profile=$(current_profile)
                     if [[ "$profile" != "$last_profile" ]]; then
-                        profile_markup "$profile" "$tertiary" "$error" "$primary" || exit 0
-                        write_rail_spine_css "$profile" "$tertiary" "$error" "$primary"
-                        write_blade_strip_css "$profile" "$tertiary" "$error" "$primary"
+                        profile_markup "$profile" "$tertiary" "$error" "$primary" "$power_saver" || exit 0
+                        write_rail_spine_css "$profile" "$tertiary" "$error" "$primary" "$power_saver"
+                        write_blade_strip_css "$profile" "$tertiary" "$error" "$primary" "$power_saver"
                         last_profile="$profile"
                     fi
 

@@ -1,20 +1,28 @@
 /* Primary */
-@define-color primary #a0cafd;
-@define-color on-primary #003258;
-@define-color primary-container #194975;
-@define-color on-primary-container #d1e4ff;
+@define-color primary #81d5ce;
+@define-color on-primary #003734;
+@define-color primary-container #00504c;
+@define-color on-primary-container #9df2ea;
 
 /* Secondary */
-@define-color secondary #bbc7db;
-@define-color on-secondary #253140;
-@define-color secondary-container #3b4858;
-@define-color on-secondary-container #d7e3f7;
+@define-color secondary #b0ccc9;
+@define-color on-secondary #1c3533;
+@define-color secondary-container #324b49;
+@define-color on-secondary-container #cce8e5;
 
 /* Tertiary */
-@define-color tertiary #d6bee4;
-@define-color on-tertiary #3b2948;
-@define-color tertiary-container #523f5f;
-@define-color on-tertiary-container #f2daff;
+@define-color tertiary #b0c9e7;
+@define-color on-tertiary #19324a;
+@define-color tertiary-container #304962;
+@define-color on-tertiary-container #d0e4ff;
+
+/* Contrary: the native source -60 degree accent family. */
+@define-color contrary #bbcd9e;
+@define-color on-contrary #263513;
+@define-color contrary-container #3c4c28;
+@define-color on-contrary-container #d6e9b9;
+@define-color contrary-fixed #d6e9b9;
+@define-color contrary-fixed-dim #bbcd9e;
 
 /* Error */
 @define-color error #ffb4ab;
@@ -23,22 +31,24 @@
 @define-color on-error-container #ffdad6;
 
 /* Surfaces */
-@define-color background #111418;
-@define-color on-background #e1e2e8;
-@define-color surface #111418;
-@define-color on-surface #e1e2e8;
-@define-color surface-variant #43474e;
-@define-color on-surface-variant #c3c7cf;
-@define-color surface-dim #111418;
-@define-color surface-bright #36393e;
-@define-color surface-container-lowest #0b0e13;
-@define-color surface-container-low #191c20;
-@define-color surface-container #1d2024;
-@define-color surface-container-high #272a2f;
-@define-color surface-container-highest #32353a;
+@define-color background #0e1514;
+@define-color on-background #dde4e2;
+@define-color surface #0e1514;
+@define-color on-surface #dde4e2;
+@define-color surface-variant #3f4947;
+@define-color on-surface-variant #bec9c7;
+@define-color surface-dim #0e1514;
+@define-color surface-bright #343a3a;
+@define-color surface-container-lowest #090f0f;
+@define-color surface-container-low #161d1c;
+@define-color surface-container #1a2120;
+@define-color surface-container-high #252b2a;
+@define-color surface-container-highest #2f3635;
 
 /* Edges and depth */
-@define-color outline #8d9199;
-@define-color outline-variant #43474e;
+@define-color outline #889391;
+@define-color outline-variant #3f4947;
 @define-color shadow #000000;
 @define-color scrim #000000;
+@define-color contrary-outline #85976c;
+@define-color contrary-outline-variant #3c4c28;

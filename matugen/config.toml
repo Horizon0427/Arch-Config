@@ -1,5 +1,6 @@
-[config]
+# ========= Have you read the README.md ? ==========
 
+[config]
 
 [templates.hyprland]
 input_path = '~/.config/matugen/templates/hyprland_colors.lua'
@@ -17,6 +18,14 @@ output_path = '~/.config/wlogout/colors.css'
 input_path = '~/.config/matugen/templates/btop.theme'
 output_path = '~/.config/btop/themes/matugen.theme'
 
+[templates.fastfetch]
+input_path = '~/.config/matugen/templates/fastfetch-config.jsonc'
+output_path = '~/.config/fastfetch/config.jsonc'
+
+[templates.yazi]
+input_path = '~/.config/matugen/templates/yazi-theme.toml'
+output_path = '~/.config/yazi/theme.toml'
+
 [templates.hyprlock]
 input_path = '~/.config/matugen/templates/hyprlock-colors.conf'
 output_path = '~/.config/hypr/hyprlock-colors.conf'
@@ -28,6 +37,10 @@ output_path = '~/.config/hypr/lock_animation/prelock_color'
 [templates.ghostty]
 input_path = '~/.config/matugen/templates/ghostty-theme.conf'
 output_path = '~/.config/ghostty/matugen-colors'
+
+[templates.starship]
+input_path = '~/.config/matugen/templates/starship.toml'
+output_path = '~/.config/starship.toml'
 
 [templates.nvim]
 input_path = '~/.config/matugen/templates/nvim-colors.lua'

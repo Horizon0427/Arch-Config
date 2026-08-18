@@ -68,16 +68,19 @@ button {
     margin-left: 4px;
     margin-right: 4px;
     padding: 0;
-    background-color: alpha(@primary, 0.84);
+    background-color: alpha(@contrary, 0.84);
     border-radius: 0;
-    outline: 1px solid alpha(@on-surface, 0.18);
+    outline: 1px solid alpha(@contrary, 0.88);
     outline-offset: 1px;
-    box-shadow: 0 0 0 alpha(@primary, 0.00);
+    box-shadow:
+        -6px 0 12px alpha(@primary, 0.00),
+        0 0 12px alpha(@tertiary, 0.00),
+        0 0 23px alpha(@contrary, 0.00);
     transform: rotate(45deg) scale(0.84);
     transition:
         background-color 0.24s ease,
         outline-color 0.24s ease,
-        box-shadow 0.30s ease,
+        box-shadow 0.26s cubic-bezier(0.2, 0, 0, 1),
         transform 0.34s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -86,7 +89,10 @@ button {
     min-height: 26px;
     color: alpha(@on-surface, 0.78);
     font-size: 15px;
-    text-shadow: 0 0 0 alpha(@primary, 0.00);
+    text-shadow:
+        0 0 7px alpha(@tertiary, 0.00),
+        0 0 14px alpha(@tertiary, 0.00),
+        0 0 19px alpha(@contrary, 0.00);
     transform: translateX(0) scale(1);
     transition:
         color 0.24s ease,
@@ -143,21 +149,32 @@ button {
     transform: translateX(-1px) scale(1);
 }
 
+.rail-media .rail-icon,
+.rail-longshot .rail-icon,
+.rail-brightness .rail-icon,
+.rail-volume .rail-icon,
+.rail-bluetooth .rail-icon,
+.rail-tray .rail-icon,
+.rail-awake .rail-icon {
+    color: @primary;
+}
+
 .rail-item:hover .rail-marker {
     background-color: @tertiary;
-    outline-color: alpha(@tertiary, 0.88);
+    outline-color: alpha(@contrary, 0.92);
     box-shadow:
-        -6px 0 12px alpha(@primary, 0.68),
-        0 0 12px alpha(@tertiary, 0.92),
-        0 0 23px alpha(@tertiary, 0.48);
-    transform: rotate(135deg) scale(1.55);
+        -6px 0 12px alpha(@contrary, 0.48),
+        0 0 12px alpha(@tertiary, 0.72),
+        0 0 23px alpha(@contrary, 0.62);
+    transform: rotate(225deg) scale(1.55);
 }
 
 .rail-item:hover .rail-icon {
-    color: @tertiary;
+    color: @contrary;
     text-shadow:
-        0 0 7px alpha(@tertiary, 0.82),
-        0 0 14px alpha(@primary, 0.40);
+        0 0 7px alpha(@contrary, 0.86),
+        0 0 14px alpha(@tertiary, 0.46),
+        0 0 19px alpha(@primary, 0.26);
     transform: translateX(3px) scale(1.06);
 }
 
@@ -178,7 +195,7 @@ button {
 }
 
 .rail-longshot:hover .rail-icon {
-    transform: translateX(1px) scale(1.06);
+    transform: translateX(3px) scale(1.06);
 }
 
 .rail-brightness:hover .rail-icon {
@@ -200,13 +217,20 @@ button {
 .rail-item:active .rail-marker {
     background-color: @surface-variant;
     outline-color: alpha(@on-surface-variant, 0.62);
-    box-shadow: 0 0 5px alpha(@primary, 0.28);
+    box-shadow:
+        -6px 0 12px alpha(@primary, 0.10),
+        0 0 12px alpha(@tertiary, 0.00),
+        0 0 23px alpha(@contrary, 0.00);
     transform: rotate(180deg) scale(0.52);
     transition-duration: 0.10s;
 }
 
 .rail-item:active .rail-icon {
     color: @on-surface-variant;
+    text-shadow:
+        0 0 7px alpha(@tertiary, 0.00),
+        0 0 14px alpha(@tertiary, 0.00),
+        0 0 19px alpha(@contrary, 0.00);
     transform: translateX(1px) scale(0.88);
     transition-duration: 0.10s;
 }
@@ -285,8 +309,8 @@ button {
 }
 
 .rail-clock:hover .rail-clock-digit {
-    color: @tertiary;
-    text-shadow: 0 0 8px alpha(@tertiary, 0.72);
+    color: @contrary;
+    text-shadow: 0 0 8px alpha(@contrary, 0.78);
     transform: translateX(2px) scale(1.06);
 }
 
@@ -329,22 +353,22 @@ button {
     min-height: 28px;
     margin: 2px 0;
     padding: 0;
-    color: alpha(@on-surface, 0.72);
+    color: @contrary;
     background-color: transparent;
     background-image:
         radial-gradient(circle at center,
-            alpha(@primary, 0.88) 0%,
-            alpha(@primary, 0.88) 43%,
+            alpha(@contrary, 0.88) 0%,
+            alpha(@contrary, 0.88) 43%,
             transparent 68%),
         radial-gradient(ellipse at center,
-            alpha(@primary, 0.18) 0%,
-            alpha(@primary, 0.07) 50%,
+            alpha(@contrary, 0.18) 0%,
+            alpha(@contrary, 0.07) 50%,
             transparent 74%),
         linear-gradient(to bottom,
             transparent 0%,
-            alpha(@primary, 0.14) 24%,
-            alpha(@primary, 0.36) 50%,
-            alpha(@primary, 0.14) 76%,
+            alpha(@contrary, 0.14) 24%,
+            alpha(@contrary, 0.36) 50%,
+            alpha(@contrary, 0.14) 76%,
             transparent 100%);
     background-repeat: no-repeat;
     background-size: 6px 6px, 13px 13px, 2px 4px;
@@ -371,33 +395,34 @@ button {
 }
 
 .workspaces .item.visible:not(.focused) {
-    color: alpha(@primary, 0.92);
+    color: @contrary;
     background-size: 7px 7px, 14px 14px, 2px 10px;
     background-position: 4.5px center, 1px center, 7px center;
 }
 
 .workspaces .item:hover:not(.focused) {
-    color: @tertiary;
+    color: @contrary;
     background-image:
         radial-gradient(circle at center,
-            @tertiary 0%,
-            @tertiary 46%,
+            @contrary 0%,
+            @contrary 46%,
             transparent 68%),
         radial-gradient(ellipse at center,
-            alpha(@tertiary, 0.34) 0%,
-            alpha(@tertiary, 0.10) 52%,
+            alpha(@contrary, 0.40) 0%,
+            alpha(@tertiary, 0.14) 52%,
             transparent 76%),
         linear-gradient(to bottom,
             transparent 0%,
-            alpha(@tertiary, 0.18) 18%,
-            alpha(@tertiary, 0.58) 50%,
-            alpha(@tertiary, 0.18) 82%,
+            alpha(@primary, 0.18) 18%,
+            alpha(@contrary, 0.66) 50%,
+            alpha(@tertiary, 0.22) 82%,
             transparent 100%);
     background-size: 10px 10px, 18px 18px, 2px 20px;
     background-position: 3px center, -1px center, 7px center;
     text-shadow:
-        0 0 7px alpha(@tertiary, 0.80),
-        0 0 13px alpha(@primary, 0.36);
+        0 0 7px alpha(@contrary, 0.84),
+        0 0 13px alpha(@tertiary, 0.40),
+        0 0 18px alpha(@primary, 0.22);
     transition:
         color 0.20s ease,
         background-size 0.28s cubic-bezier(0.34, 1.42, 0.64, 1),
@@ -417,20 +442,21 @@ button {
             @tertiary 48%,
             transparent 70%),
         radial-gradient(ellipse at center,
-            alpha(@tertiary, 0.42) 0%,
+            alpha(@tertiary, 0.26) 0%,
             alpha(@tertiary, 0.13) 50%,
             transparent 76%),
         linear-gradient(to bottom,
             transparent 0%,
-            alpha(@tertiary, 0.22) 12%,
+            alpha(@tertiary, 0.16) 12%,
             alpha(@tertiary, 0.72) 50%,
-            alpha(@tertiary, 0.22) 88%,
+            alpha(@contrary, 0.16) 88%,
             transparent 100%);
     background-size: 7px 20px, 17px 28px, 2px 28px;
     background-position: 4.5px center, -0.5px center, 7px center;
     text-shadow:
         0 0 8px alpha(@tertiary, 0.84),
-        0 0 15px alpha(@primary, 0.34);
+        0 0 15px alpha(@primary, 0.26),
+        0 0 19px alpha(@contrary, 0.16);
     animation: workspace-focus-lock 0.38s cubic-bezier(0.22, 0.88, 0.32, 1) 1;
     transition:
         color 0.24s ease,
@@ -444,8 +470,13 @@ button {
 }
 
 .workspaces .item.focused:hover {
+    color: @tertiary;
     background-size: 9px 22px, 20px 28px, 3px 28px;
     background-position: 3.5px center, -2px center, 6.5px center;
+    text-shadow:
+        0 0 8px alpha(@tertiary, 0.82),
+        0 0 15px alpha(@contrary, 0.34),
+        0 0 19px alpha(@primary, 0.20);
 }
 
 .workspaces .item.focused:hover label {
@@ -493,13 +524,54 @@ button {
     transform: rotate(45deg) scale(0.90);
 }
 
-.rail-profile:hover .rail-marker {
-    transform: rotate(135deg) scale(1.52);
+.rail-profile-injection {
+    min-width: 2px;
+    min-height: 10px;
+    margin-left: 7px;
+    margin-right: -9px;
+    padding: 0;
+    opacity: 0;
+    background-color: transparent;
+    transform-origin: center center;
+    transform: scale(1, 0.04);
+    transition:
+        opacity 0.18s ease,
+        background-color 0.20s ease,
+        transform 0.36s cubic-bezier(0.16, 1, 0.30, 1);
 }
 
-.rail-profile.profile-balanced .rail-marker,
-.rail-media .rail-marker {
+.rail-profile:hover .rail-profile-injection {
+    opacity: 0.92;
+    transform: scale(1, 102);
+}
+
+.rail-profile.profile-balanced .rail-profile-injection {
+    background-color: @error;
+}
+
+.rail-profile.profile-performance .rail-profile-injection {
+    background-color: @contrary;
+}
+
+.rail-profile.profile-powersaver .rail-profile-injection {
     background-color: @tertiary;
+}
+
+.rail-profile:hover .rail-marker {
+    transform: rotate(225deg) scale(1.52);
+}
+
+.rail-profile.profile-balanced .rail-marker {
+    background-color: @tertiary;
+}
+
+.rail-profile.profile-powersaver .rail-marker {
+    background-color: @contrary;
+    outline-color: alpha(@contrary, 0.64);
+}
+
+.rail-profile.profile-powersaver .rail-icon {
+    color: @contrary;
 }
 
 .rail-profile.profile-performance .rail-marker,
@@ -513,8 +585,52 @@ button {
     color: @error;
 }
 
+.rail-awake {
+    margin-top: 0px;
+}
+
+.rail-awake .rail-icon {
+    font-size: 12px;
+    transform: translateX(-2px) scale(1);
+}
+
+.rail-awake:hover .rail-icon {
+    transform: translateX(1px) scale(1.06);
+}
+
+.rail-awake.stay-awake-active .rail-marker {
+    background-color: @contrary;
+    outline-color: alpha(@contrary, 0.96);
+    box-shadow:
+        -6px 0 12px alpha(@primary, 0.52),
+        0 0 12px alpha(@tertiary, 0.68),
+        0 0 23px alpha(@contrary, 0.78);
+    transform: rotate(45deg) scale(1.30);
+}
+
+.rail-awake.stay-awake-active .rail-icon {
+    color: @primary;
+    font-size: 13px;
+    text-shadow:
+        0 0 7px alpha(@contrary, 0.90),
+        0 0 14px alpha(@tertiary, 0.54),
+        0 0 19px alpha(@primary, 0.28);
+    transform: translateX(-2px) scale(1.10);
+}
+
+.rail-awake.stay-awake-active:hover .rail-marker {
+    background-color: @tertiary;
+    outline-color: alpha(@contrary, 0.96);
+    transform: rotate(225deg) scale(1.68);
+}
+
+.rail-awake.stay-awake-active:hover .rail-icon {
+    transform: translateX(-2px) scale(1.16);
+    transform: translateX(2px) scale(1.06);
+}
+
 .rail-power {
-    margin-top: 6px;
+    margin-top: 2px;
 }
 
 .rail-power:hover .rail-marker {
@@ -522,15 +638,16 @@ button {
     outline-color: alpha(@error, 0.92);
     box-shadow:
         -6px 0 12px alpha(@error, 0.58),
-        0 0 13px alpha(@error, 0.88),
-        0 0 23px alpha(@error, 0.42);
+        0 0 12px alpha(@error, 0.88),
+        0 0 23px alpha(@contrary, 0.28);
 }
 
 .rail-power:hover .rail-icon {
     color: @error;
     text-shadow:
-        0 0 8px alpha(@error, 0.84),
-        0 0 15px alpha(@error, 0.38);
+        0 0 7px alpha(@error, 0.84),
+        0 0 14px alpha(@error, 0.38),
+        0 0 19px alpha(@contrary, 0.18);
 }
 
 .rail-cava {
@@ -620,7 +737,6 @@ popover > contents {
     transition:
         background-color 0.20s ease,
         border-color 0.20s ease,
-        box-shadow 0.24s ease,
         transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -695,8 +811,7 @@ popover > contents {
     transition:
         color 0.18s ease,
         background-color 0.18s ease,
-        border-color 0.18s ease,
-        box-shadow 0.22s ease;
+        border-color 0.18s ease;
 }
 
 .rail-tray-popup popover contents button:hover,

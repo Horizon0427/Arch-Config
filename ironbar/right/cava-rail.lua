@@ -138,8 +138,8 @@ local function new_renderer(channel)
         refresh_palette()
 
         local targets = read_targets()
-        local origin_x = 8
-        local max_length = math.max(8, width - origin_x - 3)
+        local origin_x = width - 10
+        local max_length = math.max(8, origin_x - 3)
         local row_height = height / DISPLAY_BANDS
 
         for index = 1, DISPLAY_BANDS do
@@ -170,7 +170,7 @@ local function new_renderer(channel)
                 )
                 cr:set_line_width(0.65)
                 cr:move_to(origin_x, y)
-                cr:line_to(origin_x + length, y)
+                cr:line_to(origin_x - length, y)
                 cr:stroke()
 
                 local dot_count = 7
@@ -179,7 +179,7 @@ local function new_renderer(channel)
                     local lit = clamp(lit_extent - dot, 0, 1)
                     if lit > 0.02 then
                         local x = origin_x
-                            + dot * max_length / (dot_count - 1)
+                            - dot * max_length / (dot_count - 1)
                         paint_dot(cr, x, y, 2.2, 0.045 * lit)
                         paint_dot(
                             cr,

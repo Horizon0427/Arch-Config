@@ -13,7 +13,7 @@
     "semanticColors": {
       "diffAdded": "#00c853",
       "diffRemoved": "{{colors.error.default.hex}}",
-      "skill": "{{colors.primary.default.hex}}"
+      "skill": "{{palettes.contrary._80.hex}}"
     },
     "surface": "{{colors.surface_container.default.hex}}"
   }

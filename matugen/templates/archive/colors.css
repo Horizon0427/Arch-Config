@@ -1,54 +1,35 @@
-/* Primary */
+/*Primary*/
 @define-color primary {{colors.primary.default.hex}};
 @define-color on-primary {{colors.on_primary.default.hex}};
 @define-color primary-container {{colors.primary_container.default.hex}};
 @define-color on-primary-container {{colors.on_primary_container.default.hex}};
 
-/* Secondary */
+/*Secondary */
 @define-color secondary {{colors.secondary.default.hex}};
 @define-color on-secondary {{colors.on_secondary.default.hex}};
 @define-color secondary-container {{colors.secondary_container.default.hex}};
 @define-color on-secondary-container {{colors.on_secondary_container.default.hex}};
 
-/* Tertiary */
+/*Tertiary*/
 @define-color tertiary {{colors.tertiary.default.hex}};
 @define-color on-tertiary {{colors.on_tertiary.default.hex}};
 @define-color tertiary-container {{colors.tertiary_container.default.hex}};
 @define-color on-tertiary-container {{colors.on_tertiary_container.default.hex}};
 
-/* Contrary: the native source -60 degree accent family. */
-@define-color contrary {{palettes.contrary._80.hex}};
-@define-color on-contrary {{palettes.contrary._20.hex}};
-@define-color contrary-container {{palettes.contrary._30.hex}};
-@define-color on-contrary-container {{palettes.contrary._90.hex}};
-@define-color contrary-fixed {{palettes.contrary._90.hex}};
-@define-color contrary-fixed-dim {{palettes.contrary._80.hex}};
-
-/* Error */
+/*Error*/
 @define-color error {{colors.error.default.hex}};
 @define-color on-error {{colors.on_error.default.hex}};
 @define-color error-container {{colors.error_container.default.hex}};
 @define-color on-error-container {{colors.on_error_container.default.hex}};
 
-/* Surfaces */
+/*Surface*/
 @define-color background {{colors.background.default.hex}};
 @define-color on-background {{colors.on_background.default.hex}};
 @define-color surface {{colors.surface.default.hex}};
 @define-color on-surface {{colors.on_surface.default.hex}};
 @define-color surface-variant {{colors.surface_variant.default.hex}};
 @define-color on-surface-variant {{colors.on_surface_variant.default.hex}};
-@define-color surface-dim {{colors.surface_dim.default.hex}};
-@define-color surface-bright {{colors.surface_bright.default.hex}};
-@define-color surface-container-lowest {{colors.surface_container_lowest.default.hex}};
-@define-color surface-container-low {{colors.surface_container_low.default.hex}};
-@define-color surface-container {{colors.surface_container.default.hex}};
-@define-color surface-container-high {{colors.surface_container_high.default.hex}};
-@define-color surface-container-highest {{colors.surface_container_highest.default.hex}};
 
-/* Edges and depth */
+/*Outline*/
 @define-color outline {{colors.outline.default.hex}};
 @define-color outline-variant {{colors.outline_variant.default.hex}};
-@define-color shadow {{colors.shadow.default.hex}};
-@define-color scrim {{colors.scrim.default.hex}};
-@define-color contrary-outline {{palettes.contrary._60.hex}};
-@define-color contrary-outline-variant {{palettes.contrary._30.hex}};

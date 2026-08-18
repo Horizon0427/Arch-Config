@@ -1,38 +1,36 @@
 background = #000000
-foreground = #e1e2e8
-cursor-color = #a0cafd
-cursor-text = #003258
-selection-background = #43474e
-selection-foreground = #c3c7cf
+foreground = #dde4e2
+cursor-color = #81d5ce
+cursor-text = #003734
+selection-background = #3f4947
+selection-foreground = #bec9c7
 
-# 黑色 (0, 8) - 使用 surface 容器色
-palette = 0=#32353a
-palette = 8=#555b63
+search-background = #a0b185
+search-foreground = #121f02
+search-selected-background = #24beb6
+search-selected-foreground = #003734
+split-divider-color = #7a93af
 
-# 红色 (1, 9) - 使用 error 错误色
+palette = 0=#2f3635
+palette = 8=#535f5d
+
 palette = 1=#ffb4ab
 palette = 9=#ff705f
 
-# 绿色 (2, 10) - 映射为 primary 主色
-palette = 2=#a0cafd
-palette = 10=#55a0fb
+palette = 2=#81d5ce
+palette = 10=#48c2b8
 
-# 黄色 (3, 11) - 映射为 tertiary 强调色
-palette = 3=#d6bee4
-palette = 11=#b488ce
+palette = 3=#b0c9e7
+palette = 11=#75a1d5
 
-# 蓝色 (4, 12) - 映射为 secondary 次要色
-palette = 4=#bbc7db
-palette = 12=#899ec1
+palette = 4=#b0ccc9
+palette = 12=#82aea9
 
-# 洋红/紫色 (5, 13) - 映射为 tertiary_fixed
-palette = 5=#f2daff
-palette = 13=#d78eff
+palette = 5=#a0b185
+palette = 13=#d6e9b9
 
-# 青色 (6, 14) - 映射为 secondary_fixed
-palette = 6=#d7e3f7
-palette = 14=#97b6ea
+palette = 6=#cce8e5
+palette = 14=#97d0ca
 
-# 白色 (7, 15) - 使用 on_surface
-palette = 7=#c3c7cf
-palette = 15=#e1e2e8
+palette = 7=#bec9c7
+palette = 15=#dde4e2

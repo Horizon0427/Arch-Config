@@ -1,0 +1,23 @@
+@define-color theme_bg_color {{colors.surface_container.default.hex}};
+@define-color theme_fg_color {{colors.on_surface.default.hex}};
+
+@define-color accent_color {{colors.primary.default.hex}};
+
+.md-code-block,
+.md-html-block {
+  background-color: {{colors.surface_container_low.default.hex}};
+  border-color: {{palettes.contrary._40.hex}};
+}
+
+.md-table,
+.md-table-cell { border-color: {{colors.outline_variant.default.hex}}; }
+
+.md-table-header {
+  background-color: {{colors.surface_container_high.default.hex}};
+  color: {{colors.on_surface.default.hex}};
+}
+
+.md-rule        { color: {{colors.outline.default.hex}}; }
+.md-alert-title { color: {{colors.on_surface_variant.default.hex}}; }
+.md-error       { color: {{colors.error.default.hex}}; }
+

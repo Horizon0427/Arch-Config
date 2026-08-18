@@ -1,12 +1,12 @@
 [mgr]
 cwd = { fg = "white" }
 
-find_keyword  = { fg = "#d6e9b9", bold = true, italic = true, underline = true }
-find_position = { fg = "#a0b185", bold = true, italic = true }
+find_keyword  = { fg = "{{palettes.contrary._90.hex}}", bold = true, italic = true, underline = true }
+find_position = { fg = "{{palettes.contrary._70.hex}}", bold = true, italic = true }
 
 marker_copied   = { fg = "yellow", bg = "black" }
 marker_cut      = { fg = "red", bg = "black" }
-marker_marked   = { fg = "#263513", bg = "#bbcd9e" }
+marker_marked   = { fg = "{{palettes.contrary._20.hex}}", bg = "{{palettes.contrary._80.hex}}" }
 marker_selected = { fg = "yellow", bg = "yellow" }
 
 count_copied   = { fg = "black", bg = "yellow" }
@@ -14,26 +14,23 @@ count_cut      = { fg = "white", bg = "red" }
 count_selected = { fg = "black", bg = "green" }
 
 border_symbol = "│"
-border_style  = { fg = "#85976c" }
+border_style  = { fg = "{{palettes.contrary._60.hex}}" }
 
 [indicator]
 padding = { open = "█", close = "█" }
 
 [tabs]
 active    = { fg = "green", bold = true }
-inactive  = { fg = "#a0b185" }
+inactive  = { fg = "{{palettes.contrary._70.hex}}" }
 sep_inner = { open = "[", close = "]" }
 
 [mode]
-# Normal mode uses Primary (Green).
 normal_main = { bg = "green", fg = "black", bold = true }
 normal_alt  = { bg = "black", fg = "white" }
 
-# Select mode uses Secondary (Blue).
 select_main = { bg = "blue", fg = "black", bold = true }
 select_alt  = { bg = "black", fg = "white" }
 
-# Unset mode uses Tertiary (Yellow).
 unset_main = { bg = "yellow", fg = "black", bold = true }
 unset_alt  = { bg = "black", fg = "white" }
 
@@ -58,7 +55,7 @@ cand = { fg = "green" }
 rest = { fg = "white" }
 desc = { fg = "white" }
 separator = " ▶ "
-separator_style = { fg = "#a0b185" }
+separator_style = { fg = "{{palettes.contrary._70.hex}}" }
 
 [notify]
 title_info  = { fg = "lightcyan" }
@@ -67,31 +64,31 @@ title_error = { fg = "lightred" }
 
 [pick]
 border = { fg = "green" }
-active = { fg = "#d6e9b9", bold = true }
+active = { fg = "{{palettes.contrary._90.hex}}", bold = true }
 inactive = {}
 
 [input]
-border = { fg = "#a0b185" }
+border = { fg = "{{palettes.contrary._70.hex}}" }
 value  = { fg = "white" }
 
 [cmp]
-border = { fg = "#a0b185", bg = "black" }
+border = { fg = "{{palettes.contrary._70.hex}}", bg = "black" }
 
 [tasks]
 border  = { fg = "green" }
 title   = {}
-hovered = { fg = "#d6e9b9", underline = true }
+hovered = { fg = "{{palettes.contrary._90.hex}}", underline = true }
 
 [help]
 on     = { fg = "white" }
 run    = { fg = "white" }
-footer = { fg = "#263513", bg = "#bbcd9e" }
+footer = { fg = "{{palettes.contrary._20.hex}}", bg = "{{palettes.contrary._80.hex}}" }
 
 [filetype]
 rules = [
     { mime = "image/*", fg = "cyan" },
     { mime = "{audio,video}/*", fg = "yellow" },
-    { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#bbcd9e" },
+    { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "{{palettes.contrary._80.hex}}" },
     { mime = "application/{pdf,doc,rtf}", fg = "lightgreen" },
 
     { url = "*", is = "orphan", bg = "red" },
@@ -122,7 +119,7 @@ prepend_dirs = [
     { name = "Videos", text = "󰕧", fg = "green" },
     { name = "Public", text = "", fg = "green" },
 
-    { name = ".config", text = "", fg = "#a0b185" },
+    { name = ".config", text = "", fg = "{{palettes.contrary._70.hex}}" },
     { name = ".git", text = "󰊢", fg = "blue" },
     { name = "Github", text = "󰊢", fg = "blue" },
     { name = "src", text = "", fg = "cyan" },
@@ -139,17 +136,17 @@ prepend_exts = [
     { name = "mp3", text = "󰎆", fg = "lightyellow" },
     { name = "flac", text = "󰎆", fg = "lightyellow" },
 
-    { name = "zip", text = "󰛫", fg = "#a0b185" },
-    { name = "tar", text = "󰛫", fg = "#a0b185" },
-    { name = "gz", text = "󰛫", fg = "#a0b185" },
-    { name = "rar", text = "󰛫", fg = "#a0b185" },
-    { name = "7z", text = "󰛫", fg = "#a0b185" },
+    { name = "zip", text = "󰛫", fg = "{{palettes.contrary._70.hex}}" },
+    { name = "tar", text = "󰛫", fg = "{{palettes.contrary._70.hex}}" },
+    { name = "gz", text = "󰛫", fg = "{{palettes.contrary._70.hex}}" },
+    { name = "rar", text = "󰛫", fg = "{{palettes.contrary._70.hex}}" },
+    { name = "7z", text = "󰛫", fg = "{{palettes.contrary._70.hex}}" },
 
-    { name = "conf", text = "", fg = "#a0b185" },
-    { name = "toml", text = "", fg = "#a0b185" },
-    { name = "yaml", text = "", fg = "#a0b185" },
-    { name = "yml", text = "", fg = "#a0b185" },
-    { name = "json", text = "", fg = "#a0b185" },
+    { name = "conf", text = "", fg = "{{palettes.contrary._70.hex}}" },
+    { name = "toml", text = "", fg = "{{palettes.contrary._70.hex}}" },
+    { name = "yaml", text = "", fg = "{{palettes.contrary._70.hex}}" },
+    { name = "yml", text = "", fg = "{{palettes.contrary._70.hex}}" },
+    { name = "json", text = "", fg = "{{palettes.contrary._70.hex}}" },
     { name = "sh", text = "", fg = "lightgreen" },
     { name = "bash", text = "", fg = "lightgreen" },
     { name = "py", text = "", fg = "lightgreen" },
@@ -164,6 +161,6 @@ prepend_files = [
     { name = "PKGBUILD", text = "", fg = "lightgreen" },
     { name = "README.md", text = "󰂺", fg = "lightblue" },
     { name = "Makefile", text = "", fg = "lightcyan" },
-    { name = ".bashrc", text = "", fg = "#d6e9b9" },
-    { name = ".zshrc", text = "", fg = "#d6e9b9" },
+    { name = ".bashrc", text = "", fg = "{{palettes.contrary._90.hex}}" },
+    { name = ".zshrc", text = "", fg = "{{palettes.contrary._90.hex}}" },
 ]

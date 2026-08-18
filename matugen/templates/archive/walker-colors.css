@@ -16,14 +16,6 @@
 @define-color tertiary-container {{colors.tertiary_container.default.hex}};
 @define-color on-tertiary-container {{colors.on_tertiary_container.default.hex}};
 
-/* Contrary: the native source -60 degree accent family. */
-@define-color contrary {{palettes.contrary._80.hex}};
-@define-color on-contrary {{palettes.contrary._20.hex}};
-@define-color contrary-container {{palettes.contrary._30.hex}};
-@define-color on-contrary-container {{palettes.contrary._90.hex}};
-@define-color contrary-fixed {{palettes.contrary._90.hex}};
-@define-color contrary-fixed-dim {{palettes.contrary._80.hex}};
-
 /* Error */
 @define-color error {{colors.error.default.hex}};
 @define-color on-error {{colors.on_error.default.hex}};
@@ -50,5 +42,3 @@
 @define-color outline-variant {{colors.outline_variant.default.hex}};
 @define-color shadow {{colors.shadow.default.hex}};
 @define-color scrim {{colors.scrim.default.hex}};
-@define-color contrary-outline {{palettes.contrary._60.hex}};
-@define-color contrary-outline-variant {{palettes.contrary._30.hex}};

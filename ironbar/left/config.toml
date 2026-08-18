@@ -8,6 +8,7 @@ margin_right = 2
 anchor_to_edges = true
 exclusive_zone = true
 popup_gap = 8
+popup_autohide = true
 ironvar_defaults.spotify_running = "false"
 
 
@@ -155,6 +156,12 @@ on_click_left = "~/.config/ironbar/scripts/modules/power-profile.sh toggle"
 type = "box"
 class = "rail-row"
 orientation = "horizontal"
+
+[[center.bar.widgets]]
+type = "box"
+class = "rail-profile-injection"
+halign = "center"
+valign = "center"
 
 [[center.bar.widgets]]
 type = "box"
@@ -306,6 +313,30 @@ direction = "horizontal"
 icon_size = 20
 on_click_left = "default"
 on_click_right = "menu"
+
+[[end]]
+type = "custom"
+name = "stay-awake-btn"
+class = "rail-item rail-awake"
+tooltip = "{{~/.config/ironbar/scripts/modules/stay-awake.sh status}}"
+on_click_left = "~/.config/ironbar/scripts/modules/stay-awake.sh toggle"
+
+[[end.bar]]
+type = "box"
+class = "rail-row"
+orientation = "horizontal"
+
+[[end.bar.widgets]]
+type = "box"
+class = "rail-marker"
+halign = "center"
+valign = "center"
+
+[[end.bar.widgets]]
+type = "script"
+class = "rail-icon rail-awake-icon"
+mode = "watch"
+cmd = "~/.config/ironbar/scripts/modules/stay-awake.sh watch"
 
 [[end]]
 type = "custom"
