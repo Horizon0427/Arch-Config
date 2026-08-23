@@ -1,15 +1,6 @@
-if os.getenv("HYPR_NO_PLUGINS") == "1" then
+if os.getenv("HYPR_NO_PLUGINS") == "1" or hl.plugin.glasscope == nil then
     return
 end
-
-local home = os.getenv("HOME")
-local so = os.getenv("GLASSCOPE_PLUGIN_PATH") or
-    (home .. "/.local/lib/hyprland-plugins/glasscope/glasscope.so")
-local file = io.open(so, "r")
-if not file then
-    return
-end
-file:close()
 
 hl.config({
     binds = {
@@ -79,13 +70,4 @@ hl.bind("SUPER + CTRL + mouse_down", function()
     invoke_adjustment("adjust_edge_width", -2.0)
 end, bind_options)
 
-if hl.plugin.glasscope ~= nil then
-    apply_defaults()
-else
-    -- Loading the plugin while the Lua file itself is being parsed is unsafe:
-    -- registering plugin config values reloads the config. Defer the IPC load
-    -- until the compositor has completed startup and this callback has returned.
-    hl.on("hyprland.start", function()
-        hl.exec_cmd(home .. "/.local/bin/glasscopectl load")
-    end)
-end
+apply_defaults()

@@ -1,4 +1,7 @@
 hl.on("hyprland.start", function()
+    if os.getenv("HYPR_NO_PLUGINS") ~= "1" then
+        hl.exec_cmd("hyprpm reload -n")
+    end
     hl.exec_cmd("dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE HYPRLAND_INSTANCE_SIGNATURE GSK_RENDERER GDK_DISABLE && systemctl --user start hyprland-session.target")
     hl.exec_cmd("mako")
     hl.exec_cmd("/usr/lib/hyprpolkitagent/hyprpolkitagent")
