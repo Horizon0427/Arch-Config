@@ -26,6 +26,47 @@ hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle_animat
 hl.bind(mainMod .. " + F1", hl.dsp.exec_cmd("~/.config/ironbar/scripts/ironbar-control.sh toggle"))
 hl.bind(mainMod .. " + F2", hl.dsp.exec_cmd("~/.config/ironbar/scripts/ironbar-control.sh reload"))
 
+local function invoke_glasscope(name, delta)
+    local glasscope = hl.plugin.glasscope
+    if glasscope ~= nil and glasscope[name] ~= nil then
+        glasscope[name](delta)
+    end
+end
+
+local glasscope_bind = { description = "Glasscope liquid lens" }
+
+hl.bind(mainMod .. " + SHIFT + A", function()
+    if hl.plugin.glasscope ~= nil then
+        hl.plugin.glasscope.toggle()
+    end
+end, glasscope_bind)
+
+hl.bind(mainMod .. " + ALT + mouse_up", function()
+    invoke_glasscope("adjust_zoom", 0.2)
+end, glasscope_bind)
+
+hl.bind(mainMod .. " + ALT + mouse_down", function()
+    invoke_glasscope("adjust_zoom", -0.2)
+end, glasscope_bind)
+
+-- The Legion Fn key is handled below XKB and cannot be used as a Hyprland
+-- modifier. ALT + SHIFT remains the dedicated radius-adjustment chord.
+hl.bind(mainMod .. " + ALT + SHIFT + mouse_up", function()
+    invoke_glasscope("adjust_radius", 16)
+end, glasscope_bind)
+
+hl.bind(mainMod .. " + ALT + SHIFT + mouse_down", function()
+    invoke_glasscope("adjust_radius", -16)
+end, glasscope_bind)
+
+hl.bind(mainMod .. " + CTRL + mouse_up", function()
+    invoke_glasscope("adjust_edge_width", 2.0)
+end, glasscope_bind)
+
+hl.bind(mainMod .. " + CTRL + mouse_down", function()
+    invoke_glasscope("adjust_edge_width", -2.0)
+end, glasscope_bind)
+
 hl.bind(mainMod .. " + ALT + L",   hl.dsp.exec_cmd("~/.config/hypr/scripts/smart_lock.sh"))
 hl.bind(mainMod .. " + ALT + V",   hl.dsp.exec_cmd("copyq toggle"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot.sh"))

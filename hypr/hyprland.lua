@@ -11,6 +11,5 @@ require("configuration.animations2")
 require("configuration.scrolling")
 require("configuration.input")
 require("configuration.keybinds")
-require("configuration.glasscope") -- after keybinds: use a lower wheel-event delay
+require("configuration.plugins") -- plugin config after bindings; guards tolerate cold start
 require("configuration.rules")
--- require("configuration.plugins")
