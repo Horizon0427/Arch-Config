@@ -49,8 +49,6 @@ hl.bind(mainMod .. " + ALT + mouse_down", function()
     invoke_glasscope("adjust_zoom", -0.2)
 end, glasscope_bind)
 
--- The Legion Fn key is handled below XKB and cannot be used as a Hyprland
--- modifier. ALT + SHIFT remains the dedicated radius-adjustment chord.
 hl.bind(mainMod .. " + ALT + SHIFT + mouse_up", function()
     invoke_glasscope("adjust_radius", 16)
 end, glasscope_bind)

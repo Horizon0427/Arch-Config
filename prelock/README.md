@@ -13,7 +13,9 @@ Hypr-Prelock is a small C/Raylib transition layer that runs immediately before H
 
 ## Requirements
 
-Building requires a C11 compiler, Make, and Raylib. Runtime integration uses Hyprland and Hyprlock. The launcher also uses `jq`; liquid mode uses `grim` to capture the focused output directly into memory. Other animations do not require `grim`.
+Building requires a C11 compiler, Make, and Raylib. Runtime integration uses
+Hyprland and Hyprlock. The launcher uses `jq`; liquid mode and the optional
+seamless Hyprlock integration use `grim`.
 
 ## Install
 
@@ -30,6 +32,33 @@ The default installation is split into stable XDG-style locations:
 ```
 
 `make install` atomically replaces the executable and liquid shader. The Hyprland integration used by this repository is in `hypr/scripts/smart_lock.sh` at the repository root.
+
+### Optional seamless Hyprlock companion
+
+Stock Hyprlock uses one screencopy for both fade directions. When Prelock is on
+screen, that makes the unlock fade replay Prelock's final frame. The optional
+patch in `patches/hyprlock-v0.9.6-dual-transition.patch` adds a separate,
+per-output fade-out image without changing authentication or the session-lock
+state machine. Hyprlock's native GPU screencopy remains the fade-in source.
+
+Build it against the pinned upstream release and install it under a distinct
+name; do not replace the system Hyprlock:
+
+```bash
+git clone --depth 1 --branch v0.9.6 https://github.com/hyprwm/hyprlock.git
+cd hyprlock
+git apply /path/to/prelock/patches/hyprlock-v0.9.6-dual-transition.patch
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --target hyprlock -j"$(nproc)"
+install -Dm755 build/hyprlock \
+  ~/.local/libexec/prelock/hyprlock-prelock
+```
+
+The launcher uses the companion only when the binary exists and a clean
+fade-out snapshot was captured for every active output. Otherwise it falls back
+to the stock Hyprlock flow. The system `/usr/bin/hyprlock` remains available for
+direct use and recovery. See `patches/README.md` for the patch boundary and
+update notes.
 
 ## Palette
 
@@ -56,4 +85,13 @@ prelock --list
 ~/.config/hypr/scripts/smart_lock.sh meteor
 ```
 
-With no animation name, the launcher selects one at random. It waits for Prelock's private FIFO readiness signal before starting Hyprlock, then lets Prelock fade out after unlock.
+With no animation name, the launcher selects one at random. With the companion
+installed, it captures the clean desktop before Prelock. Hyprlock uses its
+native screencopy of Prelock's final frame for fade-in and the clean image for
+fade-out, then notifies the launcher when fade-in is complete so that the exact
+Prelock child can be destroyed behind the lock surface.
+
+Snapshots live in a mode-0700 directory under `$XDG_RUNTIME_DIR`, use mode 0600,
+and are unlinked by Hyprlock as soon as their textures are loaded into memory.
+If any companion prerequisite or capture fails, the launcher
+retains the original behavior and lets Prelock fade after unlock.

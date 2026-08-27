@@ -44,10 +44,18 @@ hl.window_rule({
 })
 
 hl.window_rule({
-    name  = "prelock-fullscreen",
+    name  = "prelock-overlay",
     match = { class = "^(Smooth_Prelock)$" },
-    fullscreen = true,
-    no_anim    = true,
+    float            = true,
+    pin              = true,
+    move             = "0 0",
+    size             = "monitor_w monitor_h",
+    border_size      = 0,
+    rounding         = 0,
+    no_initial_focus = true,
+    no_focus         = true,
+    no_follow_mouse  = true,
+    suppress_event   = "activatefocus maximize fullscreen",
 })
 
 hl.window_rule({

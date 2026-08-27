@@ -17,6 +17,21 @@ Here are stuffs I've selected for my laptop.
 * **Application Launcher:** walker
 
 
+# Synchronization
+
+`sync.sh` treats files already present in this checkout as the synchronization
+allowlist. Top-level configuration entries map to `~/.config`; `home`,
+`local/bin`, `scripts`, and `prelock` map explicitly to `~`, `~/.local/bin`,
+`~/Projects/scripts`, and `~/.local/src/prelock`.
+
+Run `./sync.sh --dry-run` before refreshing the checkout. A normal run copies
+only allowlisted files whose contents changed, stages the resulting checkout,
+creates a timestamped commit, and pushes the current branch to its configured
+upstream. A rejected push leaves the commit local and never pulls or rebases
+automatically. Generated application state, caches, credentials, private URLs,
+machine identity, and build artifacts stay outside this repository.
+
+
 # Individual/Collaborative Projects
 
 

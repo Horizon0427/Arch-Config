@@ -9,6 +9,7 @@
 
 #include <fcntl.h>
 #include <math.h>
+#include <signal.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,6 +18,27 @@
 
 #define PRELOCK_WINDOW_TITLE "Smooth_Prelock"
 #define PRELOCK_UNLOCK_FILE "/tmp/prelock_unlocked"
+
+static volatile sig_atomic_t exit_requested = 0;
+
+static void request_exit(int signal_number) {
+  (void)signal_number;
+  exit_requested = 1;
+}
+
+static bool install_exit_handlers(void) {
+  struct sigaction action = {0};
+  action.sa_handler = request_exit;
+
+  if (sigemptyset(&action.sa_mask) != 0 ||
+      sigaction(SIGINT, &action, NULL) != 0 ||
+      sigaction(SIGTERM, &action, NULL) != 0) {
+    perror("prelock: sigaction");
+    return false;
+  }
+
+  return true;
+}
 
 static void signal_animation_ready(void) {
   const char *fifo_path = getenv("PRELOCK_READY_FIFO");
@@ -169,12 +191,10 @@ int prelock_run(int argc, char *argv[]) {
     return 1;
   }
 
-  unsigned int window_flags = FLAG_WINDOW_UNDECORATED |
-                              FLAG_WINDOW_TRANSPARENT |
-                              FLAG_WINDOW_RESIZABLE;
-  if (animation->load != NULL) {
-    window_flags |= FLAG_WINDOW_HIDDEN;
-  }
+  const unsigned int window_flags =
+      FLAG_WINDOW_UNDECORATED | FLAG_WINDOW_TRANSPARENT |
+      FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_HIDDEN |
+      FLAG_WINDOW_UNFOCUSED;
   SetConfigFlags(window_flags);
   InitWindow(1920, 1080, PRELOCK_WINDOW_TITLE);
   if (!IsWindowReady()) {
@@ -196,22 +216,28 @@ int prelock_run(int argc, char *argv[]) {
     return 1;
   }
 
-  if (animation->load != NULL) {
-    const PrelockFrame initial_frame = {
-        .screen_width = GetScreenWidth(),
-        .screen_height = GetScreenHeight(),
-        .elapsed_seconds = 0.0f,
-        .delta_seconds = 0.0f,
-        .progress = 0.0f,
-        .eased_progress = 0.0f,
-        .global_alpha = 1.0f,
-        .palette = &palette,
-    };
-    BeginDrawing();
-    ClearBackground(BLANK);
-    animation->draw(&initial_frame);
-    EndDrawing();
-    ClearWindowState(FLAG_WINDOW_HIDDEN);
+  const PrelockFrame initial_frame = {
+      .screen_width = GetScreenWidth(),
+      .screen_height = GetScreenHeight(),
+      .elapsed_seconds = 0.0f,
+      .delta_seconds = 0.0f,
+      .progress = 0.0f,
+      .eased_progress = 0.0f,
+      .global_alpha = 1.0f,
+      .palette = &palette,
+  };
+  BeginDrawing();
+  ClearBackground(BLANK);
+  animation->draw(&initial_frame);
+  EndDrawing();
+  ClearWindowState(FLAG_WINDOW_HIDDEN);
+
+  if (!install_exit_handlers()) {
+    if (animation->unload != NULL) {
+      animation->unload();
+    }
+    CloseWindow();
+    return 1;
   }
 
   float animation_time = 0.0f;
@@ -220,7 +246,7 @@ int prelock_run(int argc, char *argv[]) {
   float fade_out_time = 0.0f;
   const float fade_out_duration = 0.3f;
 
-  while (!WindowShouldClose()) {
+  while (!exit_requested && !WindowShouldClose()) {
     float delta_time = GetFrameTime();
     float global_alpha = 1.0f;
 

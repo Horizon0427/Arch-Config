@@ -1,0 +1,256 @@
+diff --git a/src/core/hyprlock.cpp b/src/core/hyprlock.cpp
+index 9a66eea..49f0e15 100644
+--- a/src/core/hyprlock.cpp
++++ b/src/core/hyprlock.cpp
+@@ -9,6 +9,7 @@
+ #include "./Egl.hpp"
+ #include "./Seat.hpp"
+ #include <chrono>
++#include <cstdlib>
+ #include <hyprutils/memory/UniquePtr.hpp>
+ #include <sys/wait.h>
+ #include <sys/poll.h>
+@@ -85,6 +86,24 @@ CHyprlock::~CHyprlock() {
+         gbm_device_destroy(dma.gbmDevice);
+ }
+ 
++void CHyprlock::signalPrelockRelease() {
++    const char* const fifoPath = std::getenv("HYPRLOCK_PRELOCK_RELEASE_FIFO");
++    if (!fifoPath || !*fifoPath)
++        return;
++
++    const int fd = open(fifoPath, O_WRONLY | O_NONBLOCK | O_CLOEXEC | O_NOFOLLOW);
++    if (fd < 0) {
++        Log::logger->log(Log::WARN, "Failed to open the Prelock release FIFO");
++        return;
++    }
++
++    static constexpr char MESSAGE[] = "release\n";
++    const auto            written   = write(fd, MESSAGE, sizeof(MESSAGE) - 1);
++    if (written != static_cast<ssize_t>(sizeof(MESSAGE) - 1))
++        Log::logger->log(Log::WARN, "Failed to notify the Prelock launcher");
++    close(fd);
++}
++
+ static void registerSignalAction(int sig, void (*handler)(int), int sa_flags = 0) {
+     struct sigaction sa;
+     sa.sa_handler = handler;
+diff --git a/src/core/hyprlock.hpp b/src/core/hyprlock.hpp
+index 0c9dbd5..de0fb41 100644
+--- a/src/core/hyprlock.hpp
++++ b/src/core/hyprlock.hpp
+@@ -62,6 +62,7 @@ class CHyprlock {
+ 
+     void                       renderOutput(const std::string& stringPort);
+     void                       renderAllOutputs();
++    void                       signalPrelockRelease();
+ 
+     size_t                     getPasswordBufferLen();
+     size_t                     getPasswordBufferDisplayLen();
+diff --git a/src/renderer/AsyncResourceManager.cpp b/src/renderer/AsyncResourceManager.cpp
+index 9e9e789..f3ea8f1 100644
+--- a/src/renderer/AsyncResourceManager.cpp
++++ b/src/renderer/AsyncResourceManager.cpp
+@@ -9,6 +9,8 @@
+ 
+ #include <algorithm>
+ #include <cstdint>
++#include <cstdlib>
++#include <filesystem>
+ #include <functional>
+ #include <sys/eventfd.h>
+ #include <sys/poll.h>
+@@ -42,6 +44,20 @@ ResourceID CAsyncResourceManager::resourceIDForScreencopy(const std::string& por
+     return scopeResourceID(4, std::hash<std::string>{}(port));
+ }
+ 
++std::string CAsyncResourceManager::fadeOutImagePath(const std::string& port) {
++    const char* const dir = std::getenv("HYPRLOCK_FADE_OUT_DIR");
++
++    if (!dir || !*dir || port.empty() || port == "." || port == ".." || port.contains('/'))
++        return {};
++
++    const auto      path = std::filesystem::path(dir) / (port + ".png");
++    std::error_code ec;
++    if (!std::filesystem::is_regular_file(path, ec))
++        return {};
++
++    return path.string();
++}
++
+ ResourceID CAsyncResourceManager::requestText(const CTextResource::STextResourceData& params, const AWP<IWidget>& widget) {
+     const auto RESOURCEID = resourceIDForTextRequest(params);
+     if (request(RESOURCEID, widget)) {
+@@ -107,6 +123,12 @@ void CAsyncResourceManager::enqueueStaticAssets() {
+             requestImage(path, 0, nullptr);
+         }
+     }
++
++    for (const auto& output : g_pHyprlock->m_vOutputs) {
++        const auto path = fadeOutImagePath(output->stringPort);
++        if (!path.empty())
++            requestImage(path, 0, nullptr);
++    }
+ }
+ 
+ void CAsyncResourceManager::enqueueScreencopyFrames() {
+diff --git a/src/renderer/AsyncResourceManager.hpp b/src/renderer/AsyncResourceManager.hpp
+index 78c892e..5d58513 100644
+--- a/src/renderer/AsyncResourceManager.hpp
++++ b/src/renderer/AsyncResourceManager.hpp
+@@ -30,8 +30,9 @@ class CAsyncResourceManager {
+     // Consumer needs to increment the revision parameter to get a new command evaluation.
+     static ResourceID resourceIDForTextCmdRequest(const CTextResource::STextResourceData& s, size_t revision);
+     // Image paths may be file system links, thus this function supports a revision parameter that gets factored into the resource id.
+-    static ResourceID resourceIDForImageRequest(const std::string& path, size_t revision);
+-    static ResourceID resourceIDForScreencopy(const std::string& port);
++    static ResourceID  resourceIDForImageRequest(const std::string& path, size_t revision);
++    static ResourceID  resourceIDForScreencopy(const std::string& port);
++    static std::string fadeOutImagePath(const std::string& port);
+ 
+     struct SPreloadedTexture {
+         ASP<CTexture> texture;
+diff --git a/src/renderer/Renderer.cpp b/src/renderer/Renderer.cpp
+index 44da8b7..9b3ef4c 100644
+--- a/src/renderer/Renderer.cpp
++++ b/src/renderer/Renderer.cpp
+@@ -603,7 +603,12 @@ void CRenderer::startFadeIn() {
+     Log::logger->log(Log::INFO, "Starting fade in");
+     *opacity = 1.f;
+ 
+-    opacity->setCallbackOnEnd([this](auto) { opacity->setConfig(g_pConfigManager->m_AnimationTree.getConfig("fadeOut")); }, true);
++    opacity->setCallbackOnEnd(
++        [this](auto) {
++            opacity->setConfig(g_pConfigManager->m_AnimationTree.getConfig("fadeOut"));
++            g_pHyprlock->signalPrelockRelease();
++        },
++        true);
+ }
+ 
+ void CRenderer::startFadeOut(bool unlock) {
+diff --git a/src/renderer/widgets/Background.cpp b/src/renderer/widgets/Background.cpp
+index 3b921e7..efeffab 100644
+--- a/src/renderer/widgets/Background.cpp
++++ b/src/renderer/widgets/Background.cpp
+@@ -69,6 +69,12 @@ void CBackground::configure(const std::unordered_map<std::string, std::any>& pro
+     transform    = wlTransformToHyprutils(invertTransform(pOutput->transform));
+     scResourceID = CAsyncResourceManager::resourceIDForScreencopy(pOutput->stringPort);
+ 
++    fadeOutPath = CAsyncResourceManager::fadeOutImagePath(outputPort);
++    if (!fadeOutPath.empty()) {
++        Log::logger->log(Log::INFO, "Using external fade-out transition for output {}", outputPort);
++        fadeOutResourceID = g_asyncResourceManager->requestImage(fadeOutPath, 0, nullptr);
++    }
++
+     g_pAnimationManager->createAnimation(0.f, crossFadeProgress, g_pConfigManager->m_AnimationTree.getConfig("fadeIn"));
+ 
+     if (!g_asyncResourceManager->checkIdPresent(scResourceID)) {
+@@ -144,6 +150,19 @@ void CBackground::updateScAsset() {
+         renderToFB(*scAsset, *transformedScFB, 0, true);
+ }
+ 
++void CBackground::updateTransitionAssets() {
++    if (!fadeOutAsset && fadeOutResourceID != 0) {
++        fadeOutAsset = g_asyncResourceManager->getAssetByID(fadeOutResourceID);
++        if (fadeOutAsset && !fadeOutPath.empty()) {
++            std::error_code ec;
++            std::filesystem::remove(fadeOutPath, ec);
++            if (ec)
++                Log::logger->log(Log::WARN, "Failed to remove the loaded fade-out image for output {}", outputPort);
++            fadeOutPath.clear();
++        }
++    }
++}
++
+ const CTexture& CBackground::getPrimaryAssetTex() const {
+     // This case is only for background:path=screenshot with blurPasses=0
+     if (isScreenshot && blurPasses == 0 && transformedScFB->isAllocated())
+@@ -160,6 +179,13 @@ const CTexture& CBackground::getScAssetTex() const {
+     return (transformedScFB->isAllocated()) ? transformedScFB->m_cTex : *scAsset;
+ }
+ 
++const CTexture* CBackground::getTransitionAssetTex() const {
++    if (g_pHyprlock->isFadingOutOrTerminating() && fadeOutAsset && fadeOutAsset->m_iType != TEXTURE_INVALID)
++        return fadeOutAsset.get();
++
++    return scAsset ? &getScAssetTex() : nullptr;
++}
++
+ void CBackground::renderRect(CHyprColor color) {
+     CBox monbox = {0, 0, viewport.x, viewport.y};
+     g_pRenderer->renderRect(monbox, color, 0);
+@@ -228,6 +254,9 @@ bool CBackground::draw(const SRenderData& data) {
+     updatePrimaryAsset();
+     updatePendingAsset();
+     updateScAsset();
++    updateTransitionAssets();
++
++    const auto transitionAsset = getTransitionAssetTex();
+ 
+     if (asset && asset->m_iType == TEXTURE_INVALID) {
+         g_asyncResourceManager->unload(asset);
+@@ -238,8 +267,8 @@ bool CBackground::draw(const SRenderData& data) {
+ 
+     if (!asset || resourceID == 0) {
+         // fade in/out with a solid color
+-        if (data.opacity < 1.0 && scAsset) {
+-            const auto& SCTEX    = getScAssetTex();
++        if (data.opacity < 1.0 && transitionAsset) {
++            const auto& SCTEX    = *transitionAsset;
+             const auto  SCTEXBOX = getScaledBoxForTextureSize(SCTEX.m_vSize, viewport);
+             g_pRenderer->renderTexture(SCTEXBOX, SCTEX, 1, 0, HYPRUTILS_TRANSFORM_FLIPPED_180);
+             CHyprColor col = color;
+@@ -254,8 +283,8 @@ bool CBackground::draw(const SRenderData& data) {
+ 
+     const auto& TEX    = getPrimaryAssetTex();
+     const auto  TEXBOX = getScaledBoxForTextureSize(TEX.m_vSize, viewport);
+-    if (data.opacity < 1.0 && scAsset) {
+-        const auto& SCTEX = getScAssetTex();
++    if (data.opacity < 1.0 && transitionAsset) {
++        const auto& SCTEX = *transitionAsset;
+         g_pRenderer->renderTextureMix(TEXBOX, SCTEX, TEX, 1.0, data.opacity, 0);
+     } else if (crossFadeProgress->isBeingAnimated()) {
+         const auto& PENDINGTEX = getPendingAssetTex();
+diff --git a/src/renderer/widgets/Background.hpp b/src/renderer/widgets/Background.hpp
+index d3516c5..e24bf08 100644
+--- a/src/renderer/widgets/Background.hpp
++++ b/src/renderer/widgets/Background.hpp
+@@ -31,10 +31,12 @@ class CBackground : public IWidget {
+     void            updatePrimaryAsset();
+     void            updatePendingAsset();
+     void            updateScAsset();
++    void            updateTransitionAssets();
+ 
+     const CTexture& getPrimaryAssetTex() const;
+     const CTexture& getPendingAssetTex() const;
+     const CTexture& getScAssetTex() const;
++    const CTexture* getTransitionAssetTex() const;
+ 
+     void            renderRect(CHyprColor color);
+     void            renderToFB(const CTexture& text, CFramebuffer& fb, int passes, bool applyTransform = false);
+@@ -60,19 +62,22 @@ class CBackground : public IWidget {
+     float                           vibrancy_darkness = 0.0;
+     Vector2D                        viewport;
+     std::string                     path = "";
++    std::string                     fadeOutPath;
+ 
+     std::string                     outputPort;
+     Hyprutils::Math::eTransform     transform;
+ 
+-    ResourceID                      resourceID      = 0;
+-    ResourceID                      scResourceID    = 0;
+-    bool                            pendingResource = false;
++    ResourceID                      resourceID        = 0;
++    ResourceID                      scResourceID      = 0;
++    ResourceID                      fadeOutResourceID = 0;
++    bool                            pendingResource   = false;
+ 
+     PHLANIMVAR<float>               crossFadeProgress;
+ 
+     CHyprColor                      color;
+     ASP<CTexture>                   asset        = nullptr;
+     ASP<CTexture>                   scAsset      = nullptr;
++    ASP<CTexture>                   fadeOutAsset = nullptr;
+     ASP<CTexture>                   pendingAsset = nullptr;
+     bool                            isScreenshot = false;
+     bool                            firstRender  = true;
