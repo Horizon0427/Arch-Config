@@ -8,14 +8,14 @@ PRELOCK_SOURCE="$HOME/.local/src/prelock"
 PRELOCK_TARGET="$DOTFILES_DIR/prelock"
 
 DRY_RUN=false
-RSYNC_ARGS=(-a --existing)
+RSYNC_ARGS=(-a --checksum --existing --itemize-changes)
 
 case "${1:-}" in
   "")
     ;;
   --dry-run)
     DRY_RUN=true
-    RSYNC_ARGS+=(--dry-run --itemize-changes)
+    RSYNC_ARGS+=(--dry-run)
     ;;
   *)
     echo "Usage: $0 [--dry-run]" >&2
@@ -38,44 +38,48 @@ if ! command -v rsync >/dev/null 2>&1; then
   exit 1
 fi
 
+build_config_allowlist() {
+  local target relative source
+
+  while IFS= read -r -d '' target; do
+    relative=${target#"$DOTFILES_DIR"/}
+    source="$CONFIG_DIR/$relative"
+
+    if [[ -f "$source" || -L "$source" ]]; then
+      printf '%s\0' "$relative"
+    fi
+  done < <(
+    find "$DOTFILES_DIR" \
+      \( -path "$DOTFILES_DIR/.git" \
+      -o -path "$DOTFILES_DIR/assets" \
+      -o -path "$DOTFILES_DIR/showcase" \
+      -o -path "$DOTFILES_DIR/prelock" \
+      -o -path "$DOTFILES_DIR/README.md" \
+      -o -path "$DOTFILES_DIR/LICENSE" \
+      -o -path "$DOTFILES_DIR/sync.sh" \) -prune \
+      -o -mindepth 1 \( -type f -o -type l \) -print0
+  )
+}
+
 echo "Scanning..."
 
-for target in "$DOTFILES_DIR"/*; do
-  item=${target##*/}
-
-  case "$item" in
-    README.md|LICENSE|sync.sh|assets|showcase|prelock)
-      continue
-      ;;
-  esac
-
-  source="$CONFIG_DIR/$item"
-
-  if [[ -d "$target" && -d "$source" ]]; then
-    echo "Refreshing existing files: $item"
-    rsync "${RSYNC_ARGS[@]}" "$source/" "$target/"
-  elif [[ (-f "$target" || -L "$target") && (-f "$source" || -L "$source") ]]; then
-    echo "Refreshing existing file: $item"
-    rsync "${RSYNC_ARGS[@]}" "$source" "$target"
-  else
-    echo "Skipping: $item (no matching source: $source)"
-  fi
-done
+build_config_allowlist | rsync "${RSYNC_ARGS[@]}" \
+  --from0 --files-from=- \
+  --out-format='config: %i %n%L' \
+  "$CONFIG_DIR/" "$DOTFILES_DIR/"
 
 if [[ -d "$PRELOCK_TARGET" && -d "$PRELOCK_SOURCE" ]]; then
-  echo "Refreshing existing files: prelock (~/.local/src)"
   rsync "${RSYNC_ARGS[@]}" --exclude=/prelock \
+    --out-format='prelock: %i %n%L' \
     "$PRELOCK_SOURCE/" "$PRELOCK_TARGET/"
 elif [[ -d "$PRELOCK_TARGET" ]]; then
-  echo "Skipping: prelock (no matching source in $PRELOCK_SOURCE)"
+  echo "Skipping prelock: source directory not found."
 fi
 
 if [[ "$DRY_RUN" == true ]]; then
   echo "Dry run complete. No files or Git state were changed."
   exit 0
 fi
-
-echo "Refresh complete."
 
 if [[ -z $(git -C "$DOTFILES_DIR" status --porcelain --untracked-files=normal) ]]; then
   echo "No changes detected; skipping commit and push."
