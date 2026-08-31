@@ -217,6 +217,27 @@ tooltip, tooltip label, popover > contents {
     transform: scale(0.94) translateY(-1px);
 }
 
+.tray.tray-reset button:hover:not(:active) {
+    background-color: transparent;
+    background-image: linear-gradient(145deg,
+        alpha(@on-surface, 0.00),
+        alpha(@contrary, 0.00));
+    background-position: 0% 0%;
+    outline-color: alpha(@outline, 0.00);
+    box-shadow: inset 0 -1px 0 alpha(@on-surface, 0.00);
+    transform: scale(1) translateY(0);
+}
+
+.tray-lifecycle-watch,
+.tray-lifecycle-watch label {
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+    opacity: 0;
+}
+
 .power-btn {
     margin: 3px 3px;
     padding: 0 28px 0 25px;

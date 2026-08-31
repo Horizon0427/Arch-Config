@@ -111,9 +111,18 @@ cmd = "~/.config/ironbar/scripts/cava.sh"
 
 [[end]]
 type = "tray"
+name = "tray-top"
 icon_size = 18
 on_click_left = "default"
 on_click_right = "menu"
+on_mouse_enter = "~/.config/ironbar/scripts/modules/tray-lifecycle.sh clear tray-top"
+
+[[end]]
+type = "script"
+name = "tray-lifecycle-watch"
+class = "tray-lifecycle-watch"
+mode = "watch"
+cmd = "~/.config/ironbar/scripts/modules/tray-lifecycle.sh watch-reset tray-top"
 
 
 [[end]]

@@ -287,13 +287,14 @@ type = "custom"
 name = "tray-gate"
 class = "rail-item rail-tray"
 tooltip = "System tray · click to toggle"
+on_mouse_enter = "~/.config/ironbar/scripts/modules/tray-lifecycle.sh clear tray-gate"
 
 [[end.bar]]
 type = "button"
 name = "tray-gate-button"
 class = "rail-row"
 orientation = "horizontal"
-on_click = "popup:toggle"
+on_click = "!~/.config/ironbar/scripts/modules/tray-lifecycle.sh toggle left-rail tray-gate"
 
 [[end.bar.widgets]]
 type = "box"

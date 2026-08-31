@@ -2,6 +2,7 @@ local mainMod     = "SUPER"
 local terminal    = "ghostty"
 local fileManager = "thunar"
 local menu        = "walker"
+local host_reserved_bind = { dont_inhibit = true }
 
 hl.config({
     binds = {
@@ -9,7 +10,7 @@ hl.config({
     },
 })
 
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal), host_reserved_bind)
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("firefox"))
@@ -17,7 +18,7 @@ hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("flclash"))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("~/.local/bin/wallpicker"))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + U", hl.dsp.exec_cmd([[command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit]]))
-hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen(), host_reserved_bind)
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + X", hl.dsp.workspace.toggle_special("spotify"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle_layout.sh"))
@@ -40,6 +41,14 @@ hl.bind(mainMod .. " + SHIFT + A", function()
         hl.plugin.glasscope.toggle()
     end
 end, glasscope_bind)
+
+hl.bind(mainMod .. " + ALT + C", function()
+    invoke_glasscope("begin_color_probe")
+end, { description = "Aim Glasscope color probe" })
+
+hl.bind(mainMod .. " + ALT + C", function()
+    invoke_glasscope("pick_color")
+end, { release = true, description = "Copy Glasscope RGB sample" })
 
 hl.bind(mainMod .. " + ALT + mouse_up", function()
     invoke_glasscope("adjust_zoom", 0.2)
@@ -81,18 +90,18 @@ local function focus_horizontal(direction, scrolling_direction)
     end
 end
 
-hl.bind(mainMod .. " + left",  focus_horizontal("left",  "l"))
-hl.bind(mainMod .. " + right", focus_horizontal("right", "r"))
-hl.bind(mainMod .. " + H",     focus_horizontal("left",  "l"))
-hl.bind(mainMod .. " + L",     focus_horizontal("right", "r"))
+hl.bind(mainMod .. " + left",  focus_horizontal("left",  "l"), host_reserved_bind)
+hl.bind(mainMod .. " + right", focus_horizontal("right", "r"), host_reserved_bind)
+hl.bind(mainMod .. " + H",     focus_horizontal("left",  "l"), host_reserved_bind)
+hl.bind(mainMod .. " + L",     focus_horizontal("right", "r"), host_reserved_bind)
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up"    }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down"  }))
 
 for i = 1, 9 do
-    hl.bind(mainMod .. " + " .. i,       hl.dsp.focus({ workspace = i        }))
+    hl.bind(mainMod .. " + " .. i,       hl.dsp.focus({ workspace = i        }), host_reserved_bind)
     hl.bind(mainMod .. " + ALT + " .. i, hl.dsp.window.move({ workspace = i  }))
 end
-hl.bind(mainMod .. " + 0",       hl.dsp.focus({ workspace = 10       }))
+hl.bind(mainMod .. " + 0",       hl.dsp.focus({ workspace = 10       }), host_reserved_bind)
 hl.bind(mainMod .. " + ALT + 0", hl.dsp.window.move({ workspace = 10 }))
 
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))

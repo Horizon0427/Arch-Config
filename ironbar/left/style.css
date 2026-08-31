@@ -210,6 +210,25 @@ button {
     transform: translateX(3.8px) scale(1.06);
 }
 
+.rail-tray.tray-reset:hover:not(:active) .rail-marker {
+    background-color: alpha(@contrary, 0.84);
+    outline-color: alpha(@contrary, 0.88);
+    box-shadow:
+        -6px 0 12px alpha(@primary, 0.00),
+        0 0 12px alpha(@tertiary, 0.00),
+        0 0 23px alpha(@contrary, 0.00);
+    transform: rotate(45deg) scale(0.84);
+}
+
+.rail-tray.tray-reset:hover:not(:active) .rail-icon {
+    color: @primary;
+    text-shadow:
+        0 0 7px alpha(@tertiary, 0.00),
+        0 0 14px alpha(@tertiary, 0.00),
+        0 0 19px alpha(@contrary, 0.00);
+    transform: translateX(1px) scale(1);
+}
+
 .rail-power:hover .rail-icon {
     transform: translateX(2px) scale(1.06);
 }
